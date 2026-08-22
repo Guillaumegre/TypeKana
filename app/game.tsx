@@ -85,6 +85,18 @@ export default function GameScreen() {
     }
   };
 
+  const handleSkip = () => {
+    setInput('');
+    setFeedback('idle');
+    setHasMissedCurrent(false);
+
+    if (index + 1 >= words.length) {
+      goToResults(correctFirstTry);
+    } else {
+      setIndex((i) => i + 1);
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={[styles.container, { paddingTop: insets.top + 12 }]}
@@ -107,7 +119,13 @@ export default function GameScreen() {
       </Text>
 
       <View style={styles.wordCard}>
-        {currentWord.emoji && <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>}
+        {currentWord.color ? (
+          <View style={[styles.colorSwatch, blindMode && styles.colorSwatchLarge, { backgroundColor: currentWord.color }]} />
+        ) : (
+          currentWord.emoji && (
+            <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>
+          )
+        )}
         {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
         {!blindMode && <Text style={styles.targetKana}>{showKanji ? currentWord.kanji : currentWord.kana}</Text>}
         <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
@@ -138,9 +156,14 @@ export default function GameScreen() {
       {feedback === 'incorrect' && <Text style={styles.feedbackText}>Essaie encore</Text>}
       {feedback === 'correct' && <Text style={[styles.feedbackText, styles.feedbackCorrect]}>Correct !</Text>}
 
-      <Pressable style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Valider</Text>
-      </Pressable>
+      <View style={styles.buttonRow}>
+        <Pressable style={styles.skipButton} onPress={handleSkip}>
+          <Text style={styles.skipButtonText}>Passer</Text>
+        </Pressable>
+        <Pressable style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Valider</Text>
+        </Pressable>
+      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -210,6 +233,20 @@ const styles = StyleSheet.create({
     fontSize: 56,
     marginBottom: 8,
   },
+  colorSwatch: {
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#CBD5E1',
+    marginBottom: 4,
+  },
+  colorSwatchLarge: {
+    width: 72,
+    height: 72,
+    borderRadius: 14,
+    marginBottom: 10,
+  },
   furigana: {
     fontSize: 16,
     color: '#64748B',
@@ -259,12 +296,32 @@ const styles = StyleSheet.create({
   feedbackCorrect: {
     color: '#22C55E',
   },
-  submitButton: {
+  buttonRow: {
+    width: '100%',
+    flexDirection: 'row',
     marginTop: 16,
+    gap: 12,
+  },
+  skipButton: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#CBD5E1',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  skipButtonText: {
+    color: '#64748B',
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  submitButton: {
+    flex: 1,
     backgroundColor: '#2563EB',
     borderRadius: 14,
     paddingVertical: 14,
-    paddingHorizontal: 32,
+    alignItems: 'center',
   },
   submitButtonText: {
     color: '#FFFFFF',

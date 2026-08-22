@@ -46,7 +46,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         ...settings,
         loaded,
         setKanjiMode: (value) =>
-          update(value ? { kanjiMode: value, blindMode: false } : { kanjiMode: value, hintMode: false }),
+          update(value ? { kanjiMode: true, blindMode: false } : { kanjiMode: false, hintMode: false, blindMode: false }),
         setHintMode: (value) => update({ hintMode: value }),
         setBlindMode: (value) => update(value ? { blindMode: value, kanjiMode: false, hintMode: false } : { blindMode: value }),
       }}

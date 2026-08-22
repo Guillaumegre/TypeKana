@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { BackHeader } from '../../src/components/BackHeader';
 import { CATEGORIES, getWordsByCategory } from '../../src/data/vocab';
 
 export default function TrainingSelectScreen() {
@@ -7,6 +8,7 @@ export default function TrainingSelectScreen() {
 
   return (
     <View style={styles.container}>
+      <BackHeader title="Training" />
       <Text style={styles.heading}>Choisis un thème</Text>
       <FlatList
         data={CATEGORIES}
@@ -34,17 +36,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8FAFC',
-    paddingHorizontal: 20,
-    paddingTop: 20,
   },
   heading: {
     fontSize: 20,
     fontWeight: '700',
     color: '#1E293B',
     marginBottom: 16,
+    paddingHorizontal: 20,
   },
   list: {
     gap: 12,
+    paddingHorizontal: 20,
     paddingBottom: 24,
   },
   card: {

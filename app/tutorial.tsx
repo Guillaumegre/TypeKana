@@ -1,25 +1,32 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { BackHeader } from '../src/components/BackHeader';
 
 export default function TutorialScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.emoji}>📖</Text>
-      <Text style={styles.title}>Tutoriel</Text>
-      <Text style={styles.subtitle}>
-        Contenu à venir : comment installer le clavier japonais sur ton téléphone, et comment fonctionne la saisie
-        kana dans l'appli.
-      </Text>
+    <View style={styles.screen}>
+      <BackHeader title="Tutoriel" />
+      <View style={styles.container}>
+        <Text style={styles.emoji}>📖</Text>
+        <Text style={styles.title}>Tutoriel</Text>
+        <Text style={styles.subtitle}>
+          Contenu à venir : comment installer le clavier japonais sur ton téléphone, et comment fonctionne la saisie
+          kana dans l'appli.
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#F8FAFC',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 32,
-    backgroundColor: '#F8FAFC',
   },
   emoji: {
     fontSize: 48,

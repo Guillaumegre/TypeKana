@@ -1,11 +1,13 @@
 import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { BackHeader } from '../src/components/BackHeader';
 
 export default function SettingsScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
+      <BackHeader title="Paramètres" />
       <Pressable style={styles.tutorialRow} onPress={() => router.push('/tutorial')}>
         <Text style={styles.tutorialLabel}>Revoir le tutoriel</Text>
         <Text style={styles.tutorialChevron}>›</Text>
@@ -21,7 +23,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8FAFC',
-    paddingTop: 8,
   },
   tutorialRow: {
     flexDirection: 'row',

@@ -8,6 +8,7 @@ export interface VocabWord {
   category: string;
   jlpt_level: JlptLevel;
   emoji: string | null;
+  color: string | null;
 }
 
 export interface Category {

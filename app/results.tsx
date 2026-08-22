@@ -1,5 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { BackHeader } from '../src/components/BackHeader';
 
 export default function ResultsScreen() {
   const router = useRouter();
@@ -10,7 +11,9 @@ export default function ResultsScreen() {
   }>();
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
+      <BackHeader />
+      <View style={styles.container}>
       <Text style={styles.title}>Entraînement terminé !</Text>
 
       <View style={styles.statsRow}>
@@ -34,14 +37,18 @@ export default function ResultsScreen() {
           <Text style={[styles.buttonText, styles.secondaryButtonText]}>Accueil</Text>
         </Pressable>
       </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: '#F8FAFC',
+  },
+  container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 24,

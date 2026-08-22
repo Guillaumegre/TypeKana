@@ -1,20 +1,21 @@
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <Pressable onPress={() => router.push('/settings')} hitSlop={12}>
-              <Text style={styles.settingsIcon}>⚙️</Text>
-            </Pressable>
-          ),
-        }}
-      />
+      <Pressable
+        onPress={() => router.push('/settings')}
+        hitSlop={12}
+        style={[styles.settingsButton, { top: insets.top + 12 }]}
+      >
+        <Text style={styles.settingsIcon}>⚙️</Text>
+      </Pressable>
+
       <Text style={styles.title}>TypeKana</Text>
       <Text style={styles.subtitle}>Entraîne-toi à taper en kana</Text>
 
@@ -46,6 +47,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
     backgroundColor: '#F8FAFC',
+  },
+  settingsButton: {
+    position: 'absolute',
+    right: 20,
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 42,
