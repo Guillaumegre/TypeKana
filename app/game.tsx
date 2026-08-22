@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getWordsByCategory } from '../src/data/vocab';
@@ -8,12 +8,17 @@ import { isTextMatch, shuffle } from '../src/utils/kana';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
 
+const SESSION_LENGTH = 10;
+
 export default function GameScreen() {
   const router = useRouter();
   const { mode, category } = useLocalSearchParams<{ mode: string; category: string }>();
   const { kanjiMode, hintMode } = useSettings();
 
-  const words = useMemo(() => shuffle(getWordsByCategory(category ?? '')), [category]);
+  const words = useMemo(
+    () => shuffle(getWordsByCategory(category ?? '')).slice(0, SESSION_LENGTH),
+    [category],
+  );
 
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState('');
@@ -79,7 +84,11 @@ export default function GameScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+    >
       <View style={styles.topRow}>
         <ModeSwitch />
       </View>
@@ -126,7 +135,7 @@ export default function GameScreen() {
       <Pressable style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Valider</Text>
       </Pressable>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
