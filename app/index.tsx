@@ -1,10 +1,19 @@
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { getRacePB, type RaceScore } from '../src/utils/raceStats';
 
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const [racePB, setRacePB] = useState<RaceScore | null>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      getRacePB().then(setRacePB);
+    }, []),
+  );
 
   return (
     <View style={styles.container}>
@@ -33,7 +42,9 @@ export default function HomeScreen() {
           onPress={() => router.push({ pathname: '/game', params: { mode: 'race' } })}
         >
           <Text style={styles.buttonText}>Race</Text>
-          <Text style={styles.buttonSubtext}>60 secondes chrono</Text>
+          <Text style={styles.buttonSubtext}>
+            60 secondes chrono{racePB ? ` · record ${racePB.correct} mots` : ''}
+          </Text>
         </Pressable>
       </View>
     </View>

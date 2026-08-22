@@ -8,12 +8,21 @@ import { getSentencesByLevel } from '../src/data/sentences';
 import { getWordsByCategory, pickRandomWord } from '../src/data/vocab';
 import type { GameEntry } from '../src/types/vocab';
 import { isTextMatch, shuffle } from '../src/utils/kana';
-import { saveRacePBIfBetter } from '../src/utils/raceStats';
+import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
 
 const SESSION_LENGTH = 10;
 const RACE_DURATION = 60;
+const RACE_QUEUE_SIZE = 3;
+
+function makeRaceQueue(): GameEntry[] {
+  const queue: GameEntry[] = [];
+  for (let i = 0; i < RACE_QUEUE_SIZE; i++) {
+    queue.push(pickRandomWord(queue[queue.length - 1]?.kana));
+  }
+  return queue;
+}
 
 export default function GameScreen() {
   const router = useRouter();
@@ -31,8 +40,10 @@ export default function GameScreen() {
   }, [isRace, category, level]);
 
   const [index, setIndex] = useState(0);
-  const [raceWord, setRaceWord] = useState<GameEntry | null>(() => (isRace ? pickRandomWord() : null));
+  const [raceQueue, setRaceQueue] = useState<GameEntry[]>(() => (isRace ? makeRaceQueue() : []));
   const [raceWordsSeen, setRaceWordsSeen] = useState(1);
+  const [raceStarted, setRaceStarted] = useState(false);
+  const [racePB, setRacePB] = useState<RaceScore | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(RACE_DURATION);
   const [input, setInput] = useState('');
   const [feedback, setFeedback] = useState<Feedback>('idle');
@@ -41,7 +52,8 @@ export default function GameScreen() {
   const [finished, setFinished] = useState(false);
   const inputRef = useRef<TextInput>(null);
 
-  const currentWord = isRace ? raceWord : sessionWords[index];
+  const currentWord = isRace ? raceQueue[0] : sessionWords[index];
+  const upcomingWords = isRace ? raceQueue.slice(1) : [];
   const showKanji = !blindMode && kanjiMode && !!currentWord?.kanji;
   const answerTarget = showKanji ? currentWord!.kanji! : currentWord?.kana;
   const acceptedAnswers = blindMode
@@ -53,7 +65,11 @@ export default function GameScreen() {
 
   useEffect(() => {
     inputRef.current?.focus();
-  }, [index, raceWord]);
+  }, [index, raceQueue]);
+
+  useEffect(() => {
+    if (isRace) getRacePB().then(setRacePB);
+  }, [isRace]);
 
   const goToResults = useCallback(
     (finalCorrect: number, finalTotal: number) => {
@@ -101,14 +117,14 @@ export default function GameScreen() {
   }, [router]);
 
   useEffect(() => {
-    if (!isRace) return;
+    if (!isRace || !raceStarted) return;
     if (secondsLeft <= 0) {
       finishRace();
       return;
     }
     const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => clearTimeout(timer);
-  }, [isRace, secondsLeft, finishRace]);
+  }, [isRace, raceStarted, secondsLeft, finishRace]);
 
   if (!isRace && sessionWords.length === 0) {
     return (
@@ -128,7 +144,10 @@ export default function GameScreen() {
     if (isRace) {
       setCorrectFirstTry(nextCorrect);
       setRaceWordsSeen((n) => n + 1);
-      setRaceWord(pickRandomWord(currentWord?.kana));
+      setRaceQueue((q) => {
+        const rest = q.slice(1);
+        return [...rest, pickRandomWord(rest[rest.length - 1]?.kana)];
+      });
       return;
     }
 
@@ -140,16 +159,31 @@ export default function GameScreen() {
     }
   };
 
+  const checkAndAdvance = (text: string) => {
+    if (!text.trim() || !currentWord) return false;
+    const correct = acceptedAnswers.some((answer) => isTextMatch(text, answer));
+    if (!correct) return false;
+
+    const nextCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
+    setFeedback('correct');
+    setTimeout(() => advance(nextCorrect), isRace ? 180 : 350);
+    return true;
+  };
+
+  const handleChangeText = (text: string) => {
+    setInput(text);
+    if (feedback !== 'idle') setFeedback('idle');
+
+    if (isRace) {
+      if (!raceStarted && text.length > 0) setRaceStarted(true);
+      checkAndAdvance(text);
+    }
+  };
+
   const handleSubmit = () => {
-    if (!input.trim() || !currentWord) return;
-
-    const correct = acceptedAnswers.some((answer) => isTextMatch(input, answer));
-
-    if (correct) {
-      const nextCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
-      setFeedback('correct');
-      setTimeout(() => advance(nextCorrect), 350);
-    } else {
+    if (!currentWord) return;
+    const advanced = checkAndAdvance(input);
+    if (!advanced && input.trim()) {
       setHasMissedCurrent(true);
       setFeedback('incorrect');
       setInput('');
@@ -157,18 +191,19 @@ export default function GameScreen() {
   };
 
   const handleSkip = () => {
-    if (isRace) {
-      setInput('');
-      setFeedback('idle');
-      setHasMissedCurrent(false);
-      setRaceWordsSeen((n) => n + 1);
-      setRaceWord(pickRandomWord(currentWord?.kana));
-      return;
-    }
-
     setInput('');
     setFeedback('idle');
     setHasMissedCurrent(false);
+
+    if (isRace) {
+      setRaceStarted(true);
+      setRaceWordsSeen((n) => n + 1);
+      setRaceQueue((q) => {
+        const rest = q.slice(1);
+        return [...rest, pickRandomWord(rest[rest.length - 1]?.kana)];
+      });
+      return;
+    }
 
     if (index + 1 >= sessionWords.length) {
       goToResults(correctFirstTry, sessionWords.length);
@@ -195,8 +230,11 @@ export default function GameScreen() {
 
       {isRace ? (
         <View style={styles.timerRow}>
-          <Text style={styles.timerText}>⏱ {secondsLeft}s</Text>
-          <Text style={styles.timerScore}>{correctFirstTry} correct{correctFirstTry > 1 ? 's' : ''}</Text>
+          <Text style={styles.timerText}>⏱ {raceStarted ? `${secondsLeft}s` : '60s'}</Text>
+          <Text style={styles.timerScore}>
+            {correctFirstTry} correct{correctFirstTry > 1 ? 's' : ''}
+            {racePB ? ` · record ${racePB.correct}` : ''}
+          </Text>
         </View>
       ) : (
         <>
@@ -224,6 +262,16 @@ export default function GameScreen() {
         <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>
 
+      {isRace && (
+        <View style={styles.upcomingRow}>
+          {upcomingWords.map((w, i) => (
+            <Text key={`${w.kana}-${i}`} style={styles.upcomingWord} numberOfLines={1}>
+              {w.kana}
+            </Text>
+          ))}
+        </View>
+      )}
+
       <TextInput
         ref={inputRef}
         style={[
@@ -232,12 +280,9 @@ export default function GameScreen() {
           feedback === 'incorrect' && styles.inputIncorrect,
         ]}
         value={input}
-        onChangeText={(text) => {
-          setInput(text);
-          if (feedback !== 'idle') setFeedback('idle');
-        }}
+        onChangeText={handleChangeText}
         onSubmitEditing={handleSubmit}
-        placeholder={inputPlaceholder}
+        placeholder={isRace && !raceStarted ? 'Tape pour commencer...' : inputPlaceholder}
         placeholderTextColor="#94A3B8"
         autoFocus
         autoCorrect={false}
@@ -249,9 +294,11 @@ export default function GameScreen() {
       {feedback === 'incorrect' && <Text style={styles.feedbackText}>Essaie encore</Text>}
       {feedback === 'correct' && <Text style={[styles.feedbackText, styles.feedbackCorrect]}>Correct !</Text>}
 
-      <Pressable style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Valider</Text>
-      </Pressable>
+      {!isRace && (
+        <Pressable style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Valider</Text>
+        </Pressable>
+      )}
 
       <Pressable onPress={handleSkip} hitSlop={8} style={styles.skipLink}>
         <Text style={styles.skipLinkText}>Passer</Text>
@@ -308,7 +355,7 @@ const styles = StyleSheet.create({
     color: '#DC2626',
   },
   timerScore: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: '#64748B',
   },
@@ -332,7 +379,7 @@ const styles = StyleSheet.create({
   },
   wordCard: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 12,
   },
   emoji: {
     fontSize: 30,
@@ -375,6 +422,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     color: '#1E293B',
+  },
+  upcomingRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 16,
+  },
+  upcomingWord: {
+    fontSize: 15,
+    color: '#CBD5E1',
+    fontWeight: '600',
   },
   input: {
     width: '100%',
