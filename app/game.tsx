@@ -8,7 +8,7 @@ import { useSettings } from '../src/context/SettingsContext';
 import { getSentencesByLevel } from '../src/data/sentences';
 import { getWordsByCategory, getWordsByLevel, pickRandomWord } from '../src/data/vocab';
 import type { GameEntry } from '../src/types/vocab';
-import { isTextMatch, shuffle } from '../src/utils/kana';
+import { isTextMatch, normalizeText, shuffle } from '../src/utils/kana';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
@@ -66,6 +66,7 @@ export default function GameScreen() {
   const [hasMissedCurrent, setHasMissedCurrent] = useState(false);
   const [correctFirstTry, setCorrectFirstTry] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [liveText, setLiveText] = useState('');
   const inputRef = useRef<TextInput>(null);
   const lastTextRef = useRef('');
 
@@ -85,6 +86,14 @@ export default function GameScreen() {
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
   const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
   const targetFontSize = !displayText || displayText.length <= 6 ? 56 : displayText.length <= 10 ? 34 : 26;
+
+  const liveChars = useMemo(() => {
+    const reference = acceptedAnswers[0];
+    if (!liveText || !reference) return [];
+    const typed = normalizeText(liveText);
+    const target = normalizeText(reference);
+    return [...typed].map((char, i) => ({ char, correct: char === target[i] }));
+  }, [liveText, acceptedAnswers]);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -169,6 +178,7 @@ export default function GameScreen() {
   const clearInput = () => {
     inputRef.current?.clear();
     lastTextRef.current = '';
+    setLiveText('');
   };
 
   const advance = (nextCorrect: number) => {
@@ -209,6 +219,7 @@ export default function GameScreen() {
 
   const handleChangeText = (text: string) => {
     lastTextRef.current = text;
+    setLiveText(text);
     if (feedback !== 'idle') setFeedback('idle');
 
     if (isRace) {
@@ -326,6 +337,16 @@ export default function GameScreen() {
           {upcomingWords.map((w, i) => (
             <Text key={`${w.kana}-${i}`} style={styles.upcomingWord} numberOfLines={1}>
               {w.kana}
+            </Text>
+          ))}
+        </View>
+      )}
+
+      {liveChars.length > 0 && (
+        <View style={styles.liveRow}>
+          {liveChars.map((c, i) => (
+            <Text key={i} style={[styles.liveChar, !c.correct && styles.liveCharWrong]}>
+              {c.char}
             </Text>
           ))}
         </View>
@@ -491,6 +512,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#CBD5E1',
     fontWeight: '600',
+  },
+  liveRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: 8,
+    paddingHorizontal: 8,
+  },
+  liveChar: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#1E293B',
+  },
+  liveCharWrong: {
+    color: '#EF4444',
   },
   input: {
     width: '100%',
