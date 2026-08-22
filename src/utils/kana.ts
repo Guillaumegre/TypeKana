@@ -1,14 +1,15 @@
 /**
- * IME kana input can produce different Unicode compositions for the same
- * visible characters (dakuten, っ, ー). Always normalize to NFC before
- * comparing, or visually-identical answers can be marked wrong.
+ * IME input (kana or kanji conversion) can produce different Unicode
+ * compositions for the same visible characters (dakuten, っ, ー). Always
+ * normalize to NFC before comparing, or visually-identical answers can be
+ * marked wrong.
  */
-export function normalizeKana(input: string): string {
+export function normalizeText(input: string): string {
   return input.normalize('NFC').trim();
 }
 
-export function isKanaMatch(input: string, target: string): boolean {
-  return normalizeKana(input) === normalizeKana(target);
+export function isTextMatch(input: string, target: string): boolean {
+  return normalizeText(input) === normalizeText(target);
 }
 
 export function shuffle<T>(items: T[]): T[] {

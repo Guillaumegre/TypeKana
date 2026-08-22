@@ -1,9 +1,10 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getWordsByCategory } from '../src/data/vocab';
-import { isKanaMatch, shuffle } from '../src/utils/kana';
+import { isTextMatch, shuffle } from '../src/utils/kana';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
 
@@ -23,6 +24,8 @@ export default function GameScreen() {
 
   const currentWord = words[index];
   const showKanji = kanjiMode && !!currentWord?.kanji;
+  const answerTarget = showKanji ? currentWord.kanji! : currentWord?.kana;
+  const inputPlaceholder = !kanjiMode || hintMode ? currentWord?.kana : '';
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -51,7 +54,7 @@ export default function GameScreen() {
   const handleSubmit = () => {
     if (!input.trim()) return;
 
-    const correct = isKanaMatch(input, currentWord.kana);
+    const correct = isTextMatch(input, answerTarget);
 
     if (correct) {
       const finalCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
@@ -77,6 +80,10 @@ export default function GameScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.topRow}>
+        <ModeSwitch />
+      </View>
+
       <View style={styles.progressBarTrack}>
         <View style={[styles.progressBarFill, { width: `${(index / words.length) * 100}%` }]} />
       </View>
@@ -104,7 +111,7 @@ export default function GameScreen() {
           if (feedback !== 'idle') setFeedback('idle');
         }}
         onSubmitEditing={handleSubmit}
-        placeholder={currentWord.kana}
+        placeholder={inputPlaceholder}
         placeholderTextColor="#94A3B8"
         autoFocus
         autoCorrect={false}
@@ -135,6 +142,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#64748B',
     marginTop: 40,
+  },
+  topRow: {
+    marginBottom: 20,
   },
   progressBarTrack: {
     width: '100%',
