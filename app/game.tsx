@@ -86,10 +86,12 @@ export default function GameScreen() {
           correct: String(finalCorrect),
           total: String(finalTotal),
           accuracy: String(finalTotal > 0 ? Math.round((finalCorrect / finalTotal) * 100) : 0),
+          ...(category ? { category } : {}),
+          ...(level ? { level } : {}),
         },
       });
     },
-    [router, isRace],
+    [router, isRace, category, level],
   );
 
   const correctRef = useRef(correctFirstTry);

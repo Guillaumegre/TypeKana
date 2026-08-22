@@ -4,12 +4,14 @@ import { BackHeader } from '../src/components/BackHeader';
 
 export default function ResultsScreen() {
   const router = useRouter();
-  const { mode, correct, total, isNewPB, pbCorrect } = useLocalSearchParams<{
+  const { mode, correct, total, isNewPB, pbCorrect, category, level } = useLocalSearchParams<{
     mode: string;
     correct: string;
     total: string;
     isNewPB?: string;
     pbCorrect?: string;
+    category?: string;
+    level?: string;
   }>();
 
   const isRace = mode === 'race';
@@ -34,7 +36,10 @@ export default function ResultsScreen() {
             onPress={() =>
               isRace
                 ? router.replace({ pathname: '/game', params: { mode: 'race' } })
-                : router.replace('/training')
+                : router.replace({
+                    pathname: '/game',
+                    params: { mode: 'training', ...(category ? { category } : {}), ...(level ? { level } : {}) },
+                  })
             }
           >
             <Text style={styles.buttonText}>Rejouer</Text>
