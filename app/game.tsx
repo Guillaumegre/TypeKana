@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useSettings } from '../src/context/SettingsContext';
 import { getWordsByCategory } from '../src/data/vocab';
 import { isKanaMatch, shuffle } from '../src/utils/kana';
 
@@ -9,6 +10,7 @@ type Feedback = 'idle' | 'correct' | 'incorrect';
 export default function GameScreen() {
   const router = useRouter();
   const { mode, category } = useLocalSearchParams<{ mode: string; category: string }>();
+  const { kanjiMode, hintMode } = useSettings();
 
   const words = useMemo(() => shuffle(getWordsByCategory(category ?? '')), [category]);
 
@@ -20,6 +22,7 @@ export default function GameScreen() {
   const inputRef = useRef<TextInput>(null);
 
   const currentWord = words[index];
+  const showKanji = kanjiMode && !!currentWord?.kanji;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -74,13 +77,17 @@ export default function GameScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.progressBarTrack}>
+        <View style={[styles.progressBarFill, { width: `${(index / words.length) * 100}%` }]} />
+      </View>
       <Text style={styles.progress}>
         Mot {index + 1} / {words.length}
       </Text>
 
       <View style={styles.wordCard}>
         {currentWord.emoji && <Text style={styles.emoji}>{currentWord.emoji}</Text>}
-        <Text style={styles.targetKana}>{currentWord.kana}</Text>
+        {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
+        <Text style={styles.targetKana}>{showKanji ? currentWord.kanji : currentWord.kana}</Text>
         <Text style={styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>
 
@@ -97,7 +104,7 @@ export default function GameScreen() {
           if (feedback !== 'idle') setFeedback('idle');
         }}
         onSubmitEditing={handleSubmit}
-        placeholder={currentWord.meaning_fr}
+        placeholder={currentWord.kana}
         placeholderTextColor="#94A3B8"
         autoFocus
         autoCorrect={false}
@@ -129,6 +136,19 @@ const styles = StyleSheet.create({
     color: '#64748B',
     marginTop: 40,
   },
+  progressBarTrack: {
+    width: '100%',
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#E2E8F0',
+    overflow: 'hidden',
+    marginBottom: 8,
+  },
+  progressBarFill: {
+    height: '100%',
+    borderRadius: 3,
+    backgroundColor: '#2563EB',
+  },
   progress: {
     fontSize: 14,
     color: '#64748B',
@@ -141,6 +161,11 @@ const styles = StyleSheet.create({
   emoji: {
     fontSize: 48,
     marginBottom: 4,
+  },
+  furigana: {
+    fontSize: 16,
+    color: '#64748B',
+    marginBottom: 2,
   },
   targetKana: {
     fontSize: 56,

@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
@@ -6,6 +6,15 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <Pressable onPress={() => router.push('/settings')} hitSlop={12}>
+              <Text style={styles.settingsIcon}>⚙️</Text>
+            </Pressable>
+          ),
+        }}
+      />
       <Text style={styles.title}>TypeKana</Text>
       <Text style={styles.subtitle}>Entraîne-toi à taper en kana</Text>
 
@@ -54,9 +63,14 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   button: {
-    borderRadius: 16,
+    borderRadius: 20,
     paddingVertical: 24,
     paddingHorizontal: 20,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 4,
   },
   trainingButton: {
     backgroundColor: '#2563EB',
@@ -66,6 +80,7 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     opacity: 0.85,
+    transform: [{ scale: 0.98 }],
   },
   buttonText: {
     color: '#FFFFFF',
@@ -76,5 +91,8 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.85)',
     fontSize: 14,
     marginTop: 4,
+  },
+  settingsIcon: {
+    fontSize: 20,
   },
 });

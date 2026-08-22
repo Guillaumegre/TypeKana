@@ -17,8 +17,12 @@ export default function TrainingSelectScreen() {
             style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
             onPress={() => router.push({ pathname: '/game', params: { mode: 'training', category: item.id } })}
           >
-            <Text style={styles.cardLabel}>{item.label}</Text>
-            <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
+            <Text style={styles.cardEmoji}>{item.emoji}</Text>
+            <View style={styles.cardText}>
+              <Text style={styles.cardLabel}>{item.label}</Text>
+              <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
+            </View>
+            <Text style={styles.cardChevron}>›</Text>
           </Pressable>
         )}
       />
@@ -44,16 +48,27 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
   },
   card: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    paddingVertical: 20,
+    borderRadius: 16,
+    paddingVertical: 18,
     paddingHorizontal: 18,
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
+    gap: 14,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
   },
   cardPressed: {
     backgroundColor: '#EFF6FF',
-    borderColor: '#93C5FD',
+  },
+  cardEmoji: {
+    fontSize: 30,
+  },
+  cardText: {
+    flex: 1,
   },
   cardLabel: {
     fontSize: 18,
@@ -64,5 +79,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#64748B',
     marginTop: 4,
+  },
+  cardChevron: {
+    fontSize: 20,
+    color: '#CBD5E1',
   },
 });
