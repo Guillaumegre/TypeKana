@@ -15,7 +15,7 @@ export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { mode, category } = useLocalSearchParams<{ mode: string; category: string }>();
-  const { kanjiMode, hintMode } = useSettings();
+  const { kanjiMode, hintMode, blindMode } = useSettings();
 
   const words = useMemo(
     () => shuffle(getWordsByCategory(category ?? '')).slice(0, SESSION_LENGTH),
@@ -30,9 +30,9 @@ export default function GameScreen() {
   const inputRef = useRef<TextInput>(null);
 
   const currentWord = words[index];
-  const showKanji = kanjiMode && !!currentWord?.kanji;
+  const showKanji = !blindMode && kanjiMode && !!currentWord?.kanji;
   const answerTarget = showKanji ? currentWord.kanji! : currentWord?.kana;
-  const inputPlaceholder = !kanjiMode || hintMode ? currentWord?.kana : '';
+  const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -94,8 +94,9 @@ export default function GameScreen() {
         <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
           <Text style={styles.backButtonText}>‹</Text>
         </Pressable>
-        <ModeSwitch />
-        <View style={styles.backButton} />
+        <View style={styles.modeSwitchWrap}>
+          <ModeSwitch />
+        </View>
       </View>
 
       <View style={styles.progressBarTrack}>
@@ -106,10 +107,10 @@ export default function GameScreen() {
       </Text>
 
       <View style={styles.wordCard}>
-        {currentWord.emoji && <Text style={styles.emoji}>{currentWord.emoji}</Text>}
+        {currentWord.emoji && <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>}
         {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
-        <Text style={styles.targetKana}>{showKanji ? currentWord.kanji : currentWord.kana}</Text>
-        <Text style={styles.meaning}>{currentWord.meaning_fr}</Text>
+        {!blindMode && <Text style={styles.targetKana}>{showKanji ? currentWord.kanji : currentWord.kana}</Text>}
+        <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>
 
       <TextInput
@@ -175,6 +176,10 @@ const styles = StyleSheet.create({
     color: '#334155',
     fontWeight: '600',
   },
+  modeSwitchWrap: {
+    flex: 1,
+    alignItems: 'center',
+  },
   progressBarTrack: {
     width: '100%',
     height: 6,
@@ -201,6 +206,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 2,
   },
+  emojiLarge: {
+    fontSize: 56,
+    marginBottom: 8,
+  },
   furigana: {
     fontSize: 16,
     color: '#64748B',
@@ -215,6 +224,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#94A3B8',
     marginTop: 8,
+  },
+  meaningPrimary: {
+    fontSize: 30,
+    fontWeight: '700',
+    color: '#1E293B',
   },
   input: {
     width: '100%',

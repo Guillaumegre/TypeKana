@@ -6,15 +6,17 @@ const STORAGE_KEY = 'typekana:settings';
 interface Settings {
   kanjiMode: boolean;
   hintMode: boolean;
+  blindMode: boolean;
 }
 
 interface SettingsContextValue extends Settings {
   loaded: boolean;
   setKanjiMode: (value: boolean) => void;
   setHintMode: (value: boolean) => void;
+  setBlindMode: (value: boolean) => void;
 }
 
-const DEFAULT_SETTINGS: Settings = { kanjiMode: false, hintMode: false };
+const DEFAULT_SETTINGS: Settings = { kanjiMode: false, hintMode: false, blindMode: false };
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
@@ -43,8 +45,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       value={{
         ...settings,
         loaded,
-        setKanjiMode: (value) => update(value ? { kanjiMode: value } : { kanjiMode: value, hintMode: false }),
+        setKanjiMode: (value) =>
+          update(value ? { kanjiMode: value, blindMode: false } : { kanjiMode: value, hintMode: false }),
         setHintMode: (value) => update({ hintMode: value }),
+        setBlindMode: (value) => update(value ? { blindMode: value, kanjiMode: false, hintMode: false } : { blindMode: value }),
       }}
     >
       {children}

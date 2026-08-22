@@ -11,7 +11,7 @@ export default function SettingsScreen() {
         <Text style={styles.tutorialChevron}>›</Text>
       </Pressable>
       <Text style={styles.hint}>
-        Le mode d'affichage (kana / kanji / indice) se règle directement depuis l'écran de jeu.
+        Le mode d'affichage (kana / kanji / indice / rappel) se règle directement depuis l'écran de jeu.
       </Text>
     </View>
   );
