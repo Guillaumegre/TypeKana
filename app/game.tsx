@@ -79,6 +79,7 @@ export default function GameScreen() {
       </Text>
 
       <View style={styles.wordCard}>
+        {currentWord.emoji && <Text style={styles.emoji}>{currentWord.emoji}</Text>}
         <Text style={styles.targetKana}>{currentWord.kana}</Text>
         <Text style={styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>
@@ -96,7 +97,7 @@ export default function GameScreen() {
           if (feedback !== 'idle') setFeedback('idle');
         }}
         onSubmitEditing={handleSubmit}
-        placeholder="かな..."
+        placeholder={currentWord.meaning_fr}
         placeholderTextColor="#94A3B8"
         autoFocus
         autoCorrect={false}
@@ -136,6 +137,10 @@ const styles = StyleSheet.create({
   wordCard: {
     alignItems: 'center',
     marginBottom: 32,
+  },
+  emoji: {
+    fontSize: 48,
+    marginBottom: 4,
   },
   targetKana: {
     fontSize: 56,

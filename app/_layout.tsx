@@ -17,8 +17,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ title: 'TypeKana' }} />
         <Stack.Screen name="training/index" options={{ title: 'Training' }} />
         <Stack.Screen name="race" options={{ title: 'Race' }} />
-        <Stack.Screen name="game" options={{ title: 'TypeKana', headerBackVisible: false }} />
-        <Stack.Screen name="results" options={{ title: 'Résultats', headerBackVisible: false }} />
+        <Stack.Screen name="game" options={{ title: 'TypeKana' }} />
+        <Stack.Screen name="results" options={{ title: 'Résultats' }} />
       </Stack>
     </SafeAreaProvider>
   );
