@@ -29,11 +29,8 @@ export function getWordsByLevel(level: string): VocabWord[] {
   return VOCAB.filter((w) => w.jlpt_level === level);
 }
 
-export function pickRandomWord(excludeId?: string): VocabWord {
-  if (VOCAB.length === 1) return VOCAB[0];
-  let word: VocabWord;
-  do {
-    word = VOCAB[Math.floor(Math.random() * VOCAB.length)];
-  } while (word.id === excludeId);
-  return word;
+export function pickRandomWord(excludeIds?: Set<string>): VocabWord {
+  const pool = excludeIds && excludeIds.size > 0 ? VOCAB.filter((w) => !excludeIds.has(w.id)) : VOCAB;
+  const source = pool.length > 0 ? pool : VOCAB;
+  return source[Math.floor(Math.random() * source.length)];
 }

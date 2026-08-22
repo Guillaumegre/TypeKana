@@ -16,10 +16,12 @@ const SESSION_LENGTH = 10;
 const RACE_DURATION = 60;
 const RACE_QUEUE_SIZE = 3;
 
-function makeRaceQueue(): GameEntry[] {
+function makeRaceQueue(used: Set<string>): GameEntry[] {
   const queue: GameEntry[] = [];
   for (let i = 0; i < RACE_QUEUE_SIZE; i++) {
-    queue.push(pickRandomWord(queue[queue.length - 1]?.id));
+    const word = pickRandomWord(used);
+    used.add(word.id);
+    queue.push(word);
   }
   return queue;
 }
@@ -50,8 +52,11 @@ export default function GameScreen() {
     return shuffle(pool).slice(0, SESSION_LENGTH);
   }, [isRace, category, level, contentType]);
 
+  const usedWordIdsRef = useRef<Set<string>>(new Set());
   const [index, setIndex] = useState(0);
-  const [raceQueue, setRaceQueue] = useState<GameEntry[]>(() => (isRace ? makeRaceQueue() : []));
+  const [raceQueue, setRaceQueue] = useState<GameEntry[]>(() =>
+    isRace ? makeRaceQueue(usedWordIdsRef.current) : [],
+  );
   const [raceWordsSeen, setRaceWordsSeen] = useState(1);
   const [raceStarted, setRaceStarted] = useState(false);
   const [racePB, setRacePB] = useState<RaceScore | null>(null);
@@ -175,7 +180,9 @@ export default function GameScreen() {
       setRaceWordsSeen((n) => n + 1);
       setRaceQueue((q) => {
         const rest = q.slice(1);
-        return [...rest, pickRandomWord(rest[rest.length - 1]?.id)];
+        const word = pickRandomWord(usedWordIdsRef.current);
+        usedWordIdsRef.current.add(word.id);
+        return [...rest, word];
       });
       return;
     }
@@ -230,7 +237,9 @@ export default function GameScreen() {
       setRaceWordsSeen((n) => n + 1);
       setRaceQueue((q) => {
         const rest = q.slice(1);
-        return [...rest, pickRandomWord(rest[rest.length - 1]?.id)];
+        const word = pickRandomWord(usedWordIdsRef.current);
+        usedWordIdsRef.current.add(word.id);
+        return [...rest, word];
       });
       return;
     }
