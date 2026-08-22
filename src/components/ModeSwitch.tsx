@@ -10,9 +10,10 @@ const OPTIONS: { mode: Mode; label: string }[] = [
   { mode: 'rappel', label: 'Rappel' },
 ];
 
-export function ModeSwitch() {
+export function ModeSwitch({ allowBlind = true }: { allowBlind?: boolean }) {
   const { kanjiMode, hintMode, blindMode, setKanjiMode, setHintMode, setBlindMode } = useSettings();
   const current: Mode = blindMode ? 'rappel' : !kanjiMode ? 'kana' : hintMode ? 'indice' : 'kanji';
+  const options = allowBlind ? OPTIONS : OPTIONS.filter((o) => o.mode !== 'rappel');
 
   const selectMode = (mode: Mode) => {
     if (mode === 'kana') {
@@ -30,7 +31,7 @@ export function ModeSwitch() {
 
   return (
     <View style={styles.track}>
-      {OPTIONS.map((option) => {
+      {options.map((option) => {
         const active = option.mode === current;
         return (
           <Pressable

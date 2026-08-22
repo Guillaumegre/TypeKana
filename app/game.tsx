@@ -28,7 +28,7 @@ export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { mode, category, level } = useLocalSearchParams<{ mode: string; category?: string; level?: string }>();
-  const { kanjiMode, hintMode, blindMode } = useSettings();
+  const { kanjiMode, hintMode, blindMode, setBlindMode } = useSettings();
   const isRace = mode === 'race';
 
   const sessionWords: GameEntry[] = useMemo(() => {
@@ -45,12 +45,18 @@ export default function GameScreen() {
   const [raceStarted, setRaceStarted] = useState(false);
   const [racePB, setRacePB] = useState<RaceScore | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(RACE_DURATION);
-  const [input, setInput] = useState('');
   const [feedback, setFeedback] = useState<Feedback>('idle');
   const [hasMissedCurrent, setHasMissedCurrent] = useState(false);
   const [correctFirstTry, setCorrectFirstTry] = useState(0);
   const [finished, setFinished] = useState(false);
   const inputRef = useRef<TextInput>(null);
+  const lastTextRef = useRef('');
+
+  // Race mode doesn't offer Rappel (blind recall doesn't fit a pure speed test).
+  // If it was left on from a Training session, turn it off on entry.
+  useEffect(() => {
+    if (isRace && blindMode) setBlindMode(false);
+  }, [isRace, blindMode, setBlindMode]);
 
   const currentWord = isRace ? raceQueue[0] : sessionWords[index];
   const upcomingWords = isRace ? raceQueue.slice(1) : [];
@@ -136,8 +142,13 @@ export default function GameScreen() {
     );
   }
 
+  const clearInput = () => {
+    inputRef.current?.clear();
+    lastTextRef.current = '';
+  };
+
   const advance = (nextCorrect: number) => {
-    setInput('');
+    clearInput();
     setFeedback('idle');
     setHasMissedCurrent(false);
 
@@ -171,7 +182,7 @@ export default function GameScreen() {
   };
 
   const handleChangeText = (text: string) => {
-    setInput(text);
+    lastTextRef.current = text;
     if (feedback !== 'idle') setFeedback('idle');
 
     if (isRace) {
@@ -182,16 +193,17 @@ export default function GameScreen() {
 
   const handleSubmit = () => {
     if (!currentWord) return;
-    const advanced = checkAndAdvance(input);
-    if (!advanced && input.trim()) {
+    const text = lastTextRef.current;
+    const advanced = checkAndAdvance(text);
+    if (!advanced && text.trim()) {
       setHasMissedCurrent(true);
       setFeedback('incorrect');
-      setInput('');
+      clearInput();
     }
   };
 
   const handleSkip = () => {
-    setInput('');
+    clearInput();
     setFeedback('idle');
     setHasMissedCurrent(false);
 
@@ -224,7 +236,7 @@ export default function GameScreen() {
           <Text style={styles.backButtonText}>‹</Text>
         </Pressable>
         <View style={styles.modeSwitchWrap}>
-          <ModeSwitch />
+          <ModeSwitch allowBlind={!isRace} />
         </View>
       </View>
 
@@ -248,13 +260,16 @@ export default function GameScreen() {
       )}
 
       <View style={styles.wordCard}>
-        {currentWord.color ? (
-          <View style={[styles.colorSwatch, blindMode && styles.colorSwatchLarge, { backgroundColor: currentWord.color }]} />
-        ) : (
-          currentWord.emoji && (
-            <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>
-          )
-        )}
+        {!isRace &&
+          (currentWord.color ? (
+            <View
+              style={[styles.colorSwatch, blindMode && styles.colorSwatchLarge, { backgroundColor: currentWord.color }]}
+            />
+          ) : (
+            currentWord.emoji && (
+              <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>
+            )
+          ))}
         {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
         {!blindMode && (
           <Text style={[styles.targetKana, { fontSize: targetFontSize }]}>{displayText}</Text>
@@ -279,7 +294,7 @@ export default function GameScreen() {
           feedback === 'correct' && styles.inputCorrect,
           feedback === 'incorrect' && styles.inputIncorrect,
         ]}
-        value={input}
+        defaultValue=""
         onChangeText={handleChangeText}
         onSubmitEditing={handleSubmit}
         placeholder={isRace && !raceStarted ? 'Tape pour commencer...' : inputPlaceholder}
