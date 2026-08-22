@@ -19,7 +19,7 @@ const RACE_QUEUE_SIZE = 3;
 function makeRaceQueue(): GameEntry[] {
   const queue: GameEntry[] = [];
   for (let i = 0; i < RACE_QUEUE_SIZE; i++) {
-    queue.push(pickRandomWord(queue[queue.length - 1]?.kana));
+    queue.push(pickRandomWord(queue[queue.length - 1]?.id));
   }
   return queue;
 }
@@ -157,7 +157,7 @@ export default function GameScreen() {
       setRaceWordsSeen((n) => n + 1);
       setRaceQueue((q) => {
         const rest = q.slice(1);
-        return [...rest, pickRandomWord(rest[rest.length - 1]?.kana)];
+        return [...rest, pickRandomWord(rest[rest.length - 1]?.id)];
       });
       return;
     }
@@ -212,7 +212,7 @@ export default function GameScreen() {
       setRaceWordsSeen((n) => n + 1);
       setRaceQueue((q) => {
         const rest = q.slice(1);
-        return [...rest, pickRandomWord(rest[rest.length - 1]?.kana)];
+        return [...rest, pickRandomWord(rest[rest.length - 1]?.id)];
       });
       return;
     }

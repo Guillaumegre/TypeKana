@@ -27,6 +27,7 @@ export interface JlptSentence {
 
 /** What the game screen needs to render a round, regardless of whether it came from a vocab word or a phrase. */
 export interface GameEntry {
+  id: string;
   kana: string;
   kanji: string | null;
   meaning_fr: string;
