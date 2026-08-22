@@ -4,7 +4,7 @@ import { BackHeader } from '../src/components/BackHeader';
 
 export default function ResultsScreen() {
   const router = useRouter();
-  const { mode, correct, total, isNewPB, pbCorrect, category, level } = useLocalSearchParams<{
+  const { mode, correct, total, isNewPB, pbCorrect, category, level, contentType } = useLocalSearchParams<{
     mode: string;
     correct: string;
     total: string;
@@ -12,6 +12,7 @@ export default function ResultsScreen() {
     pbCorrect?: string;
     category?: string;
     level?: string;
+    contentType?: string;
   }>();
 
   const isRace = mode === 'race';
@@ -38,7 +39,12 @@ export default function ResultsScreen() {
                 ? router.replace({ pathname: '/game', params: { mode: 'race' } })
                 : router.replace({
                     pathname: '/game',
-                    params: { mode: 'training', ...(category ? { category } : {}), ...(level ? { level } : {}) },
+                    params: {
+                      mode: 'training',
+                      ...(category ? { category } : {}),
+                      ...(level ? { level } : {}),
+                      ...(contentType ? { contentType } : {}),
+                    },
                   })
             }
           >

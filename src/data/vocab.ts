@@ -25,6 +25,10 @@ export function getWordsByCategory(categoryId: string): VocabWord[] {
   return VOCAB.filter((w) => w.category === categoryId);
 }
 
+export function getWordsByLevel(level: string): VocabWord[] {
+  return VOCAB.filter((w) => w.jlpt_level === level);
+}
+
 export function pickRandomWord(excludeId?: string): VocabWord {
   if (VOCAB.length === 1) return VOCAB[0];
   let word: VocabWord;

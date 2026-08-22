@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getSentencesByLevel } from '../src/data/sentences';
-import { getWordsByCategory, pickRandomWord } from '../src/data/vocab';
+import { getWordsByCategory, getWordsByLevel, pickRandomWord } from '../src/data/vocab';
 import type { GameEntry } from '../src/types/vocab';
 import { isTextMatch, shuffle } from '../src/utils/kana';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
@@ -27,17 +27,28 @@ function makeRaceQueue(): GameEntry[] {
 export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { mode, category, level } = useLocalSearchParams<{ mode: string; category?: string; level?: string }>();
+  const { mode, category, level, contentType } = useLocalSearchParams<{
+    mode: string;
+    category?: string;
+    level?: string;
+    contentType?: string;
+  }>();
   const { kanjiMode, hintMode, blindMode, setBlindMode } = useSettings();
   const isRace = mode === 'race';
 
   const sessionWords: GameEntry[] = useMemo(() => {
     if (isRace) return [];
-    const pool: GameEntry[] = level
-      ? getSentencesByLevel(level).map((s) => ({ ...s, emoji: null, color: null }))
-      : getWordsByCategory(category ?? '');
+    let pool: GameEntry[];
+    if (level) {
+      pool =
+        contentType === 'phrases'
+          ? getSentencesByLevel(level).map((s) => ({ ...s, emoji: null, color: null }))
+          : getWordsByLevel(level);
+    } else {
+      pool = getWordsByCategory(category ?? '');
+    }
     return shuffle(pool).slice(0, SESSION_LENGTH);
-  }, [isRace, category, level]);
+  }, [isRace, category, level, contentType]);
 
   const [index, setIndex] = useState(0);
   const [raceQueue, setRaceQueue] = useState<GameEntry[]>(() => (isRace ? makeRaceQueue() : []));
@@ -88,10 +99,11 @@ export default function GameScreen() {
           accuracy: String(finalTotal > 0 ? Math.round((finalCorrect / finalTotal) * 100) : 0),
           ...(category ? { category } : {}),
           ...(level ? { level } : {}),
+          ...(contentType ? { contentType } : {}),
         },
       });
     },
-    [router, isRace, category, level],
+    [router, isRace, category, level, contentType],
   );
 
   const correctRef = useRef(correctFirstTry);
@@ -138,7 +150,11 @@ export default function GameScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.empty}>
-          {level ? 'Aucune phrase disponible pour ce niveau.' : 'Aucun mot trouvé pour ce thème.'}
+          {level
+            ? contentType === 'phrases'
+              ? 'Aucune phrase disponible pour ce niveau.'
+              : 'Aucun mot disponible pour ce niveau.'
+            : 'Aucun mot trouvé pour ce thème.'}
         </Text>
       </View>
     );
