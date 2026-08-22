@@ -66,7 +66,6 @@ export default function GameScreen() {
   const [hasMissedCurrent, setHasMissedCurrent] = useState(false);
   const [correctFirstTry, setCorrectFirstTry] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [liveText, setLiveText] = useState('');
   const inputRef = useRef<TextInput>(null);
   const lastTextRef = useRef('');
 
@@ -83,17 +82,14 @@ export default function GameScreen() {
   const acceptedAnswers = blindMode
     ? [currentWord?.kana, currentWord?.kanji].filter((v): v is string => !!v)
     : [answerTarget].filter((v): v is string => !!v);
+  // While the IME is still composing the kana reading, the kanji hasn't appeared yet — accept
+  // the kana as a valid "in progress" prefix too, so live feedback doesn't flash red mid-conversion.
+  const liveCheckAnswers = showKanji
+    ? [currentWord?.kana, currentWord?.kanji].filter((v): v is string => !!v)
+    : acceptedAnswers;
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
   const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
   const targetFontSize = !displayText || displayText.length <= 6 ? 56 : displayText.length <= 10 ? 34 : 26;
-
-  const liveChars = useMemo(() => {
-    const reference = acceptedAnswers[0];
-    if (!liveText || !reference) return [];
-    const typed = normalizeText(liveText);
-    const target = normalizeText(reference);
-    return [...typed].map((char, i) => ({ char, correct: char === target[i] }));
-  }, [liveText, acceptedAnswers]);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -178,7 +174,6 @@ export default function GameScreen() {
   const clearInput = () => {
     inputRef.current?.clear();
     lastTextRef.current = '';
-    setLiveText('');
   };
 
   const advance = (nextCorrect: number) => {
@@ -219,13 +214,20 @@ export default function GameScreen() {
 
   const handleChangeText = (text: string) => {
     lastTextRef.current = text;
-    setLiveText(text);
-    if (feedback !== 'idle') setFeedback('idle');
 
     if (isRace) {
       if (!raceStarted && text.length > 0) setRaceStarted(true);
-      checkAndAdvance(text);
+      if (checkAndAdvance(text)) return;
     }
+
+    if (!text) {
+      setFeedback('idle');
+      return;
+    }
+
+    const typed = normalizeText(text);
+    const validSoFar = liveCheckAnswers.some((answer) => normalizeText(answer).startsWith(typed));
+    setFeedback(validSoFar ? 'idle' : 'incorrect');
   };
 
   const handleSubmit = () => {
@@ -337,16 +339,6 @@ export default function GameScreen() {
           {upcomingWords.map((w, i) => (
             <Text key={`${w.kana}-${i}`} style={styles.upcomingWord} numberOfLines={1}>
               {w.kana}
-            </Text>
-          ))}
-        </View>
-      )}
-
-      {liveChars.length > 0 && (
-        <View style={styles.liveRow}>
-          {liveChars.map((c, i) => (
-            <Text key={i} style={[styles.liveChar, !c.correct && styles.liveCharWrong]}>
-              {c.char}
             </Text>
           ))}
         </View>
@@ -513,21 +505,6 @@ const styles = StyleSheet.create({
     color: '#CBD5E1',
     fontWeight: '600',
   },
-  liveRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginBottom: 8,
-    paddingHorizontal: 8,
-  },
-  liveChar: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1E293B',
-  },
-  liveCharWrong: {
-    color: '#EF4444',
-  },
   input: {
     width: '100%',
     borderWidth: 2,
@@ -547,6 +524,7 @@ const styles = StyleSheet.create({
   inputIncorrect: {
     borderColor: '#EF4444',
     backgroundColor: '#FEF2F2',
+    color: '#EF4444',
   },
   feedbackText: {
     marginTop: 8,
