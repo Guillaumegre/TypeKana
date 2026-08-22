@@ -19,7 +19,7 @@ export default function RootLayout() {
           <Stack.Screen name="index" options={{ title: 'TypeKana' }} />
           <Stack.Screen name="training/index" options={{ title: 'Training' }} />
           <Stack.Screen name="race" options={{ title: 'Race' }} />
-          <Stack.Screen name="game" options={{ title: 'TypeKana' }} />
+          <Stack.Screen name="game" options={{ headerShown: false }} />
           <Stack.Screen name="results" options={{ title: 'Résultats' }} />
           <Stack.Screen name="settings" options={{ title: 'Paramètres' }} />
           <Stack.Screen name="tutorial" options={{ title: 'Tutoriel' }} />

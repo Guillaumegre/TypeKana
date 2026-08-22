@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getWordsByCategory } from '../src/data/vocab';
@@ -12,6 +13,7 @@ const SESSION_LENGTH = 10;
 
 export default function GameScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { mode, category } = useLocalSearchParams<{ mode: string; category: string }>();
   const { kanjiMode, hintMode } = useSettings();
 
@@ -85,12 +87,15 @@ export default function GameScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={[styles.container, { paddingTop: insets.top + 12 }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >
-      <View style={styles.topRow}>
+      <View style={styles.topBar}>
+        <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
+          <Text style={styles.backButtonText}>‹</Text>
+        </Pressable>
         <ModeSwitch />
+        <View style={styles.backButton} />
       </View>
 
       <View style={styles.progressBarTrack}>
@@ -152,8 +157,23 @@ const styles = StyleSheet.create({
     color: '#64748B',
     marginTop: 40,
   },
-  topRow: {
-    marginBottom: 20,
+  topBar: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  backButton: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backButtonText: {
+    fontSize: 28,
+    color: '#334155',
+    fontWeight: '600',
   },
   progressBarTrack: {
     width: '100%',
@@ -169,17 +189,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#2563EB',
   },
   progress: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#64748B',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   wordCard: {
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: 20,
   },
   emoji: {
-    fontSize: 48,
-    marginBottom: 4,
+    fontSize: 30,
+    marginBottom: 2,
   },
   furigana: {
     fontSize: 16,
@@ -217,7 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEF2F2',
   },
   feedbackText: {
-    marginTop: 12,
+    marginTop: 8,
     fontSize: 15,
     fontWeight: '600',
     color: '#EF4444',
@@ -226,7 +246,7 @@ const styles = StyleSheet.create({
     color: '#22C55E',
   },
   submitButton: {
-    marginTop: 24,
+    marginTop: 16,
     backgroundColor: '#2563EB',
     borderRadius: 14,
     paddingVertical: 14,
