@@ -4,7 +4,9 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
+import { getSentencesByLevel } from '../src/data/sentences';
 import { getWordsByCategory } from '../src/data/vocab';
+import type { GameEntry } from '../src/types/vocab';
 import { isTextMatch, shuffle } from '../src/utils/kana';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
@@ -14,13 +16,15 @@ const SESSION_LENGTH = 10;
 export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { mode, category } = useLocalSearchParams<{ mode: string; category: string }>();
+  const { mode, category, level } = useLocalSearchParams<{ mode: string; category?: string; level?: string }>();
   const { kanjiMode, hintMode, blindMode } = useSettings();
 
-  const words = useMemo(
-    () => shuffle(getWordsByCategory(category ?? '')).slice(0, SESSION_LENGTH),
-    [category],
-  );
+  const words: GameEntry[] = useMemo(() => {
+    const pool: GameEntry[] = level
+      ? getSentencesByLevel(level).map((s) => ({ ...s, emoji: null, color: null }))
+      : getWordsByCategory(category ?? '');
+    return shuffle(pool).slice(0, SESSION_LENGTH);
+  }, [category, level]);
 
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState('');
@@ -33,6 +37,8 @@ export default function GameScreen() {
   const showKanji = !blindMode && kanjiMode && !!currentWord?.kanji;
   const answerTarget = showKanji ? currentWord.kanji! : currentWord?.kana;
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
+  const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
+  const targetFontSize = !displayText || displayText.length <= 6 ? 56 : displayText.length <= 10 ? 34 : 26;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -41,7 +47,9 @@ export default function GameScreen() {
   if (words.length === 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.empty}>Aucun mot trouvé pour ce thème.</Text>
+        <Text style={styles.empty}>
+          {level ? 'Aucune phrase disponible pour ce niveau.' : 'Aucun mot trouvé pour ce thème.'}
+        </Text>
       </View>
     );
   }
@@ -127,7 +135,9 @@ export default function GameScreen() {
           )
         )}
         {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
-        {!blindMode && <Text style={styles.targetKana}>{showKanji ? currentWord.kanji : currentWord.kana}</Text>}
+        {!blindMode && (
+          <Text style={[styles.targetKana, { fontSize: targetFontSize }]}>{displayText}</Text>
+        )}
         <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>
 

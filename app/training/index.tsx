@@ -1,33 +1,32 @@
 import { useRouter } from 'expo-router';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../../src/components/BackHeader';
-import { CATEGORIES, getWordsByCategory } from '../../src/data/vocab';
 
-export default function TrainingSelectScreen() {
+export default function TrainingModeScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
       <BackHeader title="Training" />
-      <Text style={styles.heading}>Choisis un thème</Text>
-      <FlatList
-        data={CATEGORIES}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => (
-          <Pressable
-            style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
-            onPress={() => router.push({ pathname: '/game', params: { mode: 'training', category: item.id } })}
-          >
-            <Text style={styles.cardEmoji}>{item.emoji}</Text>
-            <View style={styles.cardText}>
-              <Text style={styles.cardLabel}>{item.label}</Text>
-              <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
-            </View>
-            <Text style={styles.cardChevron}>›</Text>
-          </Pressable>
-        )}
-      />
+      <View style={styles.content}>
+        <Pressable
+          style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+          onPress={() => router.push('/training/theme')}
+        >
+          <Text style={styles.cardEmoji}>🗂️</Text>
+          <Text style={styles.cardLabel}>Par thème</Text>
+          <Text style={styles.cardDescription}>Animaux, transports, nourriture, couleurs...</Text>
+        </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+          onPress={() => router.push('/training/level')}
+        >
+          <Text style={styles.cardEmoji}>🎓</Text>
+          <Text style={styles.cardLabel}>Par niveau JLPT</Text>
+          <Text style={styles.cardDescription}>Phrases courantes classées N5 à N1</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -37,26 +36,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F8FAFC',
   },
-  heading: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1E293B',
-    marginBottom: 16,
+  content: {
     paddingHorizontal: 20,
-  },
-  list: {
     gap: 12,
-    paddingHorizontal: 20,
-    paddingBottom: 24,
   },
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    paddingVertical: 18,
-    paddingHorizontal: 18,
-    gap: 14,
+    paddingVertical: 22,
+    paddingHorizontal: 20,
     shadowColor: '#0F172A',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.06,
@@ -67,23 +55,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFF6FF',
   },
   cardEmoji: {
-    fontSize: 30,
-  },
-  cardText: {
-    flex: 1,
+    fontSize: 28,
+    marginBottom: 8,
   },
   cardLabel: {
     fontSize: 18,
     fontWeight: '700',
     color: '#1E293B',
   },
-  cardCount: {
+  cardDescription: {
     fontSize: 13,
     color: '#64748B',
     marginTop: 4,
-  },
-  cardChevron: {
-    fontSize: 20,
-    color: '#CBD5E1',
   },
 });

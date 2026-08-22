@@ -9,6 +9,11 @@ export const CATEGORIES: Category[] = [
   { id: 'nourriture', label: 'Nourriture', emoji: '🍜' },
   { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨' },
   { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈' },
+  { id: 'famille', label: 'Famille', emoji: '👪' },
+  { id: 'vetements', label: 'Vêtements', emoji: '👕' },
+  { id: 'meteo', label: 'Météo', emoji: '🌦️' },
+  { id: 'chiffres', label: 'Chiffres', emoji: '🔢' },
+  { id: 'metiers', label: 'Métiers', emoji: '💼' },
 ];
 
 export function getWordsByCategory(categoryId: string): VocabWord[] {

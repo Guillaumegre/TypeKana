@@ -1,0 +1,17 @@
+[
+  { "id": "phrase_001", "kana": "こんにちは", "kanji": null, "meaning_fr": "Bonjour", "jlpt_level": "N5" },
+  { "id": "phrase_002", "kana": "おはようございます", "kanji": null, "meaning_fr": "Bonjour (le matin)", "jlpt_level": "N5" },
+  { "id": "phrase_003", "kana": "こんばんは", "kanji": null, "meaning_fr": "Bonsoir", "jlpt_level": "N5" },
+  { "id": "phrase_004", "kana": "さようなら", "kanji": null, "meaning_fr": "Au revoir", "jlpt_level": "N5" },
+  { "id": "phrase_005", "kana": "すみません", "kanji": null, "meaning_fr": "Excusez-moi / Pardon", "jlpt_level": "N5" },
+  { "id": "phrase_006", "kana": "ありがとうございます", "kanji": null, "meaning_fr": "Merci beaucoup", "jlpt_level": "N5" },
+  { "id": "phrase_007", "kana": "はじめまして", "kanji": null, "meaning_fr": "Enchanté (à la première rencontre)", "jlpt_level": "N5" },
+  { "id": "phrase_008", "kana": "おげんきですか", "kanji": "お元気ですか", "meaning_fr": "Comment allez-vous ?", "jlpt_level": "N5" },
+  { "id": "phrase_009", "kana": "げんきです", "kanji": "元気です", "meaning_fr": "Ça va bien", "jlpt_level": "N5" },
+  { "id": "phrase_010", "kana": "わたしのなまえはハナです", "kanji": "私の名前はハナです", "meaning_fr": "Je m'appelle Hana", "jlpt_level": "N5" },
+  { "id": "phrase_011", "kana": "わたしのなまえはたなかです", "kanji": "私の名前は田中です", "meaning_fr": "Je m'appelle Tanaka", "jlpt_level": "N5" },
+  { "id": "phrase_012", "kana": "よろしくおねがいします", "kanji": null, "meaning_fr": "Enchanté / Merci d'avance", "jlpt_level": "N5" },
+  { "id": "phrase_013", "kana": "いただきます", "kanji": null, "meaning_fr": "Bon appétit (avant de manger)", "jlpt_level": "N5" },
+  { "id": "phrase_014", "kana": "ごちそうさまでした", "kanji": null, "meaning_fr": "Merci pour ce repas (après manger)", "jlpt_level": "N5" },
+  { "id": "phrase_015", "kana": "おやすみなさい", "kanji": null, "meaning_fr": "Bonne nuit", "jlpt_level": "N5" }
+]

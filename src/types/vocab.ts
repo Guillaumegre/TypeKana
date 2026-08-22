@@ -16,3 +16,20 @@ export interface Category {
   label: string;
   emoji: string;
 }
+
+export interface JlptSentence {
+  id: string;
+  kana: string;
+  kanji: string | null;
+  meaning_fr: string;
+  jlpt_level: JlptLevel;
+}
+
+/** What the game screen needs to render a round, regardless of whether it came from a vocab word or a phrase. */
+export interface GameEntry {
+  kana: string;
+  kanji: string | null;
+  meaning_fr: string;
+  emoji: string | null;
+  color: string | null;
+}
