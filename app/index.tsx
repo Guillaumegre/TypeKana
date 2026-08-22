@@ -11,7 +11,7 @@ export default function HomeScreen() {
       <Pressable
         onPress={() => router.push('/settings')}
         hitSlop={12}
-        style={[styles.settingsButton, { top: insets.top + 12 }]}
+        style={[styles.settingsButton, { top: insets.top + 20 }]}
       >
         <Text style={styles.settingsIcon}>⚙️</Text>
       </Pressable>

@@ -7,7 +7,7 @@ export function BackHeader({ title }: { title?: string }) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.row, { paddingTop: insets.top + 12 }]}>
+    <View style={[styles.row, { paddingTop: insets.top + 20 }]}>
       <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
         <Text style={styles.backButtonText}>‹</Text>
       </Pressable>

@@ -7,7 +7,8 @@ export const CATEGORIES: Category[] = [
   { id: 'animaux', label: 'Animaux', emoji: '🐾' },
   { id: 'transports', label: 'Transports', emoji: '🚗' },
   { id: 'nourriture', label: 'Nourriture', emoji: '🍜' },
-  { id: 'couleurs', label: 'Couleurs', emoji: '🎨' },
+  { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨' },
+  { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈' },
 ];
 
 export function getWordsByCategory(categoryId: string): VocabWord[] {

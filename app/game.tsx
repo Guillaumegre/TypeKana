@@ -99,7 +99,7 @@ export default function GameScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={[styles.container, { paddingTop: insets.top + 12 }]}
+      style={[styles.container, { paddingTop: insets.top + 20 }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.topBar}>
@@ -156,14 +156,13 @@ export default function GameScreen() {
       {feedback === 'incorrect' && <Text style={styles.feedbackText}>Essaie encore</Text>}
       {feedback === 'correct' && <Text style={[styles.feedbackText, styles.feedbackCorrect]}>Correct !</Text>}
 
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.skipButton} onPress={handleSkip}>
-          <Text style={styles.skipButtonText}>Passer</Text>
-        </Pressable>
-        <Pressable style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonText}>Valider</Text>
-        </Pressable>
-      </View>
+      <Pressable style={styles.submitButton} onPress={handleSubmit}>
+        <Text style={styles.submitButtonText}>Valider</Text>
+      </Pressable>
+
+      <Pressable onPress={handleSkip} hitSlop={8} style={styles.skipLink}>
+        <Text style={styles.skipLinkText}>Passer</Text>
+      </Pressable>
     </KeyboardAvoidingView>
   );
 }
@@ -296,28 +295,9 @@ const styles = StyleSheet.create({
   feedbackCorrect: {
     color: '#22C55E',
   },
-  buttonRow: {
-    width: '100%',
-    flexDirection: 'row',
-    marginTop: 16,
-    gap: 12,
-  },
-  skipButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#CBD5E1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  skipButtonText: {
-    color: '#64748B',
-    fontSize: 15,
-    fontWeight: '600',
-  },
   submitButton: {
-    flex: 1,
+    width: '100%',
+    marginTop: 16,
     backgroundColor: '#2563EB',
     borderRadius: 14,
     paddingVertical: 14,
@@ -327,5 +307,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '700',
+  },
+  skipLink: {
+    marginTop: 12,
+    paddingVertical: 4,
+  },
+  skipLinkText: {
+    color: '#94A3B8',
+    fontSize: 13,
+    fontWeight: '500',
   },
 });

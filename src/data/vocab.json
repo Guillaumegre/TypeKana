@@ -454,7 +454,7 @@
     "kana": "あか",
     "kanji": "赤",
     "meaning_fr": "rouge",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#E53935"
@@ -464,7 +464,7 @@
     "kana": "あお",
     "kanji": "青",
     "meaning_fr": "bleu",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#1E88E5"
@@ -474,7 +474,7 @@
     "kana": "きいろ",
     "kanji": "黄色",
     "meaning_fr": "jaune",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#FDD835"
@@ -484,7 +484,7 @@
     "kana": "みどり",
     "kanji": "緑",
     "meaning_fr": "vert",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#43A047"
@@ -494,7 +494,7 @@
     "kana": "しろ",
     "kanji": "白",
     "meaning_fr": "blanc",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#FFFFFF"
@@ -504,7 +504,7 @@
     "kana": "くろ",
     "kanji": "黒",
     "meaning_fr": "noir",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#111111"
@@ -514,7 +514,7 @@
     "kana": "ちゃいろ",
     "kanji": "茶色",
     "meaning_fr": "marron",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#6D4C41"
@@ -524,7 +524,7 @@
     "kana": "むらさき",
     "kanji": "紫",
     "meaning_fr": "violet",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N4",
     "emoji": null,
     "color": "#8E24AA"
@@ -534,7 +534,7 @@
     "kana": "ピンク",
     "kanji": null,
     "meaning_fr": "rose",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#EC407A"
@@ -544,7 +544,7 @@
     "kana": "オレンジ",
     "kanji": null,
     "meaning_fr": "orange",
-    "category": "couleurs",
+    "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
     "color": "#FB8C00"
@@ -554,7 +554,7 @@
     "kana": "はいいろ",
     "kanji": "灰色",
     "meaning_fr": "gris",
-    "category": "couleurs",
+    "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
     "color": "#9E9E9E"
@@ -564,7 +564,7 @@
     "kana": "きんいろ",
     "kanji": "金色",
     "meaning_fr": "doré",
-    "category": "couleurs",
+    "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
     "color": "#D4AF37"
@@ -574,7 +574,7 @@
     "kana": "ぎんいろ",
     "kanji": "銀色",
     "meaning_fr": "argenté",
-    "category": "couleurs",
+    "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
     "color": "#C0C0C0"
@@ -584,7 +584,7 @@
     "kana": "こんいろ",
     "kanji": "紺色",
     "meaning_fr": "bleu marine",
-    "category": "couleurs",
+    "category": "couleurs_avancees",
     "jlpt_level": "N3",
     "emoji": null,
     "color": "#1A237E"
@@ -594,7 +594,7 @@
     "kana": "みずいろ",
     "kanji": "水色",
     "meaning_fr": "bleu ciel",
-    "category": "couleurs",
+    "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
     "color": "#81D4FA"
