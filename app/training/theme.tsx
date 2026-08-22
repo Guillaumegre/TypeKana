@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../../src/components/BackHeader';
-import { CATEGORIES, getWordsByCategory } from '../../src/data/vocab';
+import { CATEGORIES, getWordsByCategory, RANDOM_CATEGORY_ID } from '../../src/data/vocab';
 
 export default function ThemeSelectScreen() {
   const router = useRouter();
@@ -21,7 +21,11 @@ export default function ThemeSelectScreen() {
             <Text style={styles.cardEmoji}>{item.emoji}</Text>
             <View style={styles.cardText}>
               <Text style={styles.cardLabel}>{item.label}</Text>
-              <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
+              <Text style={styles.cardCount}>
+                {item.id === RANDOM_CATEGORY_ID
+                  ? 'Un peu de tout le vocabulaire'
+                  : `${getWordsByCategory(item.id).length} mots`}
+              </Text>
             </View>
             <Text style={styles.cardChevron}>›</Text>
           </Pressable>

@@ -1348,5 +1348,235 @@
     "jlpt_level": "N4",
     "emoji": "🏠",
     "color": null
+  },
+  {
+    "id": "calendrier_001",
+    "kana": "げつようび",
+    "kanji": "月曜日",
+    "meaning_fr": "lundi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_002",
+    "kana": "かようび",
+    "kanji": "火曜日",
+    "meaning_fr": "mardi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_003",
+    "kana": "すいようび",
+    "kanji": "水曜日",
+    "meaning_fr": "mercredi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_004",
+    "kana": "もくようび",
+    "kanji": "木曜日",
+    "meaning_fr": "jeudi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_005",
+    "kana": "きんようび",
+    "kanji": "金曜日",
+    "meaning_fr": "vendredi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_006",
+    "kana": "どようび",
+    "kanji": "土曜日",
+    "meaning_fr": "samedi",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_007",
+    "kana": "にちようび",
+    "kanji": "日曜日",
+    "meaning_fr": "dimanche",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_008",
+    "kana": "いちがつ",
+    "kanji": "一月",
+    "meaning_fr": "janvier",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_009",
+    "kana": "にがつ",
+    "kanji": "二月",
+    "meaning_fr": "février",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_010",
+    "kana": "さんがつ",
+    "kanji": "三月",
+    "meaning_fr": "mars",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_011",
+    "kana": "しがつ",
+    "kanji": "四月",
+    "meaning_fr": "avril",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_012",
+    "kana": "ごがつ",
+    "kanji": "五月",
+    "meaning_fr": "mai",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_013",
+    "kana": "ろくがつ",
+    "kanji": "六月",
+    "meaning_fr": "juin",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_014",
+    "kana": "しちがつ",
+    "kanji": "七月",
+    "meaning_fr": "juillet",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_015",
+    "kana": "はちがつ",
+    "kanji": "八月",
+    "meaning_fr": "août",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_016",
+    "kana": "くがつ",
+    "kanji": "九月",
+    "meaning_fr": "septembre",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_017",
+    "kana": "じゅうがつ",
+    "kanji": "十月",
+    "meaning_fr": "octobre",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_018",
+    "kana": "じゅういちがつ",
+    "kanji": "十一月",
+    "meaning_fr": "novembre",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_019",
+    "kana": "じゅうにがつ",
+    "kanji": "十二月",
+    "meaning_fr": "décembre",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_020",
+    "kana": "はる",
+    "kanji": "春",
+    "meaning_fr": "printemps",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": "🌸",
+    "color": null
+  },
+  {
+    "id": "calendrier_021",
+    "kana": "なつ",
+    "kanji": "夏",
+    "meaning_fr": "été",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": "☀️",
+    "color": null
+  },
+  {
+    "id": "calendrier_022",
+    "kana": "あき",
+    "kanji": "秋",
+    "meaning_fr": "automne",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": "🍁",
+    "color": null
+  },
+  {
+    "id": "calendrier_023",
+    "kana": "ふゆ",
+    "kanji": "冬",
+    "meaning_fr": "hiver",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": "❄️",
+    "color": null
   }
 ]

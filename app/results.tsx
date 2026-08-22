@@ -4,11 +4,10 @@ import { BackHeader } from '../src/components/BackHeader';
 
 export default function ResultsScreen() {
   const router = useRouter();
-  const { mode, correct, total, accuracy, isNewPB, pbCorrect } = useLocalSearchParams<{
+  const { mode, correct, total, isNewPB, pbCorrect } = useLocalSearchParams<{
     mode: string;
     correct: string;
     total: string;
-    accuracy: string;
     isNewPB?: string;
     pbCorrect?: string;
   }>();
@@ -24,17 +23,11 @@ export default function ResultsScreen() {
         {isRace && isNewPB === '1' && <Text style={styles.pbBanner}>🏆 Nouveau record !</Text>}
         {isRace && isNewPB === '0' && <Text style={styles.pbSubtitle}>Ton record : {pbCorrect} mots corrects</Text>}
 
-        <View style={styles.statsRow}>
-          <View style={styles.statBox}>
-            <Text style={styles.statValue}>
-              {correct}/{total}
-            </Text>
-            <Text style={styles.statLabel}>{isRace ? 'mots vus' : 'mots corrects'}</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statValue}>{accuracy}%</Text>
-            <Text style={styles.statLabel}>précision</Text>
-          </View>
+        <View style={styles.statBox}>
+          <Text style={styles.statValue}>
+            {correct}/{total}
+          </Text>
+          <Text style={styles.statLabel}>{isRace ? 'mots vus' : 'mots corrects'}</Text>
         </View>
 
         <View style={styles.buttons}>
@@ -85,23 +78,19 @@ const styles = StyleSheet.create({
     color: '#64748B',
     marginTop: 12,
   },
-  statsRow: {
-    flexDirection: 'row',
-    gap: 16,
-    marginTop: 32,
-    marginBottom: 48,
-  },
   statBox: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    paddingVertical: 24,
-    paddingHorizontal: 28,
+    paddingVertical: 28,
+    paddingHorizontal: 40,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#E2E8F0',
+    marginTop: 32,
+    marginBottom: 48,
   },
   statValue: {
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: '800',
     color: '#2563EB',
   },

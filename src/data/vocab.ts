@@ -3,7 +3,10 @@ import type { Category, VocabWord } from '../types/vocab';
 
 export const VOCAB: VocabWord[] = rawVocab as VocabWord[];
 
+export const RANDOM_CATEGORY_ID = 'aleatoire';
+
 export const CATEGORIES: Category[] = [
+  { id: RANDOM_CATEGORY_ID, label: 'Aléatoire', emoji: '🎲' },
   { id: 'animaux', label: 'Animaux', emoji: '🐾' },
   { id: 'transports', label: 'Transports', emoji: '🚗' },
   { id: 'nourriture', label: 'Nourriture', emoji: '🍜' },
@@ -14,9 +17,11 @@ export const CATEGORIES: Category[] = [
   { id: 'meteo', label: 'Météo', emoji: '🌦️' },
   { id: 'chiffres', label: 'Chiffres', emoji: '🔢' },
   { id: 'metiers', label: 'Métiers', emoji: '💼' },
+  { id: 'calendrier', label: 'Calendrier', emoji: '📅' },
 ];
 
 export function getWordsByCategory(categoryId: string): VocabWord[] {
+  if (categoryId === RANDOM_CATEGORY_ID) return VOCAB;
   return VOCAB.filter((w) => w.category === categoryId);
 }
 
