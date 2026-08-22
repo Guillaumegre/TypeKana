@@ -36,6 +36,9 @@ export default function GameScreen() {
   const currentWord = words[index];
   const showKanji = !blindMode && kanjiMode && !!currentWord?.kanji;
   const answerTarget = showKanji ? currentWord.kanji! : currentWord?.kana;
+  const acceptedAnswers = blindMode
+    ? [currentWord?.kana, currentWord?.kanji].filter((v): v is string => !!v)
+    : [answerTarget];
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
   const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
   const targetFontSize = !displayText || displayText.length <= 6 ? 56 : displayText.length <= 10 ? 34 : 26;
@@ -69,7 +72,7 @@ export default function GameScreen() {
   const handleSubmit = () => {
     if (!input.trim()) return;
 
-    const correct = isTextMatch(input, answerTarget);
+    const correct = acceptedAnswers.some((answer) => isTextMatch(input, answer));
 
     if (correct) {
       const finalCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
