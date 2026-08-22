@@ -1,39 +1,616 @@
 [
-  { "id": "phrase_001", "kana": "こんにちは", "kanji": null, "meaning_fr": "Bonjour", "jlpt_level": "N5" },
-  { "id": "phrase_002", "kana": "おはようございます", "kanji": null, "meaning_fr": "Bonjour (le matin)", "jlpt_level": "N5" },
-  { "id": "phrase_003", "kana": "こんばんは", "kanji": null, "meaning_fr": "Bonsoir", "jlpt_level": "N5" },
-  { "id": "phrase_004", "kana": "さようなら", "kanji": null, "meaning_fr": "Au revoir", "jlpt_level": "N5" },
-  { "id": "phrase_005", "kana": "すみません", "kanji": null, "meaning_fr": "Excusez-moi / Pardon", "jlpt_level": "N5" },
-  { "id": "phrase_006", "kana": "ありがとうございます", "kanji": null, "meaning_fr": "Merci beaucoup", "jlpt_level": "N5" },
-  { "id": "phrase_007", "kana": "はじめまして", "kanji": null, "meaning_fr": "Enchanté (à la première rencontre)", "jlpt_level": "N5" },
-  { "id": "phrase_008", "kana": "おげんきですか", "kanji": "お元気ですか", "meaning_fr": "Comment allez-vous ?", "jlpt_level": "N5" },
-  { "id": "phrase_009", "kana": "げんきです", "kanji": "元気です", "meaning_fr": "Ça va bien", "jlpt_level": "N5" },
-  { "id": "phrase_010", "kana": "わたしのなまえはハナです", "kanji": "私の名前はハナです", "meaning_fr": "Je m'appelle Hana", "jlpt_level": "N5" },
-  { "id": "phrase_011", "kana": "わたしのなまえはたなかです", "kanji": "私の名前は田中です", "meaning_fr": "Je m'appelle Tanaka", "jlpt_level": "N5" },
-  { "id": "phrase_012", "kana": "よろしくおねがいします", "kanji": null, "meaning_fr": "Enchanté / Merci d'avance", "jlpt_level": "N5" },
-  { "id": "phrase_013", "kana": "いただきます", "kanji": null, "meaning_fr": "Bon appétit (avant de manger)", "jlpt_level": "N5" },
-  { "id": "phrase_014", "kana": "ごちそうさまでした", "kanji": null, "meaning_fr": "Merci pour ce repas (après manger)", "jlpt_level": "N5" },
-  { "id": "phrase_015", "kana": "おやすみなさい", "kanji": null, "meaning_fr": "Bonne nuit", "jlpt_level": "N5" },
-
-  { "id": "phrase_016", "kana": "すみませんが、もういちどいってください", "kanji": "すみませんが、もう一度言ってください", "meaning_fr": "Excusez-moi, pouvez-vous répéter ?", "jlpt_level": "N4" },
-  { "id": "phrase_017", "kana": "てつだってもらえますか", "kanji": "手伝ってもらえますか", "meaning_fr": "Pouvez-vous m'aider ?", "jlpt_level": "N4" },
-  { "id": "phrase_018", "kana": "これはいくらですか", "kanji": null, "meaning_fr": "Combien ça coûte ?", "jlpt_level": "N4" },
-  { "id": "phrase_019", "kana": "ちょっとまってください", "kanji": "ちょっと待ってください", "meaning_fr": "Attendez un instant s'il vous plaît", "jlpt_level": "N4" },
-  { "id": "phrase_020", "kana": "わかりました", "kanji": "分かりました", "meaning_fr": "J'ai compris", "jlpt_level": "N4" },
-  { "id": "phrase_021", "kana": "わかりません", "kanji": "分かりません", "meaning_fr": "Je ne comprends pas", "jlpt_level": "N4" },
-  { "id": "phrase_022", "kana": "どこにありますか", "kanji": null, "meaning_fr": "Où est-ce que ça se trouve ?", "jlpt_level": "N4" },
-  { "id": "phrase_023", "kana": "なんじにあいましょうか", "kanji": "何時に会いましょうか", "meaning_fr": "À quelle heure se retrouve-t-on ?", "jlpt_level": "N4" },
-  { "id": "phrase_024", "kana": "きょうはいそがしいです", "kanji": "今日は忙しいです", "meaning_fr": "Aujourd'hui je suis occupé(e)", "jlpt_level": "N4" },
-  { "id": "phrase_025", "kana": "だいじょうぶですか", "kanji": "大丈夫ですか", "meaning_fr": "Ça va ? Tout va bien ?", "jlpt_level": "N4" },
-  { "id": "phrase_026", "kana": "おなかがすきました", "kanji": "お腹が空きました", "meaning_fr": "J'ai faim", "jlpt_level": "N4" },
-  { "id": "phrase_027", "kana": "あしたてんきがいいといいですね", "kanji": "明日天気がいいといいですね", "meaning_fr": "J'espère qu'il fera beau demain", "jlpt_level": "N4" },
-
-  { "id": "phrase_028", "kana": "もしよかったら、いっしょにいきませんか", "kanji": "もしよかったら、一緒に行きませんか", "meaning_fr": "Si ça te dit, on y va ensemble ?", "jlpt_level": "N3" },
-  { "id": "phrase_029", "kana": "さいきん、しごとがいそがしくて、つかれています", "kanji": "最近、仕事が忙しくて、疲れています", "meaning_fr": "Récemment, le travail est chargé, je suis fatigué(e)", "jlpt_level": "N3" },
-  { "id": "phrase_030", "kana": "できれば、はやくかえりたいです", "kanji": "できれば、早く帰りたいです", "meaning_fr": "Si possible, j'aimerais rentrer tôt", "jlpt_level": "N3" },
-  { "id": "phrase_031", "kana": "かんがえておきます", "kanji": "考えておきます", "meaning_fr": "Je vais y réfléchir", "jlpt_level": "N3" },
-  { "id": "phrase_032", "kana": "たぶんまにあわないとおもいます", "kanji": "たぶん間に合わないと思います", "meaning_fr": "Je pense que je ne serai probablement pas à l'heure", "jlpt_level": "N3" },
-  { "id": "phrase_033", "kana": "なにかてつだうことがあれば、いってください", "kanji": "何か手伝うことがあれば、言ってください", "meaning_fr": "S'il y a quelque chose que je peux faire pour aider, dites-le moi", "jlpt_level": "N3" },
-  { "id": "phrase_034", "kana": "けっこんしてから、とうきょうにひっこしました", "kanji": "結婚してから、東京に引っ越しました", "meaning_fr": "Après m'être marié(e), j'ai déménagé à Tokyo", "jlpt_level": "N3" },
-  { "id": "phrase_035", "kana": "しんぱいしなくてもだいじょうぶです", "kanji": "心配しなくても大丈夫です", "meaning_fr": "Pas besoin de s'inquiéter, ça va aller", "jlpt_level": "N3" }
+  {
+    "id": "phrase_001",
+    "kana": "こんにちは",
+    "kanji": null,
+    "meaning_fr": "Bonjour",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_002",
+    "kana": "おはようございます",
+    "kanji": null,
+    "meaning_fr": "Bonjour (le matin)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_003",
+    "kana": "こんばんは",
+    "kanji": null,
+    "meaning_fr": "Bonsoir",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_004",
+    "kana": "さようなら",
+    "kanji": null,
+    "meaning_fr": "Au revoir",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_005",
+    "kana": "すみません",
+    "kanji": null,
+    "meaning_fr": "Excusez-moi / Pardon",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_006",
+    "kana": "ありがとうございます",
+    "kanji": null,
+    "meaning_fr": "Merci beaucoup",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_007",
+    "kana": "はじめまして",
+    "kanji": null,
+    "meaning_fr": "Enchanté (à la première rencontre)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_008",
+    "kana": "おげんきですか",
+    "kanji": "お元気ですか",
+    "meaning_fr": "Comment allez-vous ?",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "お"
+      },
+      {
+        "text": "元気",
+        "reading": "げんき"
+      },
+      {
+        "text": "です"
+      },
+      {
+        "text": "か"
+      }
+    ]
+  },
+  {
+    "id": "phrase_009",
+    "kana": "げんきです",
+    "kanji": "元気です",
+    "meaning_fr": "Ça va bien",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "元気",
+        "reading": "げんき"
+      },
+      {
+        "text": "です"
+      }
+    ]
+  },
+  {
+    "id": "phrase_010",
+    "kana": "わたしのなまえはハナです",
+    "kanji": "私の名前はハナです",
+    "meaning_fr": "Je m'appelle Hana",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "私",
+        "reading": "わたし"
+      },
+      {
+        "text": "の"
+      },
+      {
+        "text": "名前",
+        "reading": "なまえ"
+      },
+      {
+        "text": "は"
+      },
+      {
+        "text": "ハナ"
+      },
+      {
+        "text": "です"
+      }
+    ]
+  },
+  {
+    "id": "phrase_011",
+    "kana": "わたしのなまえはたなかです",
+    "kanji": "私の名前は田中です",
+    "meaning_fr": "Je m'appelle Tanaka",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "私",
+        "reading": "わたし"
+      },
+      {
+        "text": "の"
+      },
+      {
+        "text": "名前",
+        "reading": "なまえ"
+      },
+      {
+        "text": "は"
+      },
+      {
+        "text": "田中",
+        "reading": "たなか"
+      },
+      {
+        "text": "です"
+      }
+    ]
+  },
+  {
+    "id": "phrase_012",
+    "kana": "よろしくおねがいします",
+    "kanji": null,
+    "meaning_fr": "Enchanté / Merci d'avance",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_013",
+    "kana": "いただきます",
+    "kanji": null,
+    "meaning_fr": "Bon appétit (avant de manger)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_014",
+    "kana": "ごちそうさまでした",
+    "kanji": null,
+    "meaning_fr": "Merci pour ce repas (après manger)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_015",
+    "kana": "おやすみなさい",
+    "kanji": null,
+    "meaning_fr": "Bonne nuit",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_016",
+    "kana": "すみませんが、もういちどいってください",
+    "kanji": "すみませんが、もう一度言ってください",
+    "meaning_fr": "Excusez-moi, pouvez-vous répéter ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "すみませんが、もう"
+      },
+      {
+        "text": "一度",
+        "reading": "いちど"
+      },
+      {
+        "text": "言",
+        "reading": "い"
+      },
+      {
+        "text": "ってください"
+      }
+    ]
+  },
+  {
+    "id": "phrase_017",
+    "kana": "てつだってもらえますか",
+    "kanji": "手伝ってもらえますか",
+    "meaning_fr": "Pouvez-vous m'aider ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "手伝",
+        "reading": "てつだ"
+      },
+      {
+        "text": "ってもらえますか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_018",
+    "kana": "これはいくらですか",
+    "kanji": null,
+    "meaning_fr": "Combien ça coûte ?",
+    "jlpt_level": "N4"
+  },
+  {
+    "id": "phrase_019",
+    "kana": "ちょっとまってください",
+    "kanji": "ちょっと待ってください",
+    "meaning_fr": "Attendez un instant s'il vous plaît",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "ちょっと"
+      },
+      {
+        "text": "待",
+        "reading": "ま"
+      },
+      {
+        "text": "ってください"
+      }
+    ]
+  },
+  {
+    "id": "phrase_020",
+    "kana": "わかりました",
+    "kanji": "分かりました",
+    "meaning_fr": "J'ai compris",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "分",
+        "reading": "わ"
+      },
+      {
+        "text": "かりました"
+      }
+    ]
+  },
+  {
+    "id": "phrase_021",
+    "kana": "わかりません",
+    "kanji": "分かりません",
+    "meaning_fr": "Je ne comprends pas",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "分",
+        "reading": "わ"
+      },
+      {
+        "text": "かりません"
+      }
+    ]
+  },
+  {
+    "id": "phrase_022",
+    "kana": "どこにありますか",
+    "kanji": null,
+    "meaning_fr": "Où est-ce que ça se trouve ?",
+    "jlpt_level": "N4"
+  },
+  {
+    "id": "phrase_023",
+    "kana": "なんじにあいましょうか",
+    "kanji": "何時に会いましょうか",
+    "meaning_fr": "À quelle heure se retrouve-t-on ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "何時",
+        "reading": "なんじ"
+      },
+      {
+        "text": "に"
+      },
+      {
+        "text": "会",
+        "reading": "あ"
+      },
+      {
+        "text": "いましょうか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_024",
+    "kana": "きょうはいそがしいです",
+    "kanji": "今日は忙しいです",
+    "meaning_fr": "Aujourd'hui je suis occupé(e)",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "今日",
+        "reading": "きょう"
+      },
+      {
+        "text": "は"
+      },
+      {
+        "text": "忙",
+        "reading": "いそが"
+      },
+      {
+        "text": "しいです"
+      }
+    ]
+  },
+  {
+    "id": "phrase_025",
+    "kana": "だいじょうぶですか",
+    "kanji": "大丈夫ですか",
+    "meaning_fr": "Ça va ? Tout va bien ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "大丈夫",
+        "reading": "だいじょうぶ"
+      },
+      {
+        "text": "ですか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_026",
+    "kana": "おなかがすきました",
+    "kanji": "お腹が空きました",
+    "meaning_fr": "J'ai faim",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "お"
+      },
+      {
+        "text": "腹",
+        "reading": "なか"
+      },
+      {
+        "text": "が"
+      },
+      {
+        "text": "空",
+        "reading": "す"
+      },
+      {
+        "text": "きました"
+      }
+    ]
+  },
+  {
+    "id": "phrase_027",
+    "kana": "あしたてんきがいいといいですね",
+    "kanji": "明日天気がいいといいですね",
+    "meaning_fr": "J'espère qu'il fera beau demain",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "明日",
+        "reading": "あした"
+      },
+      {
+        "text": "天気",
+        "reading": "てんき"
+      },
+      {
+        "text": "がいいといいですね"
+      }
+    ]
+  },
+  {
+    "id": "phrase_028",
+    "kana": "もしよかったら、いっしょにいきませんか",
+    "kanji": "もしよかったら、一緒に行きませんか",
+    "meaning_fr": "Si ça te dit, on y va ensemble ?",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "もしよかったら、"
+      },
+      {
+        "text": "一緒",
+        "reading": "いっしょ"
+      },
+      {
+        "text": "に"
+      },
+      {
+        "text": "行",
+        "reading": "い"
+      },
+      {
+        "text": "きませんか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_029",
+    "kana": "さいきん、しごとがいそがしくて、つかれています",
+    "kanji": "最近、仕事が忙しくて、疲れています",
+    "meaning_fr": "Récemment, le travail est chargé, je suis fatigué(e)",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "最近",
+        "reading": "さいきん"
+      },
+      {
+        "text": "、"
+      },
+      {
+        "text": "仕事",
+        "reading": "しごと"
+      },
+      {
+        "text": "が"
+      },
+      {
+        "text": "忙",
+        "reading": "いそが"
+      },
+      {
+        "text": "しくて、"
+      },
+      {
+        "text": "疲",
+        "reading": "つか"
+      },
+      {
+        "text": "れています"
+      }
+    ]
+  },
+  {
+    "id": "phrase_030",
+    "kana": "できれば、はやくかえりたいです",
+    "kanji": "できれば、早く帰りたいです",
+    "meaning_fr": "Si possible, j'aimerais rentrer tôt",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "できれば、"
+      },
+      {
+        "text": "早",
+        "reading": "はや"
+      },
+      {
+        "text": "く"
+      },
+      {
+        "text": "帰",
+        "reading": "かえ"
+      },
+      {
+        "text": "りたいです"
+      }
+    ]
+  },
+  {
+    "id": "phrase_031",
+    "kana": "かんがえておきます",
+    "kanji": "考えておきます",
+    "meaning_fr": "Je vais y réfléchir",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "考",
+        "reading": "かんが"
+      },
+      {
+        "text": "えておきます"
+      }
+    ]
+  },
+  {
+    "id": "phrase_032",
+    "kana": "たぶんまにあわないとおもいます",
+    "kanji": "たぶん間に合わないと思います",
+    "meaning_fr": "Je pense que je ne serai probablement pas à l'heure",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "たぶん"
+      },
+      {
+        "text": "間",
+        "reading": "ま"
+      },
+      {
+        "text": "に"
+      },
+      {
+        "text": "合",
+        "reading": "あ"
+      },
+      {
+        "text": "わないと"
+      },
+      {
+        "text": "思",
+        "reading": "おも"
+      },
+      {
+        "text": "います"
+      }
+    ]
+  },
+  {
+    "id": "phrase_033",
+    "kana": "なにかてつだうことがあれば、いってください",
+    "kanji": "何か手伝うことがあれば、言ってください",
+    "meaning_fr": "S'il y a quelque chose que je peux faire pour aider, dites-le moi",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "何",
+        "reading": "なに"
+      },
+      {
+        "text": "か"
+      },
+      {
+        "text": "手伝",
+        "reading": "てつだ"
+      },
+      {
+        "text": "うことがあれば、"
+      },
+      {
+        "text": "言",
+        "reading": "い"
+      },
+      {
+        "text": "ってください"
+      }
+    ]
+  },
+  {
+    "id": "phrase_034",
+    "kana": "けっこんしてから、とうきょうにひっこしました",
+    "kanji": "結婚してから、東京に引っ越しました",
+    "meaning_fr": "Après m'être marié(e), j'ai déménagé à Tokyo",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "結婚",
+        "reading": "けっこん"
+      },
+      {
+        "text": "してから、"
+      },
+      {
+        "text": "東京",
+        "reading": "とうきょう"
+      },
+      {
+        "text": "に"
+      },
+      {
+        "text": "引",
+        "reading": "ひ"
+      },
+      {
+        "text": "っ"
+      },
+      {
+        "text": "越",
+        "reading": "こ"
+      },
+      {
+        "text": "しました"
+      }
+    ]
+  },
+  {
+    "id": "phrase_035",
+    "kana": "しんぱいしなくてもだいじょうぶです",
+    "kanji": "心配しなくても大丈夫です",
+    "meaning_fr": "Pas besoin de s'inquiéter, ça va aller",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "心配",
+        "reading": "しんぱい"
+      },
+      {
+        "text": "しなくても"
+      },
+      {
+        "text": "大丈夫",
+        "reading": "だいじょうぶ"
+      },
+      {
+        "text": "です"
+      }
+    ]
+  }
 ]

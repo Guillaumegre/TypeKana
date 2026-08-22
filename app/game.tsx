@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FuriganaText } from '../src/components/FuriganaText';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getSentencesByLevel } from '../src/data/sentences';
@@ -307,9 +308,15 @@ export default function GameScreen() {
               <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>
             )
           ))}
-        {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
-        {!blindMode && (
-          <Text style={[styles.targetKana, { fontSize: targetFontSize }]}>{displayText}</Text>
+        {!blindMode && showKanji && hintMode && currentWord.furigana ? (
+          <FuriganaText segments={currentWord.furigana} fontSize={targetFontSize} color="#1E293B" />
+        ) : (
+          <>
+            {showKanji && hintMode && <Text style={styles.furigana}>{currentWord.kana}</Text>}
+            {!blindMode && (
+              <Text style={[styles.targetKana, { fontSize: targetFontSize }]}>{displayText}</Text>
+            )}
+          </>
         )}
         <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
       </View>

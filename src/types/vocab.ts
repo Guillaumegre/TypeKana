@@ -17,10 +17,17 @@ export interface Category {
   emoji: string;
 }
 
+/** One chunk of a furigana-annotated sentence: a kanji chunk carries its own reading, a kana chunk has none. */
+export interface FuriganaSegment {
+  text: string;
+  reading?: string;
+}
+
 export interface JlptSentence {
   id: string;
   kana: string;
   kanji: string | null;
+  furigana?: FuriganaSegment[];
   meaning_fr: string;
   jlpt_level: JlptLevel;
 }
@@ -30,6 +37,7 @@ export interface GameEntry {
   id: string;
   kana: string;
   kanji: string | null;
+  furigana?: FuriganaSegment[];
   meaning_fr: string;
   emoji: string | null;
   color: string | null;
