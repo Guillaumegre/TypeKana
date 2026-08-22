@@ -50,13 +50,16 @@ export function ModeSwitch({ allowBlind = true }: { allowBlind?: boolean }) {
 const styles = StyleSheet.create({
   track: {
     flexDirection: 'row',
+    width: 272,
     backgroundColor: '#E2E8F0',
     borderRadius: 12,
     padding: 3,
   },
   segment: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 7,
-    paddingHorizontal: 10,
     borderRadius: 9,
   },
   segmentActive: {
