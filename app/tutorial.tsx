@@ -1,10 +1,13 @@
+import { useRouter } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
 
 export default function TutorialScreen() {
+  const router = useRouter();
+
   return (
     <View style={styles.screen}>
-      <BackHeader title="Tutoriel" />
+      <BackHeader title="Tutoriel" onBack={() => router.replace('/settings')} />
       <View style={styles.container}>
         <Text style={styles.emoji}>📖</Text>
         <Text style={styles.title}>Tutoriel</Text>

@@ -16,7 +16,7 @@ export default function ResultsScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader />
+      <BackHeader onBack={() => router.replace('/')} />
       <View style={styles.container}>
         <Text style={styles.title}>{isRace ? 'Race terminée !' : 'Entraînement terminé !'}</Text>
 
@@ -24,10 +24,8 @@ export default function ResultsScreen() {
         {isRace && isNewPB === '0' && <Text style={styles.pbSubtitle}>Ton record : {pbCorrect} mots corrects</Text>}
 
         <View style={styles.statBox}>
-          <Text style={styles.statValue}>
-            {correct}/{total}
-          </Text>
-          <Text style={styles.statLabel}>{isRace ? 'mots vus' : 'mots corrects'}</Text>
+          <Text style={styles.statValue}>{isRace ? correct : `${correct}/${total}`}</Text>
+          <Text style={styles.statLabel}>{isRace ? 'mots faits' : 'mots corrects'}</Text>
         </View>
 
         <View style={styles.buttons}>

@@ -7,7 +7,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.container}>
-      <BackHeader title="Paramètres" />
+      <BackHeader title="Paramètres" onBack={() => router.replace('/')} />
       <Pressable style={styles.tutorialRow} onPress={() => router.push('/tutorial')}>
         <Text style={styles.tutorialLabel}>Revoir le tutoriel</Text>
         <Text style={styles.tutorialChevron}>›</Text>

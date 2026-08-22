@@ -8,7 +8,7 @@ export default function LevelSelectScreen() {
 
   return (
     <View style={styles.container}>
-      <BackHeader title="Par niveau JLPT" />
+      <BackHeader title="Par niveau JLPT" onBack={() => router.replace('/training')} />
       <FlatList
         data={JLPT_LEVELS}
         keyExtractor={(item) => item}

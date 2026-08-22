@@ -1,14 +1,12 @@
-import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export function BackHeader({ title }: { title?: string }) {
-  const router = useRouter();
+export function BackHeader({ title, onBack }: { title?: string; onBack: () => void }) {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.row, { paddingTop: insets.top + 20 }]}>
-      <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
+      <Pressable onPress={onBack} hitSlop={12} style={styles.backButton}>
         <Text style={styles.backButtonText}>‹</Text>
       </Pressable>
       {title ? (

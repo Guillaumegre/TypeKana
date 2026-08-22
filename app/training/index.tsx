@@ -7,7 +7,7 @@ export default function TrainingModeScreen() {
 
   return (
     <View style={styles.container}>
-      <BackHeader title="Training" />
+      <BackHeader title="Training" onBack={() => router.replace('/')} />
       <View style={styles.content}>
         <Pressable
           style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}

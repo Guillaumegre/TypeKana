@@ -8,7 +8,7 @@ export default function ThemeSelectScreen() {
 
   return (
     <View style={styles.container}>
-      <BackHeader title="Par thème" />
+      <BackHeader title="Par thème" onBack={() => router.replace('/training')} />
       <FlatList
         data={CATEGORIES}
         keyExtractor={(item) => item.id}

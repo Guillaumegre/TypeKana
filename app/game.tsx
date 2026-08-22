@@ -226,13 +226,23 @@ export default function GameScreen() {
 
   if (!currentWord) return null;
 
+  const handleBack = () => {
+    if (isRace) {
+      router.replace('/');
+    } else if (level) {
+      router.replace('/training/level');
+    } else {
+      router.replace('/training/theme');
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={[styles.container, { paddingTop: insets.top + 20 }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.topBar}>
-        <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
+        <Pressable onPress={handleBack} hitSlop={12} style={styles.backButton}>
           <Text style={styles.backButtonText}>‹</Text>
         </Pressable>
         <View style={styles.modeSwitchWrap}>
