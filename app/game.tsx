@@ -1,53 +1,116 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ModeSwitch } from '../src/components/ModeSwitch';
 import { useSettings } from '../src/context/SettingsContext';
 import { getSentencesByLevel } from '../src/data/sentences';
-import { getWordsByCategory } from '../src/data/vocab';
+import { getWordsByCategory, pickRandomWord } from '../src/data/vocab';
 import type { GameEntry } from '../src/types/vocab';
 import { isTextMatch, shuffle } from '../src/utils/kana';
+import { saveRacePBIfBetter } from '../src/utils/raceStats';
 
 type Feedback = 'idle' | 'correct' | 'incorrect';
 
 const SESSION_LENGTH = 10;
+const RACE_DURATION = 60;
 
 export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { mode, category, level } = useLocalSearchParams<{ mode: string; category?: string; level?: string }>();
   const { kanjiMode, hintMode, blindMode } = useSettings();
+  const isRace = mode === 'race';
 
-  const words: GameEntry[] = useMemo(() => {
+  const sessionWords: GameEntry[] = useMemo(() => {
+    if (isRace) return [];
     const pool: GameEntry[] = level
       ? getSentencesByLevel(level).map((s) => ({ ...s, emoji: null, color: null }))
       : getWordsByCategory(category ?? '');
     return shuffle(pool).slice(0, SESSION_LENGTH);
-  }, [category, level]);
+  }, [isRace, category, level]);
 
   const [index, setIndex] = useState(0);
+  const [raceWord, setRaceWord] = useState<GameEntry | null>(() => (isRace ? pickRandomWord() : null));
+  const [raceWordsSeen, setRaceWordsSeen] = useState(1);
+  const [secondsLeft, setSecondsLeft] = useState(RACE_DURATION);
   const [input, setInput] = useState('');
   const [feedback, setFeedback] = useState<Feedback>('idle');
   const [hasMissedCurrent, setHasMissedCurrent] = useState(false);
   const [correctFirstTry, setCorrectFirstTry] = useState(0);
+  const [finished, setFinished] = useState(false);
   const inputRef = useRef<TextInput>(null);
 
-  const currentWord = words[index];
+  const currentWord = isRace ? raceWord : sessionWords[index];
   const showKanji = !blindMode && kanjiMode && !!currentWord?.kanji;
-  const answerTarget = showKanji ? currentWord.kanji! : currentWord?.kana;
+  const answerTarget = showKanji ? currentWord!.kanji! : currentWord?.kana;
   const acceptedAnswers = blindMode
     ? [currentWord?.kana, currentWord?.kanji].filter((v): v is string => !!v)
-    : [answerTarget];
+    : [answerTarget].filter((v): v is string => !!v);
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
   const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
   const targetFontSize = !displayText || displayText.length <= 6 ? 56 : displayText.length <= 10 ? 34 : 26;
 
   useEffect(() => {
     inputRef.current?.focus();
-  }, [index]);
+  }, [index, raceWord]);
 
-  if (words.length === 0) {
+  const goToResults = useCallback(
+    (finalCorrect: number, finalTotal: number) => {
+      router.replace({
+        pathname: '/results',
+        params: {
+          mode: isRace ? 'race' : 'training',
+          correct: String(finalCorrect),
+          total: String(finalTotal),
+          accuracy: String(finalTotal > 0 ? Math.round((finalCorrect / finalTotal) * 100) : 0),
+        },
+      });
+    },
+    [router, isRace],
+  );
+
+  const correctRef = useRef(correctFirstTry);
+  const seenRef = useRef(raceWordsSeen);
+  useEffect(() => {
+    correctRef.current = correctFirstTry;
+    seenRef.current = raceWordsSeen;
+  }, [correctFirstTry, raceWordsSeen]);
+
+  const finishRace = useCallback(async () => {
+    setFinished((already) => {
+      if (already) return already;
+      const finalCorrect = correctRef.current;
+      const finalSeen = seenRef.current;
+      const accuracy = finalSeen > 0 ? Math.round((finalCorrect / finalSeen) * 100) : 0;
+      saveRacePBIfBetter({ correct: finalCorrect, accuracy }).then(({ isNewPB, pb }) => {
+        router.replace({
+          pathname: '/results',
+          params: {
+            mode: 'race',
+            correct: String(finalCorrect),
+            total: String(finalSeen),
+            accuracy: String(accuracy),
+            isNewPB: isNewPB ? '1' : '0',
+            pbCorrect: String(pb.correct),
+          },
+        });
+      });
+      return true;
+    });
+  }, [router]);
+
+  useEffect(() => {
+    if (!isRace) return;
+    if (secondsLeft <= 0) {
+      finishRace();
+      return;
+    }
+    const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [isRace, secondsLeft, finishRace]);
+
+  if (!isRace && sessionWords.length === 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.empty}>
@@ -57,38 +120,35 @@ export default function GameScreen() {
     );
   }
 
-  const goToResults = (finalCorrect: number) => {
-    router.replace({
-      pathname: '/results',
-      params: {
-        mode: mode ?? 'training',
-        correct: String(finalCorrect),
-        total: String(words.length),
-        accuracy: String(Math.round((finalCorrect / words.length) * 100)),
-      },
-    });
+  const advance = (nextCorrect: number) => {
+    setInput('');
+    setFeedback('idle');
+    setHasMissedCurrent(false);
+
+    if (isRace) {
+      setCorrectFirstTry(nextCorrect);
+      setRaceWordsSeen((n) => n + 1);
+      setRaceWord(pickRandomWord(currentWord?.kana));
+      return;
+    }
+
+    if (index + 1 >= sessionWords.length) {
+      goToResults(nextCorrect, sessionWords.length);
+    } else {
+      setCorrectFirstTry(nextCorrect);
+      setIndex((i) => i + 1);
+    }
   };
 
   const handleSubmit = () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !currentWord) return;
 
     const correct = acceptedAnswers.some((answer) => isTextMatch(input, answer));
 
     if (correct) {
-      const finalCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
+      const nextCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
       setFeedback('correct');
-      setTimeout(() => {
-        setInput('');
-        setFeedback('idle');
-        setHasMissedCurrent(false);
-        if (!hasMissedCurrent) setCorrectFirstTry(finalCorrect);
-
-        if (index + 1 >= words.length) {
-          goToResults(finalCorrect);
-        } else {
-          setIndex((i) => i + 1);
-        }
-      }, 450);
+      setTimeout(() => advance(nextCorrect), 350);
     } else {
       setHasMissedCurrent(true);
       setFeedback('incorrect');
@@ -97,16 +157,27 @@ export default function GameScreen() {
   };
 
   const handleSkip = () => {
+    if (isRace) {
+      setInput('');
+      setFeedback('idle');
+      setHasMissedCurrent(false);
+      setRaceWordsSeen((n) => n + 1);
+      setRaceWord(pickRandomWord(currentWord?.kana));
+      return;
+    }
+
     setInput('');
     setFeedback('idle');
     setHasMissedCurrent(false);
 
-    if (index + 1 >= words.length) {
-      goToResults(correctFirstTry);
+    if (index + 1 >= sessionWords.length) {
+      goToResults(correctFirstTry, sessionWords.length);
     } else {
       setIndex((i) => i + 1);
     }
   };
+
+  if (!currentWord) return null;
 
   return (
     <KeyboardAvoidingView
@@ -122,12 +193,21 @@ export default function GameScreen() {
         </View>
       </View>
 
-      <View style={styles.progressBarTrack}>
-        <View style={[styles.progressBarFill, { width: `${(index / words.length) * 100}%` }]} />
-      </View>
-      <Text style={styles.progress}>
-        Mot {index + 1} / {words.length}
-      </Text>
+      {isRace ? (
+        <View style={styles.timerRow}>
+          <Text style={styles.timerText}>⏱ {secondsLeft}s</Text>
+          <Text style={styles.timerScore}>{correctFirstTry} correct{correctFirstTry > 1 ? 's' : ''}</Text>
+        </View>
+      ) : (
+        <>
+          <View style={styles.progressBarTrack}>
+            <View style={[styles.progressBarFill, { width: `${(index / sessionWords.length) * 100}%` }]} />
+          </View>
+          <Text style={styles.progress}>
+            Mot {index + 1} / {sessionWords.length}
+          </Text>
+        </>
+      )}
 
       <View style={styles.wordCard}>
         {currentWord.color ? (
@@ -214,6 +294,23 @@ const styles = StyleSheet.create({
   modeSwitchWrap: {
     flex: 1,
     alignItems: 'center',
+  },
+  timerRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  timerText: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#DC2626',
+  },
+  timerScore: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#64748B',
   },
   progressBarTrack: {
     width: '100%',

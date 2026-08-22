@@ -4,39 +4,54 @@ import { BackHeader } from '../src/components/BackHeader';
 
 export default function ResultsScreen() {
   const router = useRouter();
-  const { correct, total, accuracy } = useLocalSearchParams<{
+  const { mode, correct, total, accuracy, isNewPB, pbCorrect } = useLocalSearchParams<{
+    mode: string;
     correct: string;
     total: string;
     accuracy: string;
+    isNewPB?: string;
+    pbCorrect?: string;
   }>();
+
+  const isRace = mode === 'race';
 
   return (
     <View style={styles.screen}>
       <BackHeader />
       <View style={styles.container}>
-      <Text style={styles.title}>Entraînement terminé !</Text>
+        <Text style={styles.title}>{isRace ? 'Race terminée !' : 'Entraînement terminé !'}</Text>
 
-      <View style={styles.statsRow}>
-        <View style={styles.statBox}>
-          <Text style={styles.statValue}>
-            {correct}/{total}
-          </Text>
-          <Text style={styles.statLabel}>mots corrects</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text style={styles.statValue}>{accuracy}%</Text>
-          <Text style={styles.statLabel}>précision</Text>
-        </View>
-      </View>
+        {isRace && isNewPB === '1' && <Text style={styles.pbBanner}>🏆 Nouveau record !</Text>}
+        {isRace && isNewPB === '0' && <Text style={styles.pbSubtitle}>Ton record : {pbCorrect} mots corrects</Text>}
 
-      <View style={styles.buttons}>
-        <Pressable style={[styles.button, styles.primaryButton]} onPress={() => router.replace('/training')}>
-          <Text style={styles.buttonText}>Rejouer</Text>
-        </Pressable>
-        <Pressable style={[styles.button, styles.secondaryButton]} onPress={() => router.replace('/')}>
-          <Text style={[styles.buttonText, styles.secondaryButtonText]}>Accueil</Text>
-        </Pressable>
-      </View>
+        <View style={styles.statsRow}>
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>
+              {correct}/{total}
+            </Text>
+            <Text style={styles.statLabel}>{isRace ? 'mots vus' : 'mots corrects'}</Text>
+          </View>
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>{accuracy}%</Text>
+            <Text style={styles.statLabel}>précision</Text>
+          </View>
+        </View>
+
+        <View style={styles.buttons}>
+          <Pressable
+            style={[styles.button, styles.primaryButton]}
+            onPress={() =>
+              isRace
+                ? router.replace({ pathname: '/game', params: { mode: 'race' } })
+                : router.replace('/training')
+            }
+          >
+            <Text style={styles.buttonText}>Rejouer</Text>
+          </Pressable>
+          <Pressable style={[styles.button, styles.secondaryButton]} onPress={() => router.replace('/')}>
+            <Text style={[styles.buttonText, styles.secondaryButtonText]}>Accueil</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -57,12 +72,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
     color: '#1E293B',
-    marginBottom: 32,
     textAlign: 'center',
+  },
+  pbBanner: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#D97706',
+    marginTop: 12,
+  },
+  pbSubtitle: {
+    fontSize: 14,
+    color: '#64748B',
+    marginTop: 12,
   },
   statsRow: {
     flexDirection: 'row',
     gap: 16,
+    marginTop: 32,
     marginBottom: 48,
   },
   statBox: {

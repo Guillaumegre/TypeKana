@@ -30,7 +30,7 @@ export default function HomeScreen() {
 
         <Pressable
           style={({ pressed }) => [styles.button, styles.raceButton, pressed && styles.buttonPressed]}
-          onPress={() => router.push('/race')}
+          onPress={() => router.push({ pathname: '/game', params: { mode: 'race' } })}
         >
           <Text style={styles.buttonText}>Race</Text>
           <Text style={styles.buttonSubtext}>60 secondes chrono</Text>

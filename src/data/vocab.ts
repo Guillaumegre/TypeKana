@@ -19,3 +19,12 @@ export const CATEGORIES: Category[] = [
 export function getWordsByCategory(categoryId: string): VocabWord[] {
   return VOCAB.filter((w) => w.category === categoryId);
 }
+
+export function pickRandomWord(excludeId?: string): VocabWord {
+  if (VOCAB.length === 1) return VOCAB[0];
+  let word: VocabWord;
+  do {
+    word = VOCAB[Math.floor(Math.random() * VOCAB.length)];
+  } while (word.id === excludeId);
+  return word;
+}
