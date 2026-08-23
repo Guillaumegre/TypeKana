@@ -66,6 +66,7 @@ export default function GameScreen() {
   const [hasMissedCurrent, setHasMissedCurrent] = useState(false);
   const [correctFirstTry, setCorrectFirstTry] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [liveInvalid, setLiveInvalid] = useState(false);
   const inputRef = useRef<TextInput>(null);
   const lastTextRef = useRef('');
 
@@ -174,6 +175,7 @@ export default function GameScreen() {
   const clearInput = () => {
     inputRef.current?.clear();
     lastTextRef.current = '';
+    setLiveInvalid(false);
   };
 
   const advance = (nextCorrect: number) => {
@@ -217,17 +219,25 @@ export default function GameScreen() {
 
     if (isRace) {
       if (!raceStarted && text.length > 0) setRaceStarted(true);
-      if (checkAndAdvance(text)) return;
+      if (checkAndAdvance(text)) {
+        setLiveInvalid(false);
+        return;
+      }
     }
 
+    if (feedback === 'incorrect') setFeedback('idle');
+
     if (!text) {
-      setFeedback('idle');
+      setLiveInvalid(false);
       return;
     }
 
-    const typed = normalizeText(text);
-    const validSoFar = liveCheckAnswers.some((answer) => normalizeText(answer).startsWith(typed));
-    setFeedback(validSoFar ? 'idle' : 'incorrect');
+    // Give the last kana a one-keystroke grace period before flagging it: dakuten/handakuten
+    // (は → ば) and small-tsu replace the last character in place rather than appending, so
+    // checking it immediately would flash red mid-composition, before the IME is done with it.
+    const settled = normalizeText(text).slice(0, -1);
+    const validSoFar = liveCheckAnswers.some((answer) => normalizeText(answer).startsWith(settled));
+    setLiveInvalid(!validSoFar);
   };
 
   const handleSubmit = () => {
@@ -349,7 +359,7 @@ export default function GameScreen() {
         style={[
           styles.input,
           feedback === 'correct' && styles.inputCorrect,
-          feedback === 'incorrect' && styles.inputIncorrect,
+          (feedback === 'incorrect' || liveInvalid) && styles.inputIncorrect,
         ]}
         defaultValue=""
         onChangeText={handleChangeText}
