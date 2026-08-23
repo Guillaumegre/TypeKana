@@ -1578,5 +1578,205 @@
     "jlpt_level": "N5",
     "emoji": "❄️",
     "color": null
+  },
+  {
+    "id": "verbes_001",
+    "kana": "たべる",
+    "kanji": "食べる",
+    "meaning_fr": "manger",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🍽️",
+    "color": null
+  },
+  {
+    "id": "verbes_002",
+    "kana": "のむ",
+    "kanji": "飲む",
+    "meaning_fr": "boire",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🥤",
+    "color": null
+  },
+  {
+    "id": "verbes_003",
+    "kana": "いく",
+    "kanji": "行く",
+    "meaning_fr": "aller",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🚶",
+    "color": null
+  },
+  {
+    "id": "verbes_004",
+    "kana": "くる",
+    "kanji": "来る",
+    "meaning_fr": "venir",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🙋",
+    "color": null
+  },
+  {
+    "id": "verbes_005",
+    "kana": "かえる",
+    "kanji": "帰る",
+    "meaning_fr": "rentrer",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🏠",
+    "color": null
+  },
+  {
+    "id": "verbes_006",
+    "kana": "みる",
+    "kanji": "見る",
+    "meaning_fr": "voir / regarder",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "👀",
+    "color": null
+  },
+  {
+    "id": "verbes_007",
+    "kana": "きく",
+    "kanji": "聞く",
+    "meaning_fr": "écouter / entendre",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "👂",
+    "color": null
+  },
+  {
+    "id": "verbes_008",
+    "kana": "はなす",
+    "kanji": "話す",
+    "meaning_fr": "parler",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "💬",
+    "color": null
+  },
+  {
+    "id": "verbes_009",
+    "kana": "よむ",
+    "kanji": "読む",
+    "meaning_fr": "lire",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "📖",
+    "color": null
+  },
+  {
+    "id": "verbes_010",
+    "kana": "かく",
+    "kanji": "書く",
+    "meaning_fr": "écrire",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "✍️",
+    "color": null
+  },
+  {
+    "id": "verbes_011",
+    "kana": "する",
+    "kanji": null,
+    "meaning_fr": "faire",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_012",
+    "kana": "ねる",
+    "kanji": "寝る",
+    "meaning_fr": "dormir",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "😴",
+    "color": null
+  },
+  {
+    "id": "verbes_013",
+    "kana": "おきる",
+    "kanji": "起きる",
+    "meaning_fr": "se lever / se réveiller",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "⏰",
+    "color": null
+  },
+  {
+    "id": "verbes_014",
+    "kana": "はたらく",
+    "kanji": "働く",
+    "meaning_fr": "travailler",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "💼",
+    "color": null
+  },
+  {
+    "id": "verbes_015",
+    "kana": "かう",
+    "kanji": "買う",
+    "meaning_fr": "acheter",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🛒",
+    "color": null
+  },
+  {
+    "id": "verbes_016",
+    "kana": "うる",
+    "kanji": "売る",
+    "meaning_fr": "vendre",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🏷️",
+    "color": null
+  },
+  {
+    "id": "verbes_017",
+    "kana": "まつ",
+    "kanji": "待つ",
+    "meaning_fr": "attendre",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "⏳",
+    "color": null
+  },
+  {
+    "id": "verbes_018",
+    "kana": "あう",
+    "kanji": "会う",
+    "meaning_fr": "rencontrer",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "🤝",
+    "color": null
+  },
+  {
+    "id": "verbes_019",
+    "kana": "わかる",
+    "kanji": "分かる",
+    "meaning_fr": "comprendre",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": "💡",
+    "color": null
+  },
+  {
+    "id": "verbes_020",
+    "kana": "できる",
+    "kanji": null,
+    "meaning_fr": "pouvoir / être capable de",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
   }
 ]

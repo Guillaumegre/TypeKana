@@ -18,6 +18,7 @@ export const CATEGORIES: Category[] = [
   { id: 'chiffres', label: 'Chiffres', emoji: '🔢' },
   { id: 'metiers', label: 'Métiers', emoji: '💼' },
   { id: 'calendrier', label: 'Calendrier', emoji: '📅' },
+  { id: 'verbes', label: 'Verbes', emoji: '🏃' },
 ];
 
 export function getWordsByCategory(categoryId: string): VocabWord[] {
