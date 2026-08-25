@@ -61,6 +61,16 @@ export function isKanaFamilyMatch(a: string, b: string): boolean {
   return familyA !== undefined && familyA === familyB;
 }
 
+/**
+ * The kana keyboard always types hiragana first — katakana only appears once you pick it
+ * from the conversion candidates at the end, the same way kanji does. Hiragana and katakana
+ * share a fixed +0x60 codepoint offset across their common range, so this is a straight
+ * character-by-character shift rather than a lookup table.
+ */
+export function katakanaToHiragana(input: string): string {
+  return input.replace(/[ァ-ヺ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+}
+
 export function shuffle<T>(items: T[]): T[] {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {

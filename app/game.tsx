@@ -24,7 +24,7 @@ import {
 } from '../src/data/vocab';
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
-import { isKanaFamilyMatch, isTextMatch, normalizeText, shuffle } from '../src/utils/kana';
+import { isKanaFamilyMatch, isTextMatch, katakanaToHiragana, normalizeText, shuffle } from '../src/utils/kana';
 import { getList, toGameEntries, type CustomList } from '../src/utils/customLists';
 import { clearResume, getResume, recordSession, saveResume, type ResumePoint } from '../src/utils/progress';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
@@ -157,9 +157,16 @@ export default function GameScreen() {
     : [answerTarget].filter((v): v is string => !!v);
   // While the IME is still composing the kana reading, the kanji hasn't appeared yet — accept
   // the kana as a valid "in progress" prefix too, so live feedback doesn't flash red mid-conversion.
-  const liveCheckAnswers = showKanji
+  const kanjiStageAnswers = showKanji
     ? [currentWord?.kana, currentWord?.kanji].filter((v): v is string => !!v)
     : acceptedAnswers;
+  // Same idea for katakana words (バス, ライオン...): the keyboard always types hiragana first
+  // and only offers katakana as a conversion candidate at the end, so the hiragana form must
+  // pass the live check too, or every katakana target would flash red from the first keystroke.
+  const liveCheckAnswers = [
+    ...kanjiStageAnswers,
+    ...kanjiStageAnswers.map(katakanaToHiragana).filter((a) => !kanjiStageAnswers.includes(a)),
+  ];
   const inputPlaceholder = blindMode || (kanjiMode && !hintMode) ? '' : currentWord?.kana;
   const displayText = showKanji ? currentWord?.kanji : currentWord?.kana;
   const targetFontSize = !displayText || displayText.length <= 6 ? 52 : displayText.length <= 10 ? 34 : 26;
