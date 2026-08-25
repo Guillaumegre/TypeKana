@@ -643,7 +643,10 @@ const styles = StyleSheet.create({
   stage: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // Anchored to the top rather than vertically centred: the keyboard opens on its own
+    // (autoFocus), and centred content visibly slides up as the free height shrinks.
+    justifyContent: 'flex-start',
+    paddingTop: 14,
     minHeight: 0,
   },
   themeLabel: {
@@ -651,12 +654,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 1.5,
     color: C.accent,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   emoji: {
-    fontSize: 40,
-    lineHeight: 46,
-    marginBottom: 8,
+    fontSize: 36,
+    lineHeight: 42,
+    marginBottom: 6,
   },
   emojiLarge: {
     fontSize: 56,
@@ -691,7 +694,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     color: C.inkSoft,
-    marginTop: 10,
+    marginTop: 8,
     textAlign: 'center',
   },
   meaningPrimary: {
@@ -716,7 +719,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 2,
     borderBottomColor: C.lineStrong,
-    marginTop: 26,
+    marginTop: 18,
   },
   inputWrapError: {
     borderBottomColor: C.accent,
@@ -739,9 +742,9 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: C.ink,
     borderRadius: R.md,
-    paddingVertical: 16,
+    paddingVertical: 15,
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 18,
   },
   submitText: {
     color: C.onDark,
@@ -750,11 +753,11 @@ const styles = StyleSheet.create({
     letterSpacing: -0.2,
   },
   skipButton: {
-    marginTop: 14,
+    marginTop: 10,
     borderWidth: 1,
     borderColor: 'rgba(20,22,26,.14)',
     borderRadius: R.sm,
-    paddingVertical: 9,
+    paddingVertical: 8,
     paddingHorizontal: 20,
   },
   skipText: {

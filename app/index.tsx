@@ -36,7 +36,8 @@ export default function HomeScreen() {
             hitSlop={10}
             style={({ pressed }) => [styles.settingsButton, pressed && styles.pressedSoft]}
           >
-            <Text style={styles.settingsGlyph}>⚙️</Text>
+            {/* U+FE0E forces the flat text glyph instead of the detailed colour emoji. */}
+            <Text style={styles.settingsGlyph}>{'⚙︎'}</Text>
           </Pressable>
         </View>
 
@@ -143,15 +144,12 @@ const styles = StyleSheet.create({
   settingsButton: {
     width: 36,
     height: 36,
-    borderRadius: R.sm,
-    borderWidth: 1,
-    borderColor: C.line,
-    backgroundColor: C.card,
     alignItems: 'center',
     justifyContent: 'center',
   },
   settingsGlyph: {
-    fontSize: 16,
+    fontSize: 21,
+    color: C.inkSoft,
   },
   pressedSoft: {
     opacity: 0.7,
