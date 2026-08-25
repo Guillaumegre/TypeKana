@@ -385,6 +385,8 @@ export default function GameScreen() {
         <View style={styles.modeSwitchWrap}>
           <ModeSwitch allowBlind={!isRace} />
         </View>
+        {/* Mirrors the back button so the switch sits centred on the screen, not on the leftover space. */}
+        <View style={styles.backButtonSpacer} />
       </View>
 
       {isRace ? (
@@ -535,6 +537,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  backButtonSpacer: {
+    width: 34,
+    height: 34,
+  },
   backButtonText: {
     fontSize: 20,
     lineHeight: 24,
@@ -672,16 +678,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   furigana: {
-    fontFamily: FONT.mincho,
     fontSize: 16,
     color: C.inkSoft,
     marginBottom: 4,
   },
   target: {
-    fontFamily: FONT.mincho,
-    fontWeight: '600',
-    letterSpacing: 1,
-    lineHeight: 68,
+    fontWeight: '700',
     color: C.ink,
     textAlign: 'center',
   },
@@ -706,8 +708,8 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   upcomingWord: {
-    fontFamily: FONT.mincho,
     fontSize: 15,
+    fontWeight: '600',
     color: 'rgba(20,22,26,.22)',
   },
   inputWrap: {
@@ -723,9 +725,8 @@ const styles = StyleSheet.create({
     borderBottomColor: C.ok,
   },
   input: {
-    fontFamily: FONT.mincho,
-    fontSize: 30,
-    letterSpacing: 1,
+    fontSize: 28,
+    fontWeight: '600',
     color: C.ink,
     textAlign: 'center',
     paddingBottom: 10,

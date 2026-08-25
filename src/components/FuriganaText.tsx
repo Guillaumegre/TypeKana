@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { C, FONT } from '../theme';
+import { C } from '../theme';
 import type { FuriganaSegment } from '../types/vocab';
 
 export function FuriganaText({
@@ -38,12 +38,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   reading: {
-    fontFamily: FONT.mincho,
     color: C.inkSoft,
+    fontWeight: '600',
   },
   text: {
-    fontFamily: FONT.mincho,
-    fontWeight: '600',
-    letterSpacing: 1,
+    fontWeight: '700',
   },
 });

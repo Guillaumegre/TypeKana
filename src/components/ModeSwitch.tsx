@@ -51,7 +51,7 @@ export function ModeSwitch({ allowBlind = true }: { allowBlind?: boolean }) {
 const styles = StyleSheet.create({
   track: {
     flexDirection: 'row',
-    width: 264,
+    width: '100%',
     backgroundColor: 'rgba(20,22,26,.07)',
     borderRadius: 11,
     padding: 3,

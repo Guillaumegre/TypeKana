@@ -36,7 +36,7 @@ export default function HomeScreen() {
             hitSlop={10}
             style={({ pressed }) => [styles.settingsButton, pressed && styles.pressedSoft]}
           >
-            <Text style={styles.settingsGlyph}>設</Text>
+            <Text style={styles.settingsGlyph}>⚙️</Text>
           </Pressable>
         </View>
 
@@ -151,9 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   settingsGlyph: {
-    fontFamily: FONT.mincho,
-    fontSize: 15,
-    color: C.inkSoft,
+    fontSize: 16,
   },
   pressedSoft: {
     opacity: 0.7,

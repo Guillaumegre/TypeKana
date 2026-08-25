@@ -42,7 +42,7 @@ export default function ThemeSelectScreen() {
             style={({ pressed }) => [styles.card, pressed && styles.pressedRow]}
           >
             <View style={styles.glyphBox}>
-              <Text style={styles.glyph}>{item.glyph}</Text>
+              <Text style={styles.glyph}>{item.emoji}</Text>
             </View>
             <View style={styles.cardText}>
               <Text style={styles.cardLabel}>{item.label}</Text>
@@ -127,9 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   glyph: {
-    fontFamily: FONT.mincho,
-    fontSize: 20,
-    color: C.ink,
+    fontSize: 22,
   },
   cardText: {
     flex: 1,

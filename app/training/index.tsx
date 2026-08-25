@@ -26,11 +26,11 @@ export default function TrainingModeScreen() {
           onPress={() => router.push('/training/level')}
           style={({ pressed }) => [styles.card, styles.cardAlt, pressed && styles.pressed]}
         >
-          <Text style={styles.watermark}>級</Text>
+          <Text style={[styles.watermark, styles.watermarkWarm]}>級</Text>
           <View>
-            <Text style={styles.eyebrow}>NIVEAU</Text>
+            <Text style={[styles.eyebrow, styles.eyebrowWarm]}>NIVEAU</Text>
             <Text style={styles.title}>JLPT</Text>
-            <Text style={styles.sub}>Mots ou phrases, classés N5 à N1</Text>
+            <Text style={[styles.sub, styles.subWarm]}>Mots ou phrases, classés N5 à N1</Text>
           </View>
         </Pressable>
       </View>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
   },
   cardAlt: {
-    backgroundColor: '#2A2E36',
+    backgroundColor: C.accent,
   },
   pressed: {
     opacity: 0.9,
@@ -70,11 +70,17 @@ const styles = StyleSheet.create({
     lineHeight: 118,
     color: C.watermark,
   },
+  watermarkWarm: {
+    color: C.watermarkWarm,
+  },
   eyebrow: {
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 1.5,
     color: C.onDarkFaint,
+  },
+  eyebrowWarm: {
+    color: 'rgba(255,255,255,.62)',
   },
   title: {
     fontSize: 27,
@@ -88,5 +94,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: C.onDarkSoft,
     marginTop: 3,
+  },
+  subWarm: {
+    color: 'rgba(255,255,255,.72)',
   },
 });

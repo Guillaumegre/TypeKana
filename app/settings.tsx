@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
-import { C, FONT, R } from '../src/theme';
+import { C, R } from '../src/theme';
 
 export default function SettingsScreen() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function SettingsScreen() {
           style={({ pressed }) => [styles.row, pressed && styles.pressed]}
         >
           <View style={styles.glyphBox}>
-            <Text style={styles.glyph}>説</Text>
+            <Text style={styles.glyph}>📖</Text>
           </View>
           <View style={styles.rowText}>
             <Text style={styles.rowLabel}>Revoir le tutoriel</Text>
@@ -64,9 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   glyph: {
-    fontFamily: FONT.mincho,
-    fontSize: 20,
-    color: C.ink,
+    fontSize: 22,
   },
   rowText: {
     flex: 1,
