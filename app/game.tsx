@@ -513,7 +513,7 @@ export default function GameScreen() {
         >
           <TextInput
             ref={inputRef}
-            style={[styles.input, showError && styles.inputError]}
+            style={styles.input}
             defaultValue=""
             onChangeText={handleChangeText}
             onSubmitEditing={handleSubmit}
@@ -772,9 +772,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingBottom: 10,
     paddingTop: 4,
-  },
-  inputError: {
-    color: C.accent,
   },
   submitButton: {
     width: '100%',
