@@ -18,6 +18,7 @@ export const C = {
   onDarkFaint: 'rgba(242,239,232,.4)',
   watermark: 'rgba(242,239,232,.09)',
   watermarkWarm: 'rgba(255,255,255,.14)',
+  watermarkInk: 'rgba(20,22,26,.06)',
   ok: '#2F7D4F',
 };
 

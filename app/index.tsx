@@ -100,7 +100,9 @@ export default function HomeScreen() {
             style={({ pressed }) => [styles.resumeCard, pressed && styles.pressedSoft]}
           >
             <View style={styles.resumeGlyphBox}>
-              <Text style={styles.resumeGlyph}>{resume.glyph}</Text>
+              <Text style={resume.emoji ? styles.resumeEmoji : styles.resumeGlyph}>
+                {resume.emoji || resume.glyph}
+              </Text>
             </View>
             <View style={styles.resumeBody}>
               <Text style={styles.resumeLabel} numberOfLines={1}>
@@ -260,6 +262,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT.mincho,
     fontSize: 18,
     color: C.onDark,
+  },
+  resumeEmoji: {
+    fontSize: 19,
   },
   resumeBody: {
     flex: 1,

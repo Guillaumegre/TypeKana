@@ -190,6 +190,7 @@ export default function GameScreen() {
           ? `JLPT ${level}`
           : (getCategory(category ?? '')?.label ?? 'Training'),
       glyph: customList ? '✎' : level ? '級' : (getCategory(category ?? '')?.glyph ?? '練'),
+      emoji: customList ? '📝' : level ? '🎓' : getCategory(category ?? '')?.emoji,
       index,
       total: sessionWords.length,
       ids: sessionWords.map((w) => w.id),

@@ -12,13 +12,13 @@ export const CATEGORIES: Category[] = [
   { id: 'nourriture', label: 'Nourriture', emoji: '🍜', glyph: '食' },
   { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨', glyph: '色' },
   { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈', glyph: '彩' },
+  { id: 'verbes', label: 'Verbes', emoji: '🏃', glyph: '動' },
   { id: 'famille', label: 'Famille', emoji: '👪', glyph: '家' },
   { id: 'vetements', label: 'Vêtements', emoji: '👕', glyph: '服' },
   { id: 'meteo', label: 'Météo', emoji: '🌦️', glyph: '天' },
   { id: 'chiffres', label: 'Chiffres', emoji: '🔢', glyph: '数' },
   { id: 'metiers', label: 'Métiers', emoji: '💼', glyph: '職' },
   { id: 'calendrier', label: 'Calendrier', emoji: '📅', glyph: '暦' },
-  { id: 'verbes', label: 'Verbes', emoji: '🏃', glyph: '動' },
 ];
 
 export function getCategory(id: string): Category | undefined {

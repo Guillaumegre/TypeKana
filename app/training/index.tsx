@@ -1,10 +1,19 @@
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../../src/components/BackHeader';
 import { C, FONT, R } from '../../src/theme';
+import { getLists } from '../../src/utils/customLists';
 
 export default function TrainingModeScreen() {
   const router = useRouter();
+  const [listCount, setListCount] = useState<number | null>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      getLists().then((lists) => setListCount(lists.length));
+    }, []),
+  );
 
   return (
     <View style={styles.screen}>
@@ -36,14 +45,16 @@ export default function TrainingModeScreen() {
 
         <Pressable
           onPress={() => router.push('/training/custom')}
-          style={({ pressed }) => [styles.customCard, pressed && styles.pressedSoft]}
+          style={({ pressed }) => [styles.card, styles.cardLight, pressed && styles.pressed]}
         >
-          <Text style={styles.customGlyph}>✎</Text>
-          <View style={styles.customText}>
-            <Text style={styles.customTitle}>Mes listes</Text>
-            <Text style={styles.customSub}>Tes propres mots à réviser</Text>
+          <Text style={[styles.watermark, styles.watermarkInk]}>札</Text>
+          <View>
+            <Text style={[styles.eyebrow, styles.eyebrowInk]}>
+              {listCount === null ? ' ' : listCount === 0 ? 'AUCUNE LISTE' : `${listCount} LISTE${listCount > 1 ? 'S' : ''}`}
+            </Text>
+            <Text style={[styles.title, styles.titleInk]}>Mes listes</Text>
+            <Text style={[styles.sub, styles.subInk]}>Tes mots à toi, révisés à ton rythme</Text>
           </View>
-          <Text style={styles.chevron}>›</Text>
         </Pressable>
       </View>
     </View>
@@ -70,6 +81,11 @@ const styles = StyleSheet.create({
   cardAlt: {
     backgroundColor: C.accent,
   },
+  cardLight: {
+    backgroundColor: C.card,
+    borderWidth: 1,
+    borderColor: C.line,
+  },
   pressed: {
     opacity: 0.9,
   },
@@ -85,6 +101,9 @@ const styles = StyleSheet.create({
   watermarkWarm: {
     color: C.watermarkWarm,
   },
+  watermarkInk: {
+    color: C.watermarkInk,
+  },
   eyebrow: {
     fontSize: 11,
     fontWeight: '700',
@@ -94,12 +113,18 @@ const styles = StyleSheet.create({
   eyebrowWarm: {
     color: 'rgba(255,255,255,.62)',
   },
+  eyebrowInk: {
+    color: C.inkFaint,
+  },
   title: {
     fontSize: 27,
     fontWeight: '900',
     letterSpacing: -0.9,
     color: C.onDark,
     marginTop: 6,
+  },
+  titleInk: {
+    color: C.ink,
   },
   sub: {
     fontSize: 13,
@@ -110,41 +135,7 @@ const styles = StyleSheet.create({
   subWarm: {
     color: 'rgba(255,255,255,.72)',
   },
-  customCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    backgroundColor: C.card,
-    borderWidth: 1,
-    borderColor: 'rgba(20,22,26,.09)',
-    borderRadius: R.lg,
-    paddingVertical: 16,
-    paddingHorizontal: 18,
-  },
-  pressedSoft: {
-    borderColor: 'rgba(20,22,26,.3)',
-  },
-  customGlyph: {
-    fontSize: 20,
+  subInk: {
     color: C.inkSoft,
-  },
-  customText: {
-    flex: 1,
-  },
-  customTitle: {
-    fontSize: 16.5,
-    fontWeight: '700',
-    letterSpacing: -0.3,
-    color: C.ink,
-  },
-  customSub: {
-    fontSize: 12.5,
-    fontWeight: '500',
-    color: C.inkFaint,
-    marginTop: 2,
-  },
-  chevron: {
-    fontSize: 18,
-    color: 'rgba(20,22,26,.25)',
   },
 });

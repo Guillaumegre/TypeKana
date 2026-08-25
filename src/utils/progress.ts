@@ -54,6 +54,8 @@ export async function recordSession(wordsCorrect: number): Promise<Stats> {
 export interface ResumePoint {
   label: string;
   glyph: string;
+  /** Category/theme emoji, shown instead of the kanji glyph when there is one. */
+  emoji?: string | null;
   index: number;
   total: number;
   /** Exact word/sentence ids of the interrupted session, so it resumes where it stopped. */
