@@ -33,6 +33,18 @@ export default function TrainingModeScreen() {
             <Text style={[styles.sub, styles.subWarm]}>Mots ou phrases, classés N5 à N1</Text>
           </View>
         </Pressable>
+
+        <Pressable
+          onPress={() => router.push('/training/custom')}
+          style={({ pressed }) => [styles.customCard, pressed && styles.pressedSoft]}
+        >
+          <Text style={styles.customGlyph}>✎</Text>
+          <View style={styles.customText}>
+            <Text style={styles.customTitle}>Mes listes</Text>
+            <Text style={styles.customSub}>Tes propres mots à réviser</Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -97,5 +109,42 @@ const styles = StyleSheet.create({
   },
   subWarm: {
     color: 'rgba(255,255,255,.72)',
+  },
+  customCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    backgroundColor: C.card,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.09)',
+    borderRadius: R.lg,
+    paddingVertical: 16,
+    paddingHorizontal: 18,
+  },
+  pressedSoft: {
+    borderColor: 'rgba(20,22,26,.3)',
+  },
+  customGlyph: {
+    fontSize: 20,
+    color: C.inkSoft,
+  },
+  customText: {
+    flex: 1,
+  },
+  customTitle: {
+    fontSize: 16.5,
+    fontWeight: '700',
+    letterSpacing: -0.3,
+    color: C.ink,
+  },
+  customSub: {
+    fontSize: 12.5,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 2,
+  },
+  chevron: {
+    fontSize: 18,
+    color: 'rgba(20,22,26,.25)',
   },
 });

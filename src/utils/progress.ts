@@ -61,6 +61,7 @@ export interface ResumePoint {
   category?: string;
   level?: string;
   contentType?: string;
+  listId?: string;
 }
 
 export async function getResume(): Promise<ResumePoint | null> {

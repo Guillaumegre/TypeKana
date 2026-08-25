@@ -25,10 +25,11 @@ import {
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
 import { isTextMatch, normalizeText, shuffle } from '../src/utils/kana';
+import { getList, toGameEntries, type CustomList } from '../src/utils/customLists';
 import { clearResume, getResume, recordSession, saveResume, type ResumePoint } from '../src/utils/progress';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
 
-type Feedback = 'idle' | 'correct' | 'incorrect';
+type Feedback = 'idle' | 'correct';
 
 const SESSION_LENGTH = 10;
 const RACE_DURATION = 60;
@@ -47,12 +48,13 @@ function makeRaceQueue(used: Set<string>): GameEntry[] {
 export default function GameScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { mode, category, level, contentType, resume } = useLocalSearchParams<{
+  const { mode, category, level, contentType, resume, listId } = useLocalSearchParams<{
     mode: string;
     category?: string;
     level?: string;
     contentType?: string;
     resume?: string;
+    listId?: string;
   }>();
   const { kanjiMode, hintMode, blindMode, setBlindMode } = useSettings();
   const isRace = mode === 'race';
@@ -69,23 +71,40 @@ export default function GameScreen() {
       .finally(() => setRestoring(false));
   }, [wantsResume]);
 
+  // Custom lists live in storage, so they load asynchronously like the resume point.
+  const effectiveListId = listId ?? restored?.listId;
+  const [customList, setCustomList] = useState<CustomList | null>(null);
+  const [loadingList, setLoadingList] = useState(!!listId && !isRace);
+  useEffect(() => {
+    if (!effectiveListId || isRace) return;
+    setLoadingList(true);
+    getList(effectiveListId)
+      .then(setCustomList)
+      .finally(() => setLoadingList(false));
+  }, [effectiveListId, isRace]);
+
   const sessionWords: GameEntry[] = useMemo(() => {
-    if (isRace || restoring) return [];
+    if (isRace || restoring || loadingList) return [];
+
+    const customEntries = customList ? toGameEntries(customList) : [];
 
     if (restored) {
-      const lookup = (id: string): GameEntry | undefined =>
-        restored.contentType === 'phrases'
-          ? (() => {
-              const s = getSentenceById(id);
-              return s ? { ...s, emoji: null, color: null } : undefined;
-            })()
-          : getWordById(id);
+      const lookup = (id: string): GameEntry | undefined => {
+        if (restored.listId) return customEntries.find((e) => e.id === id);
+        if (restored.contentType === 'phrases') {
+          const s = getSentenceById(id);
+          return s ? { ...s, emoji: null, color: null } : undefined;
+        }
+        return getWordById(id);
+      };
       const entries = restored.ids.map(lookup).filter((e): e is GameEntry => !!e);
       if (entries.length) return entries;
     }
 
     let pool: GameEntry[];
-    if (level) {
+    if (listId) {
+      pool = customEntries;
+    } else if (level) {
       pool =
         contentType === 'phrases'
           ? getSentencesByLevel(level).map((s) => ({ ...s, emoji: null, color: null }))
@@ -94,7 +113,7 @@ export default function GameScreen() {
       pool = getWordsByCategory(category ?? '');
     }
     return shuffle(pool).slice(0, SESSION_LENGTH);
-  }, [isRace, restoring, restored, category, level, contentType]);
+  }, [isRace, restoring, loadingList, restored, customList, listId, category, level, contentType]);
 
   const usedWordIdsRef = useRef<Set<string>>(new Set());
   const [index, setIndex] = useState(0);
@@ -117,9 +136,11 @@ export default function GameScreen() {
   const lastTextRef = useRef('');
   const shakeAnim = useRef(new Animated.Value(0)).current;
 
-  const themeLabel = level
-    ? `${level} · ${contentType === 'phrases' ? 'PHRASES' : 'MOTS'}`
-    : (getCategory(category ?? '')?.label ?? '').toUpperCase();
+  const themeLabel = customList
+    ? customList.name.toUpperCase()
+    : level
+      ? `${level} · ${contentType === 'phrases' ? 'PHRASES' : 'MOTS'}`
+      : (getCategory(category ?? '')?.label ?? '').toUpperCase();
 
   // Race mode doesn't offer Rappel (blind recall doesn't fit a pure speed test).
   // If it was left on from a Training session, turn it off on entry.
@@ -156,16 +177,21 @@ export default function GameScreen() {
     if (isRace || sessionWords.length === 0) return;
     if (index === 0) return;
     saveResume({
-      label: level ? `JLPT ${level}` : (getCategory(category ?? '')?.label ?? 'Training'),
-      glyph: level ? '級' : (getCategory(category ?? '')?.glyph ?? '練'),
+      label: customList
+        ? customList.name
+        : level
+          ? `JLPT ${level}`
+          : (getCategory(category ?? '')?.label ?? 'Training'),
+      glyph: customList ? '✎' : level ? '級' : (getCategory(category ?? '')?.glyph ?? '練'),
       index,
       total: sessionWords.length,
       ids: sessionWords.map((w) => w.id),
       ...(category ? { category } : {}),
       ...(level ? { level } : {}),
       ...(contentType ? { contentType } : {}),
+      ...(effectiveListId ? { listId: effectiveListId } : {}),
     });
-  }, [isRace, index, sessionWords, category, level, contentType]);
+  }, [isRace, index, sessionWords, category, level, contentType, customList, effectiveListId]);
 
   const runShake = useCallback(() => {
     shakeAnim.setValue(0);
@@ -189,10 +215,11 @@ export default function GameScreen() {
           ...(category ? { category } : {}),
           ...(level ? { level } : {}),
           ...(contentType ? { contentType } : {}),
+          ...(effectiveListId ? { listId: effectiveListId } : {}),
         },
       });
     },
-    [router, isRace, category, level, contentType],
+    [router, isRace, category, level, contentType, effectiveListId],
   );
 
   const correctRef = useRef(correctFirstTry);
@@ -237,17 +264,19 @@ export default function GameScreen() {
     return () => clearTimeout(timer);
   }, [isRace, raceStarted, secondsLeft, finishRace]);
 
-  if (restoring) return <View style={styles.screen} />;
+  if (restoring || loadingList) return <View style={styles.screen} />;
 
   if (!isRace && sessionWords.length === 0) {
     return (
       <View style={styles.screen}>
         <Text style={styles.empty}>
-          {level
-            ? contentType === 'phrases'
-              ? 'Aucune phrase disponible pour ce niveau.'
-              : 'Aucun mot disponible pour ce niveau.'
-            : 'Aucun mot trouvé pour ce thème.'}
+          {effectiveListId
+            ? 'Cette liste est vide. Ajoute des mots pour t’entraîner.'
+            : level
+              ? contentType === 'phrases'
+                ? 'Aucune phrase disponible pour ce niveau.'
+                : 'Aucun mot disponible pour ce niveau.'
+              : 'Aucun mot trouvé pour ce thème.'}
         </Text>
       </View>
     );
@@ -309,8 +338,6 @@ export default function GameScreen() {
       }
     }
 
-    if (feedback === 'incorrect') setFeedback('idle');
-
     if (!text) {
       setLiveInvalid(false);
       return;
@@ -329,10 +356,11 @@ export default function GameScreen() {
     const text = lastTextRef.current;
     const advanced = checkAndAdvance(text);
     if (!advanced && text.trim()) {
+      // Keep what was typed so it can be corrected in place: wiping the field left a bare
+      // red underline with no text, which read as a second, separate error state.
       setHasMissedCurrent(true);
-      setFeedback('incorrect');
+      setLiveInvalid(true);
       runShake();
-      clearInput();
     }
   };
 
@@ -360,6 +388,8 @@ export default function GameScreen() {
   const handleBack = () => {
     if (isRace) {
       router.replace('/');
+    } else if (effectiveListId) {
+      router.replace('/training/custom');
     } else if (level) {
       router.replace('/training/level');
     } else {
@@ -367,7 +397,7 @@ export default function GameScreen() {
     }
   };
 
-  const showError = feedback === 'incorrect' || liveInvalid;
+  const showError = liveInvalid;
 
   return (
     <KeyboardAvoidingView

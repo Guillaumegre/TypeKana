@@ -45,15 +45,20 @@ export default function HomeScreen() {
         <Text style={styles.title}>TypeKana</Text>
         <Text style={styles.subtitle}>Apprendre le clavier japonais, un mot à la fois.</Text>
 
-        <View style={styles.statsGrid}>
-          <Stat value={stats ? String(stats.streak) : '0'} label="JOURS" />
-          <Stat value={stats ? String(stats.totalWords) : '0'} label="MOTS" />
-          <Stat value={racePB ? String(racePB.correct) : '—'} label="MOTS/MIN" last />
-        </View>
+        {!!stats && stats.totalWords > 0 && (
+          <Text style={styles.statsLine}>
+            {stats.streak} jour{stats.streak > 1 ? 's' : ''} de suite · {stats.totalWords} mots tapés
+          </Text>
+        )}
 
         <Pressable
           onPress={() => router.push('/training')}
-          style={({ pressed }) => [styles.bigCard, styles.trainingCard, pressed && styles.pressedCard]}
+          style={({ pressed }) => [
+            styles.bigCard,
+            styles.firstCard,
+            styles.trainingCard,
+            pressed && styles.pressedCard,
+          ]}
         >
           <Text style={styles.cardWatermark}>練</Text>
           <View>
@@ -88,6 +93,7 @@ export default function HomeScreen() {
                   ...(resume.category ? { category: resume.category } : {}),
                   ...(resume.level ? { level: resume.level } : {}),
                   ...(resume.contentType ? { contentType: resume.contentType } : {}),
+                  ...(resume.listId ? { listId: resume.listId } : {}),
                 },
               })
             }
@@ -119,15 +125,6 @@ export default function HomeScreen() {
   );
 }
 
-function Stat({ value, label, last }: { value: string; label: string; last?: boolean }) {
-  return (
-    <View style={[styles.statBox, !last && styles.statDivider]}>
-      <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -142,14 +139,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   settingsButton: {
-    width: 36,
-    height: 36,
+    width: 44,
+    height: 44,
     alignItems: 'center',
     justifyContent: 'center',
   },
   settingsGlyph: {
-    fontSize: 21,
-    color: C.inkSoft,
+    fontSize: 30,
+    lineHeight: 36,
+    color: C.ink,
   },
   pressedSoft: {
     opacity: 0.7,
@@ -178,36 +176,14 @@ const styles = StyleSheet.create({
     color: C.inkSoft,
     marginTop: 9,
   },
-  statsGrid: {
-    flexDirection: 'row',
-    backgroundColor: C.card,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: C.line,
-    overflow: 'hidden',
-    marginTop: 24,
-  },
-  statBox: {
-    flex: 1,
-    paddingVertical: 13,
-    paddingHorizontal: 14,
-  },
-  statDivider: {
-    borderRightWidth: 1,
-    borderRightColor: C.line,
-  },
-  statValue: {
-    fontSize: 22,
-    fontWeight: '900',
-    letterSpacing: -0.7,
-    color: C.ink,
-  },
-  statLabel: {
-    fontSize: 10.5,
-    fontWeight: '700',
-    letterSpacing: 0.5,
+  statsLine: {
+    fontSize: 12.5,
+    fontWeight: '600',
     color: C.inkFaint,
-    marginTop: 2,
+    marginTop: 14,
+  },
+  firstCard: {
+    marginTop: 26,
   },
   bigCard: {
     position: 'relative',

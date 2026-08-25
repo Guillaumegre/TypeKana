@@ -7,16 +7,18 @@ import { C, FONT, R } from '../src/theme';
 export default function ResultsScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { mode, correct, total, isNewPB, pbCorrect, category, level, contentType } = useLocalSearchParams<{
-    mode: string;
-    correct: string;
-    total: string;
-    isNewPB?: string;
-    pbCorrect?: string;
-    category?: string;
-    level?: string;
-    contentType?: string;
-  }>();
+  const { mode, correct, total, isNewPB, pbCorrect, category, level, contentType, listId } =
+    useLocalSearchParams<{
+      mode: string;
+      correct: string;
+      total: string;
+      isNewPB?: string;
+      pbCorrect?: string;
+      category?: string;
+      level?: string;
+      contentType?: string;
+      listId?: string;
+    }>();
 
   const isRace = mode === 'race';
 
@@ -30,6 +32,7 @@ export default function ResultsScreen() {
             ...(category ? { category } : {}),
             ...(level ? { level } : {}),
             ...(contentType ? { contentType } : {}),
+            ...(listId ? { listId } : {}),
           },
         });
 
