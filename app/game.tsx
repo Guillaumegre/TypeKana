@@ -24,7 +24,7 @@ import {
 } from '../src/data/vocab';
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
-import { isTextMatch, normalizeText, shuffle } from '../src/utils/kana';
+import { isKanaFamilyMatch, isTextMatch, normalizeText, shuffle } from '../src/utils/kana';
 import { getList, toGameEntries, type CustomList } from '../src/utils/customLists';
 import { clearResume, getResume, recordSession, saveResume, type ResumePoint } from '../src/utils/progress';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
@@ -343,11 +343,19 @@ export default function GameScreen() {
       return;
     }
 
-    // Give the last kana a one-keystroke grace period before flagging it: dakuten/handakuten
-    // (は → ば) and small-tsu replace the last character in place rather than appending, so
-    // checking it immediately would flash red mid-composition, before the IME is done with it.
-    const settled = normalizeText(text).slice(0, -1);
-    const validSoFar = liveCheckAnswers.some((answer) => normalizeText(answer).startsWith(settled));
+    // The last kana only gets a pass if it could still turn into the expected one via
+    // dakuten/handakuten (は → ば) or the small-kana toggle (や → ゃ), which replace the
+    // previous character in place instead of appending — anything else that doesn't match
+    // is a genuinely wrong key, not a composition in progress, and should flag immediately.
+    const typed = normalizeText(text);
+    const settled = typed.slice(0, -1);
+    const lastChar = typed.slice(-1);
+    const validSoFar = liveCheckAnswers.some((answer) => {
+      const normAnswer = normalizeText(answer);
+      if (!normAnswer.startsWith(settled)) return false;
+      const expectedChar = normAnswer[settled.length];
+      return expectedChar !== undefined && isKanaFamilyMatch(lastChar, expectedChar);
+    });
     setLiveInvalid(!validSoFar);
   };
 

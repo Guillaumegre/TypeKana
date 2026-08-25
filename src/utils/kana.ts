@@ -12,6 +12,55 @@ export function isTextMatch(input: string, target: string): boolean {
   return normalizeText(input) === normalizeText(target);
 }
 
+/**
+ * Kana that the IME produces by modifying the *previously typed* character in place,
+ * rather than by adding a new one: dakuten (か→が), handakuten (は→ぱ), and the small-kana
+ * toggle (や→ゃ, つ→っ). Grouped so a live check can tell "still composing toward the right
+ * kana" apart from "wrong key entirely".
+ */
+const KANA_FAMILIES: string[][] = [
+  ['あ', 'ぁ'],
+  ['い', 'ぃ'],
+  ['う', 'ぅ'],
+  ['え', 'ぇ'],
+  ['お', 'ぉ'],
+  ['か', 'が'],
+  ['き', 'ぎ'],
+  ['く', 'ぐ'],
+  ['け', 'げ'],
+  ['こ', 'ご'],
+  ['さ', 'ざ'],
+  ['し', 'じ'],
+  ['す', 'ず'],
+  ['せ', 'ぜ'],
+  ['そ', 'ぞ'],
+  ['た', 'だ'],
+  ['ち', 'ぢ'],
+  ['つ', 'っ', 'づ'],
+  ['て', 'で'],
+  ['と', 'ど'],
+  ['は', 'ば', 'ぱ'],
+  ['ひ', 'び', 'ぴ'],
+  ['ふ', 'ぶ', 'ぷ'],
+  ['へ', 'べ', 'ぺ'],
+  ['ほ', 'ぼ', 'ぽ'],
+  ['や', 'ゃ'],
+  ['ゆ', 'ゅ'],
+  ['よ', 'ょ'],
+  ['わ', 'ゎ'],
+];
+
+const KANA_FAMILY_OF = new Map<string, number>();
+KANA_FAMILIES.forEach((family, i) => family.forEach((ch) => KANA_FAMILY_OF.set(ch, i)));
+
+/** True if `a` and `b` are the same character, or dakuten/handakuten/small-kana variants of each other. */
+export function isKanaFamilyMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  const familyA = KANA_FAMILY_OF.get(a);
+  const familyB = KANA_FAMILY_OF.get(b);
+  return familyA !== undefined && familyA === familyB;
+}
+
 export function shuffle<T>(items: T[]): T[] {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
