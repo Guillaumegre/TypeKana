@@ -1,30 +1,37 @@
 import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../../src/components/BackHeader';
+import { C, FONT, R } from '../../src/theme';
 
 export default function TrainingModeScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <BackHeader title="Training" onBack={() => router.replace('/')} />
       <View style={styles.content}>
         <Pressable
-          style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
           onPress={() => router.push('/training/theme')}
+          style={({ pressed }) => [styles.card, pressed && styles.pressed]}
         >
-          <Text style={styles.cardEmoji}>🗂️</Text>
-          <Text style={styles.cardLabel}>Par thème</Text>
-          <Text style={styles.cardDescription}>Animaux, transports, nourriture, couleurs...</Text>
+          <Text style={styles.watermark}>類</Text>
+          <View>
+            <Text style={styles.eyebrow}>VOCABULAIRE</Text>
+            <Text style={styles.title}>Par thème</Text>
+            <Text style={styles.sub}>Animaux, nourriture, verbes, couleurs...</Text>
+          </View>
         </Pressable>
 
         <Pressable
-          style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
           onPress={() => router.push('/training/level')}
+          style={({ pressed }) => [styles.card, styles.cardAlt, pressed && styles.pressed]}
         >
-          <Text style={styles.cardEmoji}>🎓</Text>
-          <Text style={styles.cardLabel}>Par niveau JLPT</Text>
-          <Text style={styles.cardDescription}>Phrases courantes classées N5 à N1</Text>
+          <Text style={styles.watermark}>級</Text>
+          <View>
+            <Text style={styles.eyebrow}>NIVEAU</Text>
+            <Text style={styles.title}>JLPT</Text>
+            <Text style={styles.sub}>Mots ou phrases, classés N5 à N1</Text>
+          </View>
         </Pressable>
       </View>
     </View>
@@ -32,40 +39,54 @@ export default function TrainingModeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: C.paper,
   },
   content: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     gap: 12,
   },
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    paddingVertical: 22,
-    paddingHorizontal: 20,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    position: 'relative',
+    overflow: 'hidden',
+    backgroundColor: C.ink,
+    borderRadius: R.xl,
+    paddingVertical: 24,
+    paddingHorizontal: 22,
   },
-  cardPressed: {
-    backgroundColor: '#EFF6FF',
+  cardAlt: {
+    backgroundColor: '#2A2E36',
   },
-  cardEmoji: {
-    fontSize: 28,
-    marginBottom: 8,
+  pressed: {
+    opacity: 0.9,
   },
-  cardLabel: {
-    fontSize: 18,
+  watermark: {
+    position: 'absolute',
+    right: 10,
+    bottom: -30,
+    fontFamily: FONT.mincho,
+    fontSize: 110,
+    lineHeight: 118,
+    color: C.watermark,
+  },
+  eyebrow: {
+    fontSize: 11,
     fontWeight: '700',
-    color: '#1E293B',
+    letterSpacing: 1.5,
+    color: C.onDarkFaint,
   },
-  cardDescription: {
+  title: {
+    fontSize: 27,
+    fontWeight: '900',
+    letterSpacing: -0.9,
+    color: C.onDark,
+    marginTop: 6,
+  },
+  sub: {
     fontSize: 13,
-    color: '#64748B',
-    marginTop: 4,
+    fontWeight: '500',
+    color: C.onDarkSoft,
+    marginTop: 3,
   },
 });

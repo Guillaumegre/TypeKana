@@ -15,6 +15,8 @@ export interface Category {
   id: string;
   label: string;
   emoji: string;
+  /** Single kanji used as the theme's mark on cards. */
+  glyph: string;
 }
 
 /** One chunk of a furigana-annotated sentence: a kanji chunk carries its own reading, a kana chunk has none. */

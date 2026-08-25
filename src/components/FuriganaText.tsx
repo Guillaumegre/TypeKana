@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { C, FONT } from '../theme';
 import type { FuriganaSegment } from '../types/vocab';
 
 export function FuriganaText({
@@ -16,10 +17,10 @@ export function FuriganaText({
     <View style={styles.row}>
       {segments.map((segment, i) => (
         <View key={i} style={styles.unit}>
-          <Text style={[styles.reading, { fontSize: readingSize, lineHeight: readingSize + 2 }]}>
+          <Text style={[styles.reading, { fontSize: readingSize, lineHeight: readingSize + 3 }]}>
             {segment.reading ?? ''}
           </Text>
-          <Text style={[styles.text, { fontSize, color }]}>{segment.text}</Text>
+          <Text style={[styles.text, { fontSize, lineHeight: fontSize * 1.25, color }]}>{segment.text}</Text>
         </View>
       ))}
     </View>
@@ -37,10 +38,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   reading: {
-    color: '#64748B',
-    fontWeight: '600',
+    fontFamily: FONT.mincho,
+    color: C.inkSoft,
   },
   text: {
-    fontWeight: '700',
+    fontFamily: FONT.mincho,
+    fontWeight: '600',
+    letterSpacing: 1,
   },
 });

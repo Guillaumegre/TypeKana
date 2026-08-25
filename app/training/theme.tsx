@@ -1,33 +1,54 @@
 import { useRouter } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
 import { CATEGORIES, getWordsByCategory, RANDOM_CATEGORY_ID } from '../../src/data/vocab';
+import { C, FONT, R } from '../../src/theme';
+
+const RANDOM = CATEGORIES.find((c) => c.id === RANDOM_CATEGORY_ID)!;
+const THEMES = CATEGORIES.filter((c) => c.id !== RANDOM_CATEGORY_ID);
 
 export default function ThemeSelectScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+
+  const open = (categoryId: string) =>
+    router.push({ pathname: '/game', params: { mode: 'training', category: categoryId } });
 
   return (
-    <View style={styles.container}>
-      <BackHeader title="Par thème" onBack={() => router.replace('/training')} />
+    <View style={styles.screen}>
+      <BackHeader title="Par thème" subtitle="10 mots par session" onBack={() => router.replace('/training')} />
       <FlatList
-        data={CATEGORIES}
+        data={THEMES}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.list}
+        contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 26 }]}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <Pressable
+            onPress={() => open(RANDOM.id)}
+            style={({ pressed }) => [styles.randomCard, pressed && styles.pressedCard]}
+          >
+            <Text style={styles.randomWatermark}>{RANDOM.glyph}</Text>
+            <View>
+              <Text style={styles.randomEyebrow}>MÉLANGE</Text>
+              <Text style={styles.randomTitle}>Aléatoire</Text>
+              <Text style={styles.randomSub}>Tout le vocabulaire confondu</Text>
+            </View>
+          </Pressable>
+        }
         renderItem={({ item }) => (
           <Pressable
-            style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
-            onPress={() => router.push({ pathname: '/game', params: { mode: 'training', category: item.id } })}
+            onPress={() => open(item.id)}
+            style={({ pressed }) => [styles.card, pressed && styles.pressedRow]}
           >
-            <Text style={styles.cardEmoji}>{item.emoji}</Text>
+            <View style={styles.glyphBox}>
+              <Text style={styles.glyph}>{item.glyph}</Text>
+            </View>
             <View style={styles.cardText}>
               <Text style={styles.cardLabel}>{item.label}</Text>
-              <Text style={styles.cardCount}>
-                {item.id === RANDOM_CATEGORY_ID
-                  ? 'Un peu de tout le vocabulaire'
-                  : `${getWordsByCategory(item.id).length} mots`}
-              </Text>
+              <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
             </View>
-            <Text style={styles.cardChevron}>›</Text>
+            <Text style={styles.chevron}>›</Text>
           </Pressable>
         )}
       />
@@ -36,50 +57,97 @@ export default function ThemeSelectScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: C.paper,
   },
   list: {
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingBottom: 24,
+    paddingHorizontal: 24,
+    gap: 9,
+  },
+  pressedCard: {
+    opacity: 0.9,
+  },
+  pressedRow: {
+    borderColor: 'rgba(20,22,26,.3)',
+  },
+  randomCard: {
+    position: 'relative',
+    overflow: 'hidden',
+    backgroundColor: C.ink,
+    borderRadius: R.lg,
+    padding: 18,
+    marginBottom: 9,
+  },
+  randomWatermark: {
+    position: 'absolute',
+    right: 14,
+    bottom: -26,
+    fontFamily: FONT.mincho,
+    fontSize: 86,
+    lineHeight: 92,
+    color: C.watermark,
+  },
+  randomEyebrow: {
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1.5,
+    color: C.onDarkFaint,
+  },
+  randomTitle: {
+    fontSize: 22,
+    fontWeight: '900',
+    letterSpacing: -0.7,
+    color: C.onDark,
+    marginTop: 4,
+  },
+  randomSub: {
+    fontSize: 12.5,
+    fontWeight: '500',
+    color: C.onDarkSoft,
+    marginTop: 2,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    paddingVertical: 18,
-    paddingHorizontal: 18,
     gap: 14,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    backgroundColor: C.card,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.09)',
+    borderRadius: R.lg,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
   },
-  cardPressed: {
-    backgroundColor: '#EFF6FF',
+  glyphBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: 'rgba(20,22,26,.06)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  cardEmoji: {
-    fontSize: 30,
+  glyph: {
+    fontFamily: FONT.mincho,
+    fontSize: 20,
+    color: C.ink,
   },
   cardText: {
     flex: 1,
   },
   cardLabel: {
-    fontSize: 18,
+    fontSize: 16.5,
     fontWeight: '700',
-    color: '#1E293B',
+    letterSpacing: -0.3,
+    color: C.ink,
   },
   cardCount: {
-    fontSize: 13,
-    color: '#64748B',
-    marginTop: 4,
+    fontSize: 11.5,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 3,
   },
-  cardChevron: {
-    fontSize: 20,
-    color: '#CBD5E1',
+  chevron: {
+    fontSize: 18,
+    color: 'rgba(20,22,26,.25)',
   },
 });

@@ -6,20 +6,28 @@ export const VOCAB: VocabWord[] = rawVocab as VocabWord[];
 export const RANDOM_CATEGORY_ID = 'aleatoire';
 
 export const CATEGORIES: Category[] = [
-  { id: RANDOM_CATEGORY_ID, label: 'Aléatoire', emoji: '🎲' },
-  { id: 'animaux', label: 'Animaux', emoji: '🐾' },
-  { id: 'transports', label: 'Transports', emoji: '🚗' },
-  { id: 'nourriture', label: 'Nourriture', emoji: '🍜' },
-  { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨' },
-  { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈' },
-  { id: 'famille', label: 'Famille', emoji: '👪' },
-  { id: 'vetements', label: 'Vêtements', emoji: '👕' },
-  { id: 'meteo', label: 'Météo', emoji: '🌦️' },
-  { id: 'chiffres', label: 'Chiffres', emoji: '🔢' },
-  { id: 'metiers', label: 'Métiers', emoji: '💼' },
-  { id: 'calendrier', label: 'Calendrier', emoji: '📅' },
-  { id: 'verbes', label: 'Verbes', emoji: '🏃' },
+  { id: RANDOM_CATEGORY_ID, label: 'Aléatoire', emoji: '🎲', glyph: '運' },
+  { id: 'animaux', label: 'Animaux', emoji: '🐾', glyph: '獣' },
+  { id: 'transports', label: 'Transports', emoji: '🚗', glyph: '車' },
+  { id: 'nourriture', label: 'Nourriture', emoji: '🍜', glyph: '食' },
+  { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨', glyph: '色' },
+  { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈', glyph: '彩' },
+  { id: 'famille', label: 'Famille', emoji: '👪', glyph: '家' },
+  { id: 'vetements', label: 'Vêtements', emoji: '👕', glyph: '服' },
+  { id: 'meteo', label: 'Météo', emoji: '🌦️', glyph: '天' },
+  { id: 'chiffres', label: 'Chiffres', emoji: '🔢', glyph: '数' },
+  { id: 'metiers', label: 'Métiers', emoji: '💼', glyph: '職' },
+  { id: 'calendrier', label: 'Calendrier', emoji: '📅', glyph: '暦' },
+  { id: 'verbes', label: 'Verbes', emoji: '🏃', glyph: '動' },
 ];
+
+export function getCategory(id: string): Category | undefined {
+  return CATEGORIES.find((c) => c.id === id);
+}
+
+export function getWordById(id: string): VocabWord | undefined {
+  return VOCAB.find((w) => w.id === id);
+}
 
 export function getWordsByCategory(categoryId: string): VocabWord[] {
   if (categoryId === RANDOM_CATEGORY_ID) return VOCAB;

@@ -1,22 +1,37 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { C } from '../theme';
 
-export function BackHeader({ title, onBack }: { title?: string; onBack: () => void }) {
+export function BackHeader({
+  title,
+  subtitle,
+  onBack,
+}: {
+  title?: string;
+  subtitle?: string;
+  onBack: () => void;
+}) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.row, { paddingTop: insets.top + 20 }]}>
-      <Pressable onPress={onBack} hitSlop={12} style={styles.backButton}>
+    <View style={[styles.row, { paddingTop: insets.top + 14 }]}>
+      <Pressable
+        onPress={onBack}
+        hitSlop={12}
+        style={({ pressed }) => [styles.backButton, pressed && styles.pressed]}
+      >
         <Text style={styles.backButtonText}>‹</Text>
       </Pressable>
-      {title ? (
-        <Text style={styles.title} numberOfLines={1}>
-          {title}
-        </Text>
-      ) : (
-        <View style={styles.spacer} />
+      {(title || subtitle) && (
+        <View style={styles.text}>
+          {title && (
+            <Text style={styles.title} numberOfLines={1}>
+              {title}
+            </Text>
+          )}
+          {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+        </View>
       )}
-      <View style={styles.backButton} />
     </View>
   );
 }
@@ -26,29 +41,42 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingBottom: 12,
+    gap: 12,
+    paddingHorizontal: 24,
+    paddingBottom: 14,
   },
   backButton: {
-    width: 32,
-    height: 32,
+    width: 34,
+    height: 34,
+    borderRadius: 11,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.12)',
+    backgroundColor: C.card,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backButtonText: {
-    fontSize: 28,
-    color: '#334155',
-    fontWeight: '600',
+  pressed: {
+    opacity: 0.6,
   },
-  spacer: {
+  backButtonText: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: '600',
+    color: C.ink,
+  },
+  text: {
     flex: 1,
   },
   title: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 17,
-    fontWeight: '700',
-    color: '#1E293B',
+    fontSize: 20,
+    fontWeight: '900',
+    letterSpacing: -0.6,
+    color: C.ink,
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 1,
   },
 });

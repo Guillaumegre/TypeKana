@@ -1,54 +1,98 @@
 import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
+import { C, FONT, R } from '../src/theme';
 
 export default function SettingsScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <BackHeader title="Paramètres" onBack={() => router.replace('/')} />
-      <Pressable style={styles.tutorialRow} onPress={() => router.push('/tutorial')}>
-        <Text style={styles.tutorialLabel}>Revoir le tutoriel</Text>
-        <Text style={styles.tutorialChevron}>›</Text>
-      </Pressable>
-      <Text style={styles.hint}>
-        Le mode d'affichage (kana / kanji / indice / rappel) se règle directement depuis l'écran de jeu.
-      </Text>
+
+      <View style={styles.content}>
+        <Pressable
+          onPress={() => router.push('/tutorial')}
+          style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+        >
+          <View style={styles.glyphBox}>
+            <Text style={styles.glyph}>説</Text>
+          </View>
+          <View style={styles.rowText}>
+            <Text style={styles.rowLabel}>Revoir le tutoriel</Text>
+            <Text style={styles.rowSub}>Installer et utiliser le clavier japonais</Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
+        </Pressable>
+
+        <Text style={styles.hint}>
+          Le mode d’affichage (kana / kanji / indice / rappel) se règle directement depuis l’écran de jeu.
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: C.paper,
   },
-  tutorialRow: {
+  content: {
+    paddingHorizontal: 24,
+  },
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 18,
-    paddingHorizontal: 20,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#E2E8F0',
+    gap: 14,
+    backgroundColor: C.card,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.09)',
+    borderRadius: R.lg,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
   },
-  tutorialLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#1E293B',
+  pressed: {
+    borderColor: 'rgba(20,22,26,.3)',
   },
-  tutorialChevron: {
+  glyphBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: 'rgba(20,22,26,.06)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  glyph: {
+    fontFamily: FONT.mincho,
     fontSize: 20,
-    color: '#94A3B8',
+    color: C.ink,
+  },
+  rowText: {
+    flex: 1,
+  },
+  rowLabel: {
+    fontSize: 16.5,
+    fontWeight: '700',
+    letterSpacing: -0.3,
+    color: C.ink,
+  },
+  rowSub: {
+    fontSize: 11.5,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 3,
+  },
+  chevron: {
+    fontSize: 18,
+    color: 'rgba(20,22,26,.25)',
   },
   hint: {
-    fontSize: 13,
-    color: '#94A3B8',
+    fontSize: 12.5,
+    lineHeight: 18,
+    color: C.inkFaint,
     textAlign: 'center',
-    marginTop: 16,
-    paddingHorizontal: 32,
+    marginTop: 18,
+    paddingHorizontal: 8,
   },
 });

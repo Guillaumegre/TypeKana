@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSettings } from '../context/SettingsContext';
+import { C } from '../theme';
 
 type Mode = 'kana' | 'kanji' | 'indice' | 'rappel';
 
@@ -50,32 +51,32 @@ export function ModeSwitch({ allowBlind = true }: { allowBlind?: boolean }) {
 const styles = StyleSheet.create({
   track: {
     flexDirection: 'row',
-    width: 272,
-    backgroundColor: '#E2E8F0',
-    borderRadius: 12,
+    width: 264,
+    backgroundColor: 'rgba(20,22,26,.07)',
+    borderRadius: 11,
     padding: 3,
   },
   segment: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 7,
-    borderRadius: 9,
+    paddingVertical: 6,
+    borderRadius: 8,
   },
   segmentActive: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#0F172A',
+    backgroundColor: C.card,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
     elevation: 1,
   },
   label: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#64748B',
+    fontWeight: '700',
+    color: C.inkFaint,
   },
   labelActive: {
-    color: '#1E293B',
+    color: C.ink,
   },
 });

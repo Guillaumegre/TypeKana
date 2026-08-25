@@ -8,3 +8,7 @@ export const JLPT_LEVELS: JlptLevel[] = ['N5', 'N4', 'N3', 'N2', 'N1'];
 export function getSentencesByLevel(level: string): JlptSentence[] {
   return SENTENCES.filter((s) => s.jlpt_level === level);
 }
+
+export function getSentenceById(id: string): JlptSentence | undefined {
+  return SENTENCES.find((s) => s.id === id);
+}

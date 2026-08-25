@@ -1,9 +1,11 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
 import { getSentencesByLevel, JLPT_LEVELS } from '../../src/data/sentences';
 import { getWordsByLevel } from '../../src/data/vocab';
+import { C, FONT, R } from '../../src/theme';
 
 type ContentType = 'mots' | 'phrases';
 
@@ -14,26 +16,27 @@ const TYPE_OPTIONS: { type: ContentType; label: string }[] = [
 
 export default function LevelSelectScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [contentType, setContentType] = useState<ContentType>('mots');
 
   const countFor = (level: string) =>
     contentType === 'mots' ? getWordsByLevel(level).length : getSentencesByLevel(level).length;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <BackHeader title="Par niveau JLPT" onBack={() => router.replace('/training')} />
 
-      <View style={styles.typeSwitchWrap}>
-        <View style={styles.typeSwitch}>
+      <View style={styles.switchWrap}>
+        <View style={styles.switch}>
           {TYPE_OPTIONS.map((option) => {
             const active = option.type === contentType;
             return (
               <Pressable
                 key={option.type}
                 onPress={() => setContentType(option.type)}
-                style={[styles.typeSegment, active && styles.typeSegmentActive]}
+                style={[styles.segment, active && styles.segmentActive]}
               >
-                <Text style={[styles.typeLabel, active && styles.typeLabelActive]}>{option.label}</Text>
+                <Text style={[styles.segmentLabel, active && styles.segmentLabelActive]}>{option.label}</Text>
               </Pressable>
             );
           })}
@@ -43,101 +46,134 @@ export default function LevelSelectScreen() {
       <FlatList
         data={JLPT_LEVELS}
         keyExtractor={(item) => item}
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => (
-          <Pressable
-            style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
-            onPress={() => router.push({ pathname: '/game', params: { mode: 'training', level: item, contentType } })}
-          >
-            <View style={styles.cardText}>
-              <Text style={styles.cardLabel}>{item}</Text>
-              <Text style={styles.cardCount}>
-                {countFor(item)} {contentType === 'mots' ? 'mots' : 'phrases'}
-              </Text>
-            </View>
-            <Text style={styles.cardChevron}>›</Text>
-          </Pressable>
-        )}
+        contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 26 }]}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => {
+          const count = countFor(item);
+          const empty = count === 0;
+          return (
+            <Pressable
+              disabled={empty}
+              onPress={() =>
+                router.push({ pathname: '/game', params: { mode: 'training', level: item, contentType } })
+              }
+              style={({ pressed }) => [styles.card, empty && styles.cardEmpty, pressed && styles.pressed]}
+            >
+              <View style={styles.levelBox}>
+                <Text style={styles.levelText}>{item}</Text>
+              </View>
+              <View style={styles.cardText}>
+                <Text style={[styles.cardLabel, empty && styles.textMuted]}>
+                  {contentType === 'mots' ? 'Vocabulaire' : 'Phrases courantes'}
+                </Text>
+                <Text style={styles.cardCount}>
+                  {empty ? 'Bientôt disponible' : `${count} ${contentType === 'mots' ? 'mots' : 'phrases'}`}
+                </Text>
+              </View>
+              {!empty && <Text style={styles.chevron}>›</Text>}
+            </Pressable>
+          );
+        }}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: C.paper,
   },
-  typeSwitchWrap: {
+  switchWrap: {
     alignItems: 'center',
     marginBottom: 16,
   },
-  typeSwitch: {
+  switch: {
     flexDirection: 'row',
-    width: 200,
-    backgroundColor: '#E2E8F0',
-    borderRadius: 12,
+    width: 210,
+    backgroundColor: 'rgba(20,22,26,.07)',
+    borderRadius: 11,
     padding: 3,
   },
-  typeSegment: {
+  segment: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
-    borderRadius: 9,
+    borderRadius: 8,
   },
-  typeSegmentActive: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#0F172A',
+  segmentActive: {
+    backgroundColor: C.card,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
     elevation: 1,
   },
-  typeLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#64748B',
+  segmentLabel: {
+    fontSize: 12.5,
+    fontWeight: '700',
+    color: C.inkFaint,
   },
-  typeLabelActive: {
-    color: '#1E293B',
+  segmentLabelActive: {
+    color: C.ink,
   },
   list: {
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingBottom: 24,
+    paddingHorizontal: 24,
+    gap: 9,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    paddingVertical: 18,
-    paddingHorizontal: 18,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    gap: 14,
+    backgroundColor: C.card,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.09)',
+    borderRadius: R.lg,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
   },
-  cardPressed: {
-    backgroundColor: '#EFF6FF',
+  cardEmpty: {
+    opacity: 0.5,
+  },
+  pressed: {
+    borderColor: 'rgba(20,22,26,.3)',
+  },
+  levelBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: C.ink,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  levelText: {
+    fontFamily: FONT.gothic,
+    fontSize: 15,
+    fontWeight: '900',
+    letterSpacing: -0.3,
+    color: C.onDark,
   },
   cardText: {
     flex: 1,
   },
   cardLabel: {
-    fontSize: 18,
+    fontSize: 16.5,
     fontWeight: '700',
-    color: '#1E293B',
+    letterSpacing: -0.3,
+    color: C.ink,
+  },
+  textMuted: {
+    color: C.inkSoft,
   },
   cardCount: {
-    fontSize: 13,
-    color: '#64748B',
-    marginTop: 4,
+    fontSize: 11.5,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 3,
   },
-  cardChevron: {
-    fontSize: 20,
-    color: '#CBD5E1',
+  chevron: {
+    fontSize: 18,
+    color: 'rgba(20,22,26,.25)',
   },
 });
