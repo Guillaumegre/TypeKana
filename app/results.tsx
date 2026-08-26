@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AdBanner } from '../src/components/AdBanner';
 import { C, FONT, R } from '../src/theme';
 
 export default function ResultsScreen() {
@@ -61,6 +62,8 @@ export default function ResultsScreen() {
           <Text style={styles.secondaryText}>Accueil</Text>
         </Pressable>
       </View>
+
+      <AdBanner />
     </View>
   );
 }
