@@ -23,7 +23,8 @@
         "android.permission.MODIFY_AUDIO_SETTINGS",
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
-      ]
+      ],
+      "package": "com.guillaumegrl.TypeKana"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,7 +39,8 @@
           "androidAppId": "ca-app-pub-3940256099942544~3347511713",
           "iosAppId": "ca-app-pub-3940256099942544~1458002511"
         }
-      ]
+      ],
+      "./plugins/withPlayServicesAdsFix"
     ],
     "extra": {
       "router": {},
