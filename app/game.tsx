@@ -1,3 +1,4 @@
+import { useAudioPlayer } from 'expo-audio';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -26,6 +27,7 @@ import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
 import { isKanaFamilyMatch, isTextMatch, katakanaToHiragana, normalizeText, shuffle } from '../src/utils/kana';
 import { getList, toGameEntries, type CustomList } from '../src/utils/customLists';
+import { errorHaptic, successHaptic, tapHaptic } from '../src/utils/feedback';
 import { clearResume, getResume, recordSession, saveResume, type ResumePoint } from '../src/utils/progress';
 import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/raceStats';
 
@@ -56,7 +58,9 @@ export default function GameScreen() {
     resume?: string;
     listId?: string;
   }>();
-  const { kanjiMode, hintMode, blindMode, setBlindMode } = useSettings();
+  const { kanjiMode, hintMode, blindMode, setBlindMode, soundEnabled } = useSettings();
+  const successSound = useAudioPlayer(require('../assets/sounds/success.wav'));
+  const errorSound = useAudioPlayer(require('../assets/sounds/error.wav'));
   const isRace = mode === 'race';
   const wantsResume = resume === '1' && !isRace;
 
@@ -210,9 +214,26 @@ export default function GameScreen() {
     ]).start();
   }, [shakeAnim]);
 
+  const playSuccess = useCallback(() => {
+    if (!soundEnabled) return;
+    successHaptic();
+    try {
+      successSound.seekTo(0);
+      successSound.play();
+    } catch {}
+  }, [soundEnabled, successSound]);
+
+  const playError = useCallback(() => {
+    if (!soundEnabled) return;
+    errorHaptic();
+    try {
+      errorSound.seekTo(0);
+      errorSound.play();
+    } catch {}
+  }, [soundEnabled, errorSound]);
+
   const goToResults = useCallback(
     (finalCorrect: number, finalTotal: number) => {
-      recordSession(finalCorrect);
       clearResume();
       router.replace({
         pathname: '/results',
@@ -242,7 +263,6 @@ export default function GameScreen() {
       if (already) return already;
       const finalCorrect = correctRef.current;
       const finalSeen = seenRef.current;
-      recordSession(finalCorrect);
       saveRacePBIfBetter({
         correct: finalCorrect,
         accuracy: finalSeen > 0 ? Math.round((finalCorrect / finalSeen) * 100) : 0,
@@ -331,11 +351,16 @@ export default function GameScreen() {
 
     const nextCorrect = hasMissedCurrent ? correctFirstTry : correctFirstTry + 1;
     setFeedback('correct');
+    playSuccess();
+    // Counted the moment the word is actually typed correctly, not at session end,
+    // so words already answered still count if the player quits mid-session.
+    recordSession(1);
     setTimeout(() => advance(nextCorrect), isRace ? 180 : 350);
     return true;
   };
 
   const handleChangeText = (text: string) => {
+    if (soundEnabled && text.length > lastTextRef.current.length) tapHaptic();
     lastTextRef.current = text;
 
     if (isRace) {
@@ -377,6 +402,7 @@ export default function GameScreen() {
       setHasMissedCurrent(true);
       setLiveInvalid(true);
       runShake();
+      playError();
     }
   };
 
@@ -402,7 +428,7 @@ export default function GameScreen() {
   if (!currentWord) return null;
 
   const handleBack = () => {
-    if (isRace) {
+    if (isRace || wantsResume) {
       router.replace('/');
     } else if (effectiveListId) {
       router.replace('/training/custom');

@@ -7,6 +7,7 @@ interface Settings {
   kanjiMode: boolean;
   hintMode: boolean;
   blindMode: boolean;
+  soundEnabled: boolean;
 }
 
 interface SettingsContextValue extends Settings {
@@ -14,9 +15,10 @@ interface SettingsContextValue extends Settings {
   setKanjiMode: (value: boolean) => void;
   setHintMode: (value: boolean) => void;
   setBlindMode: (value: boolean) => void;
+  setSoundEnabled: (value: boolean) => void;
 }
 
-const DEFAULT_SETTINGS: Settings = { kanjiMode: false, hintMode: false, blindMode: false };
+const DEFAULT_SETTINGS: Settings = { kanjiMode: false, hintMode: false, blindMode: false, soundEnabled: true };
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
@@ -49,6 +51,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
           update(value ? { kanjiMode: true, blindMode: false } : { kanjiMode: false, hintMode: false, blindMode: false }),
         setHintMode: (value) => update({ hintMode: value }),
         setBlindMode: (value) => update(value ? { blindMode: value, kanjiMode: false, hintMode: false } : { blindMode: value }),
+        setSoundEnabled: (value) => update({ soundEnabled: value }),
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { C, FONT, R } from '../src/theme';
-import { getStats, getResume, type ResumePoint, type Stats } from '../src/utils/progress';
+import { getStats, getResume, getWordsMilestone, type ResumePoint, type Stats } from '../src/utils/progress';
 import { getRacePB, type RaceScore } from '../src/utils/raceStats';
 
 export default function HomeScreen() {
@@ -21,13 +21,13 @@ export default function HomeScreen() {
     }, []),
   );
 
+  const milestone = stats && stats.totalWords > 0 ? getWordsMilestone(stats.totalWords) : null;
+
   return (
     <View style={styles.screen}>
       <ScrollView
-        contentContainerStyle={[
-          styles.content,
-          { paddingTop: insets.top + 12, paddingBottom: insets.bottom + 24 },
-        ]}
+        style={styles.scroll}
+        contentContainerStyle={[styles.content, { paddingTop: insets.top + 12 }]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.topRow}>
@@ -50,6 +50,7 @@ export default function HomeScreen() {
             {stats.streak} jour{stats.streak > 1 ? 's' : ''} de suite · {stats.totalWords} mots tapés
           </Text>
         )}
+        {!!milestone && <Text style={styles.milestoneLine}>{milestone}</Text>}
 
         <Pressable
           onPress={() => router.push('/training')}
@@ -81,8 +82,10 @@ export default function HomeScreen() {
             </Text>
           </View>
         </Pressable>
+      </ScrollView>
 
-        {resume && (
+      {resume && (
+        <View style={[styles.resumeBar, { paddingBottom: insets.bottom + 14 }]}>
           <Pressable
             onPress={() =>
               router.push({
@@ -121,8 +124,8 @@ export default function HomeScreen() {
               {resume.index}/{resume.total}
             </Text>
           </Pressable>
-        )}
-      </ScrollView>
+        </View>
+      )}
     </View>
   );
 }
@@ -132,8 +135,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: C.paper,
   },
+  scroll: {
+    flex: 1,
+  },
   content: {
     paddingHorizontal: 24,
+    paddingBottom: 24,
     gap: 0,
   },
   topRow: {
@@ -183,6 +190,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: C.inkFaint,
     marginTop: 14,
+  },
+  milestoneLine: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: C.inkFaint,
+    marginTop: 3,
   },
   firstCard: {
     marginTop: 26,
@@ -238,6 +251,13 @@ const styles = StyleSheet.create({
   cardSubWarm: {
     color: 'rgba(255,255,255,.72)',
   },
+  resumeBar: {
+    paddingHorizontal: 24,
+    paddingTop: 10,
+    backgroundColor: C.paper,
+    borderTopWidth: 1,
+    borderTopColor: C.line,
+  },
   resumeCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -248,7 +268,6 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     paddingVertical: 13,
     paddingHorizontal: 16,
-    marginTop: 14,
   },
   resumeGlyphBox: {
     width: 38,

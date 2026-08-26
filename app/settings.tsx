@@ -1,10 +1,12 @@
 import { useRouter } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
+import { useSettings } from '../src/context/SettingsContext';
 import { C, R } from '../src/theme';
 
 export default function SettingsScreen() {
   const router = useRouter();
+  const { soundEnabled, setSoundEnabled } = useSettings();
 
   return (
     <View style={styles.screen}>
@@ -24,6 +26,22 @@ export default function SettingsScreen() {
           </View>
           <Text style={styles.chevron}>›</Text>
         </Pressable>
+
+        <View style={[styles.row, styles.rowSpaced]}>
+          <View style={styles.glyphBox}>
+            <Text style={styles.glyph}>🔊</Text>
+          </View>
+          <View style={styles.rowText}>
+            <Text style={styles.rowLabel}>Son et vibrations</Text>
+            <Text style={styles.rowSub}>Retour sonore et haptique en tapant</Text>
+          </View>
+          <Switch
+            value={soundEnabled}
+            onValueChange={setSoundEnabled}
+            trackColor={{ false: 'rgba(20,22,26,.16)', true: C.accent }}
+            thumbColor="#FBF9F5"
+          />
+        </View>
 
         <Text style={styles.hint}>
           Le mode d’affichage (kana / kanji / indice / rappel) se règle directement depuis l’écran de jeu.
@@ -54,6 +72,9 @@ const styles = StyleSheet.create({
   },
   pressed: {
     borderColor: 'rgba(20,22,26,.3)',
+  },
+  rowSpaced: {
+    marginTop: 10,
   },
   glyphBox: {
     width: 44,
