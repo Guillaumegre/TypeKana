@@ -1778,5 +1778,725 @@
     "jlpt_level": "N5",
     "emoji": null,
     "color": null
+  },
+  {
+    "id": "animaux_016",
+    "kana": "さる",
+    "kanji": "猿",
+    "meaning_fr": "singe",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🐒",
+    "color": null
+  },
+  {
+    "id": "animaux_017",
+    "kana": "ひつじ",
+    "kanji": "羊",
+    "meaning_fr": "mouton",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🐑",
+    "color": null
+  },
+  {
+    "id": "animaux_018",
+    "kana": "やぎ",
+    "kanji": "山羊",
+    "meaning_fr": "chèvre",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🐐",
+    "color": null
+  },
+  {
+    "id": "animaux_019",
+    "kana": "かえる",
+    "kanji": "蛙",
+    "meaning_fr": "grenouille",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🐸",
+    "color": null
+  },
+  {
+    "id": "animaux_020",
+    "kana": "へび",
+    "kanji": "蛇",
+    "meaning_fr": "serpent",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🐍",
+    "color": null
+  },
+  {
+    "id": "animaux_021",
+    "kana": "ちょう",
+    "kanji": "蝶",
+    "meaning_fr": "papillon",
+    "category": "animaux",
+    "jlpt_level": "N5",
+    "emoji": "🦋",
+    "color": null
+  },
+  {
+    "id": "transports_016",
+    "kana": "ヘリコプター",
+    "kanji": null,
+    "meaning_fr": "hélicoptère",
+    "category": "transports",
+    "jlpt_level": "N4",
+    "emoji": "🚁",
+    "color": null
+  },
+  {
+    "id": "transports_017",
+    "kana": "スクーター",
+    "kanji": null,
+    "meaning_fr": "scooter",
+    "category": "transports",
+    "jlpt_level": "N4",
+    "emoji": "🛵",
+    "color": null
+  },
+  {
+    "id": "transports_018",
+    "kana": "ボート",
+    "kanji": null,
+    "meaning_fr": "canot, petit bateau",
+    "category": "transports",
+    "jlpt_level": "N5",
+    "emoji": "🛶",
+    "color": null
+  },
+  {
+    "id": "transports_019",
+    "kana": "ケーブルカー",
+    "kanji": null,
+    "meaning_fr": "téléphérique, funiculaire",
+    "category": "transports",
+    "jlpt_level": "N4",
+    "emoji": "🚡",
+    "color": null
+  },
+  {
+    "id": "nourriture_016",
+    "kana": "パスタ",
+    "kanji": null,
+    "meaning_fr": "pâtes",
+    "category": "nourriture",
+    "jlpt_level": "N4",
+    "emoji": "🍝",
+    "color": null
+  },
+  {
+    "id": "nourriture_017",
+    "kana": "サラダ",
+    "kanji": null,
+    "meaning_fr": "salade",
+    "category": "nourriture",
+    "jlpt_level": "N4",
+    "emoji": "🥗",
+    "color": null
+  },
+  {
+    "id": "nourriture_018",
+    "kana": "スープ",
+    "kanji": null,
+    "meaning_fr": "soupe",
+    "category": "nourriture",
+    "jlpt_level": "N4",
+    "emoji": "🍲",
+    "color": null
+  },
+  {
+    "id": "nourriture_019",
+    "kana": "チーズ",
+    "kanji": null,
+    "meaning_fr": "fromage",
+    "category": "nourriture",
+    "jlpt_level": "N4",
+    "emoji": "🧀",
+    "color": null
+  },
+  {
+    "id": "nourriture_020",
+    "kana": "りんご",
+    "kanji": "林檎",
+    "meaning_fr": "pomme",
+    "category": "nourriture",
+    "jlpt_level": "N5",
+    "emoji": "🍎",
+    "color": null
+  },
+  {
+    "id": "nourriture_021",
+    "kana": "バナナ",
+    "kanji": null,
+    "meaning_fr": "banane",
+    "category": "nourriture",
+    "jlpt_level": "N5",
+    "emoji": "🍌",
+    "color": null
+  },
+  {
+    "id": "couleurs_016",
+    "kana": "きみどり",
+    "kanji": "黄緑",
+    "meaning_fr": "vert clair (jaune-vert)",
+    "category": "couleurs_avancees",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": "#9CCC65"
+  },
+  {
+    "id": "couleurs_017",
+    "kana": "ベージュ",
+    "kanji": null,
+    "meaning_fr": "beige",
+    "category": "couleurs_avancees",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": "#E8DCC8"
+  },
+  {
+    "id": "couleurs_018",
+    "kana": "くりーむいろ",
+    "kanji": "クリーム色",
+    "meaning_fr": "crème",
+    "category": "couleurs_avancees",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": "#FFF6D5"
+  },
+  {
+    "id": "couleurs_019",
+    "kana": "ももいろ",
+    "kanji": "桃色",
+    "meaning_fr": "rose pêche",
+    "category": "couleurs_avancees",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": "#FFB7C5"
+  },
+  {
+    "id": "couleurs_020",
+    "kana": "そらいろ",
+    "kanji": "空色",
+    "meaning_fr": "bleu ciel",
+    "category": "couleurs_avancees",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": "#7EC8E3"
+  },
+  {
+    "id": "famille_016",
+    "kana": "りょうしん",
+    "kanji": "両親",
+    "meaning_fr": "parents",
+    "category": "famille",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "famille_017",
+    "kana": "きょうだい",
+    "kanji": "兄弟",
+    "meaning_fr": "frères et sœurs",
+    "category": "famille",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "famille_018",
+    "kana": "おじ",
+    "kanji": "叔父",
+    "meaning_fr": "oncle",
+    "category": "famille",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "famille_019",
+    "kana": "おば",
+    "kanji": "叔母",
+    "meaning_fr": "tante",
+    "category": "famille",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "famille_020",
+    "kana": "まご",
+    "kanji": "孫",
+    "meaning_fr": "petit-enfant",
+    "category": "famille",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_001",
+    "kana": "め",
+    "kanji": "目",
+    "meaning_fr": "œil",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "👁️",
+    "color": null
+  },
+  {
+    "id": "corps_002",
+    "kana": "みみ",
+    "kanji": "耳",
+    "meaning_fr": "oreille",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "👂",
+    "color": null
+  },
+  {
+    "id": "corps_003",
+    "kana": "くち",
+    "kanji": "口",
+    "meaning_fr": "bouche",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "👄",
+    "color": null
+  },
+  {
+    "id": "corps_004",
+    "kana": "はな",
+    "kanji": "鼻",
+    "meaning_fr": "nez",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "👃",
+    "color": null
+  },
+  {
+    "id": "corps_005",
+    "kana": "て",
+    "kanji": "手",
+    "meaning_fr": "main",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "✋",
+    "color": null
+  },
+  {
+    "id": "corps_006",
+    "kana": "あし",
+    "kanji": "足",
+    "meaning_fr": "pied, jambe",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "🦶",
+    "color": null
+  },
+  {
+    "id": "corps_007",
+    "kana": "あたま",
+    "kanji": "頭",
+    "meaning_fr": "tête",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "🧠",
+    "color": null
+  },
+  {
+    "id": "corps_008",
+    "kana": "からだ",
+    "kanji": "体",
+    "meaning_fr": "corps",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "🧍",
+    "color": null
+  },
+  {
+    "id": "corps_009",
+    "kana": "おなか",
+    "kanji": "お腹",
+    "meaning_fr": "ventre",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_010",
+    "kana": "は",
+    "kanji": "歯",
+    "meaning_fr": "dent",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": "🦷",
+    "color": null
+  },
+  {
+    "id": "corps_011",
+    "kana": "かみ",
+    "kanji": "髪",
+    "meaning_fr": "cheveux",
+    "category": "corps",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_012",
+    "kana": "くび",
+    "kanji": "首",
+    "meaning_fr": "cou",
+    "category": "corps",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_013",
+    "kana": "かた",
+    "kanji": "肩",
+    "meaning_fr": "épaule",
+    "category": "corps",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_014",
+    "kana": "せなか",
+    "kanji": "背中",
+    "meaning_fr": "dos",
+    "category": "corps",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "corps_015",
+    "kana": "ゆび",
+    "kanji": "指",
+    "meaning_fr": "doigt",
+    "category": "corps",
+    "jlpt_level": "N4",
+    "emoji": "☝️",
+    "color": null
+  },
+  {
+    "id": "vetements_016",
+    "kana": "パジャマ",
+    "kanji": null,
+    "meaning_fr": "pyjama",
+    "category": "vetements",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "vetements_017",
+    "kana": "ネクタイ",
+    "kanji": null,
+    "meaning_fr": "cravate",
+    "category": "vetements",
+    "jlpt_level": "N4",
+    "emoji": "👔",
+    "color": null
+  },
+  {
+    "id": "vetements_018",
+    "kana": "ベルト",
+    "kanji": null,
+    "meaning_fr": "ceinture",
+    "category": "vetements",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "vetements_019",
+    "kana": "サングラス",
+    "kanji": null,
+    "meaning_fr": "lunettes de soleil",
+    "category": "vetements",
+    "jlpt_level": "N4",
+    "emoji": "🕶️",
+    "color": null
+  },
+  {
+    "id": "vetements_020",
+    "kana": "ジャケット",
+    "kanji": null,
+    "meaning_fr": "veste",
+    "category": "vetements",
+    "jlpt_level": "N4",
+    "emoji": "🧥",
+    "color": null
+  },
+  {
+    "id": "meteo_016",
+    "kana": "つゆ",
+    "kanji": "梅雨",
+    "meaning_fr": "saison des pluies",
+    "category": "meteo",
+    "jlpt_level": "N3",
+    "emoji": "☔",
+    "color": null
+  },
+  {
+    "id": "meteo_017",
+    "kana": "しつど",
+    "kanji": "湿度",
+    "meaning_fr": "humidité",
+    "category": "meteo",
+    "jlpt_level": "N3",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "meteo_018",
+    "kana": "むしあつい",
+    "kanji": "蒸し暑い",
+    "meaning_fr": "lourd et humide (chaud)",
+    "category": "meteo",
+    "jlpt_level": "N3",
+    "emoji": "🥵",
+    "color": null
+  },
+  {
+    "id": "meteo_019",
+    "kana": "かんそう",
+    "kanji": "乾燥",
+    "meaning_fr": "sécheresse, air sec",
+    "category": "meteo",
+    "jlpt_level": "N3",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "chiffres_016",
+    "kana": "さんじゅう",
+    "kanji": "三十",
+    "meaning_fr": "trente",
+    "category": "chiffres",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "chiffres_017",
+    "kana": "よんじゅう",
+    "kanji": "四十",
+    "meaning_fr": "quarante",
+    "category": "chiffres",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "chiffres_018",
+    "kana": "ごじゅう",
+    "kanji": "五十",
+    "meaning_fr": "cinquante",
+    "category": "chiffres",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "chiffres_019",
+    "kana": "にひゃく",
+    "kanji": "二百",
+    "meaning_fr": "deux cents",
+    "category": "chiffres",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "chiffres_020",
+    "kana": "いちまん",
+    "kanji": "一万",
+    "meaning_fr": "dix mille",
+    "category": "chiffres",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "metiers_016",
+    "kana": "パイロット",
+    "kanji": null,
+    "meaning_fr": "pilote",
+    "category": "metiers",
+    "jlpt_level": "N4",
+    "emoji": "✈️",
+    "color": null
+  },
+  {
+    "id": "metiers_017",
+    "kana": "きしゃ",
+    "kanji": "記者",
+    "meaning_fr": "journaliste",
+    "category": "metiers",
+    "jlpt_level": "N4",
+    "emoji": "📰",
+    "color": null
+  },
+  {
+    "id": "metiers_018",
+    "kana": "びようし",
+    "kanji": "美容師",
+    "meaning_fr": "coiffeur, coiffeuse",
+    "category": "metiers",
+    "jlpt_level": "N4",
+    "emoji": "💇",
+    "color": null
+  },
+  {
+    "id": "metiers_019",
+    "kana": "けんちくか",
+    "kanji": "建築家",
+    "meaning_fr": "architecte",
+    "category": "metiers",
+    "jlpt_level": "N3",
+    "emoji": "📐",
+    "color": null
+  },
+  {
+    "id": "metiers_020",
+    "kana": "がか",
+    "kanji": "画家",
+    "meaning_fr": "peintre, artiste",
+    "category": "metiers",
+    "jlpt_level": "N4",
+    "emoji": "🎨",
+    "color": null
+  },
+  {
+    "id": "calendrier_024",
+    "kana": "きょう",
+    "kanji": "今日",
+    "meaning_fr": "aujourd'hui",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_025",
+    "kana": "あした",
+    "kanji": "明日",
+    "meaning_fr": "demain",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_026",
+    "kana": "きのう",
+    "kanji": "昨日",
+    "meaning_fr": "hier",
+    "category": "calendrier",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "calendrier_027",
+    "kana": "あさって",
+    "kanji": "明後日",
+    "meaning_fr": "après-demain",
+    "category": "calendrier",
+    "jlpt_level": "N4",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_021",
+    "kana": "あそぶ",
+    "kanji": "遊ぶ",
+    "meaning_fr": "jouer",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_022",
+    "kana": "あるく",
+    "kanji": "歩く",
+    "meaning_fr": "marcher",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_023",
+    "kana": "はしる",
+    "kanji": "走る",
+    "meaning_fr": "courir",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_024",
+    "kana": "おしえる",
+    "kanji": "教える",
+    "meaning_fr": "enseigner",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_025",
+    "kana": "ならう",
+    "kanji": "習う",
+    "meaning_fr": "apprendre",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_026",
+    "kana": "つかう",
+    "kanji": "使う",
+    "meaning_fr": "utiliser",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_027",
+    "kana": "おもう",
+    "kanji": "思う",
+    "meaning_fr": "penser",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
+  },
+  {
+    "id": "verbes_028",
+    "kana": "いう",
+    "kanji": "言う",
+    "meaning_fr": "dire",
+    "category": "verbes",
+    "jlpt_level": "N5",
+    "emoji": null,
+    "color": null
   }
 ]

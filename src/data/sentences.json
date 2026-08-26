@@ -612,5 +612,293 @@
         "text": "です"
       }
     ]
+  },
+  {
+    "id": "phrase_036",
+    "kana": "いってきます",
+    "kanji": null,
+    "meaning_fr": "Je pars (en sortant de la maison)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_037",
+    "kana": "いってらっしゃい",
+    "kanji": null,
+    "meaning_fr": "Bonne route (à qqn qui part)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_038",
+    "kana": "ただいま",
+    "kanji": null,
+    "meaning_fr": "Je suis rentré(e)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_039",
+    "kana": "おかえりなさい",
+    "kanji": null,
+    "meaning_fr": "Content(e) de te revoir (à qqn qui rentre)",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_040",
+    "kana": "なんじですか",
+    "kanji": "何時ですか",
+    "meaning_fr": "Quelle heure est-il ?",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "何時",
+        "reading": "なんじ"
+      },
+      {
+        "text": "ですか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_041",
+    "kana": "これはなんですか",
+    "kanji": "これは何ですか",
+    "meaning_fr": "Qu'est-ce que c'est ?",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "これは"
+      },
+      {
+        "text": "何",
+        "reading": "なん"
+      },
+      {
+        "text": "ですか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_042",
+    "kana": "トイレはどこですか",
+    "kanji": null,
+    "meaning_fr": "Où sont les toilettes ?",
+    "jlpt_level": "N5"
+  },
+  {
+    "id": "phrase_043",
+    "kana": "みずをください",
+    "kanji": "水をください",
+    "meaning_fr": "De l'eau, s'il vous plaît",
+    "jlpt_level": "N5",
+    "furigana": [
+      {
+        "text": "水",
+        "reading": "みず"
+      },
+      {
+        "text": "をください"
+      }
+    ]
+  },
+  {
+    "id": "phrase_044",
+    "kana": "ここにすわってもいいですか",
+    "kanji": "ここに座ってもいいですか",
+    "meaning_fr": "Je peux m'asseoir ici ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "ここに"
+      },
+      {
+        "text": "座って",
+        "reading": "すわって"
+      },
+      {
+        "text": "もいいですか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_045",
+    "kana": "しゃしんをとってもいいですか",
+    "kanji": "写真を撮ってもいいですか",
+    "meaning_fr": "Je peux prendre une photo ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "写真",
+        "reading": "しゃしん"
+      },
+      {
+        "text": "を"
+      },
+      {
+        "text": "撮って",
+        "reading": "とって"
+      },
+      {
+        "text": "もいいですか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_046",
+    "kana": "ちかくにこうばんがありますか",
+    "kanji": "近くに交番がありますか",
+    "meaning_fr": "Y a-t-il un poste de police près d'ici ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "近く",
+        "reading": "ちかく"
+      },
+      {
+        "text": "に"
+      },
+      {
+        "text": "交番",
+        "reading": "こうばん"
+      },
+      {
+        "text": "がありますか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_047",
+    "kana": "えきまでどのくらいかかりますか",
+    "kanji": "駅までどのくらいかかりますか",
+    "meaning_fr": "Combien de temps jusqu'à la gare ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "駅",
+        "reading": "えき"
+      },
+      {
+        "text": "までどのくらいかかりますか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_048",
+    "kana": "かぜをひいてしまいました",
+    "kanji": "風邪をひいてしまいました",
+    "meaning_fr": "J'ai attrapé un rhume",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "風邪",
+        "reading": "かぜ"
+      },
+      {
+        "text": "をひいてしまいました"
+      }
+    ]
+  },
+  {
+    "id": "phrase_049",
+    "kana": "ゆっくりはなしてもらえますか",
+    "kanji": "ゆっくり話してもらえますか",
+    "meaning_fr": "Pouvez-vous parler plus lentement ?",
+    "jlpt_level": "N4",
+    "furigana": [
+      {
+        "text": "ゆっくり"
+      },
+      {
+        "text": "話して",
+        "reading": "はなして"
+      },
+      {
+        "text": "もらえますか"
+      }
+    ]
+  },
+  {
+    "id": "phrase_050",
+    "kana": "できるだけはやくれんらくします",
+    "kanji": "できるだけ早く連絡します",
+    "meaning_fr": "Je vous contacterai dès que possible",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "できるだけ"
+      },
+      {
+        "text": "早く",
+        "reading": "はやく"
+      },
+      {
+        "text": "連絡します",
+        "reading": "れんらくします"
+      }
+    ]
+  },
+  {
+    "id": "phrase_051",
+    "kana": "それについてはあとでせつめいします",
+    "kanji": "それについては後で説明します",
+    "meaning_fr": "Je vous expliquerai ça plus tard",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "それについては"
+      },
+      {
+        "text": "後で",
+        "reading": "あとで"
+      },
+      {
+        "text": "説明します",
+        "reading": "せつめいします"
+      }
+    ]
+  },
+  {
+    "id": "phrase_052",
+    "kana": "むりをしないでください",
+    "kanji": "無理をしないでください",
+    "meaning_fr": "Ne vous forcez pas / N'en faites pas trop",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "無理",
+        "reading": "むり"
+      },
+      {
+        "text": "をしないでください"
+      }
+    ]
+  },
+  {
+    "id": "phrase_053",
+    "kana": "けっかがでるまでまつしかありません",
+    "kanji": "結果が出るまで待つしかありません",
+    "meaning_fr": "Il n'y a plus qu'à attendre le résultat",
+    "jlpt_level": "N3",
+    "furigana": [
+      {
+        "text": "結果",
+        "reading": "けっか"
+      },
+      {
+        "text": "が"
+      },
+      {
+        "text": "出る",
+        "reading": "でる"
+      },
+      {
+        "text": "まで"
+      },
+      {
+        "text": "待つ",
+        "reading": "まつ"
+      },
+      {
+        "text": "しかありません"
+      }
+    ]
   }
 ]

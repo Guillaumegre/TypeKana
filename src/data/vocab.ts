@@ -14,6 +14,7 @@ export const CATEGORIES: Category[] = [
   { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈', glyph: '彩' },
   { id: 'verbes', label: 'Verbes', emoji: '🏃', glyph: '動' },
   { id: 'famille', label: 'Famille', emoji: '👪', glyph: '家' },
+  { id: 'corps', label: 'Corps humain', emoji: '🧍', glyph: '体' },
   { id: 'vetements', label: 'Vêtements', emoji: '👕', glyph: '服' },
   { id: 'meteo', label: 'Météo', emoji: '🌦️', glyph: '天' },
   { id: 'chiffres', label: 'Chiffres', emoji: '🔢', glyph: '数' },
