@@ -8,6 +8,12 @@
       "developmentClient": true,
       "distribution": "internal"
     },
+    "development-testflight": {
+      "extends": "development",
+      "ios": {
+        "distribution": "store"
+      }
+    },
     "preview": {
       "distribution": "internal"
     },
@@ -16,6 +22,7 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {},
+    "development-testflight": {}
   }
 }
