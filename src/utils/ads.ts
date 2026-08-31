@@ -33,10 +33,17 @@ export function initAds(): void {
   initStarted = true;
   const ads = loadAdsModule();
   if (!ads) return;
-  // Non-personalized ads only: no IDFA/ATT prompt needed, matches the app's offline,
-  // no-tracking posture from the App Store privacy declaration.
-  ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.PG });
-  ads.default().initialize();
+  // The whole init is guarded: a failure here is an ads problem, never a reason for the
+  // app itself to fail to start. initialize() also rejects rather than throwing, so it
+  // needs its own catch to avoid an unhandled rejection at boot.
+  try {
+    // Non-personalized ads only: no IDFA/ATT prompt needed, matches the app's offline,
+    // no-tracking posture from the App Store privacy declaration.
+    ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.PG });
+    ads.default().initialize().catch(() => {});
+  } catch {
+    // Ads stay off for this session.
+  }
 }
 
 export function getAdsModule(): AdsModule | null {
