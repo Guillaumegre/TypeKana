@@ -50,7 +50,8 @@
             "enableBundleCompression": true
           }
         }
-      ]
+      ],
+      "./plugins/withCoreLibraryDesugaring"
     ],
     "extra": {
       "router": {},
