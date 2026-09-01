@@ -1,18 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSettings } from '../context/SettingsContext';
+import { useT } from '../i18n';
 import { C } from '../theme';
 
 type Mode = 'kana' | 'kanji' | 'indice' | 'rappel';
 
-const OPTIONS: { mode: Mode; label: string }[] = [
-  { mode: 'kana', label: 'Kana' },
-  { mode: 'kanji', label: 'Kanji' },
-  { mode: 'indice', label: 'Indice' },
-  { mode: 'rappel', label: 'Rappel' },
-];
-
 export function ModeSwitch({ allowBlind = true }: { allowBlind?: boolean }) {
   const { kanjiMode, hintMode, blindMode, setKanjiMode, setHintMode, setBlindMode } = useSettings();
+  const t = useT();
+  const OPTIONS: { mode: Mode; label: string }[] = [
+    { mode: 'kana', label: t.modes.kana },
+    { mode: 'kanji', label: t.modes.kanji },
+    { mode: 'indice', label: t.modes.hint },
+    { mode: 'rappel', label: t.modes.recall },
+  ];
   const current: Mode = blindMode ? 'rappel' : !kanjiMode ? 'kana' : hintMode ? 'indice' : 'kanji';
   const options = allowBlind ? OPTIONS : OPTIONS.filter((o) => o.mode !== 'rappel');
 

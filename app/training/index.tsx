@@ -2,11 +2,13 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BackHeader } from '../../src/components/BackHeader';
+import { useT } from '../../src/i18n';
 import { C, FONT, R } from '../../src/theme';
 import { getLists } from '../../src/utils/customLists';
 
 export default function TrainingModeScreen() {
   const router = useRouter();
+  const t = useT();
   const [listCount, setListCount] = useState<number | null>(null);
 
   useFocusEffect(
@@ -17,7 +19,7 @@ export default function TrainingModeScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Training" onBack={() => router.replace('/')} />
+      <BackHeader title={t.training.title} onBack={() => router.replace('/')} />
       <View style={styles.content}>
         <Pressable
           onPress={() => router.push('/training/theme')}
@@ -25,9 +27,9 @@ export default function TrainingModeScreen() {
         >
           <Text style={styles.watermark}>類</Text>
           <View>
-            <Text style={styles.eyebrow}>VOCABULAIRE</Text>
-            <Text style={styles.title}>Par thème</Text>
-            <Text style={styles.sub}>Animaux, nourriture, verbes, couleurs...</Text>
+            <Text style={styles.eyebrow}>{t.training.themeEyebrow}</Text>
+            <Text style={styles.title}>{t.training.themeTitle}</Text>
+            <Text style={styles.sub}>{t.training.themeSub}</Text>
           </View>
         </Pressable>
 
@@ -37,9 +39,9 @@ export default function TrainingModeScreen() {
         >
           <Text style={[styles.watermark, styles.watermarkWarm]}>級</Text>
           <View>
-            <Text style={[styles.eyebrow, styles.eyebrowWarm]}>NIVEAU</Text>
-            <Text style={styles.title}>JLPT</Text>
-            <Text style={[styles.sub, styles.subWarm]}>Mots ou phrases, classés N5 à N1</Text>
+            <Text style={[styles.eyebrow, styles.eyebrowWarm]}>{t.training.levelEyebrow}</Text>
+            <Text style={styles.title}>{t.training.levelTitle}</Text>
+            <Text style={[styles.sub, styles.subWarm]}>{t.training.levelSub}</Text>
           </View>
         </Pressable>
 
@@ -50,10 +52,10 @@ export default function TrainingModeScreen() {
           <Text style={[styles.watermark, styles.watermarkInk]}>札</Text>
           <View>
             <Text style={[styles.eyebrow, styles.eyebrowInk]}>
-              {listCount === null ? ' ' : listCount === 0 ? 'AUCUNE LISTE' : `${listCount} LISTE${listCount > 1 ? 'S' : ''}`}
+              {listCount === null ? ' ' : t.training.listsEyebrow(listCount)}
             </Text>
-            <Text style={[styles.title, styles.titleInk]}>Mes listes</Text>
-            <Text style={[styles.sub, styles.subInk]}>Tes mots à toi, révisés à ton rythme</Text>
+            <Text style={[styles.title, styles.titleInk]}>{t.training.listsTitle}</Text>
+            <Text style={[styles.sub, styles.subInk]}>{t.training.listsSub}</Text>
           </View>
         </Pressable>
       </View>

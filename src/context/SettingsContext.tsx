@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { detectDeviceLang } from '../i18n/detect';
+import type { Lang } from '../i18n/translations';
 
 const STORAGE_KEY = 'typekana:settings';
 
@@ -8,6 +10,7 @@ interface Settings {
   hintMode: boolean;
   blindMode: boolean;
   soundEnabled: boolean;
+  lang: Lang;
 }
 
 interface SettingsContextValue extends Settings {
@@ -16,9 +19,17 @@ interface SettingsContextValue extends Settings {
   setHintMode: (value: boolean) => void;
   setBlindMode: (value: boolean) => void;
   setSoundEnabled: (value: boolean) => void;
+  setLang: (value: Lang) => void;
 }
 
-const DEFAULT_SETTINGS: Settings = { kanjiMode: false, hintMode: false, blindMode: false, soundEnabled: true };
+// The language defaults to the phone's own; once the user picks one it is stored and wins.
+const DEFAULT_SETTINGS: Settings = {
+  kanjiMode: false,
+  hintMode: false,
+  blindMode: false,
+  soundEnabled: true,
+  lang: detectDeviceLang(),
+};
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
@@ -29,8 +40,14 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)
       .then((raw) => {
-        if (raw) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(raw) });
+        if (!raw) return;
+        const stored = { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+        // Storage can hold anything (older build, manual edit, corruption); an unknown
+        // language would make every screen look up an undefined translation table.
+        if (stored.lang !== 'fr' && stored.lang !== 'en') stored.lang = DEFAULT_SETTINGS.lang;
+        setSettings(stored);
       })
+      .catch(() => {})
       .finally(() => setLoaded(true));
   }, []);
 
@@ -52,6 +69,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setHintMode: (value) => update({ hintMode: value }),
         setBlindMode: (value) => update(value ? { blindMode: value, kanjiMode: false, hintMode: false } : { blindMode: value }),
         setSoundEnabled: (value) => update({ soundEnabled: value }),
+        setLang: (value) => update({ lang: value }),
       }}
     >
       {children}

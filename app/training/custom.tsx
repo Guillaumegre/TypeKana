@@ -3,11 +3,13 @@ import { useCallback, useState } from 'react';
 import { Alert, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
+import { useT } from '../../src/i18n';
 import { C, R } from '../../src/theme';
 import { createList, deleteList, getLists, type CustomList } from '../../src/utils/customLists';
 
 export default function CustomListsScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const [lists, setLists] = useState<CustomList[]>([]);
 
@@ -18,15 +20,15 @@ export default function CustomListsScreen() {
   useFocusEffect(reload);
 
   const onCreate = async () => {
-    const list = await createList(`Ma liste ${lists.length + 1}`);
+    const list = await createList(t.lists.defaultName(lists.length + 1));
     router.push({ pathname: '/training/list', params: { id: list.id } });
   };
 
   const onDelete = (list: CustomList) => {
-    Alert.alert('Supprimer la liste ?', `« ${list.name} » et ses ${list.words.length} mots seront perdus.`, [
-      { text: 'Annuler', style: 'cancel' },
+    Alert.alert(t.lists.deleteTitle, t.lists.deleteBody(list.name, list.words.length), [
+      { text: t.lists.cancel, style: 'cancel' },
       {
-        text: 'Supprimer',
+        text: t.lists.delete,
         style: 'destructive',
         onPress: async () => {
           await deleteList(list.id);
@@ -38,7 +40,7 @@ export default function CustomListsScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Mes listes" subtitle="Ton propre vocabulaire" onBack={() => router.replace('/training')} />
+      <BackHeader title={t.lists.title} subtitle={t.lists.subtitle} onBack={() => router.replace('/training')} />
 
       <FlatList
         data={lists}
@@ -46,9 +48,7 @@ export default function CustomListsScreen() {
         contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 26 }]}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          <Text style={styles.empty}>
-            Aucune liste pour l’instant. Crée-en une pour réviser tes propres mots.
-          </Text>
+          <Text style={styles.empty}>{t.lists.empty}</Text>
         }
         renderItem={({ item }) => {
           const playable = item.words.length > 0;
@@ -66,7 +66,7 @@ export default function CustomListsScreen() {
                   {item.name}
                 </Text>
                 <Text style={styles.cardCount}>
-                  {playable ? `${item.words.length} mot${item.words.length > 1 ? 's' : ''}` : 'Vide — ajoute des mots'}
+                  {playable ? t.lists.wordCount(item.words.length) : t.lists.emptyList}
                 </Text>
               </Pressable>
 
@@ -87,7 +87,7 @@ export default function CustomListsScreen() {
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 16 }]}>
         <Pressable onPress={onCreate} style={({ pressed }) => [styles.addButton, pressed && styles.pressed]}>
-          <Text style={styles.addText}>Nouvelle liste</Text>
+          <Text style={styles.addText}>{t.lists.newList}</Text>
         </Pressable>
       </View>
     </View>

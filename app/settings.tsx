@@ -2,15 +2,23 @@ import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
 import { useSettings } from '../src/context/SettingsContext';
+import { useT } from '../src/i18n';
+import type { Lang } from '../src/i18n/translations';
 import { C, R } from '../src/theme';
+
+const LANGUAGES: { lang: Lang; label: string }[] = [
+  { lang: 'fr', label: 'Français' },
+  { lang: 'en', label: 'English' },
+];
 
 export default function SettingsScreen() {
   const router = useRouter();
-  const { soundEnabled, setSoundEnabled } = useSettings();
+  const t = useT();
+  const { soundEnabled, setSoundEnabled, lang, setLang } = useSettings();
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Paramètres" onBack={() => router.replace('/')} />
+      <BackHeader title={t.settings.title} onBack={() => router.replace('/')} />
 
       <View style={styles.content}>
         <Pressable
@@ -21,8 +29,8 @@ export default function SettingsScreen() {
             <Text style={styles.glyph}>📖</Text>
           </View>
           <View style={styles.rowText}>
-            <Text style={styles.rowLabel}>Revoir le tutoriel</Text>
-            <Text style={styles.rowSub}>Installer et utiliser le clavier japonais</Text>
+            <Text style={styles.rowLabel}>{t.settings.tutorial}</Text>
+            <Text style={styles.rowSub}>{t.settings.tutorialSub}</Text>
           </View>
           <Text style={styles.chevron}>›</Text>
         </Pressable>
@@ -32,8 +40,8 @@ export default function SettingsScreen() {
             <Text style={styles.glyph}>🔊</Text>
           </View>
           <View style={styles.rowText}>
-            <Text style={styles.rowLabel}>Son et vibrations</Text>
-            <Text style={styles.rowSub}>Retour sonore et haptique en tapant</Text>
+            <Text style={styles.rowLabel}>{t.settings.sound}</Text>
+            <Text style={styles.rowSub}>{t.settings.soundSub}</Text>
           </View>
           <Switch
             value={soundEnabled}
@@ -43,9 +51,31 @@ export default function SettingsScreen() {
           />
         </View>
 
-        <Text style={styles.hint}>
-          Le mode d’affichage (kana / kanji / indice / rappel) se règle directement depuis l’écran de jeu.
-        </Text>
+        <View style={[styles.row, styles.rowSpaced]}>
+          <View style={styles.glyphBox}>
+            <Text style={styles.glyph}>🌍</Text>
+          </View>
+          <View style={styles.rowText}>
+            <Text style={styles.rowLabel}>{t.settings.language}</Text>
+            <Text style={styles.rowSub}>{t.settings.languageSub}</Text>
+          </View>
+          <View style={styles.langSwitch}>
+            {LANGUAGES.map((option) => {
+              const active = option.lang === lang;
+              return (
+                <Pressable
+                  key={option.lang}
+                  onPress={() => setLang(option.lang)}
+                  style={[styles.langSegment, active && styles.langSegmentActive]}
+                >
+                  <Text style={[styles.langLabel, active && styles.langLabelActive]}>{option.label}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+
+        <Text style={styles.hint}>{t.settings.hint}</Text>
       </View>
     </View>
   );
@@ -75,6 +105,28 @@ const styles = StyleSheet.create({
   },
   rowSpaced: {
     marginTop: 10,
+  },
+  langSwitch: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(20,22,26,.07)',
+    borderRadius: 10,
+    padding: 3,
+  },
+  langSegment: {
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 7,
+  },
+  langSegmentActive: {
+    backgroundColor: C.card,
+  },
+  langLabel: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: C.inkFaint,
+  },
+  langLabelActive: {
+    color: C.ink,
   },
   glyphBox: {
     width: 44,

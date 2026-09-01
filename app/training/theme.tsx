@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
 import { CATEGORIES, getWordsByCategory, RANDOM_CATEGORY_ID } from '../../src/data/vocab';
+import { useT } from '../../src/i18n';
 import { C, FONT, R } from '../../src/theme';
 
 const RANDOM = CATEGORIES.find((c) => c.id === RANDOM_CATEGORY_ID)!;
@@ -10,6 +11,7 @@ const THEMES = CATEGORIES.filter((c) => c.id !== RANDOM_CATEGORY_ID);
 
 export default function ThemeSelectScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
 
   const open = (categoryId: string) =>
@@ -17,7 +19,7 @@ export default function ThemeSelectScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Par thème" subtitle="10 mots par session" onBack={() => router.replace('/training')} />
+      <BackHeader title={t.theme.title} subtitle={t.theme.subtitle} onBack={() => router.replace('/training')} />
       <FlatList
         data={THEMES}
         keyExtractor={(item) => item.id}
@@ -30,9 +32,9 @@ export default function ThemeSelectScreen() {
           >
             <Text style={styles.randomWatermark}>{RANDOM.glyph}</Text>
             <View>
-              <Text style={styles.randomEyebrow}>MÉLANGE</Text>
-              <Text style={styles.randomTitle}>Aléatoire</Text>
-              <Text style={styles.randomSub}>Tout le vocabulaire confondu</Text>
+              <Text style={styles.randomEyebrow}>{t.theme.randomEyebrow}</Text>
+              <Text style={styles.randomTitle}>{t.categories.aleatoire}</Text>
+              <Text style={styles.randomSub}>{t.theme.randomSub}</Text>
             </View>
           </Pressable>
         }
@@ -45,8 +47,8 @@ export default function ThemeSelectScreen() {
               <Text style={styles.glyph}>{item.emoji}</Text>
             </View>
             <View style={styles.cardText}>
-              <Text style={styles.cardLabel}>{item.label}</Text>
-              <Text style={styles.cardCount}>{getWordsByCategory(item.id).length} mots</Text>
+              <Text style={styles.cardLabel}>{t.categories[item.labelKey as keyof typeof t.categories]}</Text>
+              <Text style={styles.cardCount}>{t.theme.wordCount(getWordsByCategory(item.id).length)}</Text>
             </View>
             <Text style={styles.chevron}>›</Text>
           </Pressable>

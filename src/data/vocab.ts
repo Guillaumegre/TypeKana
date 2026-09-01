@@ -6,20 +6,20 @@ export const VOCAB: VocabWord[] = rawVocab as VocabWord[];
 export const RANDOM_CATEGORY_ID = 'aleatoire';
 
 export const CATEGORIES: Category[] = [
-  { id: RANDOM_CATEGORY_ID, label: 'Aléatoire', emoji: '🎲', glyph: '運' },
-  { id: 'animaux', label: 'Animaux', emoji: '🐾', glyph: '獣' },
-  { id: 'transports', label: 'Transports', emoji: '🚗', glyph: '車' },
-  { id: 'nourriture', label: 'Nourriture', emoji: '🍜', glyph: '食' },
-  { id: 'couleurs_base', label: 'Couleurs de base', emoji: '🎨', glyph: '色' },
-  { id: 'couleurs_avancees', label: 'Couleurs avancées', emoji: '🌈', glyph: '彩' },
-  { id: 'verbes', label: 'Verbes', emoji: '🏃', glyph: '動' },
-  { id: 'famille', label: 'Famille', emoji: '👪', glyph: '家' },
-  { id: 'corps', label: 'Corps humain', emoji: '🧍', glyph: '体' },
-  { id: 'vetements', label: 'Vêtements', emoji: '👕', glyph: '服' },
-  { id: 'meteo', label: 'Météo', emoji: '🌦️', glyph: '天' },
-  { id: 'chiffres', label: 'Chiffres', emoji: '🔢', glyph: '数' },
-  { id: 'metiers', label: 'Métiers', emoji: '💼', glyph: '職' },
-  { id: 'calendrier', label: 'Calendrier', emoji: '📅', glyph: '暦' },
+  { id: RANDOM_CATEGORY_ID, labelKey: 'aleatoire', emoji: '🎲', glyph: '運' },
+  { id: 'animaux', labelKey: 'animaux', emoji: '🐾', glyph: '獣' },
+  { id: 'transports', labelKey: 'transports', emoji: '🚗', glyph: '車' },
+  { id: 'nourriture', labelKey: 'nourriture', emoji: '🍜', glyph: '食' },
+  { id: 'couleurs_base', labelKey: 'couleurs_base', emoji: '🎨', glyph: '色' },
+  { id: 'couleurs_avancees', labelKey: 'couleurs_avancees', emoji: '🌈', glyph: '彩' },
+  { id: 'verbes', labelKey: 'verbes', emoji: '🏃', glyph: '動' },
+  { id: 'famille', labelKey: 'famille', emoji: '👪', glyph: '家' },
+  { id: 'corps', labelKey: 'corps', emoji: '🧍', glyph: '体' },
+  { id: 'vetements', labelKey: 'vetements', emoji: '👕', glyph: '服' },
+  { id: 'meteo', labelKey: 'meteo', emoji: '🌦️', glyph: '天' },
+  { id: 'chiffres', labelKey: 'chiffres', emoji: '🔢', glyph: '数' },
+  { id: 'metiers', labelKey: 'metiers', emoji: '💼', glyph: '職' },
+  { id: 'calendrier', labelKey: 'calendrier', emoji: '📅', glyph: '暦' },
 ];
 
 export function getCategory(id: string): Category | undefined {

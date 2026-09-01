@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { BackHeader } from '../src/components/BackHeader';
+import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
 
 const STEP_COUNT = 3;
@@ -68,7 +69,7 @@ function FlickDiagram() {
 }
 
 /** A stylised keyboard strip highlighting the globe key used to switch languages. */
-function GlobeKeyDiagram() {
+function GlobeKeyDiagram({ space }: { space: string }) {
   return (
     <View style={styles.keyboardStrip}>
       <View style={[styles.key, styles.keyGlobe]}>
@@ -84,7 +85,7 @@ function GlobeKeyDiagram() {
         <Text style={styles.keyText}>さ</Text>
       </View>
       <View style={[styles.key, styles.keyWide]}>
-        <Text style={styles.keyText}>空白</Text>
+        <Text style={styles.keyText}>{space}</Text>
       </View>
     </View>
   );
@@ -92,6 +93,7 @@ function GlobeKeyDiagram() {
 
 export default function TutorialScreen() {
   const router = useRouter();
+  const t = useT();
   const { width } = useWindowDimensions();
   const scrollRef = useRef<ScrollView>(null);
   const [step, setStep] = useState(0);
@@ -110,7 +112,7 @@ export default function TutorialScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Clavier japonais" onBack={() => router.replace('/settings')} />
+      <BackHeader title={t.tutorial.title} onBack={() => router.replace('/settings')} />
 
       <ScrollView
         ref={scrollRef}
@@ -121,10 +123,8 @@ export default function TutorialScreen() {
         scrollEventThrottle={16}
         style={styles.pager}
       >
-        <Step eyebrow="ÉTAPE 1 / 3" title="Activer le clavier japonais">
-          <Text style={styles.lead}>
-            Le clavier japonais est déjà inclus dans ton téléphone : il suffit de l’activer une fois.
-          </Text>
+        <Step eyebrow={t.tutorial.step(1)} title={t.tutorial.s1Title}>
+          <Text style={styles.lead}>{t.tutorial.s1Lead}</Text>
 
           {Platform.OS === 'android' ? (
             <>
@@ -132,71 +132,53 @@ export default function TutorialScreen() {
                 onPress={openAndroidKeyboardSettings}
                 style={({ pressed }) => [styles.cta, pressed && styles.pressed]}
               >
-                <Text style={styles.ctaText}>Ouvrir les réglages clavier</Text>
+                <Text style={styles.ctaText}>{t.tutorial.s1Cta}</Text>
               </Pressable>
-              <NumberedStep n={1}>Choisis ton clavier (Gboard le plus souvent), puis « Langues ».</NumberedStep>
-              <NumberedStep n={2}>Ajoute un clavier et sélectionne « Japonais ».</NumberedStep>
+              <NumberedStep n={1}>{t.tutorial.s1Android1}</NumberedStep>
+              <NumberedStep n={2}>{t.tutorial.s1Android2}</NumberedStep>
               <NumberedStep n={3}>
-                Choisis la disposition <Text style={styles.strong}>12 touches</Text> (12キー) — c’est celle qui
-                permet la saisie flick.
+                {t.tutorial.s1Android3a}
+                <Text style={styles.strong}>{t.tutorial.s1Android3key}</Text>
+                {t.tutorial.s1Android3b}
               </NumberedStep>
             </>
           ) : (
             <>
-              <NumberedStep n={1}>Ouvre Réglages → Général → Clavier → Claviers.</NumberedStep>
-              <NumberedStep n={2}>Appuie sur « Ajouter un clavier… », puis choisis « Japonais ».</NumberedStep>
+              <NumberedStep n={1}>{t.tutorial.s1Ios1}</NumberedStep>
+              <NumberedStep n={2}>{t.tutorial.s1Ios2}</NumberedStep>
               <NumberedStep n={3}>
-                Sélectionne <Text style={styles.strong}>かな</Text> (et non ローマ字) : c’est la disposition à
-                12 touches qui permet la saisie flick.
+                {t.tutorial.s1Ios3a}
+                <Text style={styles.strong}>かな</Text>
+                {t.tutorial.s1Ios3b}
               </NumberedStep>
-              <Text style={styles.note}>
-                iOS ne permet pas aux apps d’ouvrir directement les réglages du clavier — ce chemin doit être
-                fait à la main, une seule fois.
-              </Text>
+              <Text style={styles.note}>{t.tutorial.s1IosNote}</Text>
             </>
           )}
         </Step>
 
-        <Step eyebrow="ÉTAPE 2 / 3" title="Basculer vers le japonais">
-          <Text style={styles.lead}>
-            Une fois le clavier ajouté, tu passes de l’un à l’autre depuis le clavier lui-même.
-          </Text>
+        <Step eyebrow={t.tutorial.step(2)} title={t.tutorial.s2Title}>
+          <Text style={styles.lead}>{t.tutorial.s2Lead}</Text>
 
-          <GlobeKeyDiagram />
+          <GlobeKeyDiagram space={t.tutorial.s2Space} />
 
           <Text style={styles.body}>
-            Appuie sur la touche <Text style={styles.strong}>🌐</Text> en bas à gauche pour changer de clavier.
-            Si tu en as plusieurs, <Text style={styles.strong}>reste appuyé</Text> pour choisir directement le
-            japonais dans la liste.
+            {t.tutorial.s2Body1}
+            <Text style={styles.strong}>🌐</Text>
+            {t.tutorial.s2Body2}
+            <Text style={styles.strong}>{t.tutorial.s2Body3}</Text>
+            {t.tutorial.s2Body4}
           </Text>
-          <Text style={styles.note}>
-            Dans l’app, le clavier s’ouvre tout seul quand un mot s’affiche : il ne reste qu’à vérifier qu’il
-            est bien en japonais.
-          </Text>
+          <Text style={styles.note}>{t.tutorial.s2Note}</Text>
         </Step>
 
-        <Step eyebrow="ÉTAPE 3 / 3" title="La saisie flick">
-          <Text style={styles.lead}>
-            Chaque touche porte une ligne entière de kana. Appuie pour la voyelle en あ, ou glisse le doigt
-            dans une direction pour les autres.
-          </Text>
+        <Step eyebrow={t.tutorial.step(3)} title={t.tutorial.s3Title}>
+          <Text style={styles.lead}>{t.tutorial.s3Lead}</Text>
 
           <FlickDiagram />
 
-          <Text style={styles.body}>
-            Sur la touche あ : appui simple pour <Text style={styles.strong}>あ</Text>, glisse à gauche pour{' '}
-            <Text style={styles.strong}>い</Text>, vers le haut pour <Text style={styles.strong}>う</Text>, à
-            droite pour <Text style={styles.strong}>え</Text>, vers le bas pour{' '}
-            <Text style={styles.strong}>お</Text>.
-          </Text>
-          <Text style={styles.body}>
-            Le principe vaut pour toutes les touches : か donne き / く / け / こ, さ donne し / す / せ / そ,
-            et ainsi de suite.
-          </Text>
-          <Text style={styles.note}>
-            Pour les sons voisés (が, ば) ou les petits kana (っ, ゃ), tape le kana de base puis appuie sur la
-            touche ゛゜小 pour le transformer.
-          </Text>
+          <Text style={styles.body}>{t.tutorial.s3Body}</Text>
+          <Text style={styles.body}>{t.tutorial.s3Body2}</Text>
+          <Text style={styles.note}>{t.tutorial.s3Note}</Text>
         </Step>
       </ScrollView>
 
@@ -210,7 +192,7 @@ export default function TutorialScreen() {
           onPress={() => (isLast ? router.replace('/settings') : goToStep(step + 1))}
           style={({ pressed }) => [styles.nextButton, pressed && styles.pressed]}
         >
-          <Text style={styles.nextText}>{isLast ? 'Terminé' : 'Suivant'}</Text>
+          <Text style={styles.nextText}>{isLast ? t.tutorial.done : t.tutorial.next}</Text>
         </Pressable>
       </View>
     </View>

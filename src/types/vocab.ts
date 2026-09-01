@@ -1,10 +1,15 @@
+import type { Lang } from '../i18n/translations';
+
 export type JlptLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+
+/** A meaning carried in every supported language, picked with the active Lang. */
+export type LocalizedText = Record<Lang, string>;
 
 export interface VocabWord {
   id: string;
   kana: string;
   kanji: string | null;
-  meaning_fr: string;
+  meaning: LocalizedText;
   category: string;
   jlpt_level: JlptLevel;
   emoji: string | null;
@@ -13,7 +18,8 @@ export interface VocabWord {
 
 export interface Category {
   id: string;
-  label: string;
+  /** Key into translations.categories — the label itself is localized. */
+  labelKey: string;
   emoji: string;
   /** Single kanji used as the theme's mark on cards. */
   glyph: string;
@@ -30,7 +36,7 @@ export interface JlptSentence {
   kana: string;
   kanji: string | null;
   furigana?: FuriganaSegment[];
-  meaning_fr: string;
+  meaning: LocalizedText;
   jlpt_level: JlptLevel;
 }
 
@@ -40,7 +46,7 @@ export interface GameEntry {
   kana: string;
   kanji: string | null;
   furigana?: FuriganaSegment[];
-  meaning_fr: string;
+  meaning: LocalizedText;
   emoji: string | null;
   color: string | null;
 }

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
+import { useT } from '../../src/i18n';
 import { C, R } from '../../src/theme';
 import {
   addWord,
@@ -23,6 +24,7 @@ import {
 
 export default function CustomListEditScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams<{ id: string }>();
 
@@ -49,7 +51,7 @@ export default function CustomListEditScreen() {
     await addWord(id, {
       kana: kana.trim(),
       kanji: kanji.trim() || null,
-      meaning_fr: meaning.trim(),
+      meaning: meaning.trim(),
     });
     setKana('');
     setKanji('');
@@ -74,7 +76,7 @@ export default function CustomListEditScreen() {
   if (!list) {
     return (
       <View style={styles.screen}>
-        <BackHeader title="Liste" onBack={() => router.replace('/training/custom')} />
+        <BackHeader title={t.listEdit.fallbackTitle} onBack={() => router.replace('/training/custom')} />
       </View>
     );
   }
@@ -85,8 +87,8 @@ export default function CustomListEditScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <BackHeader
-        title="Modifier la liste"
-        subtitle={`${list.words.length} mot${list.words.length > 1 ? 's' : ''}`}
+        title={t.listEdit.title}
+        subtitle={t.listEdit.wordCount(list.words.length)}
         onBack={() => router.replace('/training/custom')}
       />
 
@@ -98,21 +100,21 @@ export default function CustomListEditScreen() {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View style={styles.form}>
-            <Text style={styles.fieldLabel}>NOM DE LA LISTE</Text>
+            <Text style={styles.fieldLabel}>{t.listEdit.listName}</Text>
             <TextInput
               value={name}
               onChangeText={onNameChange}
               style={styles.nameInput}
-              placeholder="Ma liste"
+              placeholder={t.listEdit.namePlaceholder}
               placeholderTextColor="rgba(20,22,26,.3)"
             />
 
-            <Text style={[styles.fieldLabel, styles.fieldLabelSpaced]}>AJOUTER UN MOT</Text>
+            <Text style={[styles.fieldLabel, styles.fieldLabelSpaced]}>{t.listEdit.addWord}</Text>
             <TextInput
               value={kana}
               onChangeText={setKana}
               style={styles.input}
-              placeholder="Lecture en kana (ce qu’il faudra taper)"
+              placeholder={t.listEdit.kanaPlaceholder}
               placeholderTextColor="rgba(20,22,26,.3)"
               autoCorrect={false}
               autoCapitalize="none"
@@ -121,7 +123,7 @@ export default function CustomListEditScreen() {
               value={kanji}
               onChangeText={setKanji}
               style={styles.input}
-              placeholder="Kanji (facultatif)"
+              placeholder={t.listEdit.kanjiPlaceholder}
               placeholderTextColor="rgba(20,22,26,.3)"
               autoCorrect={false}
               autoCapitalize="none"
@@ -130,7 +132,7 @@ export default function CustomListEditScreen() {
               value={meaning}
               onChangeText={setMeaning}
               style={styles.input}
-              placeholder="Traduction en français"
+              placeholder={t.listEdit.meaningPlaceholder}
               placeholderTextColor="rgba(20,22,26,.3)"
               onSubmitEditing={onAdd}
               returnKeyType="done"
@@ -140,11 +142,11 @@ export default function CustomListEditScreen() {
               disabled={!canAdd}
               style={({ pressed }) => [styles.addButton, !canAdd && styles.addDisabled, pressed && styles.pressed]}
             >
-              <Text style={styles.addText}>Ajouter</Text>
+              <Text style={styles.addText}>{t.listEdit.add}</Text>
             </Pressable>
 
             {list.words.length > 0 && (
-              <Text style={[styles.fieldLabel, styles.fieldLabelSpaced]}>MOTS DE LA LISTE</Text>
+              <Text style={[styles.fieldLabel, styles.fieldLabelSpaced]}>{t.listEdit.listWords}</Text>
             )}
           </View>
         }
@@ -155,7 +157,7 @@ export default function CustomListEditScreen() {
                 {item.kana}
                 {item.kanji ? `  ·  ${item.kanji}` : ''}
               </Text>
-              <Text style={styles.wordMeaning}>{item.meaning_fr}</Text>
+              <Text style={styles.wordMeaning}>{item.meaning}</Text>
             </View>
             <Pressable hitSlop={8} onPress={() => onRemove(item.id)} style={styles.removeButton}>
               <Text style={styles.removeText}>✕</Text>

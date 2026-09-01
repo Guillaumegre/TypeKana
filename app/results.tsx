@@ -3,10 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AdBanner } from '../src/components/AdBanner';
+import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
 
 export default function ResultsScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const { mode, correct, total, isNewPB, pbCorrect, category, level, contentType, listId } =
     useLocalSearchParams<{
@@ -45,21 +47,21 @@ export default function ResultsScreen() {
 
         <Text style={styles.score}>{isRace ? correct : `${correct}/${total}`}</Text>
 
-        <Text style={styles.scoreLabel}>{isRace ? 'MOTS EN 60 S' : 'MOTS CORRECTS'}</Text>
+        <Text style={styles.scoreLabel}>{isRace ? t.results.wordsIn60 : t.results.correctWords}</Text>
 
-        {isRace && isNewPB === '1' && <Text style={styles.verdict}>Nouveau record</Text>}
-        {isRace && isNewPB === '0' && <Text style={styles.verdictMuted}>Record à battre : {pbCorrect}</Text>}
+        {isRace && isNewPB === '1' && <Text style={styles.verdict}>{t.results.newRecord}</Text>}
+        {isRace && isNewPB === '0' && <Text style={styles.verdictMuted}>{t.results.recordToBeat(Number(pbCorrect))}</Text>}
       </View>
 
       <View style={styles.buttons}>
         <Pressable onPress={replay} style={({ pressed }) => [styles.primary, pressed && styles.pressed]}>
-          <Text style={styles.primaryText}>Rejouer</Text>
+          <Text style={styles.primaryText}>{t.results.replay}</Text>
         </Pressable>
         <Pressable
           onPress={() => router.replace('/')}
           style={({ pressed }) => [styles.secondary, pressed && styles.pressed]}
         >
-          <Text style={styles.secondaryText}>Accueil</Text>
+          <Text style={styles.secondaryText}>{t.results.home}</Text>
         </Pressable>
       </View>
 

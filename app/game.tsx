@@ -23,6 +23,7 @@ import {
   getWordsByLevel,
   pickRandomWord,
 } from '../src/data/vocab';
+import { useLang, useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
 import { isKanaFamilyMatch, isTextMatch, katakanaToHiragana, normalizeText, shuffle } from '../src/utils/kana';
@@ -59,6 +60,8 @@ export default function GameScreen() {
     listId?: string;
   }>();
   const { kanjiMode, hintMode, blindMode, setBlindMode, soundEnabled } = useSettings();
+  const t = useT();
+  const lang = useLang();
   const successSound = useAudioPlayer(require('../assets/sounds/success.wav'));
   const errorSound = useAudioPlayer(require('../assets/sounds/error.wav'));
   const isRace = mode === 'race';
@@ -143,8 +146,8 @@ export default function GameScreen() {
   const themeLabel = customList
     ? customList.name.toUpperCase()
     : level
-      ? `${level} · ${contentType === 'phrases' ? 'PHRASES' : 'MOTS'}`
-      : (getCategory(category ?? '')?.label ?? '').toUpperCase();
+      ? `${level} · ${(contentType === 'phrases' ? t.level.sentences : t.level.words).toUpperCase()}`
+      : (t.categories[getCategory(category ?? '')?.labelKey as keyof typeof t.categories] ?? '').toUpperCase();
 
   // Race mode doesn't offer Rappel (blind recall doesn't fit a pure speed test).
   // If it was left on from a Training session, turn it off on entry.
@@ -192,7 +195,7 @@ export default function GameScreen() {
         ? customList.name
         : level
           ? `JLPT ${level}`
-          : (getCategory(category ?? '')?.label ?? 'Training'),
+          : (t.categories[getCategory(category ?? '')?.labelKey as keyof typeof t.categories] ?? 'Training'),
       glyph: customList ? '✎' : level ? '級' : (getCategory(category ?? '')?.glyph ?? '練'),
       emoji: customList ? '📝' : level ? '🎓' : getCategory(category ?? '')?.emoji,
       index,
@@ -299,12 +302,12 @@ export default function GameScreen() {
       <View style={styles.screen}>
         <Text style={styles.empty}>
           {effectiveListId
-            ? 'Cette liste est vide. Ajoute des mots pour t’entraîner.'
+            ? t.game.emptyCustom
             : level
               ? contentType === 'phrases'
-                ? 'Aucune phrase disponible pour ce niveau.'
-                : 'Aucun mot disponible pour ce niveau.'
-              : 'Aucun mot trouvé pour ce thème.'}
+                ? t.game.emptySentences
+                : t.game.emptyWords
+              : t.game.emptyTheme}
         </Text>
       </View>
     );
@@ -472,7 +475,7 @@ export default function GameScreen() {
             </View>
             <View style={styles.scoreGroup}>
               <Text style={styles.scoreValue}>{correctFirstTry}</Text>
-              <Text style={styles.scoreLabel}>MOTS</Text>
+              <Text style={styles.scoreLabel}>{t.game.raceWords}</Text>
             </View>
           </View>
           <View style={styles.track}>
@@ -483,16 +486,14 @@ export default function GameScreen() {
               ]}
             />
           </View>
-          {racePB && <Text style={styles.recordLine}>RECORD {racePB.correct}</Text>}
+          {racePB && <Text style={styles.recordLine}>{t.game.raceRecord(racePB.correct)}</Text>}
         </View>
       ) : (
         <View style={styles.progressHeader}>
           <View style={styles.track}>
             <View style={[styles.trackFillInk, { width: `${(index / sessionWords.length) * 100}%` }]} />
           </View>
-          <Text style={styles.counter}>
-            MOT {index + 1} / {sessionWords.length}
-          </Text>
+          <Text style={styles.counter}>{t.game.counter(index + 1, sessionWords.length)}</Text>
         </View>
       )}
 
@@ -521,7 +522,7 @@ export default function GameScreen() {
           </>
         )}
 
-        <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning_fr}</Text>
+        <Text style={blindMode ? styles.meaningPrimary : styles.meaning}>{currentWord.meaning[lang]}</Text>
 
         {isRace && upcomingWords.length > 0 && (
           <View style={styles.upcomingRow}>
@@ -551,7 +552,7 @@ export default function GameScreen() {
             defaultValue=""
             onChangeText={handleChangeText}
             onSubmitEditing={handleSubmit}
-            placeholder={isRace && !raceStarted ? 'Tape pour commencer…' : inputPlaceholder}
+            placeholder={isRace && !raceStarted ? t.game.raceStart : inputPlaceholder}
             placeholderTextColor="rgba(20,22,26,.25)"
             autoFocus
             autoCorrect={false}
@@ -566,7 +567,7 @@ export default function GameScreen() {
             onPress={handleSubmit}
             style={({ pressed }) => [styles.submitButton, pressed && styles.pressedCard]}
           >
-            <Text style={styles.submitText}>Valider</Text>
+            <Text style={styles.submitText}>{t.game.validate}</Text>
           </Pressable>
         )}
 
@@ -575,7 +576,7 @@ export default function GameScreen() {
           hitSlop={8}
           style={({ pressed }) => [styles.skipButton, pressed && styles.pressedSoft]}
         >
-          <Text style={styles.skipText}>Passer</Text>
+          <Text style={styles.skipText}>{t.game.skip}</Text>
         </Pressable>
       </View>
     </KeyboardAvoidingView>

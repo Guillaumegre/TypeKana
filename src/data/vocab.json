@@ -3,2500 +3,3250 @@
     "id": "animaux_001",
     "kana": "ねこ",
     "kanji": "猫",
-    "meaning_fr": "chat",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐱",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chat",
+      "en": "cat"
+    }
   },
   {
     "id": "animaux_002",
     "kana": "いぬ",
     "kanji": "犬",
-    "meaning_fr": "chien",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chien",
+      "en": "dog"
+    }
   },
   {
     "id": "animaux_003",
     "kana": "とり",
     "kanji": "鳥",
-    "meaning_fr": "oiseau",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐦",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "oiseau",
+      "en": "bird"
+    }
   },
   {
     "id": "animaux_004",
     "kana": "うさぎ",
     "kanji": "兎",
-    "meaning_fr": "lapin",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐰",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lapin",
+      "en": "rabbit"
+    }
   },
   {
     "id": "animaux_005",
     "kana": "うし",
     "kanji": "牛",
-    "meaning_fr": "vache",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐄",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vache",
+      "en": "cow"
+    }
   },
   {
     "id": "animaux_006",
     "kana": "うま",
     "kanji": "馬",
-    "meaning_fr": "cheval",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐴",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cheval",
+      "en": "horse"
+    }
   },
   {
     "id": "animaux_007",
     "kana": "ぶた",
     "kanji": "豚",
-    "meaning_fr": "cochon",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐷",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cochon",
+      "en": "pig"
+    }
   },
   {
     "id": "animaux_008",
     "kana": "さかな",
     "kanji": "魚",
-    "meaning_fr": "poisson",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐟",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "poisson",
+      "en": "fish"
+    }
   },
   {
     "id": "animaux_009",
     "kana": "ぞう",
     "kanji": "象",
-    "meaning_fr": "éléphant",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐘",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "éléphant",
+      "en": "elephant"
+    }
   },
   {
     "id": "animaux_010",
     "kana": "きりん",
     "kanji": null,
-    "meaning_fr": "girafe",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🦒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "girafe",
+      "en": "giraffe"
+    }
   },
   {
     "id": "animaux_011",
     "kana": "ライオン",
     "kanji": null,
-    "meaning_fr": "lion",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🦁",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lion",
+      "en": "lion"
+    }
   },
   {
     "id": "animaux_012",
     "kana": "とら",
     "kanji": "虎",
-    "meaning_fr": "tigre",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐯",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "tigre",
+      "en": "tiger"
+    }
   },
   {
     "id": "animaux_013",
     "kana": "くま",
     "kanji": "熊",
-    "meaning_fr": "ours",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐻",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ours",
+      "en": "bear"
+    }
   },
   {
     "id": "animaux_014",
     "kana": "ねずみ",
     "kanji": "鼠",
-    "meaning_fr": "souris",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐭",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "souris",
+      "en": "mouse"
+    }
   },
   {
     "id": "animaux_015",
     "kana": "かめ",
     "kanji": "亀",
-    "meaning_fr": "tortue",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐢",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "tortue",
+      "en": "turtle"
+    }
   },
   {
     "id": "transports_001",
     "kana": "くるま",
     "kanji": "車",
-    "meaning_fr": "voiture",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚗",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "voiture",
+      "en": "car"
+    }
   },
   {
     "id": "transports_002",
     "kana": "でんしゃ",
     "kanji": "電車",
-    "meaning_fr": "train",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚃",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "train",
+      "en": "train"
+    }
   },
   {
     "id": "transports_003",
     "kana": "じてんしゃ",
     "kanji": "自転車",
-    "meaning_fr": "vélo",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚲",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vélo",
+      "en": "bicycle"
+    }
   },
   {
     "id": "transports_004",
     "kana": "ひこうき",
     "kanji": "飛行機",
-    "meaning_fr": "avion",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "✈️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "avion",
+      "en": "plane"
+    }
   },
   {
     "id": "transports_005",
     "kana": "ふね",
     "kanji": "船",
-    "meaning_fr": "bateau",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚢",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "bateau",
+      "en": "boat, ship"
+    }
   },
   {
     "id": "transports_006",
     "kana": "バス",
     "kanji": null,
-    "meaning_fr": "bus",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚌",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "bus",
+      "en": "bus"
+    }
   },
   {
     "id": "transports_007",
     "kana": "タクシー",
     "kanji": null,
-    "meaning_fr": "taxi",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚕",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "taxi",
+      "en": "taxi"
+    }
   },
   {
     "id": "transports_008",
     "kana": "ちかてつ",
     "kanji": "地下鉄",
-    "meaning_fr": "métro",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚇",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "métro",
+      "en": "subway"
+    }
   },
   {
     "id": "transports_009",
     "kana": "トラック",
     "kanji": null,
-    "meaning_fr": "camion",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🚚",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "camion",
+      "en": "truck"
+    }
   },
   {
     "id": "transports_010",
     "kana": "オートバイ",
     "kanji": null,
-    "meaning_fr": "moto",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🏍️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "moto",
+      "en": "motorbike"
+    }
   },
   {
     "id": "transports_011",
     "kana": "しんかんせん",
     "kanji": "新幹線",
-    "meaning_fr": "train à grande vitesse",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚄",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "train à grande vitesse",
+      "en": "bullet train"
+    }
   },
   {
     "id": "transports_012",
     "kana": "フェリー",
     "kanji": null,
-    "meaning_fr": "ferry",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "⛴️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ferry",
+      "en": "ferry"
+    }
   },
   {
     "id": "transports_013",
     "kana": "パトカー",
     "kanji": null,
-    "meaning_fr": "voiture de police",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚓",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "voiture de police",
+      "en": "police car"
+    }
   },
   {
     "id": "transports_014",
     "kana": "きゅうきゅうしゃ",
     "kanji": "救急車",
-    "meaning_fr": "ambulance",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚑",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ambulance",
+      "en": "ambulance"
+    }
   },
   {
     "id": "transports_015",
     "kana": "しょうぼうしゃ",
     "kanji": "消防車",
-    "meaning_fr": "camion de pompiers",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "camion de pompiers",
+      "en": "fire engine"
+    }
   },
   {
     "id": "nourriture_001",
     "kana": "ごはん",
     "kanji": "ご飯",
-    "meaning_fr": "riz / repas",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍚",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "riz / repas",
+      "en": "rice, meal"
+    }
   },
   {
     "id": "nourriture_002",
     "kana": "パン",
     "kanji": null,
-    "meaning_fr": "pain",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍞",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pain",
+      "en": "bread"
+    }
   },
   {
     "id": "nourriture_003",
     "kana": "みず",
     "kanji": "水",
-    "meaning_fr": "eau",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "💧",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "eau",
+      "en": "water"
+    }
   },
   {
     "id": "nourriture_004",
     "kana": "おちゃ",
     "kanji": "お茶",
-    "meaning_fr": "thé",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "thé",
+      "en": "tea"
+    }
   },
   {
     "id": "nourriture_005",
     "kana": "たまご",
     "kanji": "卵",
-    "meaning_fr": "œuf",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🥚",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "œuf",
+      "en": "egg"
+    }
   },
   {
     "id": "nourriture_006",
     "kana": "にく",
     "kanji": "肉",
-    "meaning_fr": "viande",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍖",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "viande",
+      "en": "meat"
+    }
   },
   {
     "id": "nourriture_007",
     "kana": "すし",
     "kanji": "寿司",
-    "meaning_fr": "sushi",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "sushi",
+      "en": "sushi"
+    }
   },
   {
     "id": "nourriture_008",
     "kana": "やさい",
     "kanji": "野菜",
-    "meaning_fr": "légumes",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🥦",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "légumes",
+      "en": "vegetables"
+    }
   },
   {
     "id": "nourriture_009",
     "kana": "くだもの",
     "kanji": "果物",
-    "meaning_fr": "fruits",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍎",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "fruits",
+      "en": "fruit"
+    }
   },
   {
     "id": "nourriture_010",
     "kana": "みそしる",
     "kanji": "味噌汁",
-    "meaning_fr": "soupe miso",
     "category": "nourriture",
     "jlpt_level": "N4",
     "emoji": "🍲",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "soupe miso",
+      "en": "miso soup"
+    }
   },
   {
     "id": "nourriture_011",
     "kana": "ラーメン",
     "kanji": null,
-    "meaning_fr": "ramen",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍜",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ramen",
+      "en": "ramen"
+    }
   },
   {
     "id": "nourriture_012",
     "kana": "カレー",
     "kanji": null,
-    "meaning_fr": "curry",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍛",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "curry",
+      "en": "curry"
+    }
   },
   {
     "id": "nourriture_013",
     "kana": "ケーキ",
     "kanji": null,
-    "meaning_fr": "gâteau",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍰",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "gâteau",
+      "en": "cake"
+    }
   },
   {
     "id": "nourriture_014",
     "kana": "ぎゅうにゅう",
     "kanji": "牛乳",
-    "meaning_fr": "lait",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🥛",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lait",
+      "en": "milk"
+    }
   },
   {
     "id": "nourriture_015",
     "kana": "コーヒー",
     "kanji": null,
-    "meaning_fr": "café",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "☕",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "café",
+      "en": "coffee"
+    }
   },
   {
     "id": "couleurs_001",
     "kana": "あか",
     "kanji": "赤",
-    "meaning_fr": "rouge",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#E53935"
+    "color": "#E53935",
+    "meaning": {
+      "fr": "rouge",
+      "en": "red"
+    }
   },
   {
     "id": "couleurs_002",
     "kana": "あお",
     "kanji": "青",
-    "meaning_fr": "bleu",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#1E88E5"
+    "color": "#1E88E5",
+    "meaning": {
+      "fr": "bleu",
+      "en": "blue"
+    }
   },
   {
     "id": "couleurs_003",
     "kana": "きいろ",
     "kanji": "黄色",
-    "meaning_fr": "jaune",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#FDD835"
+    "color": "#FDD835",
+    "meaning": {
+      "fr": "jaune",
+      "en": "yellow"
+    }
   },
   {
     "id": "couleurs_004",
     "kana": "みどり",
     "kanji": "緑",
-    "meaning_fr": "vert",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#43A047"
+    "color": "#43A047",
+    "meaning": {
+      "fr": "vert",
+      "en": "green"
+    }
   },
   {
     "id": "couleurs_005",
     "kana": "しろ",
     "kanji": "白",
-    "meaning_fr": "blanc",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#FFFFFF"
+    "color": "#FFFFFF",
+    "meaning": {
+      "fr": "blanc",
+      "en": "white"
+    }
   },
   {
     "id": "couleurs_006",
     "kana": "くろ",
     "kanji": "黒",
-    "meaning_fr": "noir",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#111111"
+    "color": "#111111",
+    "meaning": {
+      "fr": "noir",
+      "en": "black"
+    }
   },
   {
     "id": "couleurs_007",
     "kana": "ちゃいろ",
     "kanji": "茶色",
-    "meaning_fr": "marron",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#6D4C41"
+    "color": "#6D4C41",
+    "meaning": {
+      "fr": "marron",
+      "en": "brown"
+    }
   },
   {
     "id": "couleurs_008",
     "kana": "むらさき",
     "kanji": "紫",
-    "meaning_fr": "violet",
     "category": "couleurs_base",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#8E24AA"
+    "color": "#8E24AA",
+    "meaning": {
+      "fr": "violet",
+      "en": "purple"
+    }
   },
   {
     "id": "couleurs_009",
     "kana": "ピンク",
     "kanji": null,
-    "meaning_fr": "rose",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#EC407A"
+    "color": "#EC407A",
+    "meaning": {
+      "fr": "rose",
+      "en": "pink"
+    }
   },
   {
     "id": "couleurs_010",
     "kana": "オレンジ",
     "kanji": null,
-    "meaning_fr": "orange",
     "category": "couleurs_base",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": "#FB8C00"
+    "color": "#FB8C00",
+    "meaning": {
+      "fr": "orange",
+      "en": "orange"
+    }
   },
   {
     "id": "couleurs_011",
     "kana": "はいいろ",
     "kanji": "灰色",
-    "meaning_fr": "gris",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#9E9E9E"
+    "color": "#9E9E9E",
+    "meaning": {
+      "fr": "gris",
+      "en": "grey"
+    }
   },
   {
     "id": "couleurs_012",
     "kana": "きんいろ",
     "kanji": "金色",
-    "meaning_fr": "doré",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#D4AF37"
+    "color": "#D4AF37",
+    "meaning": {
+      "fr": "doré",
+      "en": "gold"
+    }
   },
   {
     "id": "couleurs_013",
     "kana": "ぎんいろ",
     "kanji": "銀色",
-    "meaning_fr": "argenté",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#C0C0C0"
+    "color": "#C0C0C0",
+    "meaning": {
+      "fr": "argenté",
+      "en": "silver"
+    }
   },
   {
     "id": "couleurs_014",
     "kana": "こんいろ",
     "kanji": "紺色",
-    "meaning_fr": "bleu marine",
     "category": "couleurs_avancees",
     "jlpt_level": "N3",
     "emoji": null,
-    "color": "#1A237E"
+    "color": "#1A237E",
+    "meaning": {
+      "fr": "bleu marine",
+      "en": "navy blue"
+    }
   },
   {
     "id": "couleurs_015",
     "kana": "みずいろ",
     "kanji": "水色",
-    "meaning_fr": "bleu ciel",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#81D4FA"
+    "color": "#81D4FA",
+    "meaning": {
+      "fr": "bleu ciel",
+      "en": "light blue"
+    }
   },
   {
     "id": "famille_001",
     "kana": "かぞく",
     "kanji": "家族",
-    "meaning_fr": "famille",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👪",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "famille",
+      "en": "family"
+    }
   },
   {
     "id": "famille_002",
     "kana": "ちち",
     "kanji": "父",
-    "meaning_fr": "père (le mien)",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👨",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "père (le mien)",
+      "en": "father (my own)"
+    }
   },
   {
     "id": "famille_003",
     "kana": "はは",
     "kanji": "母",
-    "meaning_fr": "mère (la mienne)",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👩",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mère (la mienne)",
+      "en": "mother (my own)"
+    }
   },
   {
     "id": "famille_004",
     "kana": "あに",
     "kanji": "兄",
-    "meaning_fr": "grand frère (le mien)",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "🧑",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "grand frère (le mien)",
+      "en": "older brother (my own)"
+    }
   },
   {
     "id": "famille_005",
     "kana": "あね",
     "kanji": "姉",
-    "meaning_fr": "grande sœur (la mienne)",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "🧑",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "grande sœur (la mienne)",
+      "en": "older sister (my own)"
+    }
   },
   {
     "id": "famille_006",
     "kana": "おとうと",
     "kanji": "弟",
-    "meaning_fr": "petit frère",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👦",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "petit frère",
+      "en": "younger brother"
+    }
   },
   {
     "id": "famille_007",
     "kana": "いもうと",
     "kanji": "妹",
-    "meaning_fr": "petite sœur",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👧",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "petite sœur",
+      "en": "younger sister"
+    }
   },
   {
     "id": "famille_008",
     "kana": "そふ",
     "kanji": "祖父",
-    "meaning_fr": "grand-père",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👴",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "grand-père",
+      "en": "grandfather"
+    }
   },
   {
     "id": "famille_009",
     "kana": "そぼ",
     "kanji": "祖母",
-    "meaning_fr": "grand-mère",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "grand-mère",
+      "en": "grandmother"
+    }
   },
   {
     "id": "famille_010",
     "kana": "むすこ",
     "kanji": "息子",
-    "meaning_fr": "fils",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": "👦",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "fils",
+      "en": "son"
+    }
   },
   {
     "id": "famille_011",
     "kana": "むすめ",
     "kanji": "娘",
-    "meaning_fr": "fille",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": "👧",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "fille",
+      "en": "daughter"
+    }
   },
   {
     "id": "famille_012",
     "kana": "おっと",
     "kanji": "夫",
-    "meaning_fr": "mari",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": "🤵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mari",
+      "en": "husband"
+    }
   },
   {
     "id": "famille_013",
     "kana": "つま",
     "kanji": "妻",
-    "meaning_fr": "épouse",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": "👰",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "épouse",
+      "en": "wife"
+    }
   },
   {
     "id": "famille_014",
     "kana": "こども",
     "kanji": "子供",
-    "meaning_fr": "enfant",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "🧒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "enfant",
+      "en": "child"
+    }
   },
   {
     "id": "famille_015",
     "kana": "あかちゃん",
     "kanji": "赤ちゃん",
-    "meaning_fr": "bébé",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": "👶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "bébé",
+      "en": "baby"
+    }
   },
   {
     "id": "vetements_001",
     "kana": "ふく",
     "kanji": "服",
-    "meaning_fr": "vêtement(s)",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👕",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vêtement(s)",
+      "en": "clothes"
+    }
   },
   {
     "id": "vetements_002",
     "kana": "シャツ",
     "kanji": null,
-    "meaning_fr": "chemise",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👔",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chemise",
+      "en": "shirt"
+    }
   },
   {
     "id": "vetements_003",
     "kana": "ティーシャツ",
     "kanji": null,
-    "meaning_fr": "T-shirt",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👕",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "T-shirt",
+      "en": "T-shirt"
+    }
   },
   {
     "id": "vetements_004",
     "kana": "ズボン",
     "kanji": null,
-    "meaning_fr": "pantalon",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👖",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pantalon",
+      "en": "trousers"
+    }
   },
   {
     "id": "vetements_005",
     "kana": "スカート",
     "kanji": null,
-    "meaning_fr": "jupe",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "jupe",
+      "en": "skirt"
+    }
   },
   {
     "id": "vetements_006",
     "kana": "ワンピース",
     "kanji": null,
-    "meaning_fr": "robe",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "👗",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "robe",
+      "en": "dress"
+    }
   },
   {
     "id": "vetements_007",
     "kana": "くつ",
     "kanji": "靴",
-    "meaning_fr": "chaussures",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👟",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chaussures",
+      "en": "shoes"
+    }
   },
   {
     "id": "vetements_008",
     "kana": "くつした",
     "kanji": "靴下",
-    "meaning_fr": "chaussettes",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "🧦",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chaussettes",
+      "en": "socks"
+    }
   },
   {
     "id": "vetements_009",
     "kana": "ぼうし",
     "kanji": "帽子",
-    "meaning_fr": "chapeau",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "🧢",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chapeau",
+      "en": "hat"
+    }
   },
   {
     "id": "vetements_010",
     "kana": "コート",
     "kanji": null,
-    "meaning_fr": "manteau",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "🧥",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "manteau",
+      "en": "coat"
+    }
   },
   {
     "id": "vetements_011",
     "kana": "セーター",
     "kanji": null,
-    "meaning_fr": "pull",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pull",
+      "en": "sweater"
+    }
   },
   {
     "id": "vetements_012",
     "kana": "てぶくろ",
     "kanji": "手袋",
-    "meaning_fr": "gants",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "🧤",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "gants",
+      "en": "gloves"
+    }
   },
   {
     "id": "vetements_013",
     "kana": "マフラー",
     "kanji": null,
-    "meaning_fr": "écharpe",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "🧣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "écharpe",
+      "en": "scarf"
+    }
   },
   {
     "id": "vetements_014",
     "kana": "めがね",
     "kanji": "眼鏡",
-    "meaning_fr": "lunettes",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👓",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lunettes",
+      "en": "glasses"
+    }
   },
   {
     "id": "vetements_015",
     "kana": "かばん",
     "kanji": "鞄",
-    "meaning_fr": "sac",
     "category": "vetements",
     "jlpt_level": "N5",
     "emoji": "👜",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "sac",
+      "en": "bag"
+    }
   },
   {
     "id": "meteo_001",
     "kana": "てんき",
     "kanji": "天気",
-    "meaning_fr": "météo / temps qu'il fait",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "🌤️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "météo / temps qu'il fait",
+      "en": "weather"
+    }
   },
   {
     "id": "meteo_002",
     "kana": "はれ",
     "kanji": "晴れ",
-    "meaning_fr": "beau temps / ensoleillé",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "☀️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "beau temps / ensoleillé",
+      "en": "clear, sunny"
+    }
   },
   {
     "id": "meteo_003",
     "kana": "くもり",
     "kanji": "曇り",
-    "meaning_fr": "nuageux",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "☁️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "nuageux",
+      "en": "cloudy"
+    }
   },
   {
     "id": "meteo_004",
     "kana": "あめ",
     "kanji": "雨",
-    "meaning_fr": "pluie",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "🌧️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pluie",
+      "en": "rain"
+    }
   },
   {
     "id": "meteo_005",
     "kana": "ゆき",
     "kanji": "雪",
-    "meaning_fr": "neige",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "❄️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "neige",
+      "en": "snow"
+    }
   },
   {
     "id": "meteo_006",
     "kana": "かぜ",
     "kanji": "風",
-    "meaning_fr": "vent",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "🌬️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vent",
+      "en": "wind"
+    }
   },
   {
     "id": "meteo_007",
     "kana": "たいふう",
     "kanji": "台風",
-    "meaning_fr": "typhon",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "🌀",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "typhon",
+      "en": "typhoon"
+    }
   },
   {
     "id": "meteo_008",
     "kana": "かみなり",
     "kanji": "雷",
-    "meaning_fr": "tonnerre / foudre",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "⚡",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "tonnerre / foudre",
+      "en": "thunder, lightning"
+    }
   },
   {
     "id": "meteo_009",
     "kana": "きり",
     "kanji": "霧",
-    "meaning_fr": "brouillard",
     "category": "meteo",
     "jlpt_level": "N3",
     "emoji": "🌫️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "brouillard",
+      "en": "fog"
+    }
   },
   {
     "id": "meteo_010",
     "kana": "にじ",
     "kanji": "虹",
-    "meaning_fr": "arc-en-ciel",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "🌈",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "arc-en-ciel",
+      "en": "rainbow"
+    }
   },
   {
     "id": "meteo_011",
     "kana": "あつい",
     "kanji": "暑い",
-    "meaning_fr": "il fait chaud",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "🥵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "il fait chaud",
+      "en": "it's hot"
+    }
   },
   {
     "id": "meteo_012",
     "kana": "さむい",
     "kanji": "寒い",
-    "meaning_fr": "il fait froid",
     "category": "meteo",
     "jlpt_level": "N5",
     "emoji": "🥶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "il fait froid",
+      "en": "it's cold"
+    }
   },
   {
     "id": "meteo_013",
     "kana": "すずしい",
     "kanji": "涼しい",
-    "meaning_fr": "il fait frais",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "🍃",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "il fait frais",
+      "en": "it's cool"
+    }
   },
   {
     "id": "meteo_014",
     "kana": "あたたかい",
     "kanji": "暖かい",
-    "meaning_fr": "il fait doux",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "🌤️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "il fait doux",
+      "en": "it's mild"
+    }
   },
   {
     "id": "meteo_015",
     "kana": "きおん",
     "kanji": "気温",
-    "meaning_fr": "température",
     "category": "meteo",
     "jlpt_level": "N4",
     "emoji": "🌡️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "température",
+      "en": "temperature"
+    }
   },
   {
     "id": "chiffres_001",
     "kana": "ゼロ",
     "kanji": null,
-    "meaning_fr": "zéro",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "0️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "zéro",
+      "en": "zero"
+    }
   },
   {
     "id": "chiffres_002",
     "kana": "いち",
     "kanji": "一",
-    "meaning_fr": "un",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "1️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "un",
+      "en": "one"
+    }
   },
   {
     "id": "chiffres_003",
     "kana": "に",
     "kanji": "二",
-    "meaning_fr": "deux",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "2️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "deux",
+      "en": "two"
+    }
   },
   {
     "id": "chiffres_004",
     "kana": "さん",
     "kanji": "三",
-    "meaning_fr": "trois",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "3️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "trois",
+      "en": "three"
+    }
   },
   {
     "id": "chiffres_005",
     "kana": "よん",
     "kanji": "四",
-    "meaning_fr": "quatre",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "4️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "quatre",
+      "en": "four"
+    }
   },
   {
     "id": "chiffres_006",
     "kana": "ご",
     "kanji": "五",
-    "meaning_fr": "cinq",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "5️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cinq",
+      "en": "five"
+    }
   },
   {
     "id": "chiffres_007",
     "kana": "ろく",
     "kanji": "六",
-    "meaning_fr": "six",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "6️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "six",
+      "en": "six"
+    }
   },
   {
     "id": "chiffres_008",
     "kana": "なな",
     "kanji": "七",
-    "meaning_fr": "sept",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "7️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "sept",
+      "en": "seven"
+    }
   },
   {
     "id": "chiffres_009",
     "kana": "はち",
     "kanji": "八",
-    "meaning_fr": "huit",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "8️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "huit",
+      "en": "eight"
+    }
   },
   {
     "id": "chiffres_010",
     "kana": "きゅう",
     "kanji": "九",
-    "meaning_fr": "neuf",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "9️⃣",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "neuf",
+      "en": "nine"
+    }
   },
   {
     "id": "chiffres_011",
     "kana": "じゅう",
     "kanji": "十",
-    "meaning_fr": "dix",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "🔟",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dix",
+      "en": "ten"
+    }
   },
   {
     "id": "chiffres_012",
     "kana": "じゅういち",
     "kanji": "十一",
-    "meaning_fr": "onze",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "onze",
+      "en": "eleven"
+    }
   },
   {
     "id": "chiffres_013",
     "kana": "にじゅう",
     "kanji": "二十",
-    "meaning_fr": "vingt",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vingt",
+      "en": "twenty"
+    }
   },
   {
     "id": "chiffres_014",
     "kana": "ひゃく",
     "kanji": "百",
-    "meaning_fr": "cent",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": "💯",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cent",
+      "en": "one hundred"
+    }
   },
   {
     "id": "chiffres_015",
     "kana": "せん",
     "kanji": "千",
-    "meaning_fr": "mille",
     "category": "chiffres",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mille",
+      "en": "one thousand"
+    }
   },
   {
     "id": "metiers_001",
     "kana": "がくせい",
     "kanji": "学生",
-    "meaning_fr": "étudiant(e)",
     "category": "metiers",
     "jlpt_level": "N5",
     "emoji": "🎓",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "étudiant(e)",
+      "en": "student"
+    }
   },
   {
     "id": "metiers_002",
     "kana": "かいしゃいん",
     "kanji": "会社員",
-    "meaning_fr": "employé(e) de bureau",
     "category": "metiers",
     "jlpt_level": "N5",
     "emoji": "💼",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "employé(e) de bureau",
+      "en": "office worker"
+    }
   },
   {
     "id": "metiers_003",
     "kana": "エンジニア",
     "kanji": null,
-    "meaning_fr": "ingénieur(e)",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🧑‍💻",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ingénieur(e)",
+      "en": "engineer"
+    }
   },
   {
     "id": "metiers_004",
     "kana": "かんごし",
     "kanji": "看護師",
-    "meaning_fr": "infirmier / infirmière",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🧑‍⚕️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "infirmier / infirmière",
+      "en": "nurse"
+    }
   },
   {
     "id": "metiers_005",
     "kana": "いしゃ",
     "kanji": "医者",
-    "meaning_fr": "médecin",
     "category": "metiers",
     "jlpt_level": "N5",
     "emoji": "👨‍⚕️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "médecin",
+      "en": "doctor"
+    }
   },
   {
     "id": "metiers_006",
     "kana": "せんせい",
     "kanji": "先生",
-    "meaning_fr": "professeur / enseignant(e)",
     "category": "metiers",
     "jlpt_level": "N5",
     "emoji": "🧑‍🏫",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "professeur / enseignant(e)",
+      "en": "teacher"
+    }
   },
   {
     "id": "metiers_007",
     "kana": "けいさつかん",
     "kanji": "警察官",
-    "meaning_fr": "policier / policière",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "👮",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "policier / policière",
+      "en": "police officer"
+    }
   },
   {
     "id": "metiers_008",
     "kana": "しょうぼうし",
     "kanji": "消防士",
-    "meaning_fr": "pompier",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "👨‍🚒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pompier",
+      "en": "firefighter"
+    }
   },
   {
     "id": "metiers_009",
     "kana": "りょうりにん",
     "kanji": "料理人",
-    "meaning_fr": "cuisinier / cuisinière",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "👨‍🍳",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cuisinier / cuisinière",
+      "en": "cook, chef"
+    }
   },
   {
     "id": "metiers_010",
     "kana": "のうか",
     "kanji": "農家",
-    "meaning_fr": "agriculteur / agricultrice",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "👨‍🌾",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "agriculteur / agricultrice",
+      "en": "farmer"
+    }
   },
   {
     "id": "metiers_011",
     "kana": "べんごし",
     "kanji": "弁護士",
-    "meaning_fr": "avocat(e)",
     "category": "metiers",
     "jlpt_level": "N3",
     "emoji": "⚖️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "avocat(e)",
+      "en": "lawyer"
+    }
   },
   {
     "id": "metiers_012",
     "kana": "こうむいん",
     "kanji": "公務員",
-    "meaning_fr": "fonctionnaire",
     "category": "metiers",
     "jlpt_level": "N3",
     "emoji": "🏛️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "fonctionnaire",
+      "en": "civil servant"
+    }
   },
   {
     "id": "metiers_013",
     "kana": "てんいん",
     "kanji": "店員",
-    "meaning_fr": "vendeur / employé(e) de magasin",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🛍️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vendeur / employé(e) de magasin",
+      "en": "shop assistant"
+    }
   },
   {
     "id": "metiers_014",
     "kana": "うんてんしゅ",
     "kanji": "運転手",
-    "meaning_fr": "chauffeur / chauffeuse",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🚕",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chauffeur / chauffeuse",
+      "en": "driver"
+    }
   },
   {
     "id": "metiers_015",
     "kana": "しゅふ",
     "kanji": "主婦",
-    "meaning_fr": "personne au foyer",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🏠",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "personne au foyer",
+      "en": "homemaker"
+    }
   },
   {
     "id": "calendrier_001",
     "kana": "げつようび",
     "kanji": "月曜日",
-    "meaning_fr": "lundi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lundi",
+      "en": "Monday"
+    }
   },
   {
     "id": "calendrier_002",
     "kana": "かようび",
     "kanji": "火曜日",
-    "meaning_fr": "mardi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mardi",
+      "en": "Tuesday"
+    }
   },
   {
     "id": "calendrier_003",
     "kana": "すいようび",
     "kanji": "水曜日",
-    "meaning_fr": "mercredi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mercredi",
+      "en": "Wednesday"
+    }
   },
   {
     "id": "calendrier_004",
     "kana": "もくようび",
     "kanji": "木曜日",
-    "meaning_fr": "jeudi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "jeudi",
+      "en": "Thursday"
+    }
   },
   {
     "id": "calendrier_005",
     "kana": "きんようび",
     "kanji": "金曜日",
-    "meaning_fr": "vendredi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vendredi",
+      "en": "Friday"
+    }
   },
   {
     "id": "calendrier_006",
     "kana": "どようび",
     "kanji": "土曜日",
-    "meaning_fr": "samedi",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "samedi",
+      "en": "Saturday"
+    }
   },
   {
     "id": "calendrier_007",
     "kana": "にちようび",
     "kanji": "日曜日",
-    "meaning_fr": "dimanche",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dimanche",
+      "en": "Sunday"
+    }
   },
   {
     "id": "calendrier_008",
     "kana": "いちがつ",
     "kanji": "一月",
-    "meaning_fr": "janvier",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "janvier",
+      "en": "January"
+    }
   },
   {
     "id": "calendrier_009",
     "kana": "にがつ",
     "kanji": "二月",
-    "meaning_fr": "février",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "février",
+      "en": "February"
+    }
   },
   {
     "id": "calendrier_010",
     "kana": "さんがつ",
     "kanji": "三月",
-    "meaning_fr": "mars",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mars",
+      "en": "March"
+    }
   },
   {
     "id": "calendrier_011",
     "kana": "しがつ",
     "kanji": "四月",
-    "meaning_fr": "avril",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "avril",
+      "en": "April"
+    }
   },
   {
     "id": "calendrier_012",
     "kana": "ごがつ",
     "kanji": "五月",
-    "meaning_fr": "mai",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mai",
+      "en": "May"
+    }
   },
   {
     "id": "calendrier_013",
     "kana": "ろくがつ",
     "kanji": "六月",
-    "meaning_fr": "juin",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "juin",
+      "en": "June"
+    }
   },
   {
     "id": "calendrier_014",
     "kana": "しちがつ",
     "kanji": "七月",
-    "meaning_fr": "juillet",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "juillet",
+      "en": "July"
+    }
   },
   {
     "id": "calendrier_015",
     "kana": "はちがつ",
     "kanji": "八月",
-    "meaning_fr": "août",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "août",
+      "en": "August"
+    }
   },
   {
     "id": "calendrier_016",
     "kana": "くがつ",
     "kanji": "九月",
-    "meaning_fr": "septembre",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "septembre",
+      "en": "September"
+    }
   },
   {
     "id": "calendrier_017",
     "kana": "じゅうがつ",
     "kanji": "十月",
-    "meaning_fr": "octobre",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "octobre",
+      "en": "October"
+    }
   },
   {
     "id": "calendrier_018",
     "kana": "じゅういちがつ",
     "kanji": "十一月",
-    "meaning_fr": "novembre",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "novembre",
+      "en": "November"
+    }
   },
   {
     "id": "calendrier_019",
     "kana": "じゅうにがつ",
     "kanji": "十二月",
-    "meaning_fr": "décembre",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "décembre",
+      "en": "December"
+    }
   },
   {
     "id": "calendrier_020",
     "kana": "はる",
     "kanji": "春",
-    "meaning_fr": "printemps",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": "🌸",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "printemps",
+      "en": "spring"
+    }
   },
   {
     "id": "calendrier_021",
     "kana": "なつ",
     "kanji": "夏",
-    "meaning_fr": "été",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": "☀️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "été",
+      "en": "summer"
+    }
   },
   {
     "id": "calendrier_022",
     "kana": "あき",
     "kanji": "秋",
-    "meaning_fr": "automne",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": "🍁",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "automne",
+      "en": "autumn"
+    }
   },
   {
     "id": "calendrier_023",
     "kana": "ふゆ",
     "kanji": "冬",
-    "meaning_fr": "hiver",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": "❄️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "hiver",
+      "en": "winter"
+    }
   },
   {
     "id": "verbes_001",
     "kana": "たべる",
     "kanji": "食べる",
-    "meaning_fr": "manger",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🍽️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "manger",
+      "en": "to eat"
+    }
   },
   {
     "id": "verbes_002",
     "kana": "のむ",
     "kanji": "飲む",
-    "meaning_fr": "boire",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🥤",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "boire",
+      "en": "to drink"
+    }
   },
   {
     "id": "verbes_003",
     "kana": "いく",
     "kanji": "行く",
-    "meaning_fr": "aller",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🚶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "aller",
+      "en": "to go"
+    }
   },
   {
     "id": "verbes_004",
     "kana": "くる",
     "kanji": "来る",
-    "meaning_fr": "venir",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🙋",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "venir",
+      "en": "to come"
+    }
   },
   {
     "id": "verbes_005",
     "kana": "かえる",
     "kanji": "帰る",
-    "meaning_fr": "rentrer",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🏠",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "rentrer",
+      "en": "to return home"
+    }
   },
   {
     "id": "verbes_006",
     "kana": "みる",
     "kanji": "見る",
-    "meaning_fr": "voir / regarder",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "👀",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "voir / regarder",
+      "en": "to see, to watch"
+    }
   },
   {
     "id": "verbes_007",
     "kana": "きく",
     "kanji": "聞く",
-    "meaning_fr": "écouter / entendre",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "👂",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "écouter / entendre",
+      "en": "to listen, to hear"
+    }
   },
   {
     "id": "verbes_008",
     "kana": "はなす",
     "kanji": "話す",
-    "meaning_fr": "parler",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "💬",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "parler",
+      "en": "to speak"
+    }
   },
   {
     "id": "verbes_009",
     "kana": "よむ",
     "kanji": "読む",
-    "meaning_fr": "lire",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "📖",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lire",
+      "en": "to read"
+    }
   },
   {
     "id": "verbes_010",
     "kana": "かく",
     "kanji": "書く",
-    "meaning_fr": "écrire",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "✍️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "écrire",
+      "en": "to write"
+    }
   },
   {
     "id": "verbes_011",
     "kana": "する",
     "kanji": null,
-    "meaning_fr": "faire",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "faire",
+      "en": "to do"
+    }
   },
   {
     "id": "verbes_012",
     "kana": "ねる",
     "kanji": "寝る",
-    "meaning_fr": "dormir",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "😴",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dormir",
+      "en": "to sleep"
+    }
   },
   {
     "id": "verbes_013",
     "kana": "おきる",
     "kanji": "起きる",
-    "meaning_fr": "se lever / se réveiller",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "⏰",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "se lever / se réveiller",
+      "en": "to get up, to wake up"
+    }
   },
   {
     "id": "verbes_014",
     "kana": "はたらく",
     "kanji": "働く",
-    "meaning_fr": "travailler",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "💼",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "travailler",
+      "en": "to work"
+    }
   },
   {
     "id": "verbes_015",
     "kana": "かう",
     "kanji": "買う",
-    "meaning_fr": "acheter",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🛒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "acheter",
+      "en": "to buy"
+    }
   },
   {
     "id": "verbes_016",
     "kana": "うる",
     "kanji": "売る",
-    "meaning_fr": "vendre",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🏷️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "vendre",
+      "en": "to sell"
+    }
   },
   {
     "id": "verbes_017",
     "kana": "まつ",
     "kanji": "待つ",
-    "meaning_fr": "attendre",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "⏳",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "attendre",
+      "en": "to wait"
+    }
   },
   {
     "id": "verbes_018",
     "kana": "あう",
     "kanji": "会う",
-    "meaning_fr": "rencontrer",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "🤝",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "rencontrer",
+      "en": "to meet"
+    }
   },
   {
     "id": "verbes_019",
     "kana": "わかる",
     "kanji": "分かる",
-    "meaning_fr": "comprendre",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": "💡",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "comprendre",
+      "en": "to understand"
+    }
   },
   {
     "id": "verbes_020",
     "kana": "できる",
     "kanji": null,
-    "meaning_fr": "pouvoir / être capable de",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pouvoir / être capable de",
+      "en": "can, to be able to"
+    }
   },
   {
     "id": "animaux_016",
     "kana": "さる",
     "kanji": "猿",
-    "meaning_fr": "singe",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐒",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "singe",
+      "en": "monkey"
+    }
   },
   {
     "id": "animaux_017",
     "kana": "ひつじ",
     "kanji": "羊",
-    "meaning_fr": "mouton",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐑",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "mouton",
+      "en": "sheep"
+    }
   },
   {
     "id": "animaux_018",
     "kana": "やぎ",
     "kanji": "山羊",
-    "meaning_fr": "chèvre",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐐",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "chèvre",
+      "en": "goat"
+    }
   },
   {
     "id": "animaux_019",
     "kana": "かえる",
     "kanji": "蛙",
-    "meaning_fr": "grenouille",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐸",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "grenouille",
+      "en": "frog"
+    }
   },
   {
     "id": "animaux_020",
     "kana": "へび",
     "kanji": "蛇",
-    "meaning_fr": "serpent",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🐍",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "serpent",
+      "en": "snake"
+    }
   },
   {
     "id": "animaux_021",
     "kana": "ちょう",
     "kanji": "蝶",
-    "meaning_fr": "papillon",
     "category": "animaux",
     "jlpt_level": "N5",
     "emoji": "🦋",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "papillon",
+      "en": "butterfly"
+    }
   },
   {
     "id": "transports_016",
     "kana": "ヘリコプター",
     "kanji": null,
-    "meaning_fr": "hélicoptère",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚁",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "hélicoptère",
+      "en": "helicopter"
+    }
   },
   {
     "id": "transports_017",
     "kana": "スクーター",
     "kanji": null,
-    "meaning_fr": "scooter",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🛵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "scooter",
+      "en": "scooter"
+    }
   },
   {
     "id": "transports_018",
     "kana": "ボート",
     "kanji": null,
-    "meaning_fr": "canot, petit bateau",
     "category": "transports",
     "jlpt_level": "N5",
     "emoji": "🛶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "canot, petit bateau",
+      "en": "small boat, dinghy"
+    }
   },
   {
     "id": "transports_019",
     "kana": "ケーブルカー",
     "kanji": null,
-    "meaning_fr": "téléphérique, funiculaire",
     "category": "transports",
     "jlpt_level": "N4",
     "emoji": "🚡",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "téléphérique, funiculaire",
+      "en": "cable car, funicular"
+    }
   },
   {
     "id": "nourriture_016",
     "kana": "パスタ",
     "kanji": null,
-    "meaning_fr": "pâtes",
     "category": "nourriture",
     "jlpt_level": "N4",
     "emoji": "🍝",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pâtes",
+      "en": "pasta"
+    }
   },
   {
     "id": "nourriture_017",
     "kana": "サラダ",
     "kanji": null,
-    "meaning_fr": "salade",
     "category": "nourriture",
     "jlpt_level": "N4",
     "emoji": "🥗",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "salade",
+      "en": "salad"
+    }
   },
   {
     "id": "nourriture_018",
     "kana": "スープ",
     "kanji": null,
-    "meaning_fr": "soupe",
     "category": "nourriture",
     "jlpt_level": "N4",
     "emoji": "🍲",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "soupe",
+      "en": "soup"
+    }
   },
   {
     "id": "nourriture_019",
     "kana": "チーズ",
     "kanji": null,
-    "meaning_fr": "fromage",
     "category": "nourriture",
     "jlpt_level": "N4",
     "emoji": "🧀",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "fromage",
+      "en": "cheese"
+    }
   },
   {
     "id": "nourriture_020",
     "kana": "りんご",
     "kanji": "林檎",
-    "meaning_fr": "pomme",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍎",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pomme",
+      "en": "apple"
+    }
   },
   {
     "id": "nourriture_021",
     "kana": "バナナ",
     "kanji": null,
-    "meaning_fr": "banane",
     "category": "nourriture",
     "jlpt_level": "N5",
     "emoji": "🍌",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "banane",
+      "en": "banana"
+    }
   },
   {
     "id": "couleurs_016",
     "kana": "きみどり",
     "kanji": "黄緑",
-    "meaning_fr": "vert clair (jaune-vert)",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#9CCC65"
+    "color": "#9CCC65",
+    "meaning": {
+      "fr": "vert clair (jaune-vert)",
+      "en": "light green (yellow-green)"
+    }
   },
   {
     "id": "couleurs_017",
     "kana": "ベージュ",
     "kanji": null,
-    "meaning_fr": "beige",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#E8DCC8"
+    "color": "#E8DCC8",
+    "meaning": {
+      "fr": "beige",
+      "en": "beige"
+    }
   },
   {
     "id": "couleurs_018",
     "kana": "くりーむいろ",
     "kanji": "クリーム色",
-    "meaning_fr": "crème",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#FFF6D5"
+    "color": "#FFF6D5",
+    "meaning": {
+      "fr": "crème",
+      "en": "cream"
+    }
   },
   {
     "id": "couleurs_019",
     "kana": "ももいろ",
     "kanji": "桃色",
-    "meaning_fr": "rose pêche",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#FFB7C5"
+    "color": "#FFB7C5",
+    "meaning": {
+      "fr": "rose pêche",
+      "en": "peach pink"
+    }
   },
   {
     "id": "couleurs_020",
     "kana": "そらいろ",
     "kanji": "空色",
-    "meaning_fr": "bleu ciel",
     "category": "couleurs_avancees",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": "#7EC8E3"
+    "color": "#7EC8E3",
+    "meaning": {
+      "fr": "bleu ciel",
+      "en": "sky blue"
+    }
   },
   {
     "id": "famille_016",
     "kana": "りょうしん",
     "kanji": "両親",
-    "meaning_fr": "parents",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "parents",
+      "en": "parents"
+    }
   },
   {
     "id": "famille_017",
     "kana": "きょうだい",
     "kanji": "兄弟",
-    "meaning_fr": "frères et sœurs",
     "category": "famille",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "frères et sœurs",
+      "en": "siblings"
+    }
   },
   {
     "id": "famille_018",
     "kana": "おじ",
     "kanji": "叔父",
-    "meaning_fr": "oncle",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "oncle",
+      "en": "uncle"
+    }
   },
   {
     "id": "famille_019",
     "kana": "おば",
     "kanji": "叔母",
-    "meaning_fr": "tante",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "tante",
+      "en": "aunt"
+    }
   },
   {
     "id": "famille_020",
     "kana": "まご",
     "kanji": "孫",
-    "meaning_fr": "petit-enfant",
     "category": "famille",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "petit-enfant",
+      "en": "grandchild"
+    }
   },
   {
     "id": "corps_001",
     "kana": "め",
     "kanji": "目",
-    "meaning_fr": "œil",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "👁️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "œil",
+      "en": "eye"
+    }
   },
   {
     "id": "corps_002",
     "kana": "みみ",
     "kanji": "耳",
-    "meaning_fr": "oreille",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "👂",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "oreille",
+      "en": "ear"
+    }
   },
   {
     "id": "corps_003",
     "kana": "くち",
     "kanji": "口",
-    "meaning_fr": "bouche",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "👄",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "bouche",
+      "en": "mouth"
+    }
   },
   {
     "id": "corps_004",
     "kana": "はな",
     "kanji": "鼻",
-    "meaning_fr": "nez",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "👃",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "nez",
+      "en": "nose"
+    }
   },
   {
     "id": "corps_005",
     "kana": "て",
     "kanji": "手",
-    "meaning_fr": "main",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "✋",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "main",
+      "en": "hand"
+    }
   },
   {
     "id": "corps_006",
     "kana": "あし",
     "kanji": "足",
-    "meaning_fr": "pied, jambe",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "🦶",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pied, jambe",
+      "en": "foot, leg"
+    }
   },
   {
     "id": "corps_007",
     "kana": "あたま",
     "kanji": "頭",
-    "meaning_fr": "tête",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "🧠",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "tête",
+      "en": "head"
+    }
   },
   {
     "id": "corps_008",
     "kana": "からだ",
     "kanji": "体",
-    "meaning_fr": "corps",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "🧍",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "corps",
+      "en": "body"
+    }
   },
   {
     "id": "corps_009",
     "kana": "おなか",
     "kanji": "お腹",
-    "meaning_fr": "ventre",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ventre",
+      "en": "belly"
+    }
   },
   {
     "id": "corps_010",
     "kana": "は",
     "kanji": "歯",
-    "meaning_fr": "dent",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": "🦷",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dent",
+      "en": "tooth"
+    }
   },
   {
     "id": "corps_011",
     "kana": "かみ",
     "kanji": "髪",
-    "meaning_fr": "cheveux",
     "category": "corps",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cheveux",
+      "en": "hair"
+    }
   },
   {
     "id": "corps_012",
     "kana": "くび",
     "kanji": "首",
-    "meaning_fr": "cou",
     "category": "corps",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cou",
+      "en": "neck"
+    }
   },
   {
     "id": "corps_013",
     "kana": "かた",
     "kanji": "肩",
-    "meaning_fr": "épaule",
     "category": "corps",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "épaule",
+      "en": "shoulder"
+    }
   },
   {
     "id": "corps_014",
     "kana": "せなか",
     "kanji": "背中",
-    "meaning_fr": "dos",
     "category": "corps",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dos",
+      "en": "back"
+    }
   },
   {
     "id": "corps_015",
     "kana": "ゆび",
     "kanji": "指",
-    "meaning_fr": "doigt",
     "category": "corps",
     "jlpt_level": "N4",
     "emoji": "☝️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "doigt",
+      "en": "finger"
+    }
   },
   {
     "id": "vetements_016",
     "kana": "パジャマ",
     "kanji": null,
-    "meaning_fr": "pyjama",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pyjama",
+      "en": "pyjamas"
+    }
   },
   {
     "id": "vetements_017",
     "kana": "ネクタイ",
     "kanji": null,
-    "meaning_fr": "cravate",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "👔",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cravate",
+      "en": "tie"
+    }
   },
   {
     "id": "vetements_018",
     "kana": "ベルト",
     "kanji": null,
-    "meaning_fr": "ceinture",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "ceinture",
+      "en": "belt"
+    }
   },
   {
     "id": "vetements_019",
     "kana": "サングラス",
     "kanji": null,
-    "meaning_fr": "lunettes de soleil",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "🕶️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lunettes de soleil",
+      "en": "sunglasses"
+    }
   },
   {
     "id": "vetements_020",
     "kana": "ジャケット",
     "kanji": null,
-    "meaning_fr": "veste",
     "category": "vetements",
     "jlpt_level": "N4",
     "emoji": "🧥",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "veste",
+      "en": "jacket"
+    }
   },
   {
     "id": "meteo_016",
     "kana": "つゆ",
     "kanji": "梅雨",
-    "meaning_fr": "saison des pluies",
     "category": "meteo",
     "jlpt_level": "N3",
     "emoji": "☔",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "saison des pluies",
+      "en": "rainy season"
+    }
   },
   {
     "id": "meteo_017",
     "kana": "しつど",
     "kanji": "湿度",
-    "meaning_fr": "humidité",
     "category": "meteo",
     "jlpt_level": "N3",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "humidité",
+      "en": "humidity"
+    }
   },
   {
     "id": "meteo_018",
     "kana": "むしあつい",
     "kanji": "蒸し暑い",
-    "meaning_fr": "lourd et humide (chaud)",
     "category": "meteo",
     "jlpt_level": "N3",
     "emoji": "🥵",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "lourd et humide (chaud)",
+      "en": "hot and humid"
+    }
   },
   {
     "id": "meteo_019",
     "kana": "かんそう",
     "kanji": "乾燥",
-    "meaning_fr": "sécheresse, air sec",
     "category": "meteo",
     "jlpt_level": "N3",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "sécheresse, air sec",
+      "en": "dryness, dry air"
+    }
   },
   {
     "id": "chiffres_016",
     "kana": "さんじゅう",
     "kanji": "三十",
-    "meaning_fr": "trente",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "trente",
+      "en": "thirty"
+    }
   },
   {
     "id": "chiffres_017",
     "kana": "よんじゅう",
     "kanji": "四十",
-    "meaning_fr": "quarante",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "quarante",
+      "en": "forty"
+    }
   },
   {
     "id": "chiffres_018",
     "kana": "ごじゅう",
     "kanji": "五十",
-    "meaning_fr": "cinquante",
     "category": "chiffres",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "cinquante",
+      "en": "fifty"
+    }
   },
   {
     "id": "chiffres_019",
     "kana": "にひゃく",
     "kanji": "二百",
-    "meaning_fr": "deux cents",
     "category": "chiffres",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "deux cents",
+      "en": "two hundred"
+    }
   },
   {
     "id": "chiffres_020",
     "kana": "いちまん",
     "kanji": "一万",
-    "meaning_fr": "dix mille",
     "category": "chiffres",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dix mille",
+      "en": "ten thousand"
+    }
   },
   {
     "id": "metiers_016",
     "kana": "パイロット",
     "kanji": null,
-    "meaning_fr": "pilote",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "✈️",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "pilote",
+      "en": "pilot"
+    }
   },
   {
     "id": "metiers_017",
     "kana": "きしゃ",
     "kanji": "記者",
-    "meaning_fr": "journaliste",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "📰",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "journaliste",
+      "en": "journalist"
+    }
   },
   {
     "id": "metiers_018",
     "kana": "びようし",
     "kanji": "美容師",
-    "meaning_fr": "coiffeur, coiffeuse",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "💇",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "coiffeur, coiffeuse",
+      "en": "hairdresser"
+    }
   },
   {
     "id": "metiers_019",
     "kana": "けんちくか",
     "kanji": "建築家",
-    "meaning_fr": "architecte",
     "category": "metiers",
     "jlpt_level": "N3",
     "emoji": "📐",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "architecte",
+      "en": "architect"
+    }
   },
   {
     "id": "metiers_020",
     "kana": "がか",
     "kanji": "画家",
-    "meaning_fr": "peintre, artiste",
     "category": "metiers",
     "jlpt_level": "N4",
     "emoji": "🎨",
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "peintre, artiste",
+      "en": "painter, artist"
+    }
   },
   {
     "id": "calendrier_024",
     "kana": "きょう",
     "kanji": "今日",
-    "meaning_fr": "aujourd'hui",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "aujourd'hui",
+      "en": "today"
+    }
   },
   {
     "id": "calendrier_025",
     "kana": "あした",
     "kanji": "明日",
-    "meaning_fr": "demain",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "demain",
+      "en": "tomorrow"
+    }
   },
   {
     "id": "calendrier_026",
     "kana": "きのう",
     "kanji": "昨日",
-    "meaning_fr": "hier",
     "category": "calendrier",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "hier",
+      "en": "yesterday"
+    }
   },
   {
     "id": "calendrier_027",
     "kana": "あさって",
     "kanji": "明後日",
-    "meaning_fr": "après-demain",
     "category": "calendrier",
     "jlpt_level": "N4",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "après-demain",
+      "en": "the day after tomorrow"
+    }
   },
   {
     "id": "verbes_021",
     "kana": "あそぶ",
     "kanji": "遊ぶ",
-    "meaning_fr": "jouer",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "jouer",
+      "en": "to play"
+    }
   },
   {
     "id": "verbes_022",
     "kana": "あるく",
     "kanji": "歩く",
-    "meaning_fr": "marcher",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "marcher",
+      "en": "to walk"
+    }
   },
   {
     "id": "verbes_023",
     "kana": "はしる",
     "kanji": "走る",
-    "meaning_fr": "courir",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "courir",
+      "en": "to run"
+    }
   },
   {
     "id": "verbes_024",
     "kana": "おしえる",
     "kanji": "教える",
-    "meaning_fr": "enseigner",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "enseigner",
+      "en": "to teach"
+    }
   },
   {
     "id": "verbes_025",
     "kana": "ならう",
     "kanji": "習う",
-    "meaning_fr": "apprendre",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "apprendre",
+      "en": "to learn"
+    }
   },
   {
     "id": "verbes_026",
     "kana": "つかう",
     "kanji": "使う",
-    "meaning_fr": "utiliser",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "utiliser",
+      "en": "to use"
+    }
   },
   {
     "id": "verbes_027",
     "kana": "おもう",
     "kanji": "思う",
-    "meaning_fr": "penser",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "penser",
+      "en": "to think"
+    }
   },
   {
     "id": "verbes_028",
     "kana": "いう",
     "kanji": "言う",
-    "meaning_fr": "dire",
     "category": "verbes",
     "jlpt_level": "N5",
     "emoji": null,
-    "color": null
+    "color": null,
+    "meaning": {
+      "fr": "dire",
+      "en": "to say"
+    }
   }
 ]

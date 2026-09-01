@@ -51,26 +51,39 @@ export async function recordSession(wordsCorrect: number): Promise<Stats> {
   return next;
 }
 
-const MILESTONES: { min: number; text: string }[] = [
-  { min: 0, text: 'Chaque mot compte, continue comme ça !' },
-  { min: 100, text: 'L’équivalent d’une page de cahier bien remplie.' },
-  { min: 1000, text: 'Autant de mots qu’un article de blog costaud.' },
-  { min: 5000, text: 'L’équivalent d’une longue nouvelle.' },
-  { min: 15000, text: 'Autant qu’un rapport de fin d’année.' },
-  { min: 30000, text: 'Tu approches la longueur d’un roman court.' },
-  { min: 50000, text: '50 000 mots : le seuil officiel d’un roman (merci NaNoWriMo) !' },
-  { min: 100000, text: 'Autant de mots qu’un roman bien épais.' },
-  { min: 250000, text: 'L’équivalent de plusieurs romans mis bout à bout.' },
-  { min: 500000, text: 'Tu as dépassé la trilogie du Seigneur des Anneaux en mots tapés !' },
+/** Keys into translations.milestones, so the comparison follows the interface language. */
+export type MilestoneKey =
+  | 'start'
+  | 'page'
+  | 'article'
+  | 'novella'
+  | 'report'
+  | 'shortNovel'
+  | 'novel'
+  | 'thickNovel'
+  | 'severalNovels'
+  | 'trilogy';
+
+const MILESTONES: { min: number; key: MilestoneKey }[] = [
+  { min: 0, key: 'start' },
+  { min: 100, key: 'page' },
+  { min: 1000, key: 'article' },
+  { min: 5000, key: 'novella' },
+  { min: 15000, key: 'report' },
+  { min: 30000, key: 'shortNovel' },
+  { min: 50000, key: 'novel' },
+  { min: 100000, key: 'thickNovel' },
+  { min: 250000, key: 'severalNovels' },
+  { min: 500000, key: 'trilogy' },
 ];
 
 /** Playful real-world comparison for the lifetime word count, shown on the home screen. */
-export function getWordsMilestone(totalWords: number): string | null {
-  let text: string | null = null;
+export function getWordsMilestone(totalWords: number): MilestoneKey | null {
+  let key: MilestoneKey | null = null;
   for (const milestone of MILESTONES) {
-    if (totalWords >= milestone.min) text = milestone.text;
+    if (totalWords >= milestone.min) key = milestone.key;
   }
-  return text;
+  return key;
 }
 
 export interface ResumePoint {

@@ -5,30 +5,32 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
 import { getSentencesByLevel, JLPT_LEVELS } from '../../src/data/sentences';
 import { getWordsByLevel } from '../../src/data/vocab';
+import { useT } from '../../src/i18n';
 import { C, FONT, R } from '../../src/theme';
 
 type ContentType = 'mots' | 'phrases';
 
-const TYPE_OPTIONS: { type: ContentType; label: string }[] = [
-  { type: 'mots', label: 'Mots' },
-  { type: 'phrases', label: 'Phrases' },
-];
-
 export default function LevelSelectScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const [contentType, setContentType] = useState<ContentType>('mots');
+
+  const typeOptions: { type: ContentType; label: string }[] = [
+    { type: 'mots', label: t.level.words },
+    { type: 'phrases', label: t.level.sentences },
+  ];
 
   const countFor = (level: string) =>
     contentType === 'mots' ? getWordsByLevel(level).length : getSentencesByLevel(level).length;
 
   return (
     <View style={styles.screen}>
-      <BackHeader title="Par niveau JLPT" onBack={() => router.replace('/training')} />
+      <BackHeader title={t.level.title} onBack={() => router.replace('/training')} />
 
       <View style={styles.switchWrap}>
         <View style={styles.switch}>
-          {TYPE_OPTIONS.map((option) => {
+          {typeOptions.map((option) => {
             const active = option.type === contentType;
             return (
               <Pressable
@@ -64,10 +66,10 @@ export default function LevelSelectScreen() {
               </View>
               <View style={styles.cardText}>
                 <Text style={[styles.cardLabel, empty && styles.textMuted]}>
-                  {contentType === 'mots' ? 'Vocabulaire' : 'Phrases courantes'}
+                  {contentType === 'mots' ? t.level.vocabulary : t.level.commonPhrases}
                 </Text>
                 <Text style={styles.cardCount}>
-                  {empty ? 'Bientôt disponible' : `${count} ${contentType === 'mots' ? 'mots' : 'phrases'}`}
+                  {empty ? t.level.comingSoon : t.level.count(count, contentType === 'mots' ? 'words' : 'sentences')}
                 </Text>
               </View>
               {!empty && <Text style={styles.chevron}>›</Text>}

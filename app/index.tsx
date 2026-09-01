@@ -2,12 +2,15 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { getCategory } from '../src/data/vocab';
+import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
 import { getStats, getResume, getWordsMilestone, type ResumePoint, type Stats } from '../src/utils/progress';
 import { getRacePB, type RaceScore } from '../src/utils/raceStats';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const [racePB, setRacePB] = useState<RaceScore | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
@@ -21,7 +24,16 @@ export default function HomeScreen() {
     }, []),
   );
 
-  const milestone = stats && stats.totalWords > 0 ? getWordsMilestone(stats.totalWords) : null;
+  const milestoneKey = stats && stats.totalWords > 0 ? getWordsMilestone(stats.totalWords) : null;
+  const milestone = milestoneKey ? t.milestones[milestoneKey] : null;
+  const resumeLabel = resume
+    ? resume.listId
+      ? resume.label
+      : resume.level
+        ? `JLPT ${resume.level}`
+        : (t.categories[getCategory(resume.category ?? '')?.labelKey as keyof typeof t.categories] ??
+          resume.label)
+    : '';
 
   return (
     <View style={styles.screen}>
@@ -43,12 +55,10 @@ export default function HomeScreen() {
 
         <Text style={styles.eyebrow}>かな入力</Text>
         <Text style={styles.title}>TypeKana</Text>
-        <Text style={styles.subtitle}>Apprendre le clavier japonais, un mot à la fois.</Text>
+        <Text style={styles.subtitle}>{t.home.subtitle}</Text>
 
         {!!stats && stats.totalWords > 0 && (
-          <Text style={styles.statsLine}>
-            {stats.streak} jour{stats.streak > 1 ? 's' : ''} de suite · {stats.totalWords} mots tapés
-          </Text>
+          <Text style={styles.statsLine}>{t.home.stats(stats.streak, stats.totalWords)}</Text>
         )}
         {!!milestone && <Text style={styles.milestoneLine}>{milestone}</Text>}
 
@@ -63,9 +73,9 @@ export default function HomeScreen() {
         >
           <Text style={styles.cardWatermark}>練</Text>
           <View>
-            <Text style={styles.cardEyebrow}>ENTRAÎNEMENT</Text>
-            <Text style={styles.cardTitle}>Training</Text>
-            <Text style={styles.cardSub}>Par thème ou par niveau JLPT</Text>
+            <Text style={styles.cardEyebrow}>{t.home.trainingEyebrow}</Text>
+            <Text style={styles.cardTitle}>{t.home.trainingTitle}</Text>
+            <Text style={styles.cardSub}>{t.home.trainingSub}</Text>
           </View>
         </Pressable>
 
@@ -75,10 +85,10 @@ export default function HomeScreen() {
         >
           <Text style={[styles.cardWatermark, styles.cardWatermarkWarm]}>速</Text>
           <View>
-            <Text style={[styles.cardEyebrow, styles.cardEyebrowWarm]}>60 SECONDES</Text>
-            <Text style={styles.cardTitle}>Race</Text>
+            <Text style={[styles.cardEyebrow, styles.cardEyebrowWarm]}>{t.home.raceEyebrow}</Text>
+            <Text style={styles.cardTitle}>{t.home.raceTitle}</Text>
             <Text style={[styles.cardSub, styles.cardSubWarm]}>
-              {racePB ? `Ton record : ${racePB.correct} mots` : 'Aucun record pour l’instant'}
+              {racePB ? t.home.raceRecord(racePB.correct) : t.home.raceNoRecord}
             </Text>
           </View>
         </Pressable>
@@ -109,7 +119,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.resumeBody}>
               <Text style={styles.resumeLabel} numberOfLines={1}>
-                Reprendre · {resume.label}
+                {t.home.resume(resumeLabel)}
               </Text>
               <View style={styles.resumeTrack}>
                 <View

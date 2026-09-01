@@ -9,8 +9,20 @@ export interface CustomWord {
   kana: string;
   /** Optional kanji form, used by the Kanji/Indice modes when present. */
   kanji: string | null;
-  /** Free-text label shown under the word — usually the French meaning. */
-  meaning_fr: string;
+  /** Free-text label the user typed, in whatever language they chose — never translated. */
+  meaning: string;
+}
+
+/** Lists written before the app was localized stored this field as `meaning_fr`. */
+type StoredCustomWord = CustomWord & { meaning_fr?: string };
+
+function normalizeWord(word: StoredCustomWord): CustomWord {
+  return {
+    id: word.id,
+    kana: word.kana,
+    kanji: word.kanji ?? null,
+    meaning: word.meaning ?? word.meaning_fr ?? '',
+  };
 }
 
 export interface CustomList {
@@ -28,7 +40,12 @@ export async function getLists(): Promise<CustomList[]> {
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    // Migrate on read so lists created before localization keep their meanings.
+    return parsed.map((l: CustomList & { words: StoredCustomWord[] }) => ({
+      ...l,
+      words: (l.words ?? []).map(normalizeWord),
+    }));
   } catch {
     return [];
   }
@@ -85,7 +102,8 @@ export function toGameEntries(list: CustomList): GameEntry[] {
     id: w.id,
     kana: w.kana,
     kanji: w.kanji,
-    meaning_fr: w.meaning_fr,
+    // The user's own text, so it reads the same whichever interface language is active.
+    meaning: { fr: w.meaning, en: w.meaning },
     emoji: null,
     color: null,
   }));
