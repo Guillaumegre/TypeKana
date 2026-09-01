@@ -49,3 +49,54 @@ export function initAds(): void {
 export function getAdsModule(): AdsModule | null {
   return loadAdsModule();
 }
+
+/** How long to wait for an ad to load before giving the session away for free. */
+const REWARDED_TIMEOUT_MS = 12000;
+
+/**
+ * Shows a rewarded ad and resolves true only once the reward is actually earned.
+ *
+ * Resolves false when ads aren't available at all (web, Expo Go) — callers are expected to
+ * let the player through in that case rather than block them for an infrastructure problem.
+ */
+export function showRewardedAd(): Promise<boolean> {
+  const ads = getAdsModule();
+  if (!ads) return Promise.resolve(false);
+
+  return new Promise((resolve) => {
+    let settled = false;
+    let earned = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    try {
+      const rewarded = ads.RewardedAd.createForAdRequest(ads.TestIds.REWARDED, {
+        requestNonPersonalizedAdsOnly: true,
+      });
+
+      const finish = (value: boolean) => {
+        if (settled) return;
+        settled = true;
+        if (timer) clearTimeout(timer);
+        try {
+          rewarded.removeAllListeners();
+        } catch {}
+        resolve(value);
+      };
+
+      rewarded.addAdEventListener(ads.RewardedAdEventType.LOADED, () => {
+        rewarded.show().catch(() => finish(false));
+      });
+      rewarded.addAdEventListener(ads.RewardedAdEventType.EARNED_REWARD, () => {
+        earned = true;
+      });
+      // CLOSED fires whether or not the reward was earned, so it reports what actually happened.
+      rewarded.addAdEventListener(ads.AdEventType.CLOSED, () => finish(earned));
+      rewarded.addAdEventListener(ads.AdEventType.ERROR, () => finish(false));
+
+      timer = setTimeout(() => finish(false), REWARDED_TIMEOUT_MS);
+      rewarded.load();
+    } catch {
+      resolve(false);
+    }
+  });
+}

@@ -9,3 +9,7 @@ export function initAds(): void {}
 export function getAdsModule(): null {
   return null;
 }
+
+export function showRewardedAd(): Promise<boolean> {
+  return Promise.resolve(false);
+}

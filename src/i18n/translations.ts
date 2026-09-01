@@ -98,6 +98,16 @@ const fr = {
     emptyWords: 'Aucun mot disponible pour ce niveau.',
     emptyTheme: 'Aucun mot trouvé pour ce thème.',
   },
+  limit: {
+    title: 'Pause quotidienne',
+    body: (n: number) =>
+      `Tu as utilisé tes ${n} sessions gratuites du jour. Regarde une courte pub pour en débloquer une de plus, ou reviens demain.`,
+    watchAd: 'Regarder une pub (+1 session)',
+    loading: 'Chargement de la pub…',
+    failed: 'La pub n’a pas pu se charger. Réessaie dans un instant.',
+    home: 'Retour à l’accueil',
+    remaining: (n: number) => `${n} session${n > 1 ? 's' : ''} restante${n > 1 ? 's' : ''} aujourd’hui`,
+  },
   results: {
     wordsIn60: 'MOTS EN 60 S',
     correctWords: 'MOTS CORRECTS',
@@ -272,6 +282,16 @@ const en: Translations = {
     emptySentences: 'No sentences available for this level.',
     emptyWords: 'No words available for this level.',
     emptyTheme: 'No words found for this theme.',
+  },
+  limit: {
+    title: 'Daily break',
+    body: (n: number) =>
+      `You have used your ${n} free sessions for today. Watch a short ad to unlock one more, or come back tomorrow.`,
+    watchAd: 'Watch an ad (+1 session)',
+    loading: 'Loading the ad…',
+    failed: 'The ad could not load. Try again in a moment.',
+    home: 'Back to home',
+    remaining: (n: number) => `${n} session${n > 1 ? 's' : ''} left today`,
   },
   results: {
     wordsIn60: 'WORDS IN 60 S',

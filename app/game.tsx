@@ -24,6 +24,9 @@ import {
   pickRandomWord,
 } from '../src/data/vocab';
 import { useLang, useT } from '../src/i18n';
+import { getAdsModule, showRewardedAd } from '../src/utils/ads';
+import { isPremiumUser } from '../src/utils/premium';
+import { consumeSession, grantExtraSession, FREE_SESSIONS_PER_DAY } from '../src/utils/quota';
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
 import { isKanaFamilyMatch, isTextMatch, katakanaToHiragana, normalizeText, shuffle } from '../src/utils/kana';
@@ -142,6 +145,40 @@ export default function GameScreen() {
   const inputRef = useRef<TextInput>(null);
   const lastTextRef = useRef('');
   const shakeAnim = useRef(new Animated.Value(0)).current;
+
+  // Daily allowance. Resuming an interrupted session doesn't spend a new one, and premium
+  // players skip the check entirely. It is also skipped where ads can't run at all (web,
+  // Expo Go): the limit is only fair because a rewarded ad can always lift it, so without
+  // that escape hatch it would be a dead end rather than a soft limit.
+  const adsAvailable = getAdsModule() !== null;
+  const [gate, setGate] = useState<'checking' | 'open' | 'blocked'>(
+    isPremiumUser() || wantsResume || !adsAvailable ? 'open' : 'checking',
+  );
+  const [adPending, setAdPending] = useState(false);
+  const [adFailed, setAdFailed] = useState(false);
+  const gateStartedRef = useRef(false);
+
+  useEffect(() => {
+    if (gate !== 'checking' || gateStartedRef.current) return;
+    gateStartedRef.current = true;
+    consumeSession()
+      .then((state) => setGate(state.used > state.allowed ? 'blocked' : 'open'))
+      // A storage failure must never lock a player out of their own practice.
+      .catch(() => setGate('open'));
+  }, [gate]);
+
+  const onWatchAd = async () => {
+    setAdPending(true);
+    setAdFailed(false);
+    const earned = await showRewardedAd();
+    setAdPending(false);
+    if (!earned) {
+      setAdFailed(true);
+      return;
+    }
+    await grantExtraSession();
+    setGate('open');
+  };
 
   const themeLabel = customList
     ? customList.name.toUpperCase()
@@ -294,6 +331,49 @@ export default function GameScreen() {
     const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => clearTimeout(timer);
   }, [isRace, raceStarted, secondsLeft, finishRace]);
+
+  if (gate === 'checking') return <View style={styles.screen} />;
+
+  if (gate === 'blocked') {
+    return (
+      <View style={[styles.screen, { paddingTop: insets.top + 14 }]}>
+        <View style={styles.topBar}>
+          <Pressable
+            onPress={() => router.replace('/')}
+            hitSlop={12}
+            style={({ pressed }) => [styles.backButton, pressed && styles.pressedSoft]}
+          >
+            <Text style={styles.backButtonText}>‹</Text>
+          </Pressable>
+          <View style={styles.modeSwitchWrap} />
+          <View style={styles.backButtonSpacer} />
+        </View>
+
+        <View style={styles.limitBody}>
+          <Text style={styles.limitGlyph}>休</Text>
+          <Text style={styles.limitTitle}>{t.limit.title}</Text>
+          <Text style={styles.limitText}>{t.limit.body(FREE_SESSIONS_PER_DAY)}</Text>
+
+          <Pressable
+            onPress={onWatchAd}
+            disabled={adPending}
+            style={({ pressed }) => [styles.submitButton, adPending && styles.pressedCard, pressed && styles.pressedCard]}
+          >
+            <Text style={styles.submitText}>{adPending ? t.limit.loading : t.limit.watchAd}</Text>
+          </Pressable>
+
+          {adFailed && <Text style={styles.limitError}>{t.limit.failed}</Text>}
+
+          <Pressable
+            onPress={() => router.replace('/')}
+            style={({ pressed }) => [styles.skipButton, pressed && styles.pressedSoft]}
+          >
+            <Text style={styles.skipText}>{t.limit.home}</Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
 
   if (restoring || loadingList) return <View style={styles.screen} />;
 
@@ -834,5 +914,39 @@ const styles = StyleSheet.create({
     fontSize: 12.5,
     fontWeight: '700',
     color: C.inkSoft,
+  },
+  limitBody: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 60,
+  },
+  limitGlyph: {
+    fontFamily: FONT.mincho,
+    fontSize: 64,
+    color: 'rgba(20,22,26,.12)',
+  },
+  limitTitle: {
+    fontSize: 26,
+    fontWeight: '900',
+    letterSpacing: -0.8,
+    color: C.ink,
+    marginTop: 12,
+  },
+  limitText: {
+    fontSize: 14.5,
+    lineHeight: 21,
+    fontWeight: '500',
+    color: C.inkSoft,
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 8,
+  },
+  limitError: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: C.accent,
+    textAlign: 'center',
+    marginTop: 12,
   },
 });
