@@ -37,7 +37,6 @@ import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/race
 
 type Feedback = 'idle' | 'correct';
 
-const SESSION_LENGTH = 10;
 const RACE_DURATION = 60;
 const RACE_QUEUE_SIZE = 3;
 
@@ -62,7 +61,7 @@ export default function GameScreen() {
     resume?: string;
     listId?: string;
   }>();
-  const { kanjiMode, hintMode, blindMode, setBlindMode, soundEnabled } = useSettings();
+  const { kanjiMode, hintMode, blindMode, setBlindMode, soundEnabled, sessionLength } = useSettings();
   const t = useT();
   const lang = useLang();
   const successSound = useAudioPlayer(require('../assets/sounds/success.wav'));
@@ -122,8 +121,8 @@ export default function GameScreen() {
     } else {
       pool = getWordsByCategory(category ?? '');
     }
-    return shuffle(pool).slice(0, SESSION_LENGTH);
-  }, [isRace, restoring, loadingList, restored, customList, listId, category, level, contentType]);
+    return shuffle(pool).slice(0, sessionLength);
+  }, [isRace, restoring, loadingList, restored, customList, listId, category, level, contentType, sessionLength]);
 
   const usedWordIdsRef = useRef<Set<string>>(new Set());
   const [index, setIndex] = useState(0);

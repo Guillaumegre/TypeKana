@@ -11,7 +11,12 @@ interface Settings {
   blindMode: boolean;
   soundEnabled: boolean;
   lang: Lang;
+  /** How many words a Training session serves. */
+  sessionLength: number;
 }
+
+/** Offered on the settings screen; any other stored value falls back to the default. */
+export const SESSION_LENGTHS = [5, 10, 15, 20] as const;
 
 interface SettingsContextValue extends Settings {
   loaded: boolean;
@@ -20,6 +25,7 @@ interface SettingsContextValue extends Settings {
   setBlindMode: (value: boolean) => void;
   setSoundEnabled: (value: boolean) => void;
   setLang: (value: Lang) => void;
+  setSessionLength: (value: number) => void;
 }
 
 // The language defaults to the phone's own; once the user picks one it is stored and wins.
@@ -29,6 +35,7 @@ const DEFAULT_SETTINGS: Settings = {
   blindMode: false,
   soundEnabled: true,
   lang: detectDeviceLang(),
+  sessionLength: 10,
 };
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
@@ -45,6 +52,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         // Storage can hold anything (older build, manual edit, corruption); an unknown
         // language would make every screen look up an undefined translation table.
         if (stored.lang !== 'fr' && stored.lang !== 'en') stored.lang = DEFAULT_SETTINGS.lang;
+        if (!SESSION_LENGTHS.includes(stored.sessionLength)) {
+          stored.sessionLength = DEFAULT_SETTINGS.sessionLength;
+        }
         setSettings(stored);
       })
       .catch(() => {})
@@ -70,6 +80,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setBlindMode: (value) => update(value ? { blindMode: value, kanjiMode: false, hintMode: false } : { blindMode: value }),
         setSoundEnabled: (value) => update({ soundEnabled: value }),
         setLang: (value) => update({ lang: value }),
+        setSessionLength: (value) => update({ sessionLength: value }),
       }}
     >
       {children}

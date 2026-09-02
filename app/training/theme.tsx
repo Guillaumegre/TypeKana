@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../../src/components/BackHeader';
 import { CATEGORIES, getWordsByCategory, RANDOM_CATEGORY_ID } from '../../src/data/vocab';
+import { useSettings } from '../../src/context/SettingsContext';
 import { useT } from '../../src/i18n';
 import { C, FONT, R } from '../../src/theme';
 
@@ -12,6 +13,7 @@ const THEMES = CATEGORIES.filter((c) => c.id !== RANDOM_CATEGORY_ID);
 export default function ThemeSelectScreen() {
   const router = useRouter();
   const t = useT();
+  const { sessionLength } = useSettings();
   const insets = useSafeAreaInsets();
 
   const open = (categoryId: string) =>
@@ -19,7 +21,7 @@ export default function ThemeSelectScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title={t.theme.title} subtitle={t.theme.subtitle} onBack={() => router.replace('/training')} />
+      <BackHeader title={t.theme.title} subtitle={t.theme.subtitle(sessionLength)} onBack={() => router.replace('/training')} />
       <FlatList
         data={THEMES}
         keyExtractor={(item) => item.id}
