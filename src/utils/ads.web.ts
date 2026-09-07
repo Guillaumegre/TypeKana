@@ -17,3 +17,7 @@ export function adUnitId(): string {
 export function showRewardedAd(): Promise<boolean> {
   return Promise.resolve(false);
 }
+
+export function showInterstitialAd(): Promise<void> {
+  return Promise.resolve();
+}

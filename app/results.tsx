@@ -2,9 +2,13 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useState } from 'react';
 import { AdBanner } from '../src/components/AdBanner';
 import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
+import { shouldShowInterstitial } from '../src/utils/adCadence';
+import { showInterstitialAd } from '../src/utils/ads';
+import { isPremiumUser } from '../src/utils/premium';
 
 export default function ResultsScreen() {
   const router = useRouter();
@@ -25,7 +29,21 @@ export default function ResultsScreen() {
 
   const isRace = mode === 'race';
 
-  const replay = () =>
+  const [leaving, setLeaving] = useState(false);
+
+  const goTo = (navigate: () => void) => async () => {
+    if (leaving) return;
+    setLeaving(true);
+    // Shown on the way out rather than on arrival: replacing the score the player just
+    // earned with a full-screen ad is far more irritating than filling a transition they
+    // already chose. Never for premium.
+    if (!isPremiumUser() && (await shouldShowInterstitial())) {
+      await showInterstitialAd();
+    }
+    navigate();
+  };
+
+  const replay = goTo(() =>
     isRace
       ? router.replace({ pathname: '/game', params: { mode: 'race' } })
       : router.replace({
@@ -37,7 +55,10 @@ export default function ResultsScreen() {
             ...(contentType ? { contentType } : {}),
             ...(listId ? { listId } : {}),
           },
-        });
+        }),
+  );
+
+  const goHome = goTo(() => router.replace('/'));
 
   return (
     <View style={[styles.screen, { paddingTop: insets.top + 24, paddingBottom: insets.bottom + 24 }]}>
@@ -58,7 +79,7 @@ export default function ResultsScreen() {
           <Text style={styles.primaryText}>{t.results.replay}</Text>
         </Pressable>
         <Pressable
-          onPress={() => router.replace('/')}
+          onPress={goHome}
           style={({ pressed }) => [styles.secondary, pressed && styles.pressed]}
         >
           <Text style={styles.secondaryText}>{t.results.home}</Text>

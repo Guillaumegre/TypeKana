@@ -2,7 +2,7 @@
  * Real AdMob ad unit IDs.
  *
  * Where to find them: https://apps.admob.com → your app → "Ad units". Create one
- * "Banner" unit and one "Rewarded" unit per platform, then paste the ids here. They look
+ * "Banner", one "Rewarded" and one "Interstitial" unit per platform, then paste the ids here. They look
  * like "ca-app-pub-1234567890123456/1234567890" (note the slash — the App ID uses a
  * tilde instead, and goes in app.json, not here).
  *
@@ -17,11 +17,13 @@ export const AD_UNITS = {
   android: {
     banner: 'ca-app-pub-3994431410855220/2081959112',
     rewarded: 'ca-app-pub-3994431410855220/8860683559',
+    interstitial: '',
   },
   // No iOS app in AdMob yet (it waits on the Apple Developer account), so iOS keeps
   // falling back to the test units.
   ios: {
     banner: '',
     rewarded: '',
+    interstitial: '',
   },
 };
