@@ -104,7 +104,7 @@ const fr = {
       `Tu as utilisé tes ${n} sessions gratuites du jour. Regarde une courte pub pour en débloquer une de plus, ou reviens demain.`,
     watchAd: 'Regarder une pub (+1 session)',
     loading: 'Chargement de la pub…',
-    failed: 'La pub n’a pas pu se charger. Réessaie dans un instant.',
+    dismissed: 'Il faut regarder la pub jusqu’au bout pour débloquer une session.',
     home: 'Retour à l’accueil',
   },
   results: {
@@ -300,7 +300,7 @@ const en: Translations = {
       `You have used your ${n} free sessions for today. Watch a short ad to unlock one more, or come back tomorrow.`,
     watchAd: 'Watch an ad (+1 session)',
     loading: 'Loading the ad…',
-    failed: 'The ad could not load. Try again in a moment.',
+    dismissed: 'You need to watch the ad through to unlock a session.',
     home: 'Back to home',
   },
   results: {

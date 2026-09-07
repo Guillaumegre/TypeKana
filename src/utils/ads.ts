@@ -74,18 +74,23 @@ export function adUnitId(ads: AdsModule, kind: UnitKind): string {
 const REWARDED_TIMEOUT_MS = 12000;
 
 /**
- * Shows a rewarded ad and resolves true only once the reward is actually earned.
+ * 'earned'      — the reward was granted, the user held up their end.
+ * 'dismissed'   — the user closed the ad before earning it. Their choice.
+ * 'unavailable' — nothing could be shown: no module, no fill, network down, timeout.
  *
- * Resolves false when ads aren't available at all (web, Expo Go) — callers are expected to
- * let the player through in that case rather than block them for an infrastructure problem.
+ * The distinction matters: a user who never got an ad to watch must not be punished for
+ * our ad network failing, whereas one who skipped it simply didn't earn anything.
  */
-export function showRewardedAd(): Promise<boolean> {
+export type RewardedOutcome = 'earned' | 'dismissed' | 'unavailable';
+
+export function showRewardedAd(): Promise<RewardedOutcome> {
   const ads = getAdsModule();
-  if (!ads) return Promise.resolve(false);
+  if (!ads) return Promise.resolve('unavailable');
 
   return new Promise((resolve) => {
     let settled = false;
     let earned = false;
+    let shown = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     try {
@@ -93,7 +98,7 @@ export function showRewardedAd(): Promise<boolean> {
         requestNonPersonalizedAdsOnly: true,
       });
 
-      const finish = (value: boolean) => {
+      const finish = (value: RewardedOutcome) => {
         if (settled) return;
         settled = true;
         if (timer) clearTimeout(timer);
@@ -104,19 +109,23 @@ export function showRewardedAd(): Promise<boolean> {
       };
 
       rewarded.addAdEventListener(ads.RewardedAdEventType.LOADED, () => {
-        rewarded.show().catch(() => finish(false));
+        shown = true;
+        rewarded.show().catch(() => finish('unavailable'));
       });
       rewarded.addAdEventListener(ads.RewardedAdEventType.EARNED_REWARD, () => {
         earned = true;
       });
-      // CLOSED fires whether or not the reward was earned, so it reports what actually happened.
-      rewarded.addAdEventListener(ads.AdEventType.CLOSED, () => finish(earned));
-      rewarded.addAdEventListener(ads.AdEventType.ERROR, () => finish(false));
+      // CLOSED fires whether or not the reward was earned, so it reports what actually
+      // happened; it only counts as a dismissal if an ad really did appear.
+      rewarded.addAdEventListener(ads.AdEventType.CLOSED, () =>
+        finish(earned ? 'earned' : shown ? 'dismissed' : 'unavailable'),
+      );
+      rewarded.addAdEventListener(ads.AdEventType.ERROR, () => finish('unavailable'));
 
-      timer = setTimeout(() => finish(false), REWARDED_TIMEOUT_MS);
+      timer = setTimeout(() => finish('unavailable'), REWARDED_TIMEOUT_MS);
       rewarded.load();
     } catch {
-      resolve(false);
+      resolve('unavailable');
     }
   });
 }

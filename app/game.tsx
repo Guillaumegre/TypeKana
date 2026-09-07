@@ -154,7 +154,7 @@ export default function GameScreen() {
     isPremiumUser() || wantsResume || !adsAvailable ? 'open' : 'checking',
   );
   const [adPending, setAdPending] = useState(false);
-  const [adFailed, setAdFailed] = useState(false);
+  const [adDismissed, setAdDismissed] = useState(false);
   const gateStartedRef = useRef(false);
 
   useEffect(() => {
@@ -168,11 +168,14 @@ export default function GameScreen() {
 
   const onWatchAd = async () => {
     setAdPending(true);
-    setAdFailed(false);
-    const earned = await showRewardedAd();
+    setAdDismissed(false);
+    const outcome = await showRewardedAd();
     setAdPending(false);
-    if (!earned) {
-      setAdFailed(true);
+    // 'unavailable' unlocks too: the player did their part by asking for the ad, and no
+    // fill — common for a young AdMob account — must never leave them stuck. Only a
+    // deliberate dismissal earns nothing.
+    if (outcome === 'dismissed') {
+      setAdDismissed(true);
       return;
     }
     await grantExtraSession();
@@ -361,7 +364,7 @@ export default function GameScreen() {
             <Text style={styles.submitText}>{adPending ? t.limit.loading : t.limit.watchAd}</Text>
           </Pressable>
 
-          {adFailed && <Text style={styles.limitError}>{t.limit.failed}</Text>}
+          {adDismissed && <Text style={styles.limitError}>{t.limit.dismissed}</Text>}
 
           <Pressable
             onPress={() => router.replace('/')}

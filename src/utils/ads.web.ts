@@ -14,8 +14,10 @@ export function adUnitId(): string {
   return '';
 }
 
-export function showRewardedAd(): Promise<boolean> {
-  return Promise.resolve(false);
+export type RewardedOutcome = 'earned' | 'dismissed' | 'unavailable';
+
+export function showRewardedAd(): Promise<RewardedOutcome> {
+  return Promise.resolve('unavailable');
 }
 
 export function showInterstitialAd(): Promise<void> {
