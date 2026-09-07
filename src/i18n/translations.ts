@@ -37,7 +37,7 @@ const fr = {
     themeSub: 'Animaux, nourriture, verbes, couleurs...',
     levelEyebrow: 'NIVEAU',
     levelTitle: 'JLPT',
-    levelSub: 'Mots ou phrases, classés N5 à N1',
+    levelSub: 'Mots ou phrases, classés N5 à N3',
     listsEyebrow: (n: number) => (n === 0 ? 'AUCUNE LISTE' : `${n} LISTE${n > 1 ? 'S' : ''}`),
     listsTitle: 'Mes listes',
     listsSub: 'Tes mots à toi, révisés à ton rythme',
@@ -106,7 +106,6 @@ const fr = {
     loading: 'Chargement de la pub…',
     failed: 'La pub n’a pas pu se charger. Réessaie dans un instant.',
     home: 'Retour à l’accueil',
-    remaining: (n: number) => `${n} session${n > 1 ? 's' : ''} restante${n > 1 ? 's' : ''} aujourd’hui`,
   },
   results: {
     wordsIn60: 'MOTS EN 60 S',
@@ -234,7 +233,7 @@ const en: Translations = {
     themeSub: 'Animals, food, verbs, colours...',
     levelEyebrow: 'LEVEL',
     levelTitle: 'JLPT',
-    levelSub: 'Words or sentences, from N5 to N1',
+    levelSub: 'Words or sentences, from N5 to N3',
     listsEyebrow: (n: number) => (n === 0 ? 'NO LISTS' : `${n} LIST${n > 1 ? 'S' : ''}`),
     listsTitle: 'My lists',
     listsSub: 'Your own words, at your own pace',
@@ -303,7 +302,6 @@ const en: Translations = {
     loading: 'Loading the ad…',
     failed: 'The ad could not load. Try again in a moment.',
     home: 'Back to home',
-    remaining: (n: number) => `${n} session${n > 1 ? 's' : ''} left today`,
   },
   results: {
     wordsIn60: 'WORDS IN 60 S',
