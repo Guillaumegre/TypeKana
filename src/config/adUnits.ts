@@ -15,9 +15,11 @@
  */
 export const AD_UNITS = {
   android: {
-    banner: '',
-    rewarded: '',
+    banner: 'ca-app-pub-3994431410855220/2081959112',
+    rewarded: 'ca-app-pub-3994431410855220/8860683559',
   },
+  // No iOS app in AdMob yet (it waits on the Apple Developer account), so iOS keeps
+  // falling back to the test units.
   ios: {
     banner: '',
     rewarded: '',
