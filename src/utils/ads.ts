@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { AD_UNITS } from '../config/adUnits';
 
 type AdsModule = typeof import('react-native-google-mobile-ads');
 
@@ -50,6 +51,20 @@ export function getAdsModule(): AdsModule | null {
   return loadAdsModule();
 }
 
+type UnitKind = 'banner' | 'rewarded';
+
+/**
+ * Real unit in production, Google's test unit everywhere else. A development build must
+ * never request a live unit: impressions and clicks from your own testing are invalid
+ * traffic, and AdMob suspends accounts over it.
+ */
+export function adUnitId(ads: AdsModule, kind: UnitKind): string {
+  const testId = kind === 'banner' ? ads.TestIds.BANNER : ads.TestIds.REWARDED;
+  if (__DEV__) return testId;
+  const platform = Platform.OS === 'ios' ? AD_UNITS.ios : AD_UNITS.android;
+  return platform[kind] || testId;
+}
+
 /** How long to wait for an ad to load before giving the session away for free. */
 const REWARDED_TIMEOUT_MS = 12000;
 
@@ -69,7 +84,7 @@ export function showRewardedAd(): Promise<boolean> {
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     try {
-      const rewarded = ads.RewardedAd.createForAdRequest(ads.TestIds.REWARDED, {
+      const rewarded = ads.RewardedAd.createForAdRequest(adUnitId(ads, 'rewarded'), {
         requestNonPersonalizedAdsOnly: true,
       });
 

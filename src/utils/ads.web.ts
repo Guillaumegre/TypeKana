@@ -10,6 +10,10 @@ export function getAdsModule(): null {
   return null;
 }
 
+export function adUnitId(): string {
+  return '';
+}
+
 export function showRewardedAd(): Promise<boolean> {
   return Promise.resolve(false);
 }

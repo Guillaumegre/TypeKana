@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { getAdsModule } from '../utils/ads';
+import { adUnitId, getAdsModule } from '../utils/ads';
 import { isPremiumUser } from '../utils/premium';
 
 /** Renders nothing on web, in Expo Go, or for a premium user — see getAdsModule(). */
@@ -11,12 +11,12 @@ export function AdBanner() {
   const ads = getAdsModule();
   if (!ads || isPremiumUser() || failed) return null;
 
-  const { BannerAd, BannerAdSize, TestIds } = ads;
+  const { BannerAd, BannerAdSize } = ads;
 
   return (
     <View style={styles.wrap}>
       <BannerAd
-        unitId={TestIds.BANNER}
+        unitId={adUnitId(ads, 'banner')}
         size={BannerAdSize.BANNER}
         requestOptions={{ requestNonPersonalizedAdsOnly: true }}
         onAdFailedToLoad={() => setFailed(true)}
