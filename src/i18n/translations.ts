@@ -135,13 +135,13 @@ const fr = {
       'Ta série, tes mots tapés et ton record de Race seront effacés. Tes listes perso et tes réglages sont conservés.',
     resetCancel: 'Annuler',
     resetConfirm: 'Réinitialiser',
-    hint: 'Le mode d’affichage (kana / kanji / indice / rappel) se règle directement depuis l’écran de jeu.',
+    hint: 'Le mode d’affichage (kana / kanji / indice / test) se règle directement depuis l’écran de jeu.',
   },
   modes: {
     kana: 'Kana',
     kanji: 'Kanji',
     hint: 'Indice',
-    recall: 'Rappel',
+    recall: 'Test',
   },
   categories: {
     aleatoire: 'Aléatoire',
@@ -331,13 +331,13 @@ const en: Translations = {
       'Your streak, typed words and Race record will be erased. Your custom lists and settings are kept.',
     resetCancel: 'Cancel',
     resetConfirm: 'Reset',
-    hint: 'The display mode (kana / kanji / hint / recall) is set directly from the game screen.',
+    hint: 'The display mode (kana / kanji / hint / test) is set directly from the game screen.',
   },
   modes: {
     kana: 'Kana',
     kanji: 'Kanji',
     hint: 'Hint',
-    recall: 'Recall',
+    recall: 'Test',
   },
   categories: {
     aleatoire: 'Random',
