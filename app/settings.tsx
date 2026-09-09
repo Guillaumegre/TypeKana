@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useSyncExternalStore } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../src/components/BackHeader';
@@ -6,6 +7,7 @@ import { SESSION_LENGTHS, useSettings } from '../src/context/SettingsContext';
 import { useT } from '../src/i18n';
 import type { Lang } from '../src/i18n/translations';
 import { C, FONT, R } from '../src/theme';
+import { privacyOptionsRequired, showAdsPrivacyOptions, subscribeToConsent } from '../src/utils/ads';
 import { isPremiumUser } from '../src/utils/premium';
 import { resetProgress } from '../src/utils/resetProgress';
 
@@ -32,6 +34,9 @@ export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const { soundEnabled, setSoundEnabled, lang, setLang, sessionLength, setSessionLength } =
     useSettings();
+  // Only true once consent has resolved and the user is somewhere GDPR requires the
+  // ongoing ability to revisit their ad consent choice (EEA/UK) — hidden everywhere else.
+  const showAdsPrivacyRow = useSyncExternalStore(subscribeToConsent, privacyOptionsRequired);
 
   const onReset = () => {
     Alert.alert(t.settings.resetTitle, t.settings.resetBody, [
@@ -125,6 +130,25 @@ export default function SettingsScreen() {
               thumbColor="#FBF9F5"
             />
           </View>
+
+          {showAdsPrivacyRow && (
+            <>
+              <View style={styles.divider} />
+              <Pressable
+                onPress={() => showAdsPrivacyOptions()}
+                style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}
+              >
+                <View style={styles.glyphBox}>
+                  <Text style={styles.glyph}>🔒</Text>
+                </View>
+                <View style={styles.rowText}>
+                  <Text style={styles.rowLabel}>{t.settings.adsPrivacy}</Text>
+                  <Text style={styles.rowSub}>{t.settings.adsPrivacySub}</Text>
+                </View>
+                <Text style={styles.chevron}>›</Text>
+              </Pressable>
+            </>
+          )}
         </Section>
 
         <Text style={styles.hint}>{t.settings.hint}</Text>

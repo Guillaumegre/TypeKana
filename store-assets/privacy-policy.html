@@ -1,0 +1,381 @@
+<title>TypeKana — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2EFE8;
+    --card: #FBF9F5;
+    --ink: #14161A;
+    --ink-soft: rgba(20,22,26,.64);
+    --ink-faint: rgba(20,22,26,.42);
+    --line: rgba(20,22,26,.12);
+    --line-strong: rgba(20,22,26,.2);
+    --accent: #C8452A;
+    --accent-ink: #FBF9F5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #18140F;
+      --card: #221C15;
+      --ink: #F2EFE8;
+      --ink-soft: rgba(242,239,232,.7);
+      --ink-faint: rgba(242,239,232,.46);
+      --line: rgba(242,239,232,.14);
+      --line-strong: rgba(242,239,232,.22);
+      --accent: #E17750;
+      --accent-ink: #18140F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #18140F;
+    --card: #221C15;
+    --ink: #F2EFE8;
+    --ink-soft: rgba(242,239,232,.7);
+    --ink-faint: rgba(242,239,232,.46);
+    --line: rgba(242,239,232,.14);
+    --line-strong: rgba(242,239,232,.22);
+    --accent: #E17750;
+    --accent-ink: #18140F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .jp {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 44px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mark {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .bar {
+    width: 4px;
+    height: 22px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  .wordmark {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  h1 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: var(--ink-faint);
+  }
+  .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+
+  .langswitch {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .langswitch button {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .langswitch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .langswitch button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .intro {
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  section.doc { display: none; }
+  section.doc[data-active="true"] { display: block; }
+
+  .clause {
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+  }
+  .clause:last-of-type { padding-bottom: 0; }
+
+  .clause-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .clause-num {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+  .clause h2 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 18.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .clause p {
+    margin: 0 0 12px;
+    color: var(--ink-soft);
+  }
+  .clause p:last-child { margin-bottom: 0; }
+  .clause a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  .clause code {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: .9em;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--ink);
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer .contact {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+  }
+  footer .contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  footer .contact a:hover { text-decoration: underline; }
+  footer .package {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    letter-spacing: .02em;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 40px 18px 64px; }
+    body { font-size: 16px; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="mark">か</span>
+      <span class="bar"></span>
+      <span class="wordmark">TypeKana</span>
+    </div>
+    <div>
+      <h1 data-t="fr">Politique de confidentialité</h1>
+      <h1 data-t="en" style="display:none">Privacy Policy</h1>
+      <div class="meta" style="margin-top:10px">
+        <span data-t="fr">Dernière mise à jour : 9 septembre 2026</span>
+        <span data-t="en" style="display:none">Last updated: September 9, 2026</span>
+        <span class="dot"></span>
+        <span>com.guillaumegrl.TypeKana</span>
+      </div>
+    </div>
+    <div class="langswitch" role="group" aria-label="Language">
+      <button id="btn-fr" type="button" aria-pressed="true">Français</button>
+      <button id="btn-en" type="button" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <!-- FRANÇAIS -->
+  <section class="doc" data-active="true" data-lang="fr">
+    <p class="intro">TypeKana est une application d'entraînement à la saisie de kana japonais, conçue pour fonctionner hors connexion. Voici, en clair, ce que ça implique pour tes données.</p>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">01</span><h2>Aperçu</h2></div>
+      <p>TypeKana ne demande ni compte, ni inscription, ni accès à Internet pour être utilisée — à l'exception de l'affichage des publicités qui financent son développement et gardent l'application gratuite.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Données que nous collectons</h2></div>
+      <p>TypeKana elle-même ne collecte, ne stocke sur un serveur et ne transmet aucune donnée personnelle. Ta progression (mots tapés, séries, meilleur score en mode Course) et tes réglages (langue, son, longueur des sessions) restent enregistrés uniquement sur ton appareil, dans son stockage local. Rien de tout cela ne quitte le téléphone.</p>
+      <p>Tu peux effacer ces données à tout moment depuis <code>Réglages → Réinitialiser ma progression</code>, ou en désinstallant l'application.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Publicités et Google AdMob</h2></div>
+      <p>L'application affiche des publicités (bannière, interstitielles, et vidéos récompensées optionnelles) fournies par Google AdMob. TypeKana ne demande que des publicités <strong>non personnalisées</strong> — aucun profil publicitaire n'est construit à partir de ton activité dans l'app.</p>
+      <p>Pour délivrer, mesurer et sécuriser ces publicités (prévention de la fraude, limitation de fréquence, ciblage géographique approximatif), Google traite néanmoins certaines données techniques — identifiant publicitaire, adresse IP, informations sur l'appareil — selon sa propre politique : <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a> et <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">policies.google.com/technologies/ads</a>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Consentement (RGPD / Royaume-Uni)</h2></div>
+      <p>Si tu te trouves dans l'Espace économique européen ou au Royaume-Uni, un formulaire de consentement certifié par Google s'affiche au premier lancement pour recueillir ton choix avant toute requête publicitaire. Tu peux revoir ou modifier ce choix à tout moment depuis <code>Réglages → Confidentialité des annonces</code>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">05</span><h2>Données des enfants</h2></div>
+      <p>TypeKana ne s'adresse pas spécifiquement aux enfants de moins de 13 ans et ne collecte sciemment aucune donnée personnelle auprès d'eux. Les publicités affichées sont limitées à un contenu tout public.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">06</span><h2>Tes droits</h2></div>
+      <p>Comme TypeKana ne conserve aucune donnée sur un serveur, il n'existe rien à consulter, exporter ou supprimer de notre côté au-delà de ce qui est déjà sur ton appareil (voir section 2). Pour les données traitées par Google dans le cadre des publicités, tu peux exercer tes droits (accès, suppression, opposition) depuis <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a> ou la politique de confidentialité de Google.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">07</span><h2>Modifications de cette politique</h2></div>
+      <p>Cette page peut évoluer avec l'application (nouvelles fonctionnalités, nouveaux partenaires publicitaires). La date en haut de page reflète la dernière modification.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">08</span><h2>Contact</h2></div>
+      <p>Une question sur cette politique ? Écris à <a href="mailto:grelier21@gmail.com">grelier21@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <!-- ENGLISH -->
+  <section class="doc" data-active="false" data-lang="en">
+    <p class="intro">TypeKana is an offline Japanese kana typing trainer. Here's plainly what that means for your data.</p>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">01</span><h2>Overview</h2></div>
+      <p>TypeKana doesn't require an account, sign-up, or an internet connection to use — except to show the ads that fund its development and keep the app free.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Data we collect</h2></div>
+      <p>TypeKana itself does not collect, store on a server, or transmit any personal data. Your progress (words typed, streaks, best Race score) and settings (language, sound, session length) are saved only on your device, in local storage. None of it ever leaves the phone.</p>
+      <p>You can erase this data anytime from <code>Settings → Reset my progress</code>, or by uninstalling the app.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Advertising & Google AdMob</h2></div>
+      <p>The app shows ads (banner, interstitial, and optional rewarded video) served by Google AdMob. TypeKana only requests <strong>non-personalized</strong> ads — no advertising profile is built from your activity in the app.</p>
+      <p>To deliver, measure, and secure those ads (fraud prevention, frequency capping, approximate geographic targeting), Google still processes some technical data — advertising identifier, IP address, device information — under its own policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a> and <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">policies.google.com/technologies/ads</a>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Consent (GDPR / UK)</h2></div>
+      <p>If you're in the European Economic Area or the UK, a Google-certified consent form appears on first launch to collect your choice before any ad is requested. You can review or change that choice anytime from <code>Settings → Ad privacy</code>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">05</span><h2>Children's data</h2></div>
+      <p>TypeKana isn't directed at children under 13 and doesn't knowingly collect personal data from them. Ads shown are limited to general-audience content.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">06</span><h2>Your rights</h2></div>
+      <p>Since TypeKana keeps no data on a server, there's nothing on our side to access, export, or delete beyond what's already on your device (see section 2). For data processed by Google for advertising, you can exercise your rights (access, deletion, objection) at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a> or through Google's privacy policy.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">07</span><h2>Changes to this policy</h2></div>
+      <p>This page may evolve alongside the app (new features, new ad partners). The date at the top reflects the latest change.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">08</span><h2>Contact</h2></div>
+      <p>Questions about this policy? Write to <a href="mailto:grelier21@gmail.com">grelier21@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="contact" data-t="fr">TypeKana — かな入力の練習</span>
+    <span class="contact" data-t="en" style="display:none">TypeKana — Japanese kana typing practice</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btnFr = document.getElementById('btn-fr');
+    var btnEn = document.getElementById('btn-en');
+    var docs = document.querySelectorAll('section.doc');
+    var tFr = document.querySelectorAll('[data-t="fr"]');
+    var tEn = document.querySelectorAll('[data-t="en"]');
+
+    function setLang(lang) {
+      docs.forEach(function (el) {
+        el.dataset.active = String(el.dataset.lang === lang);
+      });
+      tFr.forEach(function (el) { el.style.display = lang === 'fr' ? '' : 'none'; });
+      tEn.forEach(function (el) { el.style.display = lang === 'en' ? '' : 'none'; });
+      btnFr.setAttribute('aria-pressed', String(lang === 'fr'));
+      btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+      try { localStorage.setItem('typekana-privacy-lang', lang); } catch (e) {}
+    }
+
+    btnFr.addEventListener('click', function () { setLang('fr'); });
+    btnEn.addEventListener('click', function () { setLang('en'); });
+
+    try {
+      var saved = localStorage.getItem('typekana-privacy-lang');
+      if (saved === 'en' || saved === 'fr') {
+        setLang(saved);
+      } else if ((navigator.language || '').toLowerCase().indexOf('fr') !== 0) {
+        setLang('en');
+      }
+    } catch (e) {}
+  })();
+</script>

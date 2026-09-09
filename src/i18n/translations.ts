@@ -129,6 +129,8 @@ const fr = {
     tutorialSub: 'Installer et utiliser le clavier japonais',
     sound: 'Son et vibrations',
     soundSub: 'Retour sonore et haptique en tapant',
+    adsPrivacy: 'Confidentialité des annonces',
+    adsPrivacySub: 'Revoir mon consentement publicitaire',
     reset: 'Réinitialiser ma progression',
     resetTitle: 'Réinitialiser la progression ?',
     resetBody:
@@ -325,6 +327,8 @@ const en: Translations = {
     tutorialSub: 'Set up and use the Japanese keyboard',
     sound: 'Sound and vibration',
     soundSub: 'Sound and haptic feedback while typing',
+    adsPrivacy: 'Ad privacy',
+    adsPrivacySub: 'Review my advertising consent',
     reset: 'Reset my progress',
     resetTitle: 'Reset your progress?',
     resetBody:

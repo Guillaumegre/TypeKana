@@ -14,6 +14,22 @@ export function adUnitId(): string {
   return '';
 }
 
+export function canRequestAds(): boolean {
+  return false;
+}
+
+export function privacyOptionsRequired(): boolean {
+  return false;
+}
+
+export function subscribeToConsent(): () => void {
+  return () => {};
+}
+
+export function showAdsPrivacyOptions(): Promise<void> {
+  return Promise.resolve();
+}
+
 export type RewardedOutcome = 'earned' | 'dismissed' | 'unavailable';
 
 export function showRewardedAd(): Promise<RewardedOutcome> {

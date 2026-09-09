@@ -28,20 +28,93 @@ function loadAdsModule(): AdsModule | null {
 
 let initStarted = false;
 
+/**
+ * Google requires a certified CMP (the UMP SDK, wrapped here by `AdsConsent`) to gather
+ * consent before any ad — personalized or not — is requested from users in the EEA/UK.
+ * This starts false and only flips true once consent has actually been resolved, so a
+ * screen that renders before init finishes correctly shows no ads rather than jumping
+ * ahead of the user's choice.
+ */
+let canRequestAdsFlag = false;
+// Whether the "Confidentialité des annonces" settings row should offer to reopen the
+// consent form — true only for users where GDPR requires giving them that ongoing choice.
+let privacyOptionsRequiredFlag = false;
+const consentListeners = new Set<() => void>();
+
+function notifyConsentListeners(): void {
+  consentListeners.forEach((listener) => listener());
+}
+
+/** Whether consent has been resolved (or wasn't required) and ads may be requested. */
+export function canRequestAds(): boolean {
+  return canRequestAdsFlag;
+}
+
+export function privacyOptionsRequired(): boolean {
+  return privacyOptionsRequiredFlag;
+}
+
+/** For components that need to re-render once consent resolves — see AdBanner. */
+export function subscribeToConsent(listener: () => void): () => void {
+  consentListeners.add(listener);
+  return () => consentListeners.delete(listener);
+}
+
+/** Lets the settings screen reopen the UMP privacy-options form on demand. */
+export async function showAdsPrivacyOptions(): Promise<void> {
+  const ads = getAdsModule();
+  if (!ads) return;
+  try {
+    await ads.AdsConsent.showPrivacyOptionsForm();
+  } catch {
+    // Nothing to do — the row stays visible, the user can try again later.
+  }
+}
+
 /** Call once at app startup. Safe to call from anywhere; no-ops where ads aren't available. */
 export function initAds(): void {
   if (initStarted) return;
   initStarted = true;
   const ads = loadAdsModule();
   if (!ads) return;
-  // The whole init is guarded: a failure here is an ads problem, never a reason for the
-  // app itself to fail to start. initialize() also rejects rather than throwing, so it
-  // needs its own catch to avoid an unhandled rejection at boot.
   try {
     // Non-personalized ads only: no IDFA/ATT prompt needed, matches the app's offline,
     // no-tracking posture from the App Store privacy declaration.
     ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.PG });
-    ads.default().initialize().catch(() => {});
+  } catch {
+    // Ads stay off for this session.
+  }
+  gatherConsentThenInit(ads);
+}
+
+/**
+ * Requests up-to-date consent info, shows the UMP form if required, then only starts the
+ * Mobile Ads SDK (and unlocks ad requests) once consent is settled. Every step is guarded
+ * the same way as the rest of this file: a failure here is an ads problem, never a reason
+ * for the app to fail to start, and `initialize()`/`gatherConsent()` reject rather than
+ * throw, so each needs its own catch to avoid an unhandled rejection at boot.
+ */
+async function gatherConsentThenInit(ads: AdsModule): Promise<void> {
+  try {
+    await ads.AdsConsent.gatherConsent();
+  } catch {
+    // Consent gathering failed (e.g. no network) — fall back to whatever was resolved
+    // in a previous session below, per Google's own guidance for this case.
+  }
+  let allowed = false;
+  try {
+    const info = await ads.AdsConsent.getConsentInfo();
+    allowed = info.canRequestAds;
+    privacyOptionsRequiredFlag =
+      info.privacyOptionsRequirementStatus === ads.AdsConsentPrivacyOptionsRequirementStatus.REQUIRED;
+  } catch {
+    allowed = false;
+  }
+  canRequestAdsFlag = allowed;
+  notifyConsentListeners();
+  if (!allowed) return;
+  try {
+    await ads.default().initialize();
   } catch {
     // Ads stay off for this session.
   }
@@ -85,7 +158,7 @@ export type RewardedOutcome = 'earned' | 'dismissed' | 'unavailable';
 
 export function showRewardedAd(): Promise<RewardedOutcome> {
   const ads = getAdsModule();
-  if (!ads) return Promise.resolve('unavailable');
+  if (!ads || !canRequestAds()) return Promise.resolve('unavailable');
 
   return new Promise((resolve) => {
     let settled = false;
@@ -141,7 +214,7 @@ const INTERSTITIAL_TIMEOUT_MS = 8000;
  */
 export function showInterstitialAd(): Promise<void> {
   const ads = getAdsModule();
-  if (!ads) return Promise.resolve();
+  if (!ads || !canRequestAds()) return Promise.resolve();
 
   return new Promise((resolve) => {
     let settled = false;
