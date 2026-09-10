@@ -21,7 +21,8 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.guillaumegrl.TypeKana"
+      "package": "com.guillaumegrl.TypeKana",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"
