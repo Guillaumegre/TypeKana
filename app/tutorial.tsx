@@ -1,5 +1,5 @@
-import { useRouter } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
 import {
   Linking,
   NativeScrollEvent,
@@ -15,6 +15,7 @@ import {
 import { BackHeader } from '../src/components/BackHeader';
 import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
+import { markOnboarded } from '../src/utils/onboarding';
 
 const STEP_COUNT = 3;
 
@@ -98,6 +99,17 @@ export default function TutorialScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const [step, setStep] = useState(0);
 
+  // Opened automatically on the very first launch (see app/_layout.tsx). In that case
+  // "Terminé" and the back arrow go to the home screen, not to Settings, and we record
+  // that the user has seen it so it never auto-opens again.
+  const { first } = useLocalSearchParams<{ first?: string }>();
+  const isFirstRun = first === '1';
+  const exitTo = isFirstRun ? '/' : '/settings';
+
+  useEffect(() => {
+    if (isFirstRun) markOnboarded();
+  }, [isFirstRun]);
+
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const next = Math.round(e.nativeEvent.contentOffset.x / width);
     if (next !== step) setStep(next);
@@ -112,7 +124,7 @@ export default function TutorialScreen() {
 
   return (
     <View style={styles.screen}>
-      <BackHeader title={t.tutorial.title} onBack={() => router.replace('/settings')} />
+      <BackHeader title={t.tutorial.title} onBack={() => router.replace(exitTo)} />
 
       <ScrollView
         ref={scrollRef}
@@ -189,7 +201,7 @@ export default function TutorialScreen() {
           ))}
         </View>
         <Pressable
-          onPress={() => (isLast ? router.replace('/settings') : goToStep(step + 1))}
+          onPress={() => (isLast ? router.replace(exitTo) : goToStep(step + 1))}
           style={({ pressed }) => [styles.nextButton, pressed && styles.pressed]}
         >
           <Text style={styles.nextText}>{isLast ? t.tutorial.done : t.tutorial.next}</Text>
