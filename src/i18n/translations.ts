@@ -131,6 +131,8 @@ const fr = {
     soundSub: 'Retour sonore et haptique en tapant',
     adsPrivacy: 'Confidentialité des annonces',
     adsPrivacySub: 'Revoir mon consentement publicitaire',
+    privacyPolicy: 'Politique de confidentialité',
+    privacyPolicySub: 'Comment tes données sont traitées',
     reset: 'Réinitialiser ma progression',
     resetTitle: 'Réinitialiser la progression ?',
     resetBody:
@@ -329,6 +331,8 @@ const en: Translations = {
     soundSub: 'Sound and haptic feedback while typing',
     adsPrivacy: 'Ad privacy',
     adsPrivacySub: 'Review my advertising consent',
+    privacyPolicy: 'Privacy policy',
+    privacyPolicySub: 'How your data is handled',
     reset: 'Reset my progress',
     resetTitle: 'Reset your progress?',
     resetBody:

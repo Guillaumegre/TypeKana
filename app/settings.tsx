@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useSyncExternalStore } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { Alert, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../src/components/BackHeader';
 import { SESSION_LENGTHS, useSettings } from '../src/context/SettingsContext';
@@ -10,6 +10,10 @@ import { C, FONT, R } from '../src/theme';
 import { privacyOptionsRequired, showAdsPrivacyOptions, subscribeToConsent } from '../src/utils/ads';
 import { isPremiumUser } from '../src/utils/premium';
 import { resetProgress } from '../src/utils/resetProgress';
+
+// Served from GitHub Pages (docs/privacy-policy.html). Google Play requires the policy
+// to be reachable from inside the app, not only from the store listing.
+const PRIVACY_URL = 'https://guillaumegre.github.io/TypeKana/privacy-policy.html';
 
 // Two languages only, so the design's two-line "region over code" chip would repeat
 // itself (FR over FR). The name alone is clearer, and makes the current value obvious
@@ -149,6 +153,22 @@ export default function SettingsScreen() {
               </Pressable>
             </>
           )}
+
+          <View style={styles.divider} />
+
+          <Pressable
+            onPress={() => Linking.openURL(PRIVACY_URL).catch(() => {})}
+            style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}
+          >
+            <View style={styles.glyphBox}>
+              <Text style={styles.glyph}>📄</Text>
+            </View>
+            <View style={styles.rowText}>
+              <Text style={styles.rowLabel}>{t.settings.privacyPolicy}</Text>
+              <Text style={styles.rowSub}>{t.settings.privacyPolicySub}</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </Pressable>
         </Section>
 
         <Text style={styles.hint}>{t.settings.hint}</Text>
