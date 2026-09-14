@@ -12,6 +12,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../src/components/BackHeader';
 import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
@@ -95,6 +96,7 @@ function GlobeKeyDiagram({ space }: { space: string }) {
 export default function TutorialScreen() {
   const router = useRouter();
   const t = useT();
+  const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const scrollRef = useRef<ScrollView>(null);
   const [step, setStep] = useState(0);
@@ -194,7 +196,7 @@ export default function TutorialScreen() {
         </Step>
       </ScrollView>
 
-      <View style={styles.footer}>
+      <View style={[styles.footer, { paddingBottom: insets.bottom + 16 }]}>
         <View style={styles.dots}>
           {Array.from({ length: STEP_COUNT }).map((_, i) => (
             <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
@@ -405,7 +407,6 @@ const styles = StyleSheet.create({
     gap: 16,
     paddingHorizontal: 24,
     paddingTop: 12,
-    paddingBottom: 24,
     borderTopWidth: 1,
     borderTopColor: C.line,
   },
