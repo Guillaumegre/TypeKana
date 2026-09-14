@@ -9,7 +9,11 @@
  */
 export const REVENUECAT_API_KEYS = {
   ios: '',
-  android: '',
+  // Currently the "RevenueCat Test Store" app's key (test_...), not the real Google Play
+  // one — fine for testing the purchase flow end to end, but sandboxed: it never charges
+  // anyone. Swap this for the Google Play app's key (Project settings → Apps) before
+  // shipping a build meant for real users.
+  android: 'test_CMfJHOXopYLqrbwUemLeJWvlmwl',
 };
 
 /** Must match the Entitlement identifier created in the RevenueCat dashboard. */
