@@ -8,7 +8,12 @@ import { useT } from '../src/i18n';
 import type { Lang } from '../src/i18n/translations';
 import { C, FONT, R } from '../src/theme';
 import { privacyOptionsRequired, showAdsPrivacyOptions, subscribeToConsent } from '../src/utils/ads';
-import { isPremiumUser } from '../src/utils/premium';
+import {
+  isPremiumUser,
+  presentPremiumPaywall,
+  restorePurchases,
+  subscribeToPremium,
+} from '../src/utils/premium';
 import { resetProgress } from '../src/utils/resetProgress';
 
 // Served from GitHub Pages (docs/privacy-policy.html). Google Play requires the policy
@@ -41,12 +46,28 @@ export default function SettingsScreen() {
   // Only true once consent has resolved and the user is somewhere GDPR requires the
   // ongoing ability to revisit their ad consent choice (EEA/UK) — hidden everywhere else.
   const showAdsPrivacyRow = useSyncExternalStore(subscribeToConsent, privacyOptionsRequired);
+  const isPremium = useSyncExternalStore(subscribeToPremium, isPremiumUser);
 
   const onReset = () => {
     Alert.alert(t.settings.resetTitle, t.settings.resetBody, [
       { text: t.settings.resetCancel, style: 'cancel' },
       { text: t.settings.resetConfirm, style: 'destructive', onPress: () => resetProgress() },
     ]);
+  };
+
+  const onPressPremium = async () => {
+    const outcome = await presentPremiumPaywall();
+    if (outcome === 'unavailable') {
+      Alert.alert(t.settings.premiumUnavailableTitle, t.settings.premiumUnavailableBody);
+    }
+  };
+
+  const onRestore = async () => {
+    const restored = await restorePurchases();
+    Alert.alert(
+      restored ? t.settings.restoreFoundTitle : t.settings.restoreNoneTitle,
+      restored ? t.settings.restoreFoundBody : t.settings.restoreNoneBody,
+    );
   };
 
   return (
@@ -57,13 +78,23 @@ export default function SettingsScreen() {
         contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + 28 }]}
         showsVerticalScrollIndicator={false}
       >
-        {!isPremiumUser() && (
+        {isPremium ? (
           <View style={styles.premium}>
+            <Text style={styles.premiumWatermark}>極</Text>
+            <Text style={styles.premiumEyebrow}>{t.settings.premiumEyebrow}</Text>
+            <Text style={styles.premiumTitle}>{t.settings.premiumActiveTitle}</Text>
+            <Text style={styles.premiumSub}>{t.settings.premiumActiveSub}</Text>
+          </View>
+        ) : (
+          <Pressable
+            onPress={onPressPremium}
+            style={({ pressed }) => [styles.premium, pressed && styles.pressed]}
+          >
             <Text style={styles.premiumWatermark}>極</Text>
             <Text style={styles.premiumEyebrow}>{t.settings.premiumEyebrow}</Text>
             <Text style={styles.premiumTitle}>{t.settings.premiumTitle}</Text>
             <Text style={styles.premiumSub}>{t.settings.premiumSub}</Text>
-          </View>
+          </Pressable>
         )}
 
         <Section title={t.settings.sectionPractice}>
@@ -169,6 +200,25 @@ export default function SettingsScreen() {
             </View>
             <Text style={styles.chevron}>›</Text>
           </Pressable>
+
+          {!isPremium && (
+            <>
+              <View style={styles.divider} />
+              <Pressable
+                onPress={onRestore}
+                style={({ pressed }) => [styles.row, pressed && styles.pressedRow]}
+              >
+                <View style={styles.glyphBox}>
+                  <Text style={styles.glyph}>↺</Text>
+                </View>
+                <View style={styles.rowText}>
+                  <Text style={styles.rowLabel}>{t.settings.restore}</Text>
+                  <Text style={styles.rowSub}>{t.settings.restoreSub}</Text>
+                </View>
+                <Text style={styles.chevron}>›</Text>
+              </Pressable>
+            </>
+          )}
         </Section>
 
         <Text style={styles.hint}>{t.settings.hint}</Text>

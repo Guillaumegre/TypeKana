@@ -7,6 +7,7 @@ import { SettingsProvider } from '../src/context/SettingsContext';
 import { C } from '../src/theme';
 import { initAds } from '../src/utils/ads';
 import { hasOnboarded } from '../src/utils/onboarding';
+import { initPremium } from '../src/utils/premium';
 
 // Keep the native splash up until we know whether to open the tutorial, so a first-time
 // user never sees a flash of the home screen before the setup flow.
@@ -18,6 +19,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initAds();
+    initPremium();
   }, []);
 
   useEffect(() => {
