@@ -6,6 +6,10 @@ import { BackHeader } from '../../src/components/BackHeader';
 import { useT } from '../../src/i18n';
 import { C, R } from '../../src/theme';
 import { createList, deleteList, getLists, type CustomList } from '../../src/utils/customLists';
+import { isPremiumUser, presentPremiumPaywall } from '../../src/utils/premium';
+
+/** Custom lists beyond this many require premium — see t.lists.limitBody. */
+const FREE_LIST_LIMIT = 3;
 
 export default function CustomListsScreen() {
   const router = useRouter();
@@ -20,6 +24,13 @@ export default function CustomListsScreen() {
   useFocusEffect(reload);
 
   const onCreate = async () => {
+    if (!isPremiumUser() && lists.length >= FREE_LIST_LIMIT) {
+      Alert.alert(t.lists.limitTitle, t.lists.limitBody(FREE_LIST_LIMIT), [
+        { text: t.lists.cancel, style: 'cancel' },
+        { text: t.lists.limitCta, onPress: () => presentPremiumPaywall() },
+      ]);
+      return;
+    }
     const list = await createList(t.lists.defaultName(lists.length + 1));
     router.push({ pathname: '/training/list', params: { id: list.id } });
   };

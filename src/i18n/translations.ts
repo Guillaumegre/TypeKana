@@ -72,6 +72,10 @@ const fr = {
     delete: 'Supprimer',
     emptyList: 'Vide — ajoute des mots',
     wordCount: (n: number) => `${n} mot${n > 1 ? 's' : ''}`,
+    limitTitle: 'Limite de listes atteinte',
+    limitBody: (n: number) =>
+      `La version gratuite est limitée à ${n} listes perso. Passe au premium pour en créer autant que tu veux.`,
+    limitCta: 'Voir Premium',
   },
   listEdit: {
     title: 'Modifier la liste',
@@ -282,6 +286,10 @@ const en: Translations = {
     delete: 'Delete',
     emptyList: 'Empty — add some words',
     wordCount: (n: number) => `${n} word${n > 1 ? 's' : ''}`,
+    limitTitle: 'List limit reached',
+    limitBody: (n: number) =>
+      `The free version is limited to ${n} custom lists. Go premium to create as many as you want.`,
+    limitCta: 'See Premium',
   },
   listEdit: {
     title: 'Edit list',

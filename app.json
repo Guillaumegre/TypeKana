@@ -22,7 +22,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.guillaumegrl.TypeKana",
-      "versionCode": 5
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"
