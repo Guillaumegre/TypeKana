@@ -8,6 +8,7 @@
     "icon": "./assets/logo/typekana-icon-1024.png",
     "userInterfaceStyle": "light",
     "ios": {
+      "bundleIdentifier": "com.guillaumegrl.TypeKana",
       "supportsTablet": true,
       "icon": {
         "light": "./assets/logo/typekana-icon-1024.png",
@@ -22,7 +23,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.guillaumegrl.TypeKana",
-      "versionCode": 7
+      "versionCode": 8
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"
