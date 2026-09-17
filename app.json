@@ -22,7 +22,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.guillaumegrl.TypeKana",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"
@@ -61,12 +61,12 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#F2EFE8",
-          "image": "./assets/splash-icon.png",
-          "imageWidth": 288,
+          "image": "./assets/android-icon-foreground.png",
+          "imageWidth": 190,
           "resizeMode": "contain",
           "dark": {
             "backgroundColor": "#F2EFE8",
-            "image": "./assets/splash-icon.png"
+            "image": "./assets/android-icon-foreground.png"
           }
         }
       ]
