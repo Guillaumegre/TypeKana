@@ -9,7 +9,10 @@
     "userInterfaceStyle": "light",
     "ios": {
       "bundleIdentifier": "com.guillaumegrl.TypeKana",
-      "supportsTablet": true,
+      "supportsTablet": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      },
       "icon": {
         "light": "./assets/logo/typekana-icon-1024.png",
         "dark": "./assets/logo/typekana-icon-dark-1024.png"
@@ -23,7 +26,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.guillaumegrl.TypeKana",
-      "versionCode": 9
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"
@@ -34,6 +37,7 @@
       [
         "expo-audio",
         {
+          "microphonePermission": false,
           "recordAudioAndroid": false,
           "enableBackgroundPlayback": false
         }
@@ -64,11 +68,7 @@
           "backgroundColor": "#F2EFE8",
           "image": "./assets/android-icon-foreground.png",
           "imageWidth": 190,
-          "resizeMode": "contain",
-          "dark": {
-            "backgroundColor": "#F2EFE8",
-            "image": "./assets/android-icon-foreground.png"
-          }
+          "resizeMode": "contain"
         }
       ]
     ],
