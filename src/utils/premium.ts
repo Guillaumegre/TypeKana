@@ -80,6 +80,29 @@ function hasEntitlement(info: { entitlements: { active: Record<string, unknown> 
 }
 
 let initStarted = false;
+let configured = false;
+let paywallLocale: string | null = null;
+
+function applyPaywallLocale(): void {
+  const purchases = loadPurchases();
+  if (!purchases || !configured || !paywallLocale) return;
+  try {
+    purchases.overridePreferredLocale(paywallLocale).catch(() => {});
+  } catch {
+    // The paywall just keeps following the phone's language.
+  }
+}
+
+/**
+ * The hosted paywall follows the phone's language by default, but the app has its own
+ * language switch — mirror it, so an English-speaking user on a French phone doesn't get a
+ * French paywall inside an English app. Safe to call before initPremium(): the value is
+ * kept and applied as soon as the SDK is configured.
+ */
+export function syncPaywallLanguage(lang: string): void {
+  paywallLocale = lang;
+  applyPaywallLocale();
+}
 
 /** Call once at app startup. Safe to call from anywhere; no-ops where purchases aren't available. */
 export function initPremium(): void {
@@ -90,6 +113,8 @@ export function initPremium(): void {
 
   try {
     purchases.configure({ apiKey: apiKeyFor(Platform.OS) });
+    configured = true;
+    applyPaywallLocale();
     purchases.addCustomerInfoUpdateListener((info) => setPremium(hasEntitlement(info)));
     purchases
       .getCustomerInfo()

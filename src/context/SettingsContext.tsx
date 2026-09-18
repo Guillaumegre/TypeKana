@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { detectDeviceLang } from '../i18n/detect';
 import type { Lang } from '../i18n/translations';
+import { syncPaywallLanguage } from '../utils/premium';
 
 const STORAGE_KEY = 'typekana:settings';
 
@@ -60,6 +61,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       .catch(() => {})
       .finally(() => setLoaded(true));
   }, []);
+
+  useEffect(() => {
+    syncPaywallLanguage(settings.lang);
+  }, [settings.lang]);
 
   const update = (next: Partial<Settings>) => {
     setSettings((prev) => {

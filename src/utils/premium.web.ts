@@ -14,6 +14,8 @@ export function subscribeToPremium(): () => void {
 
 export function initPremium(): void {}
 
+export function syncPaywallLanguage(_lang: string): void {}
+
 export type PaywallOutcome = 'purchased' | 'restored' | 'cancelled' | 'unavailable';
 
 export function presentPremiumPaywall(): Promise<PaywallOutcome> {
