@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -39,6 +40,8 @@ type Feedback = 'idle' | 'correct';
 
 const RACE_DURATION = 60;
 const RACE_QUEUE_SIZE = 3;
+/** Below this many dp above the keyboard, the game layout switches to its compact form. */
+const COMPACT_STAGE_HEIGHT = 380;
 
 function makeRaceQueue(used: Set<string>): GameEntry[] {
   const queue: GameEntry[] = [];
@@ -165,6 +168,15 @@ export default function GameScreen() {
       // A storage failure must never lock a player out of their own practice.
       .catch(() => setGate('open'));
   }, [gate]);
+
+  // Premium sessions aren't gated, but they still count toward the "sessions today" tally
+  // on the home screen (shown as N/∞). Resuming an interrupted session isn't a new one.
+  const premiumCountedRef = useRef(false);
+  useEffect(() => {
+    if (!isPremiumUser() || wantsResume || premiumCountedRef.current) return;
+    premiumCountedRef.current = true;
+    consumeSession().catch(() => {});
+  }, [wantsResume]);
 
   const onWatchAd = async () => {
     setAdPending(true);
@@ -526,6 +538,14 @@ export default function GameScreen() {
 
   const showError = liveInvalid;
 
+  // Height left for the word + input once the keyboard is up. On a shorter phone with a
+  // tall Japanese keyboard, the full layout doesn't fit and "Valider" ends up underneath
+  // it — so below this height the decorative parts (theme label, emoji) fold away and the
+  // spacing tightens. It is driven by the available height, never by the content's, so it
+  // can't oscillate; the ScrollView below is the safety net for anything still too tall.
+  const [stageHeight, setStageHeight] = useState(0);
+  const compact = stageHeight > 0 && stageHeight < COMPACT_STAGE_HEIGHT;
+
   return (
     <KeyboardAvoidingView
       style={[styles.screen, { paddingTop: insets.top + 14 }]}
@@ -579,17 +599,31 @@ export default function GameScreen() {
         </View>
       )}
 
-      <View style={styles.stage}>
-        {!!themeLabel && !isRace && <Text style={styles.themeLabel}>{themeLabel}</Text>}
+      <ScrollView
+        style={styles.stageScroll}
+        contentContainerStyle={styles.stage}
+        // "handled": taps on Valider/Passer must not first dismiss the keyboard the game
+        // keeps open on purpose.
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        onLayout={(e) => setStageHeight(e.nativeEvent.layout.height)}
+      >
+        {!!themeLabel && !isRace && !compact && <Text style={styles.themeLabel}>{themeLabel}</Text>}
 
+        {/* In Test mode the emoji/colour is the cue, so it stays (smaller); elsewhere it folds away. */}
         {!isRace &&
+          (blindMode || !compact) &&
           (currentWord.color ? (
             <View
-              style={[styles.colorSwatch, blindMode && styles.colorSwatchLarge, { backgroundColor: currentWord.color }]}
+              style={[
+                styles.colorSwatch,
+                blindMode && !compact && styles.colorSwatchLarge,
+                { backgroundColor: currentWord.color },
+              ]}
             />
           ) : (
             !!currentWord.emoji && (
-              <Text style={[styles.emoji, blindMode && styles.emojiLarge]}>{currentWord.emoji}</Text>
+              <Text style={[styles.emoji, blindMode && !compact && styles.emojiLarge]}>{currentWord.emoji}</Text>
             )
           ))}
 
@@ -619,6 +653,7 @@ export default function GameScreen() {
         <Animated.View
           style={[
             styles.inputWrap,
+            compact && styles.inputWrapCompact,
             showError && styles.inputWrapError,
             feedback === 'correct' && styles.inputWrapOk,
             {
@@ -647,7 +682,11 @@ export default function GameScreen() {
         {!isRace && (
           <Pressable
             onPress={handleSubmit}
-            style={({ pressed }) => [styles.submitButton, pressed && styles.pressedCard]}
+            style={({ pressed }) => [
+              styles.submitButton,
+              compact && styles.submitButtonCompact,
+              pressed && styles.pressedCard,
+            ]}
           >
             <Text style={styles.submitText}>{t.game.validate}</Text>
           </Pressable>
@@ -656,11 +695,11 @@ export default function GameScreen() {
         <Pressable
           onPress={handleSkip}
           hitSlop={8}
-          style={({ pressed }) => [styles.skipButton, pressed && styles.pressedSoft]}
+          style={({ pressed }) => [styles.skipButton, compact && styles.skipButtonCompact, pressed && styles.pressedSoft]}
         >
           <Text style={styles.skipText}>{t.game.skip}</Text>
         </Pressable>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
@@ -795,14 +834,17 @@ const styles = StyleSheet.create({
     marginTop: 8,
     textAlign: 'right',
   },
-  stage: {
+  stageScroll: {
     flex: 1,
+    minHeight: 0,
+  },
+  stage: {
     alignItems: 'center',
     // Anchored to the top rather than vertically centred: the keyboard opens on its own
     // (autoFocus), and centred content visibly slides up as the free height shrinks.
     justifyContent: 'flex-start',
     paddingTop: 14,
-    minHeight: 0,
+    paddingBottom: 16,
   },
   themeLabel: {
     fontSize: 11,
@@ -876,6 +918,9 @@ const styles = StyleSheet.create({
     borderBottomColor: C.lineStrong,
     marginTop: 18,
   },
+  inputWrapCompact: {
+    marginTop: 10,
+  },
   inputWrapError: {
     borderBottomColor: C.accent,
   },
@@ -898,6 +943,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 18,
   },
+  submitButtonCompact: {
+    marginTop: 10,
+    paddingVertical: 12,
+  },
   submitText: {
     color: C.onDark,
     fontSize: 16,
@@ -911,6 +960,9 @@ const styles = StyleSheet.create({
     borderRadius: R.sm,
     paddingVertical: 8,
     paddingHorizontal: 20,
+  },
+  skipButtonCompact: {
+    marginTop: 6,
   },
   skipText: {
     fontSize: 12.5,

@@ -7,6 +7,7 @@ export type Lang = 'fr' | 'en';
 const fr = {
   home: {
     subtitle: 'Apprendre le clavier japonais, un mot à la fois.',
+    sessionsToday: 'Sessions du jour',
     stats: (days: number, words: number) =>
       `${days} jour${days > 1 ? 's' : ''} de suite · ${words} mot${words > 1 ? 's' : ''} tapé${words > 1 ? 's' : ''}`,
     trainingEyebrow: 'ENTRAÎNEMENT',
@@ -123,10 +124,10 @@ const fr = {
     title: 'Réglages',
     titleJa: '設定',
     premiumEyebrow: 'TYPEKANA PREMIUM',
-    premiumTitle: 'Sessions illimitées, zéro pub',
+    premiumTitle: 'Sessions et listes illimitées, zéro pub',
     premiumSub: 'Voir les offres',
     premiumActiveTitle: 'Premium actif',
-    premiumActiveSub: 'Merci pour ton soutien — zéro pub, sessions illimitées.',
+    premiumActiveSub: 'Merci pour ton soutien — zéro pub, sessions et listes illimitées.',
     premiumUnavailableTitle: 'Indisponible pour l’instant',
     premiumUnavailableBody: 'Le premium n’a pas pu s’ouvrir. Vérifie ta connexion et réessaie dans un instant.',
     restore: 'Restaurer mes achats',
@@ -221,6 +222,7 @@ export type Translations = typeof fr;
 const en: Translations = {
   home: {
     subtitle: 'Learn the Japanese keyboard, one word at a time.',
+    sessionsToday: 'Today’s sessions',
     stats: (days: number, words: number) =>
       `${days} day${days > 1 ? 's' : ''} in a row · ${words} word${words > 1 ? 's' : ''} typed`,
     trainingEyebrow: 'PRACTICE',
@@ -337,10 +339,10 @@ const en: Translations = {
     title: 'Settings',
     titleJa: '設定',
     premiumEyebrow: 'TYPEKANA PREMIUM',
-    premiumTitle: 'Unlimited sessions, no ads',
+    premiumTitle: 'Unlimited sessions and lists, no ads',
     premiumSub: 'See the plans',
     premiumActiveTitle: 'Premium active',
-    premiumActiveSub: 'Thanks for your support — no ads, unlimited sessions.',
+    premiumActiveSub: 'Thanks for your support — no ads, unlimited sessions and lists.',
     premiumUnavailableTitle: 'Not available right now',
     premiumUnavailableBody: 'Premium couldn’t open. Check your connection and try again in a moment.',
     restore: 'Restore purchases',

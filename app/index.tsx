@@ -2,6 +2,7 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SessionCounter } from '../src/components/SessionCounter';
 import { getCategory } from '../src/data/vocab';
 import { useT } from '../src/i18n';
 import { C, FONT, R } from '../src/theme';
@@ -43,6 +44,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.topRow}>
+          <SessionCounter />
           <Pressable
             onPress={() => router.push('/settings')}
             hitSlop={10}
@@ -155,9 +157,11 @@ const styles = StyleSheet.create({
   },
   topRow: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   settingsButton: {
+    // Pushes the gear to the right whether or not the session counter has loaded yet.
+    marginLeft: 'auto',
     width: 44,
     height: 44,
     alignItems: 'center',
