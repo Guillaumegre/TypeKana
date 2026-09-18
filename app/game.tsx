@@ -148,6 +148,17 @@ export default function GameScreen() {
   const lastTextRef = useRef('');
   const shakeAnim = useRef(new Animated.Value(0)).current;
 
+  // Height left for the word + input once the keyboard is up. On a shorter phone with a
+  // tall Japanese keyboard, the full layout doesn't fit and "Valider" ends up underneath
+  // it — so below this height the decorative parts (theme label, emoji) fold away and the
+  // spacing tightens. It is driven by the available height, never by the content's, so it
+  // can't oscillate; the ScrollView below is the safety net for anything still too tall.
+  // Must stay up here with the other hooks: the early returns below (quota check, pause
+  // screen, loading) come first on a real phone, and a hook declared after them changes
+  // the hook count between renders and crashes the screen.
+  const [stageHeight, setStageHeight] = useState(0);
+  const compact = stageHeight > 0 && stageHeight < COMPACT_STAGE_HEIGHT;
+
   // Daily allowance. Resuming an interrupted session doesn't spend a new one, and premium
   // players skip the check entirely. It is also skipped where ads can't run at all (web,
   // Expo Go): the limit is only fair because a rewarded ad can always lift it, so without
@@ -538,13 +549,6 @@ export default function GameScreen() {
 
   const showError = liveInvalid;
 
-  // Height left for the word + input once the keyboard is up. On a shorter phone with a
-  // tall Japanese keyboard, the full layout doesn't fit and "Valider" ends up underneath
-  // it — so below this height the decorative parts (theme label, emoji) fold away and the
-  // spacing tightens. It is driven by the available height, never by the content's, so it
-  // can't oscillate; the ScrollView below is the safety net for anything still too tall.
-  const [stageHeight, setStageHeight] = useState(0);
-  const compact = stageHeight > 0 && stageHeight < COMPACT_STAGE_HEIGHT;
 
   return (
     <KeyboardAvoidingView
