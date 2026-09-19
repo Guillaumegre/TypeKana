@@ -19,11 +19,11 @@ export const AD_UNITS = {
     rewarded: 'ca-app-pub-3994431410855220/8860683559',
     interstitial: 'ca-app-pub-3994431410855220/8351853994',
   },
-  // No iOS app in AdMob yet (it waits on the Apple Developer account), so iOS keeps
-  // falling back to the test units.
+  // Units of the iOS app in AdMob. They only serve if the iOS App ID in app.json
+  // (`iosAppId` of the react-native-google-mobile-ads plugin) belongs to that same app.
   ios: {
-    banner: '',
-    rewarded: '',
-    interstitial: '',
+    banner: 'ca-app-pub-3994431410855220/3944966435',
+    rewarded: 'ca-app-pub-3994431410855220/9698846839',
+    interstitial: 'ca-app-pub-3994431410855220/3892995546',
   },
 };
