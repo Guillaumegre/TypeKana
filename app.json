@@ -11,12 +11,14 @@
       "bundleIdentifier": "com.guillaumegrl.TypeKana",
       "supportsTablet": false,
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleLocalizations": ["fr", "en"]
       },
       "icon": {
         "light": "./assets/logo/typekana-icon-1024.png",
         "dark": "./assets/logo/typekana-icon-dark-1024.png"
-      }
+      },
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
@@ -70,7 +72,8 @@
           "imageWidth": 190,
           "resizeMode": "contain"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "extra": {
       "router": {},

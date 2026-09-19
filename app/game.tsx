@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -40,8 +41,24 @@ type Feedback = 'idle' | 'correct';
 
 const RACE_DURATION = 60;
 const RACE_QUEUE_SIZE = 3;
-/** Below this many dp above the keyboard, the game layout switches to its compact form. */
-const COMPACT_STAGE_HEIGHT = 380;
+/**
+ * How much of the game layout folds away, decided from the window's height alone — never
+ * from the room left above the keyboard. That room only shrinks once the keyboard opens, so
+ * reacting to it made the whole screen jump (and the emoji vanish) right after the first
+ * frame. The window height is known before anything is drawn, so the layout is settled from
+ * the start and doesn't move when the keyboard appears.
+ *   0  tall phones   everything
+ *   1                tighter spacing
+ *   2                + no theme label
+ *   3  short screens + no emoji (except in Test mode, where it is the cue)
+ * The ScrollView stays as the safety net for anything still too tall for the space left.
+ */
+function tightnessFor(windowHeight: number): 0 | 1 | 2 | 3 {
+  if (windowHeight >= 880) return 0;
+  if (windowHeight >= 840) return 1;
+  if (windowHeight >= 810) return 2;
+  return 3;
+}
 
 function makeRaceQueue(used: Set<string>): GameEntry[] {
   const queue: GameEntry[] = [];
@@ -148,16 +165,13 @@ export default function GameScreen() {
   const lastTextRef = useRef('');
   const shakeAnim = useRef(new Animated.Value(0)).current;
 
-  // Height left for the word + input once the keyboard is up. On a shorter phone with a
-  // tall Japanese keyboard, the full layout doesn't fit and "Valider" ends up underneath
-  // it — so below this height the decorative parts (theme label, emoji) fold away and the
-  // spacing tightens. It is driven by the available height, never by the content's, so it
-  // can't oscillate; the ScrollView below is the safety net for anything still too tall.
+  // On a shorter phone with a tall Japanese keyboard the full layout doesn't fit and
+  // "Valider" ends up underneath it, hence the folding-away levels (see tightnessFor).
   // Must stay up here with the other hooks: the early returns below (quota check, pause
   // screen, loading) come first on a real phone, and a hook declared after them changes
   // the hook count between renders and crashes the screen.
-  const [stageHeight, setStageHeight] = useState(0);
-  const compact = stageHeight > 0 && stageHeight < COMPACT_STAGE_HEIGHT;
+  const { height: windowHeight } = useWindowDimensions();
+  const tightness = tightnessFor(windowHeight);
 
   // Daily allowance. Resuming an interrupted session doesn't spend a new one, and premium
   // players skip the check entirely. It is also skipped where ads can't run at all (web,
@@ -610,24 +624,23 @@ export default function GameScreen() {
         // keeps open on purpose.
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        onLayout={(e) => setStageHeight(e.nativeEvent.layout.height)}
       >
-        {!!themeLabel && !isRace && !compact && <Text style={styles.themeLabel}>{themeLabel}</Text>}
+        {!!themeLabel && !isRace && tightness < 2 && <Text style={styles.themeLabel}>{themeLabel}</Text>}
 
         {/* In Test mode the emoji/colour is the cue, so it stays (smaller); elsewhere it folds away. */}
         {!isRace &&
-          (blindMode || !compact) &&
+          (blindMode || tightness < 3) &&
           (currentWord.color ? (
             <View
               style={[
                 styles.colorSwatch,
-                blindMode && !compact && styles.colorSwatchLarge,
+                blindMode && tightness < 3 && styles.colorSwatchLarge,
                 { backgroundColor: currentWord.color },
               ]}
             />
           ) : (
             !!currentWord.emoji && (
-              <Text style={[styles.emoji, blindMode && !compact && styles.emojiLarge]}>{currentWord.emoji}</Text>
+              <Text style={[styles.emoji, blindMode && tightness < 3 && styles.emojiLarge]}>{currentWord.emoji}</Text>
             )
           ))}
 
@@ -657,7 +670,7 @@ export default function GameScreen() {
         <Animated.View
           style={[
             styles.inputWrap,
-            compact && styles.inputWrapCompact,
+            tightness >= 1 && styles.inputWrapCompact,
             showError && styles.inputWrapError,
             feedback === 'correct' && styles.inputWrapOk,
             {
@@ -688,7 +701,7 @@ export default function GameScreen() {
             onPress={handleSubmit}
             style={({ pressed }) => [
               styles.submitButton,
-              compact && styles.submitButtonCompact,
+              tightness >= 1 && styles.submitButtonCompact,
               pressed && styles.pressedCard,
             ]}
           >
@@ -699,7 +712,7 @@ export default function GameScreen() {
         <Pressable
           onPress={handleSkip}
           hitSlop={8}
-          style={({ pressed }) => [styles.skipButton, compact && styles.skipButtonCompact, pressed && styles.pressedSoft]}
+          style={({ pressed }) => [styles.skipButton, tightness >= 1 && styles.skipButtonCompact, pressed && styles.pressedSoft]}
         >
           <Text style={styles.skipText}>{t.game.skip}</Text>
         </Pressable>
