@@ -8,7 +8,9 @@
  * crashing — see src/utils/premium.ts.
  */
 export const REVENUECAT_API_KEYS = {
-  ios: '',
+  // The App Store app's key (appl_...). Purchases only work once the iOS products exist in
+  // App Store Connect and are attached to the packages and the `premium` entitlement.
+  ios: 'appl_tPqcIYUqaEfZxLEgfqKSnCOUnfh',
   // The real Google Play app's key (goog_...) — real purchases, real money. The
   // Test Store key (test_...) used earlier for sandboxed testing is retired.
   android: 'goog_AmBQkyQfzSfUdxBEyikQANQdIWS',
