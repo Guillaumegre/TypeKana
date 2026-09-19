@@ -13,7 +13,8 @@ Tout est vérifié par rapport aux limites d'App Store Connect. Le nom de l'app 
 | Catégorie secondaire | Référence |
 | Classification par âge | 4+ (aucun contenu sensible) |
 | URL de politique de confidentialité | https://guillaumegre.github.io/TypeKana/privacy-policy.html |
-| URL d'assistance (obligatoire) | à créer — voir « Reste à faire » |
+| URL d'assistance (obligatoire) | https://guillaumegre.github.io/TypeKana/support.html |
+| Conditions d'utilisation (lien du paywall) | https://guillaumegre.github.io/TypeKana/terms.html |
 | Connexion requise pour la revue | Non |
 
 ## Français
@@ -156,7 +157,7 @@ Point de départ, à recouper avec les pages officielles avant de valider :
 
 ## Reste à faire avant la soumission
 
-- [ ] Page d'assistance (URL obligatoire chez Apple), avec une adresse de contact
+- [x] Page d'assistance (`docs/support.html`) et conditions d'utilisation (`docs/terms.html`)
 - [ ] Captures d'écran iPhone (6,9" ou 6,7") — voir la procédure dans la conversation
 - [ ] Vrais identifiants AdMob iOS dans `app.json` et `src/config/adUnits.ts`
 - [ ] Clé RevenueCat iOS (`appl_...`) dans `src/config/revenueCat.ts`

@@ -1,0 +1,399 @@
+<title>TypeKana — Terms of Use</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2EFE8;
+    --card: #FBF9F5;
+    --ink: #14161A;
+    --ink-soft: rgba(20,22,26,.64);
+    --ink-faint: rgba(20,22,26,.42);
+    --line: rgba(20,22,26,.12);
+    --line-strong: rgba(20,22,26,.2);
+    --accent: #C8452A;
+    --accent-ink: #FBF9F5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #18140F;
+      --card: #221C15;
+      --ink: #F2EFE8;
+      --ink-soft: rgba(242,239,232,.7);
+      --ink-faint: rgba(242,239,232,.46);
+      --line: rgba(242,239,232,.14);
+      --line-strong: rgba(242,239,232,.22);
+      --accent: #E17750;
+      --accent-ink: #18140F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #18140F;
+    --card: #221C15;
+    --ink: #F2EFE8;
+    --ink-soft: rgba(242,239,232,.7);
+    --ink-faint: rgba(242,239,232,.46);
+    --line: rgba(242,239,232,.14);
+    --line-strong: rgba(242,239,232,.22);
+    --accent: #E17750;
+    --accent-ink: #18140F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .jp {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 44px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mark {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .bar {
+    width: 4px;
+    height: 22px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  .wordmark {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  h1 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: var(--ink-faint);
+  }
+  .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+
+  .langswitch {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .langswitch button {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .langswitch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .langswitch button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .intro {
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  section.doc { display: none; }
+  section.doc[data-active="true"] { display: block; }
+
+  .clause {
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+  }
+  .clause:last-of-type { padding-bottom: 0; }
+
+  .clause-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .clause-num {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+  .clause h2 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 18.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .clause p {
+    margin: 0 0 12px;
+    color: var(--ink-soft);
+  }
+  .clause p:last-child { margin-bottom: 0; }
+  .clause a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  .clause code {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: .9em;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--ink);
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer .contact {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+  }
+  footer .contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  footer .contact a:hover { text-decoration: underline; }
+  footer .package {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    letter-spacing: .02em;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 40px 18px 64px; }
+    body { font-size: 16px; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="mark">か</span>
+      <span class="bar"></span>
+      <span class="wordmark">TypeKana</span>
+    </div>
+    <div>
+      <h1 data-t="fr">Conditions d'utilisation</h1>
+      <h1 data-t="en" style="display:none">Terms of Use</h1>
+      <div class="meta" style="margin-top:10px">
+        <span data-t="fr">Dernière mise à jour : 19 septembre 2026</span>
+        <span data-t="en" style="display:none">Last updated: September 19, 2026</span>
+        <span class="dot"></span>
+        <span>com.guillaumegrl.TypeKana</span>
+      </div>
+    </div>
+    <div class="langswitch" role="group" aria-label="Language">
+      <button id="btn-fr" type="button" aria-pressed="true">Français</button>
+      <button id="btn-en" type="button" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <section class="doc" data-active="true" data-lang="fr">
+    <p class="intro">Ces conditions encadrent l'utilisation de l'application TypeKana. En l'utilisant, tu les acceptes.</p>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">01</span><h2>Licence d'utilisation</h2></div>
+      <p>TypeKana t'accorde une licence personnelle, non exclusive et non transférable pour utiliser l'application sur tes appareils, à des fins personnelles et non commerciales. Tu ne peux ni copier, modifier ou revendre l'application, ni tenter d'en extraire le code, sauf dans les limites permises par la loi.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Version gratuite et publicités</h2></div>
+      <p>La version gratuite est financée par des publicités (Google AdMob) et propose 5 sessions d'entraînement par jour et 3 listes personnelles. Regarder une publicité récompensée débloque une session supplémentaire. Les données liées aux publicités sont détaillées dans la <a href="privacy-policy.html">politique de confidentialité</a>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Abonnement premium</h2></div>
+      <p>TypeKana Premium est un abonnement optionnel, mensuel ou annuel, qui supprime les publicités et lève les limites de sessions et de listes. Le prix et la durée sont affichés dans l'application avant l'achat, dans ta devise. Les nouveaux abonnés éligibles peuvent bénéficier d'un essai gratuit de 3 jours.</p>
+      <p>Le paiement est prélevé sur ton compte Google Play (Android) ou Apple (iOS) à la confirmation de l'achat, ou à la fin de l'essai gratuit. L'abonnement se renouvelle automatiquement à chaque période, sauf résiliation au moins 24 heures avant la fin de la période en cours.</p>
+      <p>Tu peux gérer et résilier ton abonnement à tout moment depuis les réglages de ton compte Google Play ou Apple. Désinstaller l'application ne le résilie pas. Les remboursements sont traités par Google ou Apple, selon leurs propres règles.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Contenu pédagogique</h2></div>
+      <p>Le vocabulaire et les phrases sont proposés à titre pédagogique, avec le plus grand soin, mais sans garantie d'exactitude absolue ni de résultat à un examen (JLPT ou autre). Les listes que tu crées restent les tiennes et ne quittent pas ton appareil.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">05</span><h2>Propriété intellectuelle</h2></div>
+      <p>L'application, son nom, son logo et son contenu sont protégés. Tous droits réservés, sauf mention contraire.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">06</span><h2>Disponibilité et responsabilité</h2></div>
+      <p>TypeKana est fournie « en l'état ». Nous faisons le nécessaire pour qu'elle fonctionne bien, mais ne pouvons garantir un service ininterrompu et sans erreur. Dans les limites permises par la loi, notre responsabilité ne peut être engagée pour des dommages indirects. Ces conditions ne limitent pas les droits que la loi te reconnaît en tant que consommateur, notamment les garanties légales.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">07</span><h2>Utilisateurs d'iPhone</h2></div>
+      <p>Sur iOS, le contrat de licence standard d'Apple (<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Licensed Application End User License Agreement</a>) s'applique en complément de ces conditions. En cas de contradiction, il prévaut pour l'utilisation de l'application sur iOS.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">08</span><h2>Droit applicable</h2></div>
+      <p>Ces conditions sont régies par le droit français. Si tu es un consommateur résidant dans l'Union européenne, tu conserves la protection des dispositions impératives du pays où tu résides.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">09</span><h2>Modifications</h2></div>
+      <p>Ces conditions peuvent évoluer avec l'application. La date en haut de page reflète la dernière modification ; continuer à utiliser TypeKana après une mise à jour vaut acceptation.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">10</span><h2>Contact</h2></div>
+      <p>Une question sur ces conditions ? Écris à <a href="mailto:grelier21@gmail.com">grelier21@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <section class="doc" data-active="false" data-lang="en">
+    <p class="intro">These terms govern your use of the TypeKana app. By using it, you accept them.</p>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">01</span><h2>License</h2></div>
+      <p>TypeKana grants you a personal, non-exclusive, non-transferable license to use the app on your devices for personal, non-commercial purposes. You may not copy, modify or resell the app, or attempt to extract its code, except as permitted by law.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">02</span><h2>Free version and ads</h2></div>
+      <p>The free version is funded by ads (Google AdMob) and offers 5 practice sessions a day and 3 custom lists. Watching a rewarded ad unlocks one extra session. Data related to ads is described in the <a href="privacy-policy.html">privacy policy</a>.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">03</span><h2>Premium subscription</h2></div>
+      <p>TypeKana Premium is an optional monthly or annual subscription that removes ads and lifts the session and list limits. The price and duration are shown in the app before you buy, in your currency. Eligible new subscribers may get a 3-day free trial.</p>
+      <p>Payment is charged to your Google Play (Android) or Apple (iOS) account when the purchase is confirmed, or when the free trial ends. The subscription renews automatically each period unless you cancel at least 24 hours before the end of the current period.</p>
+      <p>You can manage and cancel your subscription at any time from your Google Play or Apple account settings. Uninstalling the app does not cancel it. Refunds are handled by Google or Apple under their own rules.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">04</span><h2>Educational content</h2></div>
+      <p>Vocabulary and sentences are provided for learning purposes, with great care, but without any guarantee of absolute accuracy or of results on an exam (JLPT or otherwise). The lists you create remain yours and never leave your device.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">05</span><h2>Intellectual property</h2></div>
+      <p>The app, its name, logo and content are protected. All rights reserved unless stated otherwise.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">06</span><h2>Availability and liability</h2></div>
+      <p>TypeKana is provided “as is”. We do our best to keep it working well, but cannot guarantee uninterrupted, error-free service. To the extent permitted by law, we are not liable for indirect damages. These terms do not limit the rights the law gives you as a consumer, including statutory guarantees.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">07</span><h2>iPhone users</h2></div>
+      <p>On iOS, Apple's standard license agreement (<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Licensed Application End User License Agreement</a>) applies in addition to these terms. If they conflict, it prevails for use of the app on iOS.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">08</span><h2>Governing law</h2></div>
+      <p>These terms are governed by French law. If you are a consumer residing in the European Union, you keep the protection of the mandatory provisions of the country where you live.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">09</span><h2>Changes</h2></div>
+      <p>These terms may change alongside the app. The date at the top reflects the latest change; continuing to use TypeKana after an update means you accept it.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-head"><span class="clause-num">10</span><h2>Contact</h2></div>
+      <p>Questions about these terms? Write to <a href="mailto:grelier21@gmail.com">grelier21@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="contact" data-t="fr"><a href="terms.html">Conditions d'utilisation</a> · <a href="privacy-policy.html">Confidentialité</a> · <a href="support.html">Assistance</a></span>
+    <span class="contact" data-t="en" style="display:none"><a href="terms.html">Terms of Use</a> · <a href="privacy-policy.html">Privacy</a> · <a href="support.html">Support</a></span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btnFr = document.getElementById('btn-fr');
+    var btnEn = document.getElementById('btn-en');
+    var docs = document.querySelectorAll('section.doc');
+    var tFr = document.querySelectorAll('[data-t="fr"]');
+    var tEn = document.querySelectorAll('[data-t="en"]');
+
+    function setLang(lang) {
+      docs.forEach(function (el) {
+        el.dataset.active = String(el.dataset.lang === lang);
+      });
+      tFr.forEach(function (el) { el.style.display = lang === 'fr' ? '' : 'none'; });
+      tEn.forEach(function (el) { el.style.display = lang === 'en' ? '' : 'none'; });
+      btnFr.setAttribute('aria-pressed', String(lang === 'fr'));
+      btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+      try { localStorage.setItem('typekana-privacy-lang', lang); } catch (e) {}
+    }
+
+    btnFr.addEventListener('click', function () { setLang('fr'); });
+    btnEn.addEventListener('click', function () { setLang('en'); });
+
+    try {
+      var saved = localStorage.getItem('typekana-privacy-lang');
+      if (saved === 'en' || saved === 'fr') {
+        setLang(saved);
+      } else if ((navigator.language || '').toLowerCase().indexOf('fr') !== 0) {
+        setLang('en');
+      }
+    } catch (e) {}
+  })();
+</script>
