@@ -9,7 +9,7 @@ Le texte ci-dessous se colle à **deux endroits** :
    champ **Notes**, comme Apple le demande explicitement pour les prochaines
    soumissions.
 
-Avant d'envoyer, remplacer les trois marqueurs entre crochets.
+Avant d'envoyer, remplacer le seul marqueur restant : le lien de la video.
 
 ---
 
@@ -24,7 +24,7 @@ Information section.
 
 [LIEN DE LA VIDEO]
 
-Recorded on a physical [MODELE D'IPHONE] running iOS [VERSION]. The recording
+Recorded on a physical iPhone 15 Pro running iOS 27.0. The recording
 starts with launching the app and follows a typical user flow: the 3-step
 keyboard tutorial, a training session by theme with kana typed on the iOS
 Japanese keyboard, a JLPT session, the 60-second Race mode, creating a personal
@@ -142,7 +142,7 @@ publisher. "N5" to "N3" are used only as descriptive difficulty labels for the
 exercises; the app is not affiliated with, endorsed by, or sponsored by the
 Japan Foundation or JEES.
 
-The app embeds no third-party fonts (it uses the system fonts only). [SONS]
+The app embeds no third-party fonts (it uses the system fonts only). The two sound effects are short synthesized tones (0.16 s and 0.25 s) generated programmatically as raw waveforms for this app; they are not sampled from, or derived from, any third-party recording or sound library.
 
 Please let me know if anything else would help complete the review.
 
@@ -154,16 +154,14 @@ Guillaume
 
 ## À remplir avant d'envoyer
 
-| Marqueur | À remplacer par |
-| --- | --- |
-| LIEN DE LA VIDEO | Lien vers la vidéo (YouTube non répertorié, Drive, iCloud) |
-| MODELE D'IPHONE / VERSION | Le vrai matériel utilisé pour l'enregistrement |
-| SONS | L'origine de `assets/sounds/success.wav` et `error.wav` |
+Un seul marqueur reste, `[LIEN DE LA VIDEO]`, à remplacer par le lien de
+l'enregistrement (YouTube non répertorié, Google Drive ou iCloud).
 
-Phrase à utiliser pour SONS selon le cas :
-- Sons créés par toi : *The two short sound effects were created by me.*
-- Sons libres de droits : *The two short sound effects are royalty-free assets
-  licensed for commercial use.*
+Déjà renseigné : iPhone 15 Pro sous iOS 27.0, et l'origine des sons
+(tonalités de synthèse générées pour l'app, aucun échantillon tiers).
+
+**Vérifier avant d'envoyer** que la classification du contenu des annonces
+AdMob est bien sur G, sinon retirer la phrase correspondante du point 4.
 
 ## Plan de la vidéo (2 à 3 minutes)
 
