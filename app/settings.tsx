@@ -31,32 +31,16 @@ const LANGUAGES: { lang: Lang; label: string }[] = [
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-/** A − / value / + control for one part of the time. Both ends wrap around (23 → 0, 55 → 0). */
-function Stepper({ label, value, onStep }: { label: string; value: number; onStep: (dir: 1 | -1) => void }) {
-  return (
-    <View style={styles.stepper}>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel={`${label} −`}
-        onPress={() => onStep(-1)}
-        style={({ pressed }) => [styles.stepBtn, pressed && styles.pressed]}
-      >
-        <Text style={styles.stepBtnText}>−</Text>
-      </Pressable>
-      <Text accessibilityLabel={label} style={styles.stepValue}>
-        {pad(value)}
-      </Text>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel={`${label} +`}
-        onPress={() => onStep(1)}
-        style={({ pressed }) => [styles.stepBtn, pressed && styles.pressed]}
-      >
-        <Text style={styles.stepBtnText}>+</Text>
-      </Pressable>
-    </View>
-  );
-}
+/** How far the − / + buttons move the reminder time. */
+const REMINDER_STEP_MINUTES = 15;
+
+/** One-tap times for the usual moments of the day, so most people never touch − / +. */
+const REMINDER_PRESETS = [
+  { hour: 8, minute: 0, emoji: '🌅' },
+  { hour: 12, minute: 30, emoji: '🍱' },
+  { hour: 19, minute: 0, emoji: '🌆' },
+  { hour: 22, minute: 0, emoji: '🌙' },
+];
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -132,6 +116,12 @@ export default function SettingsScreen() {
     ]);
   };
 
+  // Steps through the whole day, wrapping at midnight (23:45 + 15 min → 00:00).
+  const stepReminder = (dir: 1 | -1) => {
+    const total = (reminderHour * 60 + reminderMinute + dir * REMINDER_STEP_MINUTES + 1440) % 1440;
+    setReminderTime(Math.floor(total / 60), total % 60);
+  };
+
   const onReset = () => {
     Alert.alert(t.settings.resetTitle, t.settings.resetBody, [
       { text: t.settings.resetCancel, style: 'cancel' },
@@ -204,9 +194,6 @@ export default function SettingsScreen() {
 
         <Section title={t.settings.sectionReminder}>
           <View style={styles.row}>
-            <View style={styles.glyphBox}>
-              <Text style={styles.glyph}>🔔</Text>
-            </View>
             <View style={styles.rowText}>
               <Text style={styles.rowLabel}>{t.settings.reminder}</Text>
               <Text style={styles.rowSub}>{t.settings.reminderSub}</Text>
@@ -231,22 +218,45 @@ export default function SettingsScreen() {
 
               <View style={styles.rowHeader}>
                 <Text style={styles.rowLabel}>{t.settings.reminderTime}</Text>
-                <Text style={styles.rowValue}>
-                  {pad(reminderHour)}:{pad(reminderMinute)}
-                </Text>
+                <View style={styles.timePill}>
+                  <Pressable
+                    accessibilityRole="button"
+                    accessibilityLabel={`${t.settings.reminderTime} −`}
+                    onPress={() => stepReminder(-1)}
+                    style={({ pressed }) => [styles.timePillBtn, pressed && styles.pressed]}
+                  >
+                    <Text style={styles.timePillBtnText}>−</Text>
+                  </Pressable>
+                  <Text style={styles.timePillValue}>
+                    {pad(reminderHour)}:{pad(reminderMinute)}
+                  </Text>
+                  <Pressable
+                    accessibilityRole="button"
+                    accessibilityLabel={`${t.settings.reminderTime} +`}
+                    onPress={() => stepReminder(1)}
+                    style={({ pressed }) => [styles.timePillBtn, pressed && styles.pressed]}
+                  >
+                    <Text style={styles.timePillBtnText}>+</Text>
+                  </Pressable>
+                </View>
               </View>
-              <View style={styles.timeRow}>
-                <Stepper
-                  label={t.settings.reminderHour}
-                  value={reminderHour}
-                  onStep={(dir) => setReminderTime((reminderHour + dir + 24) % 24, reminderMinute)}
-                />
-                <Text style={styles.timeColon}>:</Text>
-                <Stepper
-                  label={t.settings.reminderMinute}
-                  value={reminderMinute}
-                  onStep={(dir) => setReminderTime(reminderHour, (reminderMinute + dir * 5 + 60) % 60)}
-                />
+
+              <View style={styles.presets}>
+                {REMINDER_PRESETS.map((preset) => {
+                  const active = preset.hour === reminderHour && preset.minute === reminderMinute;
+                  return (
+                    <Pressable
+                      key={`${preset.hour}:${preset.minute}`}
+                      onPress={() => setReminderTime(preset.hour, preset.minute)}
+                      style={({ pressed }) => [styles.preset, active && styles.chipActive, pressed && styles.pressed]}
+                    >
+                      <Text style={styles.presetEmoji}>{preset.emoji}</Text>
+                      <Text style={[styles.presetTime, active && styles.chipTextActive]}>
+                        {pad(preset.hour)}:{pad(preset.minute)}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
               </View>
             </>
           )}
@@ -475,47 +485,52 @@ const styles = StyleSheet.create({
   chipTextActive: {
     color: C.onDark,
   },
-  timeRow: {
+  timePill: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    // Wraps on very narrow screens rather than spilling out of the card.
-    flexWrap: 'wrap',
-    columnGap: 8,
-    rowGap: 10,
-    marginTop: 14,
+    backgroundColor: 'rgba(20,22,26,.06)',
+    borderRadius: R.sm,
   },
-  stepper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  stepBtn: {
+  timePillBtn: {
     width: 40,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  timePillBtnText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: C.inkFaint,
+  },
+  timePillValue: {
+    minWidth: 58,
+    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: '800',
+    color: C.accent,
+  },
+  presets: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 14,
+  },
+  preset: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 4,
+    paddingVertical: 10,
     borderRadius: R.sm,
     borderWidth: 1,
     borderColor: 'rgba(20,22,26,.12)',
     backgroundColor: C.paper,
   },
-  stepBtnText: {
-    fontSize: 22,
+  presetEmoji: {
+    fontSize: 20,
+  },
+  presetTime: {
+    fontSize: 12,
     fontWeight: '700',
     color: C.inkSoft,
-  },
-  stepValue: {
-    minWidth: 34,
-    textAlign: 'center',
-    fontSize: 26,
-    fontWeight: '800',
-    color: C.ink,
-  },
-  timeColon: {
-    fontSize: 26,
-    fontWeight: '800',
-    color: C.inkFaint,
   },
   blockedHint: {
     fontSize: 12.5,
