@@ -6,145 +6,107 @@ défaut de l'app : il faut fournir une vidéo de démonstration et six réponses
 Le texte ci-dessous se colle à **deux endroits** :
 1. Centre de résolution, en réponse au message d'Apple.
 2. App Store Connect → la version → **Informations de vérification de l'app** →
-   champ **Notes**, comme Apple le demande explicitement pour les prochaines
+   champ **Remarques**, comme Apple le demande explicitement pour les prochaines
    soumissions.
 
-Avant d'envoyer, remplacer le seul marqueur restant : le lien de la video.
+Les deux champs sont limités à **4000 caractères**, d'où cette version resserrée.
+Avant d'envoyer, remplacer le seul marqueur restant : le lien de la vidéo.
 
 ---
 
 ```
 Hello,
 
-Thank you for reviewing TypeKana. Please find below all the requested
-information. The same text has been added to the Notes field of the App Review
-Information section.
+Answers to your six questions. The same text has been added to the Notes field
+of the App Review Information section.
 
 1. SCREEN RECORDING
 
 [LIEN DE LA VIDEO]
 
-Recorded on a physical iPhone 15 Pro running iOS 27.0. The recording
-starts with launching the app and follows a typical user flow: the 3-step
-keyboard tutorial, a training session by theme with kana typed on the iOS
-Japanese keyboard, a JLPT session, the 60-second Race mode, creating a personal
-word list, and opening the TypeKana Premium paywall.
+Recorded on a physical iPhone 15 Pro running iOS 27.0. It starts with launching
+the app and shows: the 3-step tutorial, adding the iOS Japanese keyboard in
+Settings, a themed training session with kana typed on that keyboard, a JLPT
+session, the 60-second Race mode, creating a personal list, and the TypeKana
+Premium paywall.
 
-Regarding the specific flows listed in your message:
-
-- Account registration, login and account deletion: not applicable. TypeKana has
-  no account system of any kind. There is no registration, no login and no
-  server. The app is fully usable offline immediately after installation.
-- User-generated content: users can create personal vocabulary lists, but these
-  are stored locally on their own device only. Nothing is uploaded, published,
-  shared or visible to any other user, so there is no user-to-user content and
-  no reporting or blocking mechanism is required.
-- Accessing paid content or features: shown in the recording. The paywall is
-  opened from Settings > the "TypeKana Premium" banner.
+- Account registration, login and deletion: not applicable. The app has no
+account system, no login and no server. It works offline right after install.
+- User-generated content: users can create personal word lists, but these are
+stored locally on their own device only. Nothing is uploaded, shared or visible
+to any other user, so no reporting or blocking mechanism applies.
+- Accessing paid features: shown in the recording. Settings > the "TypeKana
+Premium" banner opens the paywall.
 
 2. PURPOSE AND TARGET AUDIENCE
 
-TypeKana is a typing trainer for the Japanese keyboard.
+TypeKana is a typing trainer for the Japanese keyboard. Learners of Japanese are
+taught to READ hiragana and katakana, but never to TYPE them. On iPhone,
+Japanese is typed with the flick ("Kana") keyboard, where each key holds a whole
+kana row and the other kana are reached by sliding in a direction. Even fluent
+readers stay slow and hesitant the moment they have to write a message, look up
+a word, or use a Japanese app.
 
-The problem it solves: people learning Japanese are taught to READ hiragana and
-katakana, but almost never train to TYPE them. On iPhone, Japanese is typed with
-the flick ("Kana") keyboard, where each key carries a whole kana row and the
-other kana are reached by sliding in a direction. Learners who can read fluently
-are still slow and hesitant when they actually have to write something, which
-holds them back the moment they want to text a Japanese friend, look up a word
-in a dictionary, or use a Japanese app or website.
+Audience: teenagers and adults learning Japanese, whether self-taught, in class,
+or preparing the JLPT. The app assumes kana reading is already known and trains
+typing speed and muscle memory through short drills, organised by theme and by
+JLPT level, with sound and haptic feedback, a daily streak and a 60-second Race
+mode. Everything works offline and all progress stays on the device.
 
-Target audience: teenagers and adults learning Japanese, whether self-taught,
-in class, or preparing the JLPT exam. The app assumes the user already knows how
-to read kana and focuses purely on typing speed and muscle memory.
+3. SETUP AND MAIN FEATURES
 
-The value it provides: short, repeatable drills on the real system keyboard
-(rather than a simulated one), organised by theme and by JLPT level, with
-immediate sound and haptic feedback, a daily streak and a 60-second Race mode
-for motivation. Everything works offline and all progress stays on the device.
+No login, demo account or sample file is required. One setup step is needed,
+because the app uses the iPhone's own Japanese keyboard rather than a simulated
+one:
 
-3. SETTING UP AND ACCESSING THE MAIN FEATURES
+Settings > General > Keyboard > Keyboards > Add New Keyboard > Japanese, then
+choose the "Kana" layout (not Romaji). In the app, tap the globe key at the
+bottom left of the keyboard to switch to Japanese.
 
-No login credentials, demo account or sample file are required. The app is fully
-functional right after installation.
+The app shows this 3-step tutorial on first launch, it can be reopened from
+Settings > "Review the tutorial", and it is demonstrated in the recording.
 
-IMPORTANT - one setup step is needed to type the answers, because the app uses
-the iPhone's own built-in Japanese keyboard rather than a simulated one:
+- Home > Training > By theme, or By JLPT level: type each word's kana reading,
+then tap "Validate", or tap "Skip".
+- Home > Training > My lists: create personal lists, stored locally.
+- Home > Race: a 60-second timed mode.
+- Settings (gear icon, top right): words per session, daily reminder, language,
+sound, ad privacy, privacy policy, restore purchases.
+- Settings > "TypeKana Premium": the paywall. The free version allows 5 sessions
+a day and 3 personal lists, with ads. The auto-renewing subscription (monthly or
+yearly, 3-day free trial) removes the ads and both limits.
 
-  Settings > General > Keyboard > Keyboards > Add New Keyboard > Japanese,
-  then choose the "Kana" layout (not Romaji).
+4. EXTERNAL SERVICES
 
-Then, inside the app, when a word appears and the keyboard opens, tap the globe
-key at the bottom left of the keyboard to switch to Japanese. The app displays
-this exact 3-step tutorial on first launch, and it can be reopened at any time
-from Settings > "Review the tutorial".
+- Apple In-App Purchase / StoreKit: the subscription.
+- RevenueCat: subscription management only (receipt validation, entitlement
+status, restore purchases). It receives anonymous purchase events tied to a
+randomly generated app user ID.
+- Google AdMob: banner, interstitial and rewarded ads, non-personalized only,
+maximum ad content rating G. Users in the EEA and the UK are shown Google's UMP
+consent form on first launch, reopenable from Settings > "Ad privacy".
 
-Main features and how to reach them:
-
-- Home > Training > By theme: pick a category (animals, food, verbs, colors...),
-  then type each word's kana reading and tap "Validate", or tap "Skip".
-- Home > Training > By JLPT level: the same exercise with words and sentences
-  ranked from N5 to N3.
-- Home > Training > My lists: create a personal list with your own words and
-  translations, stored locally on the device.
-- Home > Race: a 60-second timed mode; type as many words as possible.
-- Settings (gear icon, top right of the home screen): words per session, daily
-  reminder, interface language (French/English), tutorial, sound and haptics,
-  ad privacy, privacy policy, restore purchases, reset progress.
-- Settings > "TypeKana Premium" banner: opens the subscription paywall.
-- Inside an exercise, the display mode (Kana, Kanji, Hint, Test) is switched
-  from the controls on the game screen itself.
-
-The free version allows 5 sessions per day and 3 personal lists, and shows ads.
-The auto-renewing subscription (monthly or yearly, with a 3-day free trial)
-removes the ads and lifts both limits.
-
-4. EXTERNAL SERVICES, TOOLS AND PLATFORMS
-
-- Apple In-App Purchase / StoreKit: the auto-renewing subscription.
-- RevenueCat (revenuecat.com): subscription management only - receipt
-  validation, entitlement status and "Restore purchases". It receives anonymous
-  purchase events tied to a randomly generated app user ID.
-- Google AdMob: banner, interstitial and rewarded ads. Ads are always requested
-  in non-personalized mode. Users in the EEA and the UK are shown Google's UMP
-  consent form on first launch, which can be reopened from Settings > "Ad
-  privacy". The maximum ad content rating is set to G.
-
-No other external service is used. There is no backend, no server, no database,
-no authentication service, no analytics SDK, no data provider and no AI service.
-All vocabulary content is bundled inside the app, which is why it works entirely
-offline; an internet connection is only used to load ads and to process
-purchases.
+There is no backend, no server, no database, no authentication service, no
+analytics SDK, no data provider and no AI service. All content is bundled in the
+app; an internet connection is only used for ads and purchases.
 
 5. REGIONAL DIFFERENCES
 
-The app's features and content are identical in every region. The only two
-variations are imposed by regulation or by the platform:
+Features and content are identical in every region. Only two variations exist,
+both imposed externally: the UMP consent form is shown in the EEA and the UK
+only, and subscription prices follow App Store Connect price points for each
+storefront. The interface is available in French and English, follows the device
+language, and can be changed at any time in Settings.
 
-- Users in the EEA and the UK are presented with Google's UMP consent form for
-  ads on first launch. Users elsewhere are not.
-- Subscription prices follow the App Store Connect price points for each
-  storefront.
+6. REGULATED INDUSTRY OR THIRD-PARTY MATERIAL
 
-The interface is available in French and English. It follows the device
-language automatically and can be changed at any time in Settings. All exercises
-and vocabulary are the same in both languages.
-
-6. REGULATED INDUSTRY OR PROTECTED THIRD-PARTY MATERIAL
-
-TypeKana does not operate in a regulated industry and contains no protected
-third-party material.
-
-All content is original: the vocabulary words, the example sentences and their
-French and English translations were compiled and written by me. The app
-contains no official JLPT examination material and no material from any
-publisher. "N5" to "N3" are used only as descriptive difficulty labels for the
-exercises; the app is not affiliated with, endorsed by, or sponsored by the
-Japan Foundation or JEES.
-
-The app embeds no third-party fonts (it uses the system fonts only). The two sound effects are short synthesized tones (0.16 s and 0.25 s) generated programmatically as raw waveforms for this app; they are not sampled from, or derived from, any third-party recording or sound library.
-
-Please let me know if anything else would help complete the review.
+Neither applies. All vocabulary, sentences and translations were written and
+compiled by me. The app contains no official JLPT examination material and no
+publisher content: "N5" to "N3" are used only as descriptive difficulty labels,
+and the app is not affiliated with or endorsed by the Japan Foundation or JEES.
+It embeds no third-party fonts (system fonts only). The two sound effects are
+short synthesized tones generated programmatically for this app, not sampled
+from any third-party recording or library.
 
 Best regards,
 Guillaume
@@ -154,14 +116,14 @@ Guillaume
 
 ## À remplir avant d'envoyer
 
-Un seul marqueur reste, `[LIEN DE LA VIDEO]`, à remplacer par le lien de
-l'enregistrement (YouTube non répertorié, Google Drive ou iCloud).
+Un seul marqueur reste, `[LIEN DE LA VIDEO]`, à remplacer par le lien Google
+Drive, partagé en « Tous les utilisateurs disposant du lien ».
 
-Déjà renseigné : iPhone 15 Pro sous iOS 27.0, et l'origine des sons
-(tonalités de synthèse générées pour l'app, aucun échantillon tiers).
+Déjà renseigné : iPhone 15 Pro sous iOS 27.0, et l'origine des sons (tonalités
+de synthèse générées pour l'app, aucun échantillon tiers).
 
-**Vérifier avant d'envoyer** que la classification du contenu des annonces
-AdMob est bien sur G, sinon retirer la phrase correspondante du point 4.
+**Vérifier avant d'envoyer** que la classification du contenu des annonces AdMob
+est bien sur G, sinon retirer la mention correspondante du point 4.
 
 ## Plan de la vidéo (2 à 3 minutes, une seule prise)
 
@@ -169,8 +131,7 @@ AdMob est bien sur G, sinon retirer la phrase correspondante du point 4.
    premier**, Apple l'exige explicitement.
 2. Le tutoriel en 3 étapes, qui explique la mise en place du clavier.
 3. Sortir vers Réglages iOS → Général → Clavier → Claviers → Ajouter un clavier →
-   Japonais → disposition **Kana**. 15 à 20 secondes suffisent. L'enregistrement
-   continue hors de l'app, c'est voulu : le relecteur devra faire exactement ça.
+   Japonais → disposition **Kana**. 15 à 20 secondes suffisent.
 4. Revenir dans l'app, ouvrir un exercice, **toucher la touche globe** en bas à
    gauche pour passer en japonais. C'est le geste sur lequel un relecteur bloque.
 5. Training → Par thème : taper 2 ou 3 mots, montrer « Valider ».
@@ -181,11 +142,5 @@ AdMob est bien sur G, sinon retirer la phrase correspondante du point 4.
    les prix. **Le point le plus important**, Apple le demande noir sur blanc.
 10. Retour à l'accueil.
 
-Avant d'enregistrer :
-- Supprimer le clavier japonais pour pouvoir filmer son ajout (Réglages → Général
-  → Clavier → Claviers → Modifier → supprimer Japonais).
-- Activer le mode Concentration pour éviter qu'une notification personnelle
-  apparaisse à l'écran.
-
-Enregistrement iPhone : Réglages → Centre de contrôle → ajouter
-« Enregistrement de l'écran », puis Centre de contrôle → bouton d'enregistrement.
+Avant d'enregistrer : supprimer le clavier japonais pour pouvoir filmer son
+ajout, activer le mode Concentration, et passer l'app en anglais.
