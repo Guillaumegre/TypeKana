@@ -163,17 +163,29 @@ Déjà renseigné : iPhone 15 Pro sous iOS 27.0, et l'origine des sons
 **Vérifier avant d'envoyer** que la classification du contenu des annonces
 AdMob est bien sur G, sinon retirer la phrase correspondante du point 4.
 
-## Plan de la vidéo (2 à 3 minutes)
+## Plan de la vidéo (2 à 3 minutes, une seule prise)
 
-1. Écran d'accueil au lancement, depuis l'écran d'accueil de l'iPhone.
-2. Le tutoriel en 3 étapes.
-3. Training → Par thème : taper 2 ou 3 mots en japonais, montrer « Valider ».
-4. Training → Par niveau JLPT : un mot.
-5. Race : quelques secondes du chrono.
-6. Mes listes : créer une liste avec un mot.
-7. Réglages : faire défiler, puis toucher la bannière **TypeKana Premium** et
-   laisser le paywall s'afficher avec les prix. **Le point le plus important.**
-8. Revenir à l'accueil.
+1. Lancement de l'app depuis l'écran d'accueil de l'iPhone. **Obligatoire en
+   premier**, Apple l'exige explicitement.
+2. Le tutoriel en 3 étapes, qui explique la mise en place du clavier.
+3. Sortir vers Réglages iOS → Général → Clavier → Claviers → Ajouter un clavier →
+   Japonais → disposition **Kana**. 15 à 20 secondes suffisent. L'enregistrement
+   continue hors de l'app, c'est voulu : le relecteur devra faire exactement ça.
+4. Revenir dans l'app, ouvrir un exercice, **toucher la touche globe** en bas à
+   gauche pour passer en japonais. C'est le geste sur lequel un relecteur bloque.
+5. Training → Par thème : taper 2 ou 3 mots, montrer « Valider ».
+6. Training → Par niveau JLPT : un mot.
+7. Race : quelques secondes de chrono.
+8. Mes listes : créer une liste avec un mot.
+9. Réglages → bannière **TypeKana Premium** → laisser le paywall s'afficher avec
+   les prix. **Le point le plus important**, Apple le demande noir sur blanc.
+10. Retour à l'accueil.
+
+Avant d'enregistrer :
+- Supprimer le clavier japonais pour pouvoir filmer son ajout (Réglages → Général
+  → Clavier → Claviers → Modifier → supprimer Japonais).
+- Activer le mode Concentration pour éviter qu'une notification personnelle
+  apparaisse à l'écran.
 
 Enregistrement iPhone : Réglages → Centre de contrôle → ajouter
 « Enregistrement de l'écran », puis Centre de contrôle → bouton d'enregistrement.
