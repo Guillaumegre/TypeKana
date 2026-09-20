@@ -1,8 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { AppState } from 'react-native';
 import { detectDeviceLang } from '../i18n/detect';
-import type { Lang } from '../i18n/translations';
+import { translations, type Lang } from '../i18n/translations';
 import { syncPaywallLanguage } from '../utils/premium';
+import { syncReminder } from '../utils/reminder';
 
 const STORAGE_KEY = 'typekana:settings';
 
@@ -14,6 +16,10 @@ interface Settings {
   lang: Lang;
   /** How many words a Training session serves. */
   sessionLength: number;
+  /** Daily practice reminder (a local notification), off until the user turns it on. */
+  reminderEnabled: boolean;
+  reminderHour: number;
+  reminderMinute: number;
 }
 
 /** Offered on the settings screen; any other stored value falls back to the default. */
@@ -27,6 +33,8 @@ interface SettingsContextValue extends Settings {
   setSoundEnabled: (value: boolean) => void;
   setLang: (value: Lang) => void;
   setSessionLength: (value: number) => void;
+  setReminderEnabled: (value: boolean) => void;
+  setReminderTime: (hour: number, minute: number) => void;
 }
 
 // The language defaults to the phone's own; once the user picks one it is stored and wins.
@@ -37,6 +45,9 @@ const DEFAULT_SETTINGS: Settings = {
   soundEnabled: true,
   lang: detectDeviceLang(),
   sessionLength: 10,
+  reminderEnabled: false,
+  reminderHour: 19,
+  reminderMinute: 0,
 };
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
@@ -56,6 +67,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         if (!SESSION_LENGTHS.includes(stored.sessionLength)) {
           stored.sessionLength = DEFAULT_SETTINGS.sessionLength;
         }
+        if (!Number.isInteger(stored.reminderHour) || stored.reminderHour < 0 || stored.reminderHour > 23) {
+          stored.reminderHour = DEFAULT_SETTINGS.reminderHour;
+        }
+        if (!Number.isInteger(stored.reminderMinute) || stored.reminderMinute < 0 || stored.reminderMinute > 59) {
+          stored.reminderMinute = DEFAULT_SETTINGS.reminderMinute;
+        }
         setSettings(stored);
       })
       .catch(() => {})
@@ -65,6 +82,29 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     syncPaywallLanguage(settings.lang);
   }, [settings.lang]);
+
+  // Keeps the scheduled notification in line with the settings: on load, whenever the switch,
+  // the time or the language changes, and each time the app comes back to the foreground
+  // (which also picks up a permission the user just granted in the system settings).
+  const { reminderEnabled, reminderHour, reminderMinute, lang } = settings;
+  useEffect(() => {
+    if (!loaded) return;
+    const text = translations[lang].reminder;
+    const sync = () =>
+      syncReminder({
+        enabled: reminderEnabled,
+        hour: reminderHour,
+        minute: reminderMinute,
+        channelName: text.channel,
+        title: text.title,
+        body: text.body,
+      });
+    sync();
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') sync();
+    });
+    return () => subscription.remove();
+  }, [loaded, reminderEnabled, reminderHour, reminderMinute, lang]);
 
   const update = (next: Partial<Settings>) => {
     setSettings((prev) => {
@@ -86,6 +126,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         setSoundEnabled: (value) => update({ soundEnabled: value }),
         setLang: (value) => update({ lang: value }),
         setSessionLength: (value) => update({ sessionLength: value }),
+        setReminderEnabled: (value) => update({ reminderEnabled: value }),
+        setReminderTime: (hour, minute) => update({ reminderHour: hour, reminderMinute: minute }),
       }}
     >
       {children}

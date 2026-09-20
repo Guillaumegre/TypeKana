@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
-import { useSyncExternalStore } from 'react';
-import { Alert, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import { Alert, AppState, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../src/components/BackHeader';
 import { SESSION_LENGTHS, useSettings } from '../src/context/SettingsContext';
@@ -14,6 +14,7 @@ import {
   restorePurchases,
   subscribeToPremium,
 } from '../src/utils/premium';
+import { hasReminderPermission, requestReminderPermission } from '../src/utils/reminder';
 import { resetProgress } from '../src/utils/resetProgress';
 
 // Served from GitHub Pages (docs/privacy-policy.html). Google Play requires the policy
@@ -28,6 +29,35 @@ const LANGUAGES: { lang: Lang; label: string }[] = [
   { lang: 'en', label: 'English' },
 ];
 
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/** A − / value / + control for one part of the time. Both ends wrap around (23 → 0, 55 → 0). */
+function Stepper({ label, value, onStep }: { label: string; value: number; onStep: (dir: 1 | -1) => void }) {
+  return (
+    <View style={styles.stepper}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`${label} −`}
+        onPress={() => onStep(-1)}
+        style={({ pressed }) => [styles.stepBtn, pressed && styles.pressed]}
+      >
+        <Text style={styles.stepBtnText}>−</Text>
+      </Pressable>
+      <Text accessibilityLabel={label} style={styles.stepValue}>
+        {pad(value)}
+      </Text>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`${label} +`}
+        onPress={() => onStep(1)}
+        style={({ pressed }) => [styles.stepBtn, pressed && styles.pressed]}
+      >
+        <Text style={styles.stepBtnText}>+</Text>
+      </Pressable>
+    </View>
+  );
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View style={styles.section}>
@@ -41,12 +71,66 @@ export default function SettingsScreen() {
   const router = useRouter();
   const t = useT();
   const insets = useSafeAreaInsets();
-  const { soundEnabled, setSoundEnabled, lang, setLang, sessionLength, setSessionLength } =
-    useSettings();
+  const {
+    soundEnabled,
+    setSoundEnabled,
+    lang,
+    setLang,
+    sessionLength,
+    setSessionLength,
+    reminderEnabled,
+    reminderHour,
+    reminderMinute,
+    setReminderEnabled,
+    setReminderTime,
+  } = useSettings();
+  // The reminder is on in the settings but the system has since withdrawn the notification
+  // permission — the switch alone wouldn't tell the user why nothing arrives.
+  const [reminderBlocked, setReminderBlocked] = useState(false);
   // Only true once consent has resolved and the user is somewhere GDPR requires the
   // ongoing ability to revisit their ad consent choice (EEA/UK) — hidden everywhere else.
   const showAdsPrivacyRow = useSyncExternalStore(subscribeToConsent, privacyOptionsRequired);
   const isPremium = useSyncExternalStore(subscribeToPremium, isPremiumUser);
+
+  useEffect(() => {
+    if (!reminderEnabled) {
+      setReminderBlocked(false);
+      return;
+    }
+    let cancelled = false;
+    const check = () =>
+      hasReminderPermission().then((granted) => {
+        if (!cancelled) setReminderBlocked(!granted);
+      });
+    check();
+    // Coming back from the system settings after granting (or revoking) the permission.
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') check();
+    });
+    return () => {
+      cancelled = true;
+      subscription.remove();
+    };
+  }, [reminderEnabled]);
+
+  const openSystemSettings = () => Linking.openSettings().catch(() => {});
+
+  // The permission is only asked when the user turns the reminder on, so the system prompt
+  // appears in a context where its purpose is obvious.
+  const onToggleReminder = async (value: boolean) => {
+    if (!value) {
+      setReminderEnabled(false);
+      return;
+    }
+    if (await requestReminderPermission(t.reminder.channel)) {
+      setReminderEnabled(true);
+      return;
+    }
+    Alert.alert(t.settings.reminderDeniedTitle, t.settings.reminderDeniedBody, [
+      { text: t.settings.reminderCancel, style: 'cancel' },
+      { text: t.settings.reminderOpenSettings, onPress: openSystemSettings },
+    ]);
+  };
 
   const onReset = () => {
     Alert.alert(t.settings.resetTitle, t.settings.resetBody, [
@@ -116,6 +200,56 @@ export default function SettingsScreen() {
               );
             })}
           </View>
+        </Section>
+
+        <Section title={t.settings.sectionReminder}>
+          <View style={styles.row}>
+            <View style={styles.glyphBox}>
+              <Text style={styles.glyph}>🔔</Text>
+            </View>
+            <View style={styles.rowText}>
+              <Text style={styles.rowLabel}>{t.settings.reminder}</Text>
+              <Text style={styles.rowSub}>{t.settings.reminderSub}</Text>
+            </View>
+            <Switch
+              value={reminderEnabled}
+              onValueChange={onToggleReminder}
+              trackColor={{ false: 'rgba(20,22,26,.16)', true: C.accent }}
+              thumbColor="#FBF9F5"
+            />
+          </View>
+
+          {reminderEnabled && (
+            <>
+              {reminderBlocked && (
+                <Pressable onPress={openSystemSettings} style={({ pressed }) => pressed && styles.pressed}>
+                  <Text style={styles.blockedHint}>{t.settings.reminderBlocked}</Text>
+                </Pressable>
+              )}
+
+              <View style={styles.divider} />
+
+              <View style={styles.rowHeader}>
+                <Text style={styles.rowLabel}>{t.settings.reminderTime}</Text>
+                <Text style={styles.rowValue}>
+                  {pad(reminderHour)}:{pad(reminderMinute)}
+                </Text>
+              </View>
+              <View style={styles.timeRow}>
+                <Stepper
+                  label={t.settings.reminderHour}
+                  value={reminderHour}
+                  onStep={(dir) => setReminderTime((reminderHour + dir + 24) % 24, reminderMinute)}
+                />
+                <Text style={styles.timeColon}>:</Text>
+                <Stepper
+                  label={t.settings.reminderMinute}
+                  value={reminderMinute}
+                  onStep={(dir) => setReminderTime(reminderHour, (reminderMinute + dir * 5 + 60) % 60)}
+                />
+              </View>
+            </>
+          )}
         </Section>
 
         <Section title={t.settings.sectionApp}>
@@ -340,6 +474,55 @@ const styles = StyleSheet.create({
   },
   chipTextActive: {
     color: C.onDark,
+  },
+  timeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // Wraps on very narrow screens rather than spilling out of the card.
+    flexWrap: 'wrap',
+    columnGap: 8,
+    rowGap: 10,
+    marginTop: 14,
+  },
+  stepper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  stepBtn: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: R.sm,
+    borderWidth: 1,
+    borderColor: 'rgba(20,22,26,.12)',
+    backgroundColor: C.paper,
+  },
+  stepBtnText: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: C.inkSoft,
+  },
+  stepValue: {
+    minWidth: 34,
+    textAlign: 'center',
+    fontSize: 26,
+    fontWeight: '800',
+    color: C.ink,
+  },
+  timeColon: {
+    fontSize: 26,
+    fontWeight: '800',
+    color: C.inkFaint,
+  },
+  blockedHint: {
+    fontSize: 12.5,
+    lineHeight: 17,
+    fontWeight: '600',
+    color: C.accent,
+    marginTop: 10,
   },
   divider: {
     height: 1,

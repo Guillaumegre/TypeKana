@@ -12,13 +12,16 @@
       "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "CFBundleLocalizations": ["fr", "en"]
+        "CFBundleLocalizations": [
+          "fr",
+          "en"
+        ]
       },
       "icon": {
         "light": "./assets/logo/typekana-icon-1024.png",
         "dark": "./assets/logo/typekana-icon-dark-1024.png"
       },
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
@@ -73,7 +76,14 @@
           "resizeMode": "contain"
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#C8452A"
+        }
+      ]
     ],
     "extra": {
       "router": {},
