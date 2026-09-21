@@ -80,7 +80,7 @@ export function initAds(): void {
   try {
     // Non-personalized ads only: no IDFA/ATT prompt needed, matches the app's offline,
     // no-tracking posture from the App Store privacy declaration.
-    ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.PG });
+    ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.G });
   } catch {
     // Ads stay off for this session.
   }
