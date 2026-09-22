@@ -195,9 +195,9 @@ Avant d'enregistrer :
 
 ## Version consolidée du 23 septembre 2026 — à utiliser maintenant
 
-Remplace les deux pavés précédents. Elle couvre les deux refus, porte **les deux
-liens vidéo** et fait 2817 caractères, soit environ 2950 avec les liens : large
-marge sous la limite de 4000. À coller dans les Remarques et dans le Centre de
+Remplace les deux pavés précédents. Elle couvre les deux refus, porte le lien de la **nouvelle**
+vidéo et laisse une large marge sous la limite de 4000 caractères. L ancienne
+vidéo montre le paywall non conforme : elle ne doit plus etre transmise. À coller dans les Remarques et dans le Centre de
 résolution.
 
 ```
@@ -207,8 +207,11 @@ Updated notes for this resubmission.
 
 1. SCREEN RECORDINGS (physical iPhone 15 Pro, iOS 27.0)
 
-Full walkthrough of the app: [LIEN VIDEO 1]
-ATT prompt, subscription details and working Terms/Privacy links: [LIEN VIDEO 2]
+[LIEN DE LA VIDEO]
+
+The recording begins with launching the app and shows the Google UMP consent
+form, the ATT permission request, then the Premium paywall with its billed
+amount and its working links to the Terms of Use and the privacy policy.
 
 2. APP TRACKING TRANSPARENCY (5.1.2)
 
