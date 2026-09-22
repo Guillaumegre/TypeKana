@@ -190,3 +190,84 @@ Avant d'enregistrer :
 5. Toucher **Terms**, montrer que la page s'ouvre, revenir.
 6. Toucher **Privacy**, montrer que la page s'ouvre, revenir.
 7. Facultatif : 15 secondes d'exercice pour montrer que l'app fonctionne.
+
+---
+
+## Version consolidée du 23 septembre 2026 — à utiliser maintenant
+
+Remplace les deux pavés précédents. Elle couvre les deux refus, porte **les deux
+liens vidéo** et fait 2817 caractères, soit environ 2950 avec les liens : large
+marge sous la limite de 4000. À coller dans les Remarques et dans le Centre de
+résolution.
+
+```
+Hello,
+
+Updated notes for this resubmission.
+
+1. SCREEN RECORDINGS (physical iPhone 15 Pro, iOS 27.0)
+
+Full walkthrough of the app: [LIEN VIDEO 1]
+ATT prompt, subscription details and working Terms/Privacy links: [LIEN VIDEO 2]
+
+2. APP TRACKING TRANSPARENCY (5.1.2)
+
+The ATT permission request is presented at launch, right after Google UMP
+consent form and before any ad is requested, which is the order Google
+recommends. Declining keeps ads non-personalized. App Privacy has been updated
+to disclose tracking.
+
+3. SUBSCRIPTIONS (3.1.2c)
+
+The paywall shows each subscription name, its length, and the total billed
+amount as the most prominent price, with working links to the privacy policy
+and to Apple standard Terms of Use (EULA). The EULA is also linked at the end
+of the App Description. Both auto-renewable subscriptions are submitted with
+this version.
+
+4. METADATA (2.3.10)
+
+The App Description no longer mentions Android or Google Play.
+
+5. PURPOSE AND AUDIENCE
+
+TypeKana is a typing trainer for the Japanese keyboard. Learners are taught to
+READ hiragana and katakana but never to TYPE them, which on iPhone means the
+flick ("Kana") keyboard. Audience: teenagers and adults learning Japanese or
+preparing the JLPT.
+
+6. SETUP AND MAIN FEATURES
+
+No login, demo account or sample file is required. The app uses the iPhone's
+own Japanese keyboard, so it has to be added first:
+
+Settings > General > Keyboard > Keyboards > Add New Keyboard > Japanese, then
+the "Kana" layout (not Romaji). In the app, tap the globe key at the bottom
+left to switch to Japanese. The app's tutorial covers this on first launch.
+
+Home > Training > By theme or By JLPT level: type the word's kana reading, then
+tap "Validate" or "Skip". My lists: personal lists, stored locally. Race: a
+60-second timed mode. Settings (gear icon): daily reminder, language, sound, ad
+privacy, privacy policy, restore purchases, and the Premium paywall. Free
+version: 5 sessions a day and 3 lists, with ads.
+
+7. EXTERNAL SERVICES
+
+Apple In-App Purchase / StoreKit. RevenueCat, for subscription management only.
+Google AdMob: banner, interstitial and rewarded ads, maximum ad content rating
+G, with Google UMP consent form in the EEA and the UK, reopenable from Settings
+> "Ad privacy". There is no backend, server, database, analytics SDK, data
+provider or AI service; all content is bundled in the app.
+
+8. OTHER POINTS
+
+No account system, so no registration, login or account deletion. Personal word
+lists are stored locally only, never uploaded or shared, so no reporting or
+blocking mechanism applies. Features and content are identical in every region.
+All vocabulary and translations are original: no official JLPT material, no
+third-party fonts, and the two sound effects are synthesized tones generated
+for this app.
+
+Best regards,
+Guillaume
+```
