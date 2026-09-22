@@ -21,7 +21,7 @@
         "light": "./assets/logo/typekana-icon-1024.png",
         "dark": "./assets/logo/typekana-icon-dark-1024.png"
       },
-      "buildNumber": "4"
+      "buildNumber": "5"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +31,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.guillaumegrl.TypeKana",
-      "versionCode": 11
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/logo/typekana-icon-256.png"

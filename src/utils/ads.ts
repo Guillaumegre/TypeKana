@@ -107,9 +107,13 @@ export function initAds(): void {
   const ads = loadAdsModule();
   if (!ads) return;
   try {
-    // Non-personalized ads only: no IDFA/ATT prompt needed, matches the app's offline,
-    // no-tracking posture from the App Store privacy declaration.
-    ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.G });
+    // Each store gets the rating its listing declares: the App Store app is rated 4+, so
+    // G, while the Play listing targets 13+, where T matches and leaves far more inventory
+    // than G would. Anything above what the listing claims risks a store rejection.
+    ads.default().setRequestConfiguration({
+      maxAdContentRating:
+        Platform.OS === 'ios' ? ads.MaxAdContentRating.G : ads.MaxAdContentRating.T,
+    });
   } catch {
     // Ads stay off for this session.
   }
