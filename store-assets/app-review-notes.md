@@ -197,8 +197,8 @@ Avant d'enregistrer :
 
 Remplace les deux pavés précédents. Elle couvre les deux refus, porte le lien de la **nouvelle**
 vidéo et laisse une large marge sous la limite de 4000 caractères. L ancienne
-vidéo montre le paywall non conforme : elle ne doit plus etre transmise. À coller dans les Remarques et dans le Centre de
-résolution.
+vidéo montre le paywall non conforme : elle ne doit plus etre transmise. À coller dans le champ **Remarques** uniquement : le
+Centre de résolution a sa propre réponse, plus courte, juste en dessous.
 
 ```
 Hello,
@@ -270,6 +270,47 @@ blocking mechanism applies. Features and content are identical in every region.
 All vocabulary and translations are original: no official JLPT material, no
 third-party fonts, and the two sound effects are synthesized tones generated
 for this app.
+
+Best regards,
+Guillaume
+```
+
+### Réponse au Centre de résolution
+
+Plus courte que les Remarques, et volontairement : le relecteur a déjà validé
+le reste, il cherche uniquement ce qui a changé. Chaque paragraphe reprend le
+numéro de règle de son message.
+
+```
+Hello,
+
+Thank you for the detailed feedback. All five points have been addressed.
+
+Screen recording: [LIEN DE LA VIDEO]
+
+It begins with launching the app and shows the Google UMP consent form, the App
+Tracking Transparency permission request, then the Premium paywall with its
+billed amount and its working links to the Terms of Use and the privacy policy.
+
+2.3.10 - The App Description no longer mentions Android or Google Play.
+
+3.1.2(c), required information - Apple standard Terms of Use (EULA) is now
+linked at the end of the App Description, and both the EULA and the privacy
+policy open from the paywall footer.
+
+3.1.2(c), pricing - The paywall now displays the total billed amount as the
+most prominent price. The monthly equivalent is shown in a smaller, subordinate
+position.
+
+5.1.2(i) - The app now requests permission through App Tracking Transparency at
+launch, right after the Google UMP consent form and before any ad is requested,
+which is the order Google recommends. Declining keeps ads non-personalized. The
+App Privacy information has been updated to disclose tracking.
+
+2.1(b) - Both auto-renewable subscriptions are submitted together with this
+version.
+
+Full details about the app are also in the App Review Information notes.
 
 Best regards,
 Guillaume
