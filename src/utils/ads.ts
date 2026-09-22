@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { AD_UNITS } from '../config/adUnits';
 
 type AdsModule = typeof import('react-native-google-mobile-ads');
+type TrackingModule = typeof import('expo-tracking-transparency');
 
 let adsModule: AdsModule | null | undefined;
 
@@ -43,6 +44,34 @@ const consentListeners = new Set<() => void>();
 
 function notifyConsentListeners(): void {
   consentListeners.forEach((listener) => listener());
+}
+
+// iOS only: whether the user allowed tracking through the ATT prompt. Personalized ads
+// are requested only when they did; everything else stays non-personalized.
+let trackingAuthorizedFlag = false;
+
+/** Whether ads may be personalized — false unless the user accepted the ATT prompt. */
+export function trackingAuthorized(): boolean {
+  return trackingAuthorizedFlag;
+}
+
+/**
+ * App Review rejects an app whose consent form mentions personalized advertising without
+ * asking through App Tracking Transparency first (guideline 5.1.2(i)). Google's own
+ * guidance sets the order: the UMP form first, since it explains why, then the ATT alert,
+ * then the ads SDK. A refusal — or no ATT at all — simply keeps ads non-personalized.
+ */
+async function requestTrackingPermission(): Promise<void> {
+  if (Platform.OS !== 'ios') return;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const tracking = require('expo-tracking-transparency') as TrackingModule;
+    if (!tracking.isAvailable()) return;
+    const { granted } = await tracking.requestTrackingPermissionsAsync();
+    trackingAuthorizedFlag = granted;
+  } catch {
+    // Module missing or prompt failed: stay on non-personalized ads.
+  }
 }
 
 /** Whether consent has been resolved (or wasn't required) and ads may be requested. */
@@ -110,9 +139,14 @@ async function gatherConsentThenInit(ads: AdsModule): Promise<void> {
   } catch {
     allowed = false;
   }
-  canRequestAdsFlag = allowed;
+  if (!allowed) {
+    notifyConsentListeners();
+    return;
+  }
+  // Asked before anything is requested, so the first ad already reflects the answer.
+  await requestTrackingPermission();
+  canRequestAdsFlag = true;
   notifyConsentListeners();
-  if (!allowed) return;
   try {
     await ads.default().initialize();
   } catch {
@@ -168,7 +202,7 @@ export function showRewardedAd(): Promise<RewardedOutcome> {
 
     try {
       const rewarded = ads.RewardedAd.createForAdRequest(adUnitId(ads, 'rewarded'), {
-        requestNonPersonalizedAdsOnly: true,
+        requestNonPersonalizedAdsOnly: !trackingAuthorizedFlag,
       });
 
       const finish = (value: RewardedOutcome) => {
@@ -222,7 +256,7 @@ export function showInterstitialAd(): Promise<void> {
 
     try {
       const interstitial = ads.InterstitialAd.createForAdRequest(adUnitId(ads, 'interstitial'), {
-        requestNonPersonalizedAdsOnly: true,
+        requestNonPersonalizedAdsOnly: !trackingAuthorizedFlag,
       });
 
       const finish = () => {

@@ -18,6 +18,10 @@ export function canRequestAds(): boolean {
   return false;
 }
 
+export function trackingAuthorized(): boolean {
+  return false;
+}
+
 export function privacyOptionsRequired(): boolean {
   return false;
 }

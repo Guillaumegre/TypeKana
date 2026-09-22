@@ -136,3 +136,36 @@ est bien sur G, sinon retirer la mention correspondante du point 4.
 
 Avant d'enregistrer : supprimer le clavier japonais pour pouvoir filmer son
 ajout, activer le mode Concentration, et passer l'app en anglais.
+
+---
+
+## Second refus du 22 septembre 2026 — à ajouter aux Remarques
+
+Apple a relevé cinq points. Un seul touchait au code (ATT). À ajouter au champ
+Remarques et au Centre de résolution, en plus du texte ci-dessus :
+
+```
+App Tracking Transparency: the ATT permission request is presented at launch,
+right after Google UMP consent form and before any ad is requested, which is the
+order Google recommends. If the user declines, ads are requested as
+non-personalized only. App Privacy has been updated accordingly.
+
+Terms of Use (EULA): Apple standard EULA is linked at the end of the App
+Description and from the Terms link in the subscription paywall.
+
+Subscription details: the paywall shows the subscription name, its length, the
+total billed amount as the most prominent price, and functional links to the
+privacy policy and the Terms of Use, all before purchase.
+
+The two auto-renewable subscriptions are submitted together with this version.
+```
+
+### Les cinq points et leur correction
+
+| Point | Cause | Correction |
+| --- | --- | --- |
+| 2.3.10 Metadata | La description Google Play avait été collée dans App Store Connect (mentions Android et Play Store) | Reprendre la description de `ios-listing.md` |
+| 3.1.2(c) EULA | Cette même description ne contenait pas le lien EULA | Idem, plus les liens du pied de paywall RevenueCat |
+| 5.1.2(i) ATT | Le formulaire UMP parle de publicité personnalisée sans invite ATT | `expo-tracking-transparency`, invite après l'UMP et avant toute pub |
+| 3.1.2(c) Prix | Le paywall met « $1.49 per month » en avant plutôt que « $17.99 » | Éditeur de paywall RevenueCat : rendre le montant facturé dominant |
+| 2.1(b) Achats | Les abonnements n'étaient pas soumis avec la version | Les rattacher à la version et soumettre |

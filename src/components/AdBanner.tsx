@@ -1,6 +1,6 @@
 import { useState, useSyncExternalStore } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { adUnitId, canRequestAds, getAdsModule, subscribeToConsent } from '../utils/ads';
+import { adUnitId, canRequestAds, getAdsModule, subscribeToConsent, trackingAuthorized } from '../utils/ads';
 import { isPremiumUser } from '../utils/premium';
 
 /**
@@ -23,7 +23,7 @@ export function AdBanner() {
       <BannerAd
         unitId={adUnitId(ads, 'banner')}
         size={BannerAdSize.BANNER}
-        requestOptions={{ requestNonPersonalizedAdsOnly: true }}
+        requestOptions={{ requestNonPersonalizedAdsOnly: !trackingAuthorized() }}
         onAdFailedToLoad={() => setFailed(true)}
       />
     </View>
