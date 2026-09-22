@@ -1,3 +1,4 @@
+import { setAudioModeAsync } from 'expo-audio';
 import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -20,6 +21,14 @@ export default function RootLayout() {
   useEffect(() => {
     initAds();
     initPremium();
+    // Ambient audio session: the answer sounds mix with whatever the user is already
+    // listening to instead of pausing it, and the phone's mute switch is respected.
+    // Without this, iOS takes exclusive control and cuts the music at every keystroke.
+    setAudioModeAsync({
+      playsInSilentMode: false,
+      shouldPlayInBackground: false,
+      interruptionMode: 'mixWithOthers',
+    }).catch(() => {});
   }, []);
 
   useEffect(() => {
