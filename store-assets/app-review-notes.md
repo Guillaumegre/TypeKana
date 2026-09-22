@@ -169,3 +169,24 @@ The two auto-renewable subscriptions are submitted together with this version.
 | 5.1.2(i) ATT | Le formulaire UMP parle de publicité personnalisée sans invite ATT | `expo-tracking-transparency`, invite après l'UMP et avant toute pub |
 | 3.1.2(c) Prix | Le paywall met « $1.49 per month » en avant plutôt que « $17.99 » | Éditeur de paywall RevenueCat : rendre le montant facturé dominant |
 | 2.1(b) Achats | Les abonnements n'étaient pas soumis avec la version | Les rattacher à la version et soumettre |
+
+### Plan de la seconde vidéo (environ 90 secondes)
+
+Deux exigences d'Apple : montrer où se trouve l'invite ATT (5.1.2(i)) et
+prouver que les informations d'abonnement et leurs liens fonctionnent (3.1.2(c)).
+
+Avant d'enregistrer :
+- Installer le build qui contient l'ATT, puis **supprimer l'app et la
+  réinstaller** : la réponse à l'invite est mémorisée et elle ne réapparaît pas.
+- Réglages iOS → Confidentialité et sécurité → Suivi → **« Autoriser les apps à
+  demander le suivi » doit être activé**, sinon iOS n'affiche jamais l'invite.
+- App en anglais, mode Concentration activé.
+
+1. Lancement depuis l'écran d'accueil de l'iPhone.
+2. Formulaire de consentement Google, puis **l'invite ATT**. Toucher Allow.
+3. Réglages → bannière TypeKana Premium → le paywall.
+4. Laisser le paywall visible quelques secondes : noms des abonnements, durées,
+   et le **montant facturé** désormais le plus en évidence.
+5. Toucher **Terms**, montrer que la page s'ouvre, revenir.
+6. Toucher **Privacy**, montrer que la page s'ouvre, revenir.
+7. Facultatif : 15 secondes d'exercice pour montrer que l'app fonctionne.
