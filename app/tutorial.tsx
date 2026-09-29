@@ -162,10 +162,11 @@ export default function TutorialScreen() {
               <NumberedStep n={2}>{t.tutorial.s1Ios2}</NumberedStep>
               <NumberedStep n={3}>
                 {t.tutorial.s1Ios3a}
-                <Text style={styles.strong}>かな</Text>
+                <Text style={styles.strong}>Kana</Text>
                 {t.tutorial.s1Ios3b}
               </NumberedStep>
               <Text style={styles.note}>{t.tutorial.s1IosNote}</Text>
+              <Text style={styles.note}>{t.tutorial.s1IosTip}</Text>
             </>
           )}
         </Step>

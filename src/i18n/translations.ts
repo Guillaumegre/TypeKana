@@ -210,9 +210,11 @@ const fr = {
     s1Ios1: 'Ouvre Réglages → Général → Clavier → Claviers.',
     s1Ios2: 'Appuie sur « Ajouter un clavier… », puis choisis « Japonais ».',
     s1Ios3a: 'Sélectionne ',
-    s1Ios3b: ' (et non ローマ字) : c’est la disposition à 12 touches qui permet la saisie flick.',
+    s1Ios3b: ' (et non Romaji) : c’est la disposition à 12 touches qui permet la saisie flick.',
     s1IosNote:
       'iOS ne permet pas aux apps d’ouvrir directement les réglages du clavier — ce chemin doit être fait à la main, une seule fois.',
+    s1IosTip:
+      'Astuce : toujours dans Réglages → Général → Clavier, active « Balayer l’écran uniquement » sous Kana. Les touches ne réagissent alors qu’au glissement, ce qui évite de faire défiler les kana par appuis répétés et accélère nettement la frappe.',
     s2Title: 'Basculer vers le japonais',
     s2Lead: 'Une fois le clavier ajouté, tu passes de l’un à l’autre depuis le clavier lui-même.',
     s2Body1: 'Appuie sur la touche ',
@@ -440,9 +442,11 @@ const en: Translations = {
     s1Ios1: 'Open Settings → General → Keyboard → Keyboards.',
     s1Ios2: 'Tap “Add New Keyboard…”, then choose “Japanese”.',
     s1Ios3a: 'Select ',
-    s1Ios3b: ' (not ローマ字): it is the 12-key layout that allows flick input.',
+    s1Ios3b: ' (not Romaji): it is the 12-key layout that allows flick input.',
     s1IosNote:
       'iOS does not let apps open keyboard settings directly — this path has to be followed by hand, just once.',
+    s1IosTip:
+      'Tip: still in Settings → General → Keyboard, turn on “Flick Only” under Kana. Keys then respond to sliding only, which stops repeated taps from cycling through the kana and makes typing noticeably faster.',
     s2Title: 'Switch to Japanese',
     s2Lead: 'Once the keyboard is added, you switch between them from the keyboard itself.',
     s2Body1: 'Tap the ',
