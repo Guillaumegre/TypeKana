@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TypeKana — Apprends à taper comme un vrai japonais</title>
+<meta name="description" content="TypeKana entraîne à taper vite sur le vrai clavier japonais : mots par thème, niveaux JLPT, mode Course de 60 secondes et listes personnelles. Hors connexion, sans compte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2EFE8;
+    --card: #FBF9F5;
+    --ink: #14161A;
+    --ink-soft: rgba(20,22,26,.64);
+    --ink-faint: rgba(20,22,26,.42);
+    --line: rgba(20,22,26,.12);
+    --accent: #C8452A;
+    --accent-ink: #FBF9F5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #18140F;
+      --card: #221C15;
+      --ink: #F2EFE8;
+      --ink-soft: rgba(242,239,232,.7);
+      --ink-faint: rgba(242,239,232,.46);
+      --line: rgba(242,239,232,.14);
+      --accent: #E17750;
+      --accent-ink: #18140F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #18140F;
+    --card: #221C15;
+    --ink: #F2EFE8;
+    --ink-soft: rgba(242,239,232,.7);
+    --ink-faint: rgba(242,239,232,.46);
+    --line: rgba(242,239,232,.14);
+    --accent: #E17750;
+    --accent-ink: #18140F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 52px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .mark {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .bar { width: 4px; height: 22px; border-radius: 2px; background: var(--accent); }
+  .wordmark {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .langswitch {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .langswitch button {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .langswitch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .langswitch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+  .eyebrow {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    font-size: 15px;
+    letter-spacing: .32em;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 7vw, 46px);
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin: 0 0 34px;
+    max-width: 34em;
+  }
+
+  .stores { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .store {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 190px;
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .store:hover { transform: translateY(-2px); }
+  .store .small { font-size: 11.5px; font-weight: 600; opacity: .62; letter-spacing: .04em; }
+  .store .big { font-size: 16.5px; font-weight: 800; letter-spacing: -0.01em; }
+  .store.soon {
+    background: transparent;
+    color: var(--ink-faint);
+    border: 1px dashed var(--line);
+    cursor: default;
+  }
+  .store.soon:hover { transform: none; }
+
+  .note {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin: 0 0 52px;
+  }
+
+  .features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 52px;
+    border-top: 1px solid var(--line);
+  }
+  .features li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .features .kanji {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+    font-size: 21px;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .features strong {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .features span.text { color: var(--ink-soft); font-size: 16px; }
+
+  section.doc { display: none; }
+  section.doc[data-active="true"] { display: block; }
+
+  footer {
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+  }
+  footer nav { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 14px; }
+  footer a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 40px 18px 64px; }
+    body { font-size: 16px; }
+    .store { min-width: 100%; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="mark">か</span>
+      <span class="bar"></span>
+      <span class="wordmark">TypeKana</span>
+    </div>
+    <div class="langswitch" role="group" aria-label="Language">
+      <button id="btn-fr" type="button" aria-pressed="true">Français</button>
+      <button id="btn-en" type="button" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <!-- FRANÇAIS -->
+  <section class="doc" data-active="true" data-lang="fr">
+    <p class="eyebrow">かな入力</p>
+    <h1>Apprends à taper comme un vrai japonais</h1>
+    <p class="lead">
+      Tu sais lire les kana. Mais es-tu vraiment à l'aise pour les taper ? TypeKana
+      t'entraîne sur le vrai clavier japonais de ton téléphone, celui que tu utiliseras
+      pour de bon. Sans compte, sans inscription, et hors connexion.
+    </p>
+
+    <div class="stores">
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.guillaumegrl.TypeKana">
+        <span class="small">TÉLÉCHARGER SUR</span>
+        <span class="big">Google Play</span>
+      </a>
+      <span class="store soon">
+        <span class="small">BIENTÔT SUR</span>
+        <span class="big">l'App Store</span>
+      </span>
+    </div>
+    <p class="note">Gratuit. Abonnement facultatif pour retirer les publicités et les limites.</p>
+
+    <ul class="features">
+      <li>
+        <span class="kanji">練</span>
+        <span><strong>Par thème ou par niveau JLPT</strong><span class="text">Animaux, nourriture, verbes… et des mots et phrases classés du N5 au N3.</span></span>
+      </li>
+      <li>
+        <span class="kanji">速</span>
+        <span><strong>Mode Course</strong><span class="text">60 secondes chrono, tape le plus de mots possible et bats ton record.</span></span>
+      </li>
+      <li>
+        <span class="kanji">録</span>
+        <span><strong>Tes propres listes</strong><span class="text">Ajoute les mots que tu veux retravailler, avec tes kanji et tes traductions.</span></span>
+      </li>
+      <li>
+        <span class="kanji">静</span>
+        <span><strong>Tout reste sur ton téléphone</strong><span class="text">Ta série, tes statistiques et tes listes ne quittent jamais l'appareil.</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ENGLISH -->
+  <section class="doc" data-lang="en">
+    <p class="eyebrow">かな入力</p>
+    <h1>Learn to type Japanese like a native</h1>
+    <p class="lead">
+      You can read the kana. But can you actually type them? TypeKana trains you on your
+      phone's real Japanese keyboard, the one you will actually use. No account, no
+      sign-up, and it works offline.
+    </p>
+
+    <div class="stores">
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.guillaumegrl.TypeKana">
+        <span class="small">GET IT ON</span>
+        <span class="big">Google Play</span>
+      </a>
+      <span class="store soon">
+        <span class="small">COMING SOON TO</span>
+        <span class="big">the App Store</span>
+      </span>
+    </div>
+    <p class="note">Free. Optional subscription to remove the ads and the limits.</p>
+
+    <ul class="features">
+      <li>
+        <span class="kanji">練</span>
+        <span><strong>By theme or by JLPT level</strong><span class="text">Animals, food, verbs… plus words and sentences ranked from N5 to N3.</span></span>
+      </li>
+      <li>
+        <span class="kanji">速</span>
+        <span><strong>Race mode</strong><span class="text">60 seconds on the clock: type as many words as you can and beat your record.</span></span>
+      </li>
+      <li>
+        <span class="kanji">録</span>
+        <span><strong>Your own lists</strong><span class="text">Add the words you want to drill, with your own kanji and translations.</span></span>
+      </li>
+      <li>
+        <span class="kanji">静</span>
+        <span><strong>Everything stays on your phone</strong><span class="text">Your streak, your stats and your lists never leave the device.</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="privacy-policy.html" data-t="fr">Confidentialité</a>
+      <a href="privacy-policy.html" data-t="en" style="display:none">Privacy</a>
+      <a href="terms.html" data-t="fr">Conditions</a>
+      <a href="terms.html" data-t="en" style="display:none">Terms</a>
+      <a href="support.html" data-t="fr">Assistance</a>
+      <a href="support.html" data-t="en" style="display:none">Support</a>
+    </nav>
+    <span data-t="fr">TypeKana — かな入力の練習</span>
+    <span data-t="en" style="display:none">TypeKana — Japanese kana typing practice</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btnFr = document.getElementById('btn-fr');
+    var btnEn = document.getElementById('btn-en');
+    var docs = document.querySelectorAll('section.doc');
+    var tFr = document.querySelectorAll('[data-t="fr"]');
+    var tEn = document.querySelectorAll('[data-t="en"]');
+
+    function setLang(lang) {
+      docs.forEach(function (el) {
+        el.dataset.active = String(el.dataset.lang === lang);
+      });
+      tFr.forEach(function (el) { el.style.display = lang === 'fr' ? '' : 'none'; });
+      tEn.forEach(function (el) { el.style.display = lang === 'en' ? '' : 'none'; });
+      btnFr.setAttribute('aria-pressed', String(lang === 'fr'));
+      btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('typekana-privacy-lang', lang); } catch (e) {}
+    }
+
+    btnFr.addEventListener('click', function () { setLang('fr'); });
+    btnEn.addEventListener('click', function () { setLang('en'); });
+
+    try {
+      var saved = localStorage.getItem('typekana-privacy-lang');
+      if (saved === 'en' || saved === 'fr') {
+        setLang(saved);
+      } else if ((navigator.language || '').toLowerCase().indexOf('fr') !== 0) {
+        setLang('en');
+      }
+    } catch (e) {}
+  })();
+</script>
