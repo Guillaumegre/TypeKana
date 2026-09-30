@@ -25,22 +25,30 @@ function today(): string {
   return `${d.getFullYear()}-${month}-${day}`;
 }
 
-const EMPTY: Quota = { day: today(), used: 0, extra: 0 };
+/**
+ * A function, never a shared constant: a constant would freeze the day at the moment the
+ * module first loaded. An app left in memory overnight would then keep writing yesterday's
+ * date, and every later read would discard the count as stale — the counter stuck at 0 and
+ * the daily limit never enforced.
+ */
+function emptyQuota(): Quota {
+  return { day: today(), used: 0, extra: 0 };
+}
 
 async function read(): Promise<Quota> {
   try {
     const raw = await AsyncStorage.getItem(KEY);
-    if (!raw) return { ...EMPTY };
+    if (!raw) return emptyQuota();
     const parsed = JSON.parse(raw) as Quota;
     // A stored day that isn't today means the allowance has reset.
-    if (parsed?.day !== today()) return { ...EMPTY };
+    if (parsed?.day !== today()) return emptyQuota();
     return {
       day: parsed.day,
       used: Number(parsed.used) || 0,
       extra: Number(parsed.extra) || 0,
     };
   } catch {
-    return { ...EMPTY };
+    return emptyQuota();
   }
 }
 
