@@ -22,6 +22,10 @@ export function presentPremiumPaywall(): Promise<PaywallOutcome> {
   return Promise.resolve('unavailable');
 }
 
+export function getPremiumUserId(): Promise<string | null> {
+  return Promise.resolve(null);
+}
+
 export function restorePurchases(): Promise<boolean> {
   return Promise.resolve(false);
 }

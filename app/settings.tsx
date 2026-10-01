@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { Alert, AppState, Linking, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { Alert, AppState, Linking, Pressable, ScrollView, Share, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackHeader } from '../src/components/BackHeader';
 import { SESSION_LENGTHS, useSettings } from '../src/context/SettingsContext';
@@ -9,6 +9,7 @@ import type { Lang } from '../src/i18n/translations';
 import { C, FONT, R } from '../src/theme';
 import { privacyOptionsRequired, showAdsPrivacyOptions, subscribeToConsent } from '../src/utils/ads';
 import {
+  getPremiumUserId,
   isPremiumUser,
   presentPremiumPaywall,
   restorePurchases,
@@ -120,6 +121,22 @@ export default function SettingsScreen() {
   const stepReminder = (dir: 1 | -1) => {
     const total = (reminderHour * 60 + reminderMinute + dir * REMINDER_STEP_MINUTES + 1440) % 1440;
     setReminderTime(Math.floor(total / 60), total % 60);
+  };
+
+  // Hidden on purpose (long press on the hint at the bottom): a technical id has no place in
+  // the settings list, but it is the reliable way to find one's own customer record in the
+  // RevenueCat dashboard, and what a user is asked for when they need help with a purchase.
+  // The share sheet is used rather than a clipboard module, which would need a native build.
+  const onShowUserId = async () => {
+    const id = await getPremiumUserId();
+    if (!id) {
+      Alert.alert(t.settings.userIdTitle, t.settings.userIdUnavailable);
+      return;
+    }
+    Alert.alert(t.settings.userIdTitle, id, [
+      { text: t.settings.userIdClose, style: 'cancel' },
+      { text: t.settings.userIdShare, onPress: () => Share.share({ message: id }).catch(() => {}) },
+    ]);
   };
 
   const onReset = () => {
@@ -365,7 +382,9 @@ export default function SettingsScreen() {
           )}
         </Section>
 
-        <Text style={styles.hint}>{t.settings.hint}</Text>
+        <Text style={styles.hint} onLongPress={onShowUserId} suppressHighlighting>
+          {t.settings.hint}
+        </Text>
 
         <Pressable onPress={onReset} style={({ pressed }) => [styles.reset, pressed && styles.pressed]}>
           <Text style={styles.resetText}>{t.settings.reset}</Text>

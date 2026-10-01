@@ -148,6 +148,22 @@ export async function presentPremiumPaywall(): Promise<PaywallOutcome> {
 }
 
 /**
+ * The anonymous id RevenueCat gives this installation. It is what identifies the customer
+ * in the dashboard, so it is the reliable way to find one's own record there (to grant
+ * oneself an entitlement, or to look up a user who asks for help). Null where purchases
+ * aren't available or the SDK isn't configured yet.
+ */
+export async function getPremiumUserId(): Promise<string | null> {
+  const purchases = loadPurchases();
+  if (!purchases || !configured) return null;
+  try {
+    return await purchases.getAppUserID();
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Apple requires a restore path reachable without going through a purchase attempt —
  * exposed here as its own action (see settings.tsx) rather than only inside the paywall.
  */
