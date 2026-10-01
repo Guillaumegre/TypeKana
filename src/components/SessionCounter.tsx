@@ -23,8 +23,8 @@ export function SessionCounter() {
 
   if (!quota) return null;
 
-  // A blocked attempt still bumps `used` past the allowance (see consumeSession), so clamp:
-  // "7/5" would read as a bug rather than "you're out of sessions".
+  // Clamp: older versions bumped `used` past the allowance on a blocked attempt, and "7/5"
+  // would read as a bug rather than "you're out of sessions".
   const shown = isPremium ? quota.used : Math.min(quota.used, quota.allowed);
   const exhausted = !isPremium && shown >= quota.allowed;
 

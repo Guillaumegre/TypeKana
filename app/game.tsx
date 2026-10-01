@@ -28,7 +28,7 @@ import {
 import { useLang, useT } from '../src/i18n';
 import { getAdsModule, showRewardedAd } from '../src/utils/ads';
 import { isPremiumUser } from '../src/utils/premium';
-import { consumeSession, grantExtraSession, FREE_SESSIONS_PER_DAY } from '../src/utils/quota';
+import { consumeSession, getQuota, grantExtraSession, FREE_SESSIONS_PER_DAY } from '../src/utils/quota';
 import { C, FONT, R } from '../src/theme';
 import type { GameEntry } from '../src/types/vocab';
 import { isKanaFamilyMatch, isTextMatch, katakanaToHiragana, normalizeText, shuffle } from '../src/utils/kana';
@@ -40,6 +40,8 @@ import { getRacePB, saveRacePBIfBetter, type RaceScore } from '../src/utils/race
 type Feedback = 'idle' | 'correct';
 
 const RACE_DURATION = 60;
+/** A Race only counts as a session once the clock has run this long: entering and bailing out is free. */
+const RACE_COUNT_AFTER_SECONDS = 5;
 const RACE_QUEUE_SIZE = 3;
 /**
  * How much of the game layout folds away, decided from the window's height alone — never
@@ -185,23 +187,32 @@ export default function GameScreen() {
   const [adDismissed, setAdDismissed] = useState(false);
   const gateStartedRef = useRef(false);
 
+  // Entering only *checks* the allowance. The session is spent later, once the player has
+  // really started (see countSession), so opening a screen by mistake costs nothing.
   useEffect(() => {
     if (gate !== 'checking' || gateStartedRef.current) return;
     gateStartedRef.current = true;
-    consumeSession()
-      .then((state) => setGate(state.used > state.allowed ? 'blocked' : 'open'))
+    getQuota()
+      .then((state) => setGate(state.remaining > 0 ? 'open' : 'blocked'))
       // A storage failure must never lock a player out of their own practice.
       .catch(() => setGate('open'));
   }, [gate]);
 
-  // Premium sessions aren't gated, but they still count toward the "sessions today" tally
-  // on the home screen (shown as N/∞). Resuming an interrupted session isn't a new one.
-  const premiumCountedRef = useRef(false);
-  useEffect(() => {
-    if (!isPremiumUser() || wantsResume || premiumCountedRef.current) return;
-    premiumCountedRef.current = true;
+  // A session is spent once, when the player has really started: the first correct word in
+  // Training, five seconds into the clock in Race. Premium sessions count too, for the
+  // N/∞ tally on the home screen. Resuming an interrupted session isn't a new one, and
+  // where ads can't run the limit isn't enforced, so nothing is counted there either.
+  const sessionCountedRef = useRef(false);
+  const countSession = () => {
+    if (sessionCountedRef.current || wantsResume) return;
+    if (!isPremiumUser() && !adsAvailable) return;
+    sessionCountedRef.current = true;
     consumeSession().catch(() => {});
-  }, [wantsResume]);
+  };
+
+  useEffect(() => {
+    if (isRace && raceStarted && RACE_DURATION - secondsLeft >= RACE_COUNT_AFTER_SECONDS) countSession();
+  });
 
   const onWatchAd = async () => {
     setAdPending(true);
@@ -477,6 +488,7 @@ export default function GameScreen() {
     // Counted the moment the word is actually typed correctly, not at session end,
     // so words already answered still count if the player quits mid-session.
     recordSession(1);
+    if (!isRace) countSession();
     setTimeout(() => advance(nextCorrect), isRace ? 180 : 350);
     return true;
   };

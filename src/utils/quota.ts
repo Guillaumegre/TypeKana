@@ -72,7 +72,7 @@ export async function getQuota(): Promise<QuotaState> {
   return { used: q.used, allowed, remaining: Math.max(0, allowed - q.used) };
 }
 
-/** Records a started session. Returns the state after consumption. */
+/** Records a session the player has really started. Returns the state after consumption. */
 export async function consumeSession(): Promise<QuotaState> {
   const q = await read();
   const next = { ...q, used: q.used + 1 };
