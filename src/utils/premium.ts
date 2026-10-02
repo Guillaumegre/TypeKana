@@ -125,6 +125,23 @@ export function initPremium(): void {
   }
 }
 
+/**
+ * Reads the entitlement from RevenueCat's view of the customer, and aligns the premium flag
+ * with it either way. Used where a UI result alone says "something happened" without saying
+ * whether the user is actually subscribed.
+ */
+async function confirmPremium(): Promise<boolean> {
+  const purchases = loadPurchases();
+  if (!purchases) return false;
+  try {
+    const active = hasEntitlement(await purchases.getCustomerInfo());
+    setPremium(active);
+    return active;
+  } catch {
+    return false;
+  }
+}
+
 export type PaywallOutcome = 'purchased' | 'restored' | 'cancelled' | 'unavailable';
 
 /** Opens RevenueCat's hosted paywall UI (design lives in the RevenueCat dashboard, not here). */
@@ -138,8 +155,10 @@ export async function presentPremiumPaywall(): Promise<PaywallOutcome> {
       return 'purchased';
     }
     if (result === ui.PAYWALL_RESULT.RESTORED) {
-      setPremium(true);
-      return 'restored';
+      // The hosted paywall reports RESTORED when its restore button was used, not when
+      // something was actually restored. Trusting it would hand premium to anyone who taps
+      // the button, so ask the server whether the entitlement is really active.
+      return (await confirmPremium()) ? 'restored' : 'cancelled';
     }
     return 'cancelled';
   } catch {
