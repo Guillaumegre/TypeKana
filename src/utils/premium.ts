@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { PREMIUM_ENTITLEMENT_ID, REVENUECAT_API_KEYS } from '../config/revenueCat';
+import { PREMIUM_ENTITLEMENT_IDS, REVENUECAT_API_KEYS } from '../config/revenueCat';
 
 // The `Purchases` default export is the singleton with .configure/.getCustomerInfo/etc —
 // that's what every call site below needs, not the module namespace itself.
@@ -76,7 +76,7 @@ export function subscribeToPremium(listener: () => void): () => void {
 }
 
 function hasEntitlement(info: { entitlements: { active: Record<string, unknown> } }): boolean {
-  return typeof info.entitlements.active[PREMIUM_ENTITLEMENT_ID] !== 'undefined';
+  return PREMIUM_ENTITLEMENT_IDS.some((id) => typeof info.entitlements.active[id] !== 'undefined');
 }
 
 let initStarted = false;

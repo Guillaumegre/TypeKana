@@ -16,5 +16,11 @@ export const REVENUECAT_API_KEYS = {
   android: 'goog_AmBQkyQfzSfUdxBEyikQANQdIWS',
 };
 
-/** Must match the Entitlement identifier created in the RevenueCat dashboard. */
-export const PREMIUM_ENTITLEMENT_ID = 'premium';
+/**
+ * Identifiers of the entitlement that unlocks premium. RevenueCat answers with the
+ * *identifier* given when the entitlement was created in the dashboard, so a mismatch is
+ * silent: purchases succeed, yet the app never recognizes them (premium lost at the next
+ * launch). The real one is `typekana_pro`; `premium` is kept so the app also works if an
+ * entitlement of that name is created later.
+ */
+export const PREMIUM_ENTITLEMENT_IDS = ['typekana_pro', 'premium'];
